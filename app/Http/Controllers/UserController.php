@@ -81,11 +81,11 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user, $id)
     {
         $data = $request->validate([
             'name' => 'required|min:3',
-            'email' => 'required',
+            'email' => 'required|unique:users,email,' . $id,
             'telepon' => 'required|min:12',
             'current_password' => 'nullable',
             'new_password' => 'nullable|confirmed',
