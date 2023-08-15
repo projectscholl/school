@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class MuridSeeder extends Seeder
 {
@@ -11,6 +14,5 @@ class MuridSeeder extends Seeder
      */
     public function run(): void
     {
-        
     }
 }

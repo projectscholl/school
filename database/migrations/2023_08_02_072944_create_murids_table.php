@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('murids', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_users')->nullable();
+            $table->foreignId('id_wali_murid')->nullable();
             $table->string('name');
             $table->string('nisn');
             $table->set('jurusan', ['teknik mesin', 'teknik komputer']);
-            $table->foreignId('id_angkatans')->nullable();
             $table->string('kelas');
-            $table->foreignId('biaya_id')->nullable();
+            $table->foreignId('biaya_id');
             $table->timestamps();
         });
     }

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Murid;
 use App\Models\User;
+use App\Models\WaliMurid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class WaliMuridController extends Controller
 {
@@ -23,8 +22,7 @@ class WaliMuridController extends Controller
     public function create()
     {
         $user = Auth::user();
-        $murid = Murid::all();
-        return view('admin.walimurid.create', compact('user', 'murid'));
+        return view('admin.walimurid.create', compact('user'));
     }
 
     /**
@@ -32,26 +30,7 @@ class WaliMuridController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required | max:255 | string',
-            'email' => 'required | email | unique:users',
-            'telepon' => 'required | string',
-            'image' => 'nullable | mimes:jpeg,png,gif',
-            'password' => 'required',
-        ]);
-        // dd($data);
-        
-        $data['password'] = bcrypt($data['password']);
-        $data['role'] = 'WALI';
-
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('public/storage/image');
-            $data['image'] = Storage::url($imagePath);
-        }
-
-        User::create($data);
-        return redirect()->route('admin.walimurid.index')->with('message', 'Wali murid berhasil ditambahkan!');
-
+        //
     }
 
     /**
@@ -60,8 +39,7 @@ class WaliMuridController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        $murid = Murid::all();
-        return view('admin.walimurid.detail', compact('user', 'murid'));
+        return view('admin.walimurid.detail', compact('user'));
     }
 
     /**
@@ -88,8 +66,6 @@ class WaliMuridController extends Controller
      */
     public function destroy(string $id)
     {
-        $waliMurid =  User::findOrFail($id);
-        $waliMurid->delete();
-        return redirect()->route('admin.walimurid.index')->with('delete', "Wali Murid Berhasil Dihapus!!");
+        //
     }
 }

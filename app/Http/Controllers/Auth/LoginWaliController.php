@@ -64,6 +64,6 @@ class LoginWaliController extends Controller
     {
         $wali_id = Auth::user()->id;
         $jumlahMurid = Murid::where('id_users', $wali_id)->count();
-        return view('wali.dashboard' , compact('jumlahMurid'));
+        return view('wali.dashboard', compact('jumlahMurid'));
     }
 }

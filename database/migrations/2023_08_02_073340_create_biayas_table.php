@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('biayas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_angkatans');
-            $table->string('nama');
+            $table->string('judul_spp');
             $table->decimal('total_biaya');
             $table->timestamps();
         });

@@ -19,6 +19,6 @@ class Wali
         if (Auth::check() && Auth::user()->role == 'WALI') {
             return $next($request);
         }
-        return redirect()->route('login-wali');
+        abort(403, 'Akses Khusus Wali Murid');
     }
 }

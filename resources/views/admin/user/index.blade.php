@@ -10,7 +10,10 @@
         <!-- Navbar -->
         <x-navbar></x-navbar>
         <div class="content-wrapper">
-
+            {{-- Sweetalert if error exist --}}
+            @if (session('success'))
+                <div>{{ session('success') }}</div>
+            @endif
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="card">
