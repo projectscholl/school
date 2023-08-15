@@ -22,101 +22,45 @@
                     <div class="col-md-12">
                         <div class="card mb-4">
                             <h5 class="card-header">Edit User</h5>
-                            @if (session('success'))
-                                <div>{{ session('success') }}</div>
-                            @endif
                             <div class="card-body">
-                                <form method="POST" action="{{ route('admin.user.update', $user->id) }}"
+                                <form id="formAccountSettings" method="POST" onsubmit="return false"
                                     enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
                                             <label for="username" class="form-label">User Name</label>
-                                            <input
-                                                class="form-control @error('name')
-                                                is-invalid
-                                            @enderror"
-                                                type="text" name="name" value="{{ $user->name }}" autofocus />
-                                            @error('name')
-                                                <div id="validationServer05Feedback" class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
+                                            <input class="form-control" type="text" id="firstName" name="firstName"
+                                                value="{{ $user->name }}" autofocus />
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="telepone" class="form-label">Telephone</label>
-                                            <input
-                                                class="form-control @error('telepon')
-                                                is-invalid
-                                            @enderror"
-                                                type="number" name="telepon" value="{{ $user->telepon }}" />
-                                            @error('telepon')
-                                                <div id="validationServer05Feedback" class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
+                                            <input class="form-control" type="text" name="telepone" id="lastName"
+                                                value="{{ $user->telepon }}" />
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="email" class="form-label">E-mail</label>
-                                            <input
-                                                class="form-control @error('email')
-                                                is-invalid
-                                            @enderror"
-                                                type="email" id="email" name="email"
+                                            <input class="form-control" type="text" id="email" name="email"
                                                 placeholder="john.doe@example.com" value="{{ $user->email }}" />
-                                            @error('email')
-                                                <div id="validationServer05Feedback" class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label" for="country">Role</label>
                                             <input class="form-control" type="text" id="" name="role"
-                                                value="ADMIN" readonly />
+                                                value="ADMIN" disabled />
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label for="password" class="form-label">Current Password</label>
-                                            <input
-                                                class="form-control @error('current_password')
-                                                is-invalid
-                                            @enderror"
-                                                type="password" id="current_password" name="current_password"
+                                            <label for="email" class="form-label">Password</label>
+                                            <input class="form-control" type="text" id="password" name="password"
                                                 placeholder="" />
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label for="new_password" class="form-label">New Password</label>
-                                            <input
-                                                class="form-control @error('new_password')
-                                                is-invalid
-                                            @enderror"
-                                                type="password" id="new_password" name="new_password" placeholder="" />
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label for="new_password" class="form-label">New Password Confirm</label>
-                                            <input
-                                                class="form-control @error('new_password_confirmation')
-                                                is-invalid
-                                            @enderror"
-                                                type="password" id="new_password_confirmation"
-                                                name="new_password_confirmation" placeholder="" />
-                                            @error('new_password_confirmation')
-                                                {{ $message }}
-                                            @enderror
+                                            <label for="email" class="form-label">Password confirm</label>
+                                            <input class="form-control" type="text" id="password_confirm"
+                                                name="password_confirm" placeholder="" />
                                         </div>
 
-                                        <div class="mb-3 col-md-6 d-flex flex-column">
+                                        <div class="mb-3 col-md-6">
                                             <label for="" class="form-label">Image</label>
-                                            <img src="{{ asset('storage/image/' . $user->image) }}" alt=""
-                                                width="100" class="mb-3 rounded" id="output">
-                                            <input type="file" name="image"
-                                                class="form-control @error('image')
-                                                is-invalid
-                                            @enderror"
-                                                onchange="loadFile(event)">
-                                            <p class="text-muted mb-0">Allowed JPG, GIF or PNG.
-                                                Max size of 2Mb
+                                            <input type="file" name="image" id="" class="form-control">
+                                            <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 2Mb
                                         </div>
                                         <div class="mt-2">
                                             <button type="submit" class="btn btn-primary me-2">Save
@@ -128,19 +72,9 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!--End Form-->
             </div>
         </div>
     </div>
 @endsection
-@push('js')
-    <script>
-        var loadFile = function(event) {
-
-            var output = document.getElementById('output')
-            output.src = URL.createObjectURL(event.target.files[0]);
-        }
-    </script>
-@endpush

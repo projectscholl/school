@@ -27,8 +27,8 @@
                             <h5 class="card-header">Profile details</h5>
                             <div class="card-body">
                                 <div class="d-flex align-items-start gap-4">
-                                    <img src="{{ asset('storage/image/' . $user->image) }}" alt="" width="100"
-                                        height="100" class="d-block rounded">
+                                    <img src="{{ asset($user->image) }}" alt="" width="100" height="100"
+                                        class="d-block rounded">
                                     <form id="formAccountSettings" method="POST" onsubmit="return false"
                                         enctype="multipart/form-data">
                                         <div class="row">
@@ -58,12 +58,11 @@
                                                 <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of
                                                     800K
                                             </div>
-                                            <div class="mt-2">
-                                                <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                                                <button type="reset" class="btn btn-outline-secondary">Cancel</button>
-                                            </div>
                                     </form>
-
+                                    <div class="mt-2">
+                                        <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                                        <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

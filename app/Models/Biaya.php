@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Biaya extends Model
 {
     use HasFactory;
+
+    
 }

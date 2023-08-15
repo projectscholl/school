@@ -28,8 +28,7 @@
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
 
-                        <img src="{{ asset('/storage/image/' . $user->image) }}" alt
-                            class="w-px-40 h-100 rounded-circle" />
+                        <img src="{{ asset($user->image) }}" alt class="w-px-40 h-100 rounded-circle" />
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
