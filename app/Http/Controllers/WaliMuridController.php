@@ -47,18 +47,33 @@ class WaliMuridController extends Controller
      */
     public function edit(string $id)
     {
-        $user = Auth::user();
-
-
+        $user = User::find($id);
         return view('admin.walimurid.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+    $data = $request->validate([
+        'name' => 'required|max:255|string',
+        'email' => 'required|email|unique:users,email,' . $id,
+        'telepon' => 'required|string',
+        'password' => 'required',
+    ]);
+
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('public/storage/image');
+        $data['image'] = $imagePath;
+    }
+
+    $data['password'] = bcrypt($data['password']);
+
+    $user = User::findOrFail($id);
+    $user->update($data);
+    // dd($data);
+    return redirect()->route('admin.walimurid.index')->with('pesan', "Data Wali Murid berhasil diperbarui!!");
     }
 
     /**
