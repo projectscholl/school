@@ -18,7 +18,7 @@
                     <a href="{{ route('admin.tagihan.create') }}" class="btn btn-primary col-2 ms-4">Tambah Data</a>
                     <div class="card-body">
                         <div class="table-responsive text-nowrap">
-                            <table class="table" id="myTable">
+                            <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th>No</th>

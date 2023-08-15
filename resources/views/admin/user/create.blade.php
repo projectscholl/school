@@ -21,46 +21,70 @@
                         <div class="card mb-4">
                             <h5 class="card-header">Add New User</h5>
                             <div class="card-body">
-                                <form id="formAccountSettings" method="POST" onsubmit="return false"
-                                    enctype="multipart/form-data">
+                                <form action="{{ route('admin.user.store') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
-                                            <label for="username" class="form-label">User Name</label>
-                                            <input class="form-control" type="text" id="firstName" name="firstName"
+                                            <label for="name" class="form-label">User Name</label>
+                                            <input
+                                                class="form-control @error('name')
+                                                is-invalid
+                                            @enderror"
+                                                type="text" id="firstName" name="name" value="{{ old('name') }}"
                                                 autofocus />
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="telepone" class="form-label">Telephone</label>
-                                            <input class="form-control" type="text" name="lastName" id="lastName" />
+                                            <input
+                                                class="form-control @error('telepon')
+                                            is-invalid
+                                        @enderror"
+                                                type="text" name="telepon" id="telepon" value="{{ old('name') }}" />
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="email" class="form-label">E-mail</label>
-                                            <input class="form-control" type="text" id="email" name="email"
-                                                placeholder="john.doe@example.com" />
+                                            <input
+                                                class="form-control @error('email')
+                                            is-invalid
+                                        @enderror"
+                                                type="email" id="email" name="email"
+                                                placeholder="john.doe@example.com" value="{{ old('email') }}" />
                                         </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label class="form-label" for="country">Role</label>
+                                        <div class="mb-3
+                                                col-md-6">
+                                            <label class="form-label" for="role">Role</label>
                                             <input class="form-control" type="text" id="" name="role"
-                                                value="ADMIN" disabled />
+                                                value="ADMIN" readonly="readonly" />
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label for="email" class="form-label">Password</label>
-                                            <input class="form-control" type="text" id="password" name="password"
-                                                placeholder="john.doe@example.com" />
+                                            <label for="password" class="form-label">Password</label>
+                                            <input
+                                                class="form-control @error('password')
+                                            is-invalid
+                                        @enderror"
+                                                type="password" id="password" name="password" placeholder="" />
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label for="email" class="form-label">Password confirm</label>
-                                            <input class="form-control" type="text" id="password_confirm"
-                                                name="password_confirm" placeholder="john.doe@example.com" />
+                                            <label for="password_confirm" class="form-label">Password confirm</label>
+                                            <input
+                                                class="form-control @error('password_confirm')
+                                            is-invalid
+                                        @enderror"
+                                                type="password" id="password_confirm" name="password_confirm"
+                                                placeholder="" />
                                         </div>
 
                                         <div class="mb-3 col-md-6">
-                                            <label for="" class="form-label">Image</label>
-                                            <input type="file" name="" id="" class="form-control">
+                                            <label for="image" class="form-label">Image</label>
+                                            <input type="file" name="image" id="image"
+                                                class="form-control @error('image')
+                                            is-invalid
+                                        @enderror"
+                                                value="{{ old('name') }}">
                                             <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 2Mb
                                         </div>
                                         <div class="mt-2">
-                                            <button type="submit" class="btn btn-primary me-2">Save
+                                            <button type="submit" class="btn btn-primary me-2" id="success">Save
                                                 changes</button>
                                             <a type="reset" class="btn btn-outline-secondary"
                                                 href="{{ route('admin.user.index') }}">Cancel</a>

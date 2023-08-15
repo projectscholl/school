@@ -10,7 +10,7 @@
                 <div class="card">
                     <div class="card-header">Data Kelas</div>
                     <table class="table" id="myTables">
-                        
+
                     </table>
                 </div>
             </div>

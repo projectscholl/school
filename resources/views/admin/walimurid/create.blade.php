@@ -16,32 +16,21 @@
                 <div class="card">
                     <h5 class="card-header">Tambah Wali Murid</h5>
                     <div class="card-body">
-                        <form action="{{ route('admin.walimurid.store') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
+                        <form action="">
                             <div class="form-group mb-3">
-                                <label for="name" class="mb-3">Nama</label>
+                                <label for="nama">Nama</label>
                                 <input type="text" class="form-control" name="name" id="name"
-                                    placeholder="Masukkan Nama" required>
+                                    placeholder="Masukkan Nama">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="content" class="mb-3">Email</label>
+                                <label for="content">Email</label>
                                 <input type="email" class="form-control" name="email" id="email"
-                                    placeholder="Masukkan Alamat Email" required>
+                                    placeholder="Masukkan Alamat Email">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="content" class="mb-3">Password</label>
-                                <input type="password" class="form-control" name="password" id="password"
-                                    placeholder="Masukkan Password" required>
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="image" class="form-label">Image</label>
-                                <input type="file" name="image" id="image" class="form-control">
-                                <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 2Mb</p>
-                            </div>                            
-                            <div class="form-group mb-3">
-                                <label for="content" class="mb-3">Telepon</label>
-                                <input type="number" class="form-control" name="telepon" id="telepon"
-                                    placeholder="Masukkan nomor telepon" required>
+                                <label for="content">Telepon</label>
+                                <input type="number" class="form-control" name="telephone" id="telephone"
+                                    placeholder="Masukkan nomor telepon">
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

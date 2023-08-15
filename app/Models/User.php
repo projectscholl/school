@@ -21,9 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'telepon',
-        'image',
         'role',
         'password',
+        'image',
     ];
 
     /**
@@ -45,9 +45,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    public function murid()
-    {
-        return $this->hasMany(Murid::class, 'id_users');
-    }
 }

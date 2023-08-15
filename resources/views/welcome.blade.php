@@ -15,21 +15,75 @@
     <title>Document</title>
 </head>
 
-<body style="background-image : url('public/sneat/assets/img/backgrounds/sekolah.jpg'); background-repeat:no-repeat; background-size:cover;">
-    <div class="container-fluid" style="background-color:#f7ecf2;">
-        <div class="row p-3">
-            <div class="d-flex align-items-center">
-                <img src="{{ asset('sneat') }}/assets/img/favicon/png-clipart-computer-icons-gear-eps-zip-miscellaneous-vector-logo.png" alt="" width="50px;">
-                <h2 class="ms-3">SMK TADIKA</h2>
-
+<body
+    style="background-image : url('/storage/image/background.jpg'); background-repeat:no-repeat; background-size:cover; ">
+    <div class="container-fluid sticky-top d-flex align-items-center justify-content-between"
+        style="background-color:rgba(0,0,0,0.5);">
+        <div class="row p-2">
+            <div class="d-flex align-items-center ps-5">
+                <img src="{{ asset('storage/image/tutwuri1.png') }}" alt="" width="50">
+                <h2 class="ms-3 text-light" style="font-family: Public sans, serif;">SMK TADIKA</h2>
             </div>
         </div>
-    </div>
-    <div class="container">
-        <h1 style="font-family: Public sans, serif; font-weight:700;" class="">Selamat Datang di Smk Tadika</h1>
+        <div>
+            @guest
+            @else
+                <div class="d-flex">
+                    <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-light"
+                        style="font-family: Public sans, serif;">Dashboard</a>
 
-        <a href="{{ route('login') }}">Admin Login</a>
-        <a href="{{ route('login-wali') }}">Wali Murid Login</a>
+                    <a class="btn btn-light ms-3" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+
+                        <span class="align-middle">Logout</span>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                        <button class="btn btn-light ms-3" style="font-family: Public sans, serif;">Logout</button>
+                    </form>
+                </div>
+            @endguest
+        </div>
+    </div>
+    <div class="container-fluid
+                        position-relative"
+        style="background-color: rgba(0,0,0,0.5); height:100vh;">
+        <div class="position-absolute" style="top:25%; left:10%">
+            <p class="text-light" style="font-family: Public sans, serif;">Welcome To Smk Tadika</p>
+            <h1 style="font-family: Public sans, serif; font-weight:700;" class="text-light ">Live as if you
+                were to
+                die
+                tomorrow <br>Learn as if you were to live forever.
+            </h1>
+            <div class="d-flex mt-4 align-items-center">
+                <a href="" class="btn btn-light" style="font-family: Public sans, serif;">LOGIN WALI
+                    MURID</a>
+                <a href="" class="btn btn-outline-light ms-4" style="font-family: Public sans, serif;">DAFTAR
+                    WALI
+                    MURID</a>
+            </div>
+        </div>
+        <footer class="fixed-bottom w-100  d-flex align-items-center bg-black justify-content-center"
+            style="background-color:rgba(0, 0, 0, 0);">
+            <span class="text-light" style="font-family: Public sans, serif;">Create by Admin</span>
+            <hr style="width:5px;height:30px; background-color:rgb(4, 232, 205);" class="mx-2">
+            <a class="text-light" style="font-family: Public sans, serif;">Tlp : 0863712326</a>
+            @guest
+                <hr style="width:5px;height:30px; background-color:rgb(4, 232, 205);" class="mx-2">
+
+                <a href="{{ route('login') }}" class="text-light text-decoration-none"
+                    style="font-family: Public sans, serif;">Login
+                    Admin</a>
+                <hr style="width:5px;height:30px; background-color:rgb(4, 232, 205);" class="mx-2">
+
+                <a href="" class="text-light text-decoration-none" style="font-family: Public sans, serif;">Login
+                    Wali Murid</a>
+            @endguest
+
+
+
+        </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
