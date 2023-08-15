@@ -86,7 +86,7 @@
                                         <div class="mt-2">
                                             <button type="submit" class="btn btn-primary me-2" id="success">Save
                                                 changes</button>
-                                            <a type="reset" class="btn btn-outline-secondary bg-white"
+                                            <a type="reset" class="btn btn-outline-secondary"
                                                 href="{{ route('admin.user.index') }}">Cancel</a>
                                         </div>
                                 </form>

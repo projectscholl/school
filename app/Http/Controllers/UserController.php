@@ -45,7 +45,7 @@ class UserController extends Controller
         ]);
         // cache the file
         $imageName = time() . '.' . $request->image->extension();
-        $request->image->move(public_path('storage/images'), $imageName);
+        $request->image->move(public_path('storage/image'), $imageName);
         $user = User::create([
             'name' => $request->name,
             'telepon' => $request->telepon,
@@ -81,12 +81,12 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user, $id)
+    public function update(Request $request, User $user)
     {
         $data = $request->validate([
             'name' => 'required|min:3',
-            'email' => 'required|unique:users,email,' . $id,
-            'telepon' => 'required|min:12',
+            'email' => 'required|unique:users,email,' . $user['id'],
+            'telepon' => 'required|min:8',
             'current_password' => 'nullable',
             'new_password' => 'nullable|confirmed',
 

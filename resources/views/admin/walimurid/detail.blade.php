@@ -16,31 +16,16 @@
                 <div class="card">
                     <h5 class="card-header">Detail Wali Murid</h5>
                     <div class="card-body">
-                        <div>ID : 1</div>
+                        <div>NAMA : {{ $user->name }} </div>
                         <hr>
-                        <div>NAMA : {{ $user->name }}</div>
+                        <div>EMAIL : {{ $user->email }} </div>
                         <hr>
-                        <div>EMAIL : abraham@example.com</div>
+                        <div>Nomor Telepon :  {{ $user->telepon }}</div>
                         <hr>
-                        <div>Nomor Telepon : 09515964809651961 </div>
+                        <div>Dibuat : {{ $user->created_at }} </div>
                         <hr>
-                        <div>Dibuat : 2023-08-07 00:00:00 </div>
+                        <div>Di Update :  {{ $user->updated_at }}</div>
                         <hr>
-                        <div>Di Update : 2023-08-07 00:00:00 </div>
-                        <hr>
-
-
-                        <h3 class="mt-4">Tambah Data Anak</h3>
-
-                        <div class="form-group mb-3">
-                            <label for="nama">Nama Anak</label>
-                            <select name="wali" id="wali" class="form-control">
-                                <option disabled selected>-----------</option>
-                                <option value="">Suherman</option>
-                                <option value="">Sutejo</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
 
                         <h3 class="mt-4">Data Anak</h3>
 
@@ -53,15 +38,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Suherman</td>
-                                    <td>
-                                        <form action="">
-                                            <button class="btn btn-danger"><i class="bx bx-trash"></i></button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                @foreach ($user->murid as $index => $anak)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $anak->name }}</td> 
+                                        <td>
+                                            <form action="">
+                                                <button class="btn btn-danger"><i class="bx bx-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

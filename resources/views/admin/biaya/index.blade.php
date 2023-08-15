@@ -16,7 +16,7 @@
                     <a href="{{ route('admin.biaya.create') }}" class="btn btn-primary col-2 ms-4">Tambah Data</a>
                     <div class="card-body">
                         <div class="table-responsive text-nowrap">
-                            <table class="table table-bordered">
+                            <table class="table" id="myTable">
                                 <thead>
                                     <tr>
                                         <th>No</th>

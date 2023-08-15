@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Angkatan;
+use App\Models\Biaya;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +18,8 @@ class BiayaController extends Controller
     public function create()
     {
         $user = Auth::user();
-        return view('admin.biaya.create', compact('user'));
+        $angkatan = Angkatan::all();
+        return view('admin.biaya.create', compact('user', 'angkatan'));
     }
 
     /**
@@ -24,7 +27,14 @@ class BiayaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'nama' => 'required',
+            'id_angkatans' => 'required',
+            'total_biaya' => 'required',
+        ]);
+
+        Biaya::create($data);
+        return redirect()->route('admin.biaya.index');
     }
 
     /**

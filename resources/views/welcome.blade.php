@@ -77,7 +77,8 @@
                     Admin</a>
                 <hr style="width:5px;height:30px; background-color:rgb(4, 232, 205);" class="mx-2">
 
-                <a href="" class="text-light text-decoration-none" style="font-family: Public sans, serif;">Login
+                <a href="{{ route('login-wali') }}" class="text-light text-decoration-none"
+                    style="font-family: Public sans, serif;">Login
                     Wali Murid</a>
             @endguest
 
