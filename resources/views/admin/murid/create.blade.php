@@ -17,44 +17,48 @@
                 <div class="card">
                     <h5 class="card-header">Tambah Murid</h5>
                     <div class="card-body">
-                        <form action="">
+                        <form action="{{ route('admin.murid.store') }}" method="POST">
+                            @csrf
                             <div class="form-group mb-3">
                                 <label for="nama">Nama</label>
-                                <input type="text" class="form-control" name="nama" id="nama"
-                                    placeholder="Masukkan Nama">
+                                <input type="text" class="form-control" name="name" id="name"
+                                    placeholder="Masukkan Nama" required>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="nama">Nama Wali</label>
-                                <select name="wali" id="wali" class="form-control">
+                                <label for="content">Nama Wali</label>
+                                <select name="id_users" id="id_users" class="form-control" required>
                                     <option disabled selected>-----------</option>
-                                    <option value="">Asep</option>
-                                    <option value="">Rahman</option>
+                                    @foreach ($users as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="nama">NISN</label>
                                 <input type="text" class="form-control" name="nisn" id="nisn"
-                                    placeholder="Masukkan NISN">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="content">Angkatan</label>
-                                <select name="angkatan" id="angkatan" class="form-control">
-                                    <option disabled selected>-----------</option>
-                                    <option value="">2022</option>
-                                    <option value="">2023</option>
-                                </select>
+                                    placeholder="Masukkan NISN" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="content">Jurusan</label>
-                                <select name="jurusan" id="jurusan" class="form-control">
+                                <select name="jurusan" id="jurusan" class="form-control" required>
                                     <option disabled selected>-----------</option>
-                                    <option value="">RPL</option>
-                                    <option value="">Multimedia</option>
+                                    @foreach ( ['teknik mesin', 'teknik komputer'] as $item)
+                                    <option value="{{ $item }}">{{ $item }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="content">Kelas</label>
-                                <input type="number" class="form-control" name="kelas" id="kelas">
+                                <input type="number" class="form-control" name="kelas" id="kelas" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="content">Angkatan</label>
+                                <select name="id_angkatans" id="id_angkatans" class="form-control" required>
+                                    <option disabled selected>-----------</option>
+                                    @foreach ($angkatan as $item)
+                                        <option value="{{ $item->id }}">{{ $item->tahun }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
