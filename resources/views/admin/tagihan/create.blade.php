@@ -18,16 +18,6 @@
                         <div class="table-responsive text-nowrap">
                             <form action="">
                                 <div class="form-group mb-3">
-                                    <label for="pilih">Angkatan</label>
-                                    <select name="" id="" class="form-select">
-                                        <option value=""> Pilih Angkatan</option>
-                                        <option value="">Angkatan 2022</option>
-                                        <option value="">Angkatan 2023</option>
-                                        <option value="">Angkatan 2024</option>
-
-                                    </select>
-                                </div>
-                                <div class="form-group mb-3">
                                     <label for="nama">Tanggal Tagihan </label>
                                     <input type="date" class="form-control" name="start_date" id="start_date"
                                         placeholder="Masukkan Nama Biaya">

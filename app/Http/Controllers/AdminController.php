@@ -17,7 +17,8 @@ class AdminController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('admin.dashboard', compact('user'));
+        $jumlahMurid = Murid::count();
+        return view('admin.dashboard', compact('user', 'jumlahMurid'));
     }
     public function edit()
     {

@@ -2,44 +2,7 @@
 
 @section('content')
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
-        <div class="layout-container">
-            <!-- Menu -->
-
-            <x-sidebar>
-                <div class="app-brand demo">
-                    <a href="index.html" class="app-brand-link">
-                        <img src="{{ asset('storage/image/stm_svg.svg.png') }}" alt="" width="30px">
-                        <span class="app-brand-text demo menu-text fw-bolder ms-2 text-capitalize">TADIKA</span>
-                    </a>
-
-                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-                        <i class="bx bx-chevron-left bx-sm align-middle"></i>
-                    </a>
-                </div>
-
-                <div class="menu-inner-shadow"></div>
-
-                <!--Menu-->
-                <ul class="menu-inner py-1">
-                    <!-- Dashboard -->
-                    <x-menu-item>
-                        @slot('active')
-                            active open
-                        @endslot
-                        <a href="{{ route('admin.dashboard') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Dashboard</div>
-                        </a>
-                    </x-menu-item>
-
-                    <!-- Layouts -->
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Settings</span>
-                    </li>
-
-                </ul>
-            </x-sidebar>
+    @include('layouts.sidebar')
             <!-- / Sidebar -->
 
             <!-- Layout container -->
@@ -62,7 +25,7 @@
                                         <div class="col-sm-7">
                                             <div class="card-body">
                                                 <h5 class="card-title text-primary">Selamat Datang
-                                                    {{ $user->name }}
+                                                    {{ Auth::user()->name }}
                                                     🎉</h5>
                                                 <p class="mb-4">
                                                     Kamu mendapatkan <span class="fw-bold">10</span> notifikasi
@@ -111,41 +74,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <span class="fw-semibold d-block mb-1">Total Murid</span>
-                                                <h3 class="card-title mb-2">500</h3>
-                                                <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>
-                                                    +72.80%</small>
+                                                <span class="fw-semibold d-block mb-1">Total Anak</span>
+                                                <h3 class="card-title mb-2">{{ $jumlahMurid }}</h3>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-6 mb-4">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="card-title d-flex align-items-start justify-content-between">
-                                                    <div class="avatar flex-shrink-0">
-                                                        <img src="{{ asset('sneat') }}/assets/img/icons/unicons/wallet-info.png"
-                                                            alt="Credit Card" class="rounded" />
-                                                    </div>
-                                                    <div class="dropdown">
-                                                        <button class="btn p-0" type="button" id="cardOpt6"
-                                                            data-bs-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-end"
-                                                            aria-labelledby="cardOpt6">
-                                                            <a class="dropdown-item" href="javascript:void(0);">View
-                                                                More</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <span>Sales</span>
-                                                <h3 class="card-title text-nowrap mb-1">$4,679</h3>
-                                                <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>
-                                                    +28.42%</small>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

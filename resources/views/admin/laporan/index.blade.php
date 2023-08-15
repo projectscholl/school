@@ -7,9 +7,6 @@
         <x-navbar></x-navbar>
         <div class="content-wrapper">
             <div class="container-xxl flex-grow-1 container-p-y">
-                <div class="card">
-                    <div class="card-header">Data Laporan</div>
-                </div>
                 <div class="card mt-3">
                     <div class="card-header">
                         <h4>Laporan Pembayaran</h4>

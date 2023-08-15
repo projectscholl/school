@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('instansis', function (Blueprint $table) {
             $table->id();
+            $table->string('logo');
+            $table->string('name');
+            $table->string('telepon');
+            $table->string('email')->unique();
+            $table->string('alamat');
             $table->timestamps();
         });
     }
