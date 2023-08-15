@@ -42,7 +42,7 @@
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>SPP ANGKATAN 2021</td>
+                                    <td>SPP ANGKATAN 2022</td>
                                     <td>Rp 200.000.00</td>
                                 </tr>
 
@@ -56,7 +56,6 @@
 
                         <div class="mt-3">
                             <a href="#" class="btn btn-primary fs-5">Detail Pembayaran</a>
-                            <a href="#" class="btn btn-primary fs-5">Detail Pembayaran NIh jek</a>
                         </div>
                     </div>
 
