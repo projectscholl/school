@@ -9,8 +9,9 @@
             <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="card">
                     <div class="card-header">Data Kelas</div>
+                    <h1>NIh jek gua rubah</h1>
                     <table class="table" id="myTables">
-
+                        
                     </table>
                 </div>
             </div>
