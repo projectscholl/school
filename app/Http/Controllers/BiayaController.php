@@ -34,7 +34,7 @@ class BiayaController extends Controller
         ]);
 
         Biaya::create($data);
-        return redirect()->route('admin.biaya.index');
+        return redirect()->route('admin.biaya.index')->with('message' , "Biaya Berhasil Dibuat!!!");
     }
 
     /**
@@ -42,6 +42,7 @@ class BiayaController extends Controller
      */
     public function show(string $id)
     {
+
     }
 
     /**
