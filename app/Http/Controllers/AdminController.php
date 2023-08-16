@@ -22,6 +22,7 @@ class AdminController extends Controller
     }
     public function edit()
     {
+        
         $user = Auth::user();
         return view('admin.user.profile', compact('user'));
     }

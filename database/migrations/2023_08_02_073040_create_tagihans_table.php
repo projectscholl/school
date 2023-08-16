@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('tagihans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_murids');
-            $table->foreignId('id_users');
             $table->datetime('start_date');
             $table->datetime('end_date');
             $table->timestamps();

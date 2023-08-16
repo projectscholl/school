@@ -54,8 +54,8 @@ class LoginController extends Controller
         } else {
             Auth::logout();
             return redirect()->route('login')->withErrors([
-                'email' => 'Hanya Admin!!!!!',
-                'password' => 'password Admin!!!!!'
+                'email' => 'Email is invalid',
+                'password' => 'Password is invalid',
             ])->withInput();
         }
     }

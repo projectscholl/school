@@ -13,7 +13,12 @@
                         <div class="pe-5 me-5">
                             <form action="">
                                 <label for="" class="mb-2">Pilih Tahun Laporan</label>
-                                <input type="date" name="" id="" class="form-control">
+                                <select name="" id="" class="form-control">
+                                    <option value="">2021</option>
+                                    <option value="">2022</option>
+                                    <option value="">2023</option>
+                                    <option value="">2024</option>
+                                </select>
                                 <a href=""
                                     class="d-flex align-items-center justify-content-around px-5 btn btn-primary mt-3 col-md-2">
                                     <i class='bx bx-book-content'></i>

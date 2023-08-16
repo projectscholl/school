@@ -77,35 +77,22 @@
                                                 value="ADMIN" readonly />
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label for="password" class="form-label">Current Password</label>
+                                            <label for="password" class="form-label">Password</label>
                                             <input
                                                 class="form-control @error('current_password')
                                                 is-invalid
                                             @enderror"
-                                                type="password" id="current_password" name="current_password"
+                                                type="password" id="password" name="password" placeholder="" />
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label for="new_password" class="form-label">Password Confirm</label>
+                                            <input
+                                                class="form-control @error('password_confirmation')
+                                                is-invalid
+                                            @enderror"
+                                                type="password" id="password_confirmation" name="password_confirmation"
                                                 placeholder="" />
                                         </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label for="new_password" class="form-label">New Password</label>
-                                            <input
-                                                class="form-control @error('new_password')
-                                                is-invalid
-                                            @enderror"
-                                                type="password" id="new_password" name="new_password" placeholder="" />
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label for="new_password" class="form-label">New Password Confirm</label>
-                                            <input
-                                                class="form-control @error('new_password_confirmation')
-                                                is-invalid
-                                            @enderror"
-                                                type="password" id="new_password_confirmation"
-                                                name="new_password_confirmation" placeholder="" />
-                                            @error('new_password_confirmation')
-                                                {{ $message }}
-                                            @enderror
-                                        </div>
-
                                         <div class="mb-3 col-md-6 d-flex flex-column">
                                             <label for="" class="form-label">Image</label>
                                             <img src="{{ asset('storage/image/' . $user->image) }}" alt=""
@@ -135,7 +122,7 @@
         </div>
     </div>
 @endsection
-@push('js')
+@push('scripts')
     <script>
         var loadFile = function(event) {
 

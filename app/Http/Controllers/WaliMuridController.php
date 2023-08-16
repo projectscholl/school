@@ -46,7 +46,7 @@ class WaliMuridController extends Controller
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('public/storage/image');
-            $data['image'] = Storage::url($imagePath);
+            $data['image'] = $imagePath;
         }
 
         User::create($data);
@@ -68,16 +68,25 @@ class WaliMuridController extends Controller
      */
     public function edit(string $id)
     {
-        $user = Auth::user();
+        $user = User::find($id);
         return view('admin.walimurid.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+    $data = $request->validate([
+        'name' => 'max:255|string',
+        'email' => 'email|unique:users,email,' . $id,
+        'telepon' => 'required|string',
+        'password' => 'required',
+    ]);
+    $user = User::find($id);
+    $user->update($data);
+    // dd($user);
+    return redirect()->route('admin.walimurid.index')->with('pesan', "Data Wali Murid berhasil diperbarui!!");
     }
 
     /**

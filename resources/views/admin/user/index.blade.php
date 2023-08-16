@@ -48,7 +48,10 @@
 
                                                     <a href="{{ route('admin.user.edit', $item->id) }}"
                                                         class="btn btn-warning me-2"><i class="bx bx-edit-alt"></i></a>
-                                                    <form action="">
+                                                    <form action="{{ route('admin.user.destroy', $item->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
                                                         <button class="btn btn-danger"><i class="bx bx-trash"></i></button>
                                                     </form>
 

@@ -29,8 +29,8 @@
             @guest
             @else
                 <div class="d-flex">
-                    <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-light"
-                        style="font-family: Public sans, serif;">Dashboard</a>
+                    <a href="{{ Auth::user()->role == 'ADMIN' ? route('admin.dashboard') : route('wali.dashboard') }}"
+                        class="btn btn-outline-light" style="font-family: Public sans, serif;">Dashboard</a>
 
                     <a class="btn btn-light ms-3" href="{{ route('logout') }}"
                         onclick="event.preventDefault();

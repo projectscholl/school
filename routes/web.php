@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AngkatanController;
 use App\Http\Controllers\Auth\LoginWaliController;
+use App\Http\Controllers\BankController;
 use App\Http\Controllers\BiayaController;
 use App\Http\Controllers\InstansiController;
 use App\Http\Controllers\LaporanController;
@@ -39,6 +40,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['IsAdmin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/profile', [AdminController::class, 'edit'])->name('profile');
+    Route::resource('/bank', BankController::class);
     Route::resource('/user', UserController::class);
     Route::resource('/murid', MuridController::class);
     Route::resource('/walimurid', WaliMuridController::class);
@@ -49,6 +51,7 @@ Route::middleware(['IsAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::resource('/angkatan', AngkatanController::class);
     Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran');
     Route::get('/pembayaran/detail', [PembayaranController::class, 'show'])->name('pembayaran.detail');
+    Route::get('/bayar/{id}', [TagihanController::class, 'bayarIpaymu'])->name('bayar');
     // Route::get('/laporan', [])
 });
 

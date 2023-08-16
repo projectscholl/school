@@ -58,4 +58,9 @@ class TagihanController extends Controller
     {
         //
     }
+
+    public function bayarIpaymu($id)
+    {
+        return view('admin.tagihan.bayar');
+    }
 }

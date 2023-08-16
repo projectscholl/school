@@ -62,7 +62,12 @@
                                                 class="form-control @error('password')
                                             is-invalid
                                         @enderror"
-                                                type="password" id="password" name="password" placeholder="" />
+                                                type="password" id="password" name="password" placeholder=""
+                                                id="password" />
+                                            <div class="d-flex">
+                                                <label>Show password</label>
+                                                <input type="checkbox" id="checkbox" class="ms-2">
+                                            </div>
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="password_confirm" class="form-label">Password confirm</label>
@@ -74,13 +79,15 @@
                                                 placeholder="" />
                                         </div>
 
-                                        <div class="mb-3 col-md-6">
+                                        <div class="mb-3 col-md-6 d-flex flex-column">
                                             <label for="image" class="form-label">Image</label>
+                                            <img src="" alt="" id="output" width="100"
+                                                class="mb-3 rounded">
                                             <input type="file" name="image" id="image"
                                                 class="form-control @error('image')
                                             is-invalid
                                         @enderror"
-                                                value="{{ old('name') }}">
+                                                value="{{ old('name') }}" onchange="loadFile(event)">
                                             <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 2Mb
                                         </div>
                                         <div class="mt-2">
@@ -99,5 +106,20 @@
 
         </div>
     </div>
-
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#checkbox').on('change', function() {
+                $('#password').attr('type', $('#checkbox').prop('checked') == true ? "text" : "password");
+            });
+        });
+    </script>
+    <script>
+        var loadFile = function(event) {
+
+            var output = document.getElementById('output')
+            output.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
+@endpush

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-
+@section('title', 'Admin')
 @section('content')
     <!-- Layout wrapper -->
     <!-- Menu -->
@@ -33,7 +33,7 @@
                                             konfirmasi belum
                                             kamu lihat klik untuk melihat
                                         </p>
-                                            
+
                                         <a href="javascript:;" class="btn btn-sm btn-outline-primary">Lihat
                                             Notifikasi</a>
                                     </div>
@@ -51,98 +51,93 @@
                     </div>
 
 
-                            <div class="col-lg-4 col-md-4 order-1">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-12 col-6 mb-4">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="card-title d-flex align-items-start justify-content-between">
-                                                    <div class="avatar flex-shrink-0">
-                                                        <img src="{{ asset('sneat') }}/assets/img/icons/unicons/chart-success.png"
-                                                            alt="chart success" class="rounded" />
-                                                    </div>
-                                                    <div class="dropdown">
-                                                        <button class="btn p-0" type="button" id="cardOpt3"
-                                                            data-bs-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-end"
-                                                            aria-labelledby="cardOpt3">
-                                                            <a class="dropdown-item" href="javascript:void(0);">View
-                                                                More</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                                        </div>
-                                                    </div>
+                    <div class="col-lg-4 col-md-4 order-1">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-6 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title d-flex align-items-start justify-content-between">
+                                            <div class="avatar flex-shrink-0">
+                                                <img src="{{ asset('sneat') }}/assets/img/icons/unicons/chart-success.png"
+                                                    alt="chart success" class="rounded" />
+                                            </div>
+                                            <div class="dropdown">
+                                                <button class="btn p-0" type="button" id="cardOpt3"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                                                    <a class="dropdown-item" href="javascript:void(0);">View
+                                                        More</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);">Delete</a>
                                                 </div>
-                                                <span class="fw-semibold d-block mb-1">Total Murid</span>
-                                                <h3 class="card-title mb-2">{{ $jumlahMurid }}</h3>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12 col-6 mb-4">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="card-title d-flex align-items-start justify-content-between">
-                                                    <div class="avatar flex-shrink-0">
-                                                        <img src="{{ asset('sneat') }}/assets/img/icons/unicons/wallet-info.png"
-                                                            alt="chart success" class="rounded" />
-                                                    </div>
-                                                    <div class="dropdown">
-                                                        <button class="btn p-0" type="button" id="cardOpt3"
-                                                            data-bs-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-end"
-                                                            aria-labelledby="cardOpt3">
-                                                            <a class="dropdown-item" href="javascript:void(0);">View
-                                                                More</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <span class="fw-semibold d-block mb-1">Total Sudah Bayar</span>
-                                                <h3 class="card-title mb-2">0</h3>
-                                                <small class="text-success fw-semibold">Rp 1.000.000.00</small>
-                                            </div>
-                                        </div>
+                                        <span class="fw-semibold d-block mb-1">Total Murid</span>
+                                        <h3 class="card-title mb-2">{{ $jumlahMurid }}</h3>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Total Revenue -->
-                            <!--/ Total Revenue -->
+                            <div class="col-lg-6 col-md-12 col-6 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title d-flex align-items-start justify-content-between">
+                                            <div class="avatar flex-shrink-0">
+                                                <img src="{{ asset('sneat') }}/assets/img/icons/unicons/wallet-info.png"
+                                                    alt="chart success" class="rounded" />
+                                            </div>
+                                            <div class="dropdown">
+                                                <button class="btn p-0" type="button" id="cardOpt3"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                                                    <a class="dropdown-item" href="javascript:void(0);">View
+                                                        More</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="fw-semibold d-block mb-1">Total Sudah Bayar</span>
+                                        <h3 class="card-title mb-2">0</h3>
+                                        <small class="text-success fw-semibold">Rp 1.000.000.00</small>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- / Content -->
+                    <!-- Total Revenue -->
+                    <!--/ Total Revenue -->
+                </div>
+            </div>
+            <!-- / Content -->
 
-                    <!-- Footer -->
-                    <footer class="content-footer footer bg-footer-theme">
-                        <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                            <div class="mb-2 mb-md-0">
-                                ©
-                                <script>
-                                    document.write(new Date().getFullYear());
-                                </script>
-                                , made with ❤️ by
-                                <a href="https://themeselection.com" target="_blank"
-                                    class="footer-link fw-bolder">ThemeSelection</a>
-                            </div>
-                            <div>
-                                <a href="https://themeselection.com/license/" class="footer-link me-4"
-                                    target="_blank">License</a>
-                                <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
-                                    Themes</a>
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+                <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                    <div class="mb-2 mb-md-0">
+                        ©
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>
+                        , made with ❤️ by
+                        <a href="https://themeselection.com" target="_blank"
+                            class="footer-link fw-bolder">ThemeSelection</a>
+                    </div>
+                    <div>
+                        <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
+                        <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
+                            Themes</a>
 
-                                <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                                    target="_blank" class="footer-link me-4">Documentation</a>
+                        <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
+                            target="_blank" class="footer-link me-4">Documentation</a>
 
-                                <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                                    target="_blank" class="footer-link me-4">Support</a>
-                            </div>
-                        </div>
-                    </footer>
-                    <!-- / Footer -->
+                        <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank"
+                            class="footer-link me-4">Support</a>
+                    </div>
+                </div>
+            </footer>
+            <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
         </div>

@@ -87,9 +87,6 @@ class UserController extends Controller
             'name' => 'required|min:3',
             'email' => 'required|unique:users,email,' . $user['id'],
             'telepon' => 'required|min:8',
-            'current_password' => 'nullable',
-            'new_password' => 'nullable|confirmed',
-
         ]);
 
 
@@ -103,11 +100,15 @@ class UserController extends Controller
             $user->image;
         }
 
-        if ($request->filled('new_password')) {
-            if (!Hash::check($request->current_password, $user->password)) {
-                return back()->with('password', 'Currrent password do not match!');
-            }
-            $data['password'] = Hash::make($request->new_password);
+        if (!$request->password) {
+            $user->password;
+        } else {
+            $data = $request->validate([
+                'password' => 'min:5',
+                'password_confirmation' => 'required|same:password',
+            ]);
+
+            Hash::make($request->password);
         }
         $user->update($data);
         // dd($data);
@@ -117,8 +118,14 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        if ($user == Auth::user()) {
+            return redirect()->route('admin.angkatan.index')->with('error', 'User Sedang dipakai');
+        }
+        $user->delete();
+
+        return redirect()->route('admin.user.index')->with('success', 'Berhasil dihapus');
     }
 }

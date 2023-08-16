@@ -18,6 +18,15 @@
                         <div class="table-responsive text-nowrap">
                             <form action="">
                                 <div class="form-group mb-3">
+                                    <label for="nama">Pilih Angkatan </label>
+                                    <select name="" id="" class="form-control">
+                                        <option value="">2020</option>
+                                        <option value="">2021</option>
+                                        <option value="">2022</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
                                     <label for="nama">Tanggal Tagihan </label>
                                     <input type="date" class="form-control" name="start_date" id="start_date"
                                         placeholder="Masukkan Nama Biaya">
