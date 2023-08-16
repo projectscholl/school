@@ -13,8 +13,4 @@ class WaliSiswaController extends Controller
         $wali = Murid::where('id_users',$user)->get();
         return view('wali.siswa.index', compact('wali'));
     }
-    public function tagihan()
-    {
-        return view('wali.tagihan.index');
-    }
 }

@@ -43,7 +43,7 @@
                 </li>
 
                 <!--Data Tagihan-->
-                <li class="{{ Route::is('wali.tagihan.index*') ? $active : $nonActive }}">
+                <li class="{{ Route::is('wali.tagihan   *') ? $active : $nonActive }}">
                     <a href="{{ route('wali.tagihan.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-wallet-alt"></i>
                         <div data-i18n="Without menu">Data Tagihan</div>

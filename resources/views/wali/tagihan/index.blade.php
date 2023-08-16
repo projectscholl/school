@@ -25,43 +25,82 @@
                         <hr>
                         <div>KELAS : 12 </div>
                         <hr>
-                        <div>TANGGAL TAGIHAN : 1/1/2021 </div>
-                        <hr>
-                        <div>TENGGAT TAGIHAN : 1/2/2021 </div>
-                        <hr>
-                        <div>STATUS PEMBAYARAN : Belum Bayar </div>
-                        <hr>
-
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama Tagihan</th>
-                                    <th>JUMLAH</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>SPP ANGKATAN 2022</td>
-                                    <td>Rp 200.000.00</td>
-                                </tr>
-
-                                <tr>
-                                    <td></td>
-                                    <td><strong>Total Pembayaran:</strong></td>
-                                    <td><strong>Rp 200.000.00</strong></td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <div class="mt-3">
-                            <a href="#" class="btn btn-primary fs-5">Detail Pembayaran</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 order-2 mt-4">
+                    <div class="card h-100">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <h5 class="card-title m-0 me-2">Spp Angkatan 2022</h5>
+                            <div class="dropdown">
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                                    <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
+                                    <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+                                    <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
+                                </div>
+                            </div>
+                            <input type="checkbox" id="selectAll">
+                        </div>
+                        <div class="card-body">
+                            <ul class="p-0 m-0">
+                                    <li class="d-flex mb-4 pb-1 align-items-center">
+                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                            <div class="me-2">
+                                                <h6 class="mb-0">Januari</h6>
+                                            </div>
+                                            <div class="user-progress d-flex align-items-center gap-1">
+                                                <h6 class="mb-0">Rp.1000.000</h6>
+                                            </div>
+                                            <div class="user-progress gap-1">
+                                                <a href="" class="text-danger">Belum</a>
+                                            </div>
+                                            <input type="checkbox" data-select name="" id="">
+                                        </div>
+                                    </li>
+                                    <li class="d-flex mb-4 pb-1 align-items-center">
+                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                            <div class="me-2">
+                                                <h6 class="mb-0">Januari</h6>
+                                            </div>
+                                            <div class="user-progress d-flex align-items-center gap-1">
+                                                <h6 class="mb-0">Rp.1000.000</h6>
+                                            </div>
+                                            <div class="user-progress gap-1">
+                                                <a href="" class="text-danger">Belum</a>
+                                            </div>
+                                            <input type="checkbox" data-select name="" id="">
+                                        </div>
+                                    </li>
+                            </ul>
                         </div>
                     </div>
-
                 </div>
+                <a href="{{ route('wali.tagihan.detail') }}" class="btn btn-primary mt-3 w-25">Bayar</a>
             </div>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const selectAllCheckbox = document.querySelector("#selectAll");
+                    const checkboxes = document.querySelectorAll("[data-select]");
+            
+                    selectAllCheckbox.addEventListener("change", function() {
+                        checkboxes.forEach(checkbox => {
+                            checkbox.checked = selectAllCheckbox.checked;
+                        });
+                    });
+            
+                    checkboxes.forEach(checkbox => {
+                        checkbox.addEventListener("change", function() {
+                            if (!checkbox.checked) {
+                                selectAllCheckbox.checked = false;
+                            }
+                            else if (
+                                [...checkboxes].every(checkbox => checkbox.checked)
+                            ) {
+                                selectAllCheckbox.checked = true;
+                            }
+                        });
+                    });
+                });
+            </script>            
             <!--/ Bordered Table -->
         </div>
     </div>

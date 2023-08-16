@@ -33,13 +33,12 @@ class WaliMuridController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required | max:255 | string',
-            'email' => 'required | email | unique:users',
-            'telepon' => 'required | string',
-            'image' => 'nullable | mimes:jpeg,png,gif',
+            'name' => 'required|max:255|string',
+            'email' => 'required|email|unique:users',
+            'telepon' => 'required|string',
+            'image' => 'nullable|mimes:jpeg,png,gif',
             'password' => 'required',
         ]);
-        // dd($data);
 
         $data['password'] = bcrypt($data['password']);
         $data['role'] = 'WALI';
@@ -77,16 +76,16 @@ class WaliMuridController extends Controller
      */
     public function update(Request $request, $id)
     {
-    $data = $request->validate([
-        'name' => 'max:255|string',
-        'email' => 'email|unique:users,email,' . $id,
-        'telepon' => 'required|string',
-        'password' => 'required',
-    ]);
-    $user = User::find($id);
-    $user->update($data);
-    // dd($user);
-    return redirect()->route('admin.walimurid.index')->with('pesan', "Data Wali Murid berhasil diperbarui!!");
+        $data = $request->validate([
+            'name' => 'max:255|string',
+            'email' => 'email|unique:users,email,' . $id,
+            'telepon' => 'required|string',
+            'password' => 'required',
+        ]);
+        $user = User::find($id);
+        $user->update($data);
+        // dd($user);
+        return redirect()->route('admin.walimurid.index')->with('pesan', "Data Wali Murid berhasil diperbarui!!");
     }
 
     /**

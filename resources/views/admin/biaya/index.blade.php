@@ -21,25 +21,27 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Biaya</th>
-                                        <th>Total Tagihan</th>
-                                        <th>Dibuat</th>
+                                        <th>Angkatan</th>
+                                        <th>Total Biaya</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <td>1</td>
-                                    <td>SPP Angkatan 2022</td>
-                                    <td>Rp 200.000.00</td>
-                                    <td>admin</td>
-                                    <td class="d-flex">
+                                    <tr>
+                                        <td>1</td>
+                                        <td>SPP Angkatan 2022</td>
+                                        <td>Rp 200.000.00</td>
+                                        <td>admin</td>
+                                        <td class="d-flex">
 
-                                        <a href="{{ route('admin.biaya.edit', ['biaya' => 1]) }}"
-                                            class="btn btn-warning me-2"><i class="bx bx-edit-alt"></i>
-                                        </a>
-                                        <form action="">
-                                            <button class="btn btn-danger"><i class="bx bx-trash"></i></button>
-                                        </form>
-                                    </td>
+                                            <a href="{{ route('admin.biaya.edit', ['biaya' => 1]) }}"
+                                                class="btn btn-warning me-2"><i class="bx bx-edit-alt"></i>
+                                            </a>
+                                            <form action="">
+                                                <button class="btn btn-danger"><i class="bx bx-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

@@ -23,6 +23,9 @@
                                 <label for="nama">Nama</label>
                                 <input type="text" class="form-control" name="name" id="name"
                                     placeholder="Masukkan Nama" required>
+                                @error('nama')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label for="content">Nama Wali</label>
@@ -32,11 +35,17 @@
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('id_users')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label for="nama">NISN</label>
                                 <input type="text" class="form-control" name="nisn" id="nisn"
                                     placeholder="Masukkan NISN" required>
+                                @error('nisn')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label for="content">Jurusan</label>
@@ -46,10 +55,21 @@
                                     <option value="{{ $item }}">{{ $item }}</option>
                                     @endforeach
                                 </select>
+                                @error('jurusan')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label for="content">Kelas</label>
-                                <input type="number" class="form-control" name="kelas" id="kelas" required>
+                                <select name="kelas" id="kelas" class="form-control" required>
+                                    <option disabled selected>-----------</option>
+                                    @foreach ( ['10', '11' , '12'] as $item)
+                                    <option value="{{ $item }}">{{ $item }}</option>
+                                    @endforeach
+                                </select>
+                                @error('kelas')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label for="content">Angkatan</label>
@@ -59,6 +79,9 @@
                                         <option value="{{ $item->id }}">{{ $item->tahun }}</option>
                                     @endforeach
                                 </select>
+                                @error('id_angkatans')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
