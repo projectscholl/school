@@ -34,7 +34,6 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,11 +41,6 @@
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $anak->name }}</td> 
-                                        <td>
-                                            <form action="">
-                                                <button class="btn btn-danger"><i class="bx bx-trash"></i></button>
-                                            </form>
-                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
