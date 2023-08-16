@@ -29,11 +29,13 @@
                                 <div class="d-flex align-items-start gap-4">
                                     <img src="{{ asset('storage/image/' . $user->image) }}" alt="" width="100"
                                         height="100" class="d-block rounded">
-                                    <form id="formAccountSettings" method="POST" onsubmit="return false"
+                                    <form id="{{ route('admin.profile.update', $user->id) }}" method="POST"
                                         enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="username" class="form-label">User Name</label>
+                                                <label for="username" class="form-label">UserName</label>
                                                 <input class="form-control" type="text" id="firstName" name="firstName"
                                                     value="{{ $user->name }}" autofocus />
                                             </div>
@@ -50,7 +52,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label class="form-label" for="country">Role</label>
                                                 <input class="form-control" type="text" id="email" name="text"
-                                                    value="{{ $user->role }}" disabled />
+                                                    value="{{ $user->role }}" readonly />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="" class="form-label">Image</label>
@@ -58,11 +60,12 @@
                                                 <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of
                                                     800K
                                             </div>
+                                            <div class="mt-2">
+                                                <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                                                <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                                            </div>
                                     </form>
-                                    <div class="mt-2">
-                                        <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                                        <button type="reset" class="btn btn-outline-secondary">Cancel</button>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>

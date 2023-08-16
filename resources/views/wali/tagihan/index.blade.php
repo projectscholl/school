@@ -1,5 +1,6 @@
 @extends('layouts.master')
 
+@section('title','Tagihan')
 @section('content')
     <!-- Layout wrapper -->
     @include('layouts.sidebar')

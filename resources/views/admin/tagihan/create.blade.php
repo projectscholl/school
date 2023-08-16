@@ -1,5 +1,6 @@
 @extends('layouts.master')
 
+@section('title','Tagihan create')
 @section('content')
     <!-- Sidebar -->
     @include('layouts.sidebar')

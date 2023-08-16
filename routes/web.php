@@ -40,6 +40,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['IsAdmin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/profile', [AdminController::class, 'edit'])->name('profile');
+    Route::put('/profile/{id}', [AdminController::class, 'update'])->name('profile.update');
     Route::resource('/bank', BankController::class);
     Route::resource('/user', UserController::class);
     Route::resource('/murid', MuridController::class);

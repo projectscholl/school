@@ -122,7 +122,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if ($user == Auth::user()) {
-            return redirect()->route('admin.angkatan.index')->with('error', 'User Sedang dipakai');
+            return redirect()->route('admin.user.index')->with('error', 'User Sedang dipakai');
         }
         $user->delete();
 
