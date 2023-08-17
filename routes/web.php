@@ -40,7 +40,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //Admin
 Route::middleware(['IsAdmin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-    Route::get('/profile', [AdminController::class, 'edit'])->name('profile');
+    Route::get('/profile/{id}/edit', [AdminController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/{id}', [AdminController::class, 'update'])->name('profile.update');
     Route::resource('/bank', BankController::class);
     Route::resource('/user', UserController::class);
@@ -64,7 +64,7 @@ Route::post('loginprocess', [LoginWaliController::class, 'loginprocess'])->name(
 Route::middleware(['Wali'])->group(function () {
     Route::get('/wali', [LoginWaliController::class, 'dashboard'])->name('wali.dashboard');
     Route::get('/siswa', [WaliSiswaController::class, 'index'])->name('wali.siswa.index');
-    Route::get('wali/siswa', [WaliSiswaControllerntroller::class, 'index'])->name('wali.siswa.index');
+    Route::get('wali/siswa', [WaliSiswaController::class, 'index'])->name('wali.siswa.index');
     Route::get('/tagihan', [TagihanWaliController::class, 'index'])->name('wali.tagihan.index');
     Route::get('/tagihan/detail', [TagihanWaliController::class, 'detail'])->name('wali.tagihan.detail');
     Route::get('/tagihan/bayar', [TagihanWaliController::class, 'bayar'])->name('wali.tagihan.bayar');

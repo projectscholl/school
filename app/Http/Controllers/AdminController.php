@@ -21,7 +21,7 @@ class AdminController extends Controller
         $jumlahMurid = Murid::count();
         return view('admin.dashboard', compact('user', 'jumlahMurid'));
     }
-    public function edit()
+    public function edit($id)
     {
         $user = Auth::user();
         return view('admin.user.profile', compact('user'));
@@ -37,7 +37,7 @@ class AdminController extends Controller
         ]);
 
         $user = Auth::user();
-        if ($request->image) {
+        if ($request['image'] == $user->image) {
             $content = $request->file('image');
             $imageName = time() . '.' . $content->extension();
             $path = 'image/' . $imageName;
@@ -46,7 +46,7 @@ class AdminController extends Controller
         } else {
             $user->image;
         }
-        
+
 
         return redirect()->route('admin.profile');
     }

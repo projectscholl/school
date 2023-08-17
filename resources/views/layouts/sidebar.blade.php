@@ -43,7 +43,7 @@
                 </li>
 
                 <!--Data Tagihan-->
-                <li class="{{ Route::is('wali.tagihan   *') ? $active : $nonActive }}">
+                <li class="{{ Route::is('wali.tagihan.*') ? $active : $nonActive }}">
                     <a href="{{ route('wali.tagihan.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-wallet-alt"></i>
                         <div data-i18n="Without menu">Data Tagihan</div>
@@ -103,7 +103,7 @@
 
                 <!--Account setting-->
                 <li
-                    class="menu-item {{ Route::is('admin.profile', 'admin.instansi.*', 'admin.bank.*') ? 'active open' : '' }}">
+                    class="menu-item {{ Route::is('admin.profile.*', 'admin.instansi.*', 'admin.bank.*') ? 'active open' : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-dock-top"></i>
                         <div data-i18n="Account Settings">Account Setting</div>
@@ -116,8 +116,8 @@
                         </li>
                     </ul>
                     <ul class="menu-sub">
-                        <li class="{{ Route::is('admin.profile') ? $active : $nonActive }}">
-                            <a href="{{ route('admin.profile') }}" class="menu-link">
+                        <li class="{{ Route::is('admin.profile.*') ? $active : $nonActive }}">
+                            <a href="{{ route('admin.profile.edit', Auth::user()->id) }}" class="menu-link">
                                 <div data-i18n="Without menu">Profile</div>
                             </a>
                         </li>
