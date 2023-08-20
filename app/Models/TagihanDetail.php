@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Biaya extends Model
+class TagihanDetail extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nama',
-        'id_angkatans',
+        'id_tagihan',
+        'nama_biaya',
         'total_biaya',
     ];
 
-    public function angkatans()
+    public function tagihan()
     {
-        return $this->belongsTo(Angkatan::class, 'id_angkatans');
+        return $this->belongsTo(Tagihan::class, 'id_tagihan');
     }
 }

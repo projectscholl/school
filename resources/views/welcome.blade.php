@@ -57,10 +57,10 @@
                 tomorrow <br>Learn as if you were to live forever.
             </h1>
             <div class="d-flex mt-4 align-items-center">
-                <a href="" class="btn btn-light" style="font-family: Public sans, serif;">LOGIN WALI
+                <a href="{{ route('login-wali') }}" class="btn btn-light" style="font-family: Public sans, serif;">LOGIN
+                    WALI
                     MURID</a>
                 <a href="" class="btn btn-outline-light ms-4" style="font-family: Public sans, serif;">DAFTAR
-                    WALI
                     MURID</a>
             </div>
         </div>

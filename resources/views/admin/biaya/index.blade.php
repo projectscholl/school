@@ -21,27 +21,29 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Biaya</th>
-                                        <th>Angkatan</th>
-                                        <th>Total Biaya</th>
+                                        <th>tahun</th>
+                                        <th>user</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>SPP Angkatan 2022</td>
-                                        <td>Rp 200.000.00</td>
-                                        <td>admin</td>
-                                        <td class="d-flex">
+                                    @foreach ($biaya as $key => $value)
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $value->nama }}</td>
+                                            <td>{{ $value->angkatans->tahun }}</td>
+                                            <td>{{ $user->name }}</td>
+                                            <td class="d-flex">
 
-                                            <a href="{{ route('admin.biaya.edit', ['biaya' => 1]) }}"
-                                                class="btn btn-warning me-2"><i class="bx bx-edit-alt"></i>
-                                            </a>
-                                            <form action="">
-                                                <button class="btn btn-danger"><i class="bx bx-trash"></i></button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                                <a href="{{ route('admin.biaya.edit', ['biaya' => 1]) }}"
+                                                    class="btn btn-warning me-2"><i class="bx bx-edit-alt"></i>
+                                                </a>
+                                                <form action="">
+                                                    <button class="btn btn-danger"><i class="bx bx-trash"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

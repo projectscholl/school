@@ -36,27 +36,27 @@
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
                                                 <label for="username" class="form-label">UserName</label>
-                                                <input class="form-control" type="text" id="firstName" name="firstName"
+                                                <input class="form-control" type="text" id="firstName" name="name"
                                                     value="{{ $user->name }}" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="telepone" class="form-label">Telephone</label>
-                                                <input class="form-control" type="text" name="lastName" id="lastName"
+                                                <label for="telepon" class="form-label">Telephone</label>
+                                                <input class="form-control" type="number" name="telepon" id="lastName"
                                                     value="{{ $user->telepon }}" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="email" class="form-label">E-mail</label>
-                                                <input class="form-control" type="text" id="email" name="email"
+                                                <input class="form-control" type="email" id="email" name="email"
                                                     value="{{ $user->email }}" placeholder="john.doe@example.com" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label class="form-label" for="country">Role</label>
-                                                <input class="form-control" type="text" id="email" name="text"
+                                                <input class="form-control" type="text" id="email" name="role"
                                                     value="{{ $user->role }}" readonly />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="" class="form-label">Image</label>
-                                                <input type="file" name="" id="" class="form-control">
+                                                <input type="file" name="image" id="" class="form-control">
                                                 <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of
                                                     800K
                                             </div>

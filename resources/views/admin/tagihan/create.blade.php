@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title','Tagihan create')
+@section('title', 'Tagihan create')
 @section('content')
     <!-- Sidebar -->
     @include('layouts.sidebar')
@@ -17,23 +17,25 @@
                     <h5 class="card-header">Tambah Data Tagihan</h5>
                     <div class="card-body w-50">
                         <div class="table-responsive text-nowrap">
-                            <form action="">
+                            <form action="{{ route('admin.tagihan.store') }}" method="post">
+                                @csrf
+                                @method('POST')
                                 <div class="form-group mb-3">
-                                    <label for="nama">Pilih Angkatan </label>
-                                    <select name="" id="" class="form-control">
-                                        <option value="">2020</option>
-                                        <option value="">2021</option>
-                                        <option value="">2022</option>
-
+                                    <label for="nama">Pilih Angkatan</label>
+                                    <select name="id_angkatans" id="" class="form-control">
+                                        @foreach ($biaya as $item)
+                                            <option value="{{ $item->angkatans->id }}">{{ $item->angkatans->tahun }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="nama">Tanggal Tagihan </label>
+                                    <label for="start_date">Tanggal Tagihan </label>
                                     <input type="date" class="form-control" name="start_date" id="start_date"
                                         placeholder="Masukkan Nama Biaya">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="nama">Tenggat Tagihan </label>
+                                    <label for="end_date">Tenggat Tagihan </label>
                                     <input type="date" class="form-control" name="end_date" id="end_date"
                                         placeholder="Masukkan Nama Biaya">
                                 </div>

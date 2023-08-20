@@ -12,7 +12,8 @@ class BiayaController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('admin.biaya.index', compact('user'));
+        $biaya = Biaya::with('angkatans')->get();
+        return view('admin.biaya.index', compact('user', 'biaya'));
     }
 
     public function create()
@@ -34,7 +35,7 @@ class BiayaController extends Controller
         ]);
 
         Biaya::create($data);
-        return redirect()->route('admin.biaya.index')->with('message' , "Biaya Berhasil Dibuat!!!");
+        return redirect()->route('admin.biaya.index')->with('message', "Biaya Berhasil Dibuat!!!");
     }
 
     /**
@@ -42,7 +43,6 @@ class BiayaController extends Controller
      */
     public function show(string $id)
     {
-
     }
 
     /**

@@ -15,6 +15,10 @@ class Angkatan extends Model
 
     public function murids()
     {
-        return $this->hasMany(Murid::class, 'id_angkatans');
+        return $this->belongsTo(Murid::class);
+    }
+    public function biaya()
+    {
+        return $this->hasMany(Biaya::class);
     }
 }
