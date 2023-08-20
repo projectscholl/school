@@ -21,9 +21,8 @@
                                 <div class="form-group mb-3">
                                     <label for="nama">Pilih Biaya </label>
                                     <select name="" id="" class="form-control">
-                                        <option value="">2020</option>
-                                        <option value="">2021</option>
-                                        <option value="">2022</option>
+                                        <option value="">SPP Angkatan 2022</option>
+                                        <option value="">SPP Angkatan 2023</option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">

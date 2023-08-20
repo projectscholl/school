@@ -38,7 +38,20 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->kelas }}</td>
                                         <td>{{ $item->angkatan->tahun }}</td>
-                                        <td>{{ $item->biaya ?? 'Tidak ada Biaya'}}</td>
+                                        <td class="d-flex">
+                                            @if ($item->angkatan && $item->angkatan->biaya)
+                                                Rp {{ number_format($item->angkatan->biaya->total_biaya) }}
+                                                {{-- <form action="{{ route('wali.tagihan.index', ['murid' => $item->id]) }}">
+                                                    <button type="submit" class="btn btn-link">
+                                                        <strong>
+                                                            <i class="menu-icon tf-icons bx bx-detail ms-2"></i>Detail
+                                                        </strong>
+                                                    </button>
+                                                </form> --}}
+                                            @else
+                                                Tidak ada Biaya 
+                                            @endif
+                                        </td>                                        
                                     </tr>
                                     @endforeach
                             </tbody>

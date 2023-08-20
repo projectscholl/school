@@ -18,7 +18,7 @@
                 <div class="card">
                     <h5 class="card-header">Data Pembayaran</h5>
                     <div class="table-responsive text-nowrap">
-                        <table class="table table-hover">
+                        <table class="table" id="myTable">
                             <thead>
                                 <tr>
                                     <th>Nama Murid</th>

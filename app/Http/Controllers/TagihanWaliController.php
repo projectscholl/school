@@ -15,6 +15,10 @@ class TagihanWaliController extends Controller
     {
         return view('wali.tagihan.detail');
     }
+    public function detail2()
+    {
+        return view('wali.tagihan.detail2');
+    }
 
     public function bayar()
     {
