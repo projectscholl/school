@@ -19,12 +19,11 @@
                         <div class="table-responsive text-nowrap">
                             <form action="">
                                 <div class="form-group mb-3">
-                                    <label for="nama">Pilih Angkatan </label>
+                                    <label for="nama">Pilih Biaya </label>
                                     <select name="" id="" class="form-control">
                                         <option value="">2020</option>
                                         <option value="">2021</option>
                                         <option value="">2022</option>
-
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">

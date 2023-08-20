@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Angkatan;
+use App\Models\Biaya;
 use App\Models\Murid;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,7 +14,6 @@ class MuridController extends Controller
     public function index()
     {
         $user = Auth::user();
-
         $murids = Murid::all();
         return view('admin.murid.index', compact('murids', 'user'));
     }
@@ -21,9 +21,9 @@ class MuridController extends Controller
     public function create()
     {
         $user = Auth::user();
-        $angkatan = Angkatan::all();
+        $biaya = Biaya::with('angkatan')->get();
         $users = User::where('role' , 'WALI')->get();
-        return view('admin.murid.create', compact('user', 'users', 'angkatan'));
+        return view('admin.murid.create', compact('user', 'users', 'biaya'));
     }
 
     /**
@@ -40,6 +40,7 @@ class MuridController extends Controller
             'kelas' => 'required',
         ]);
 
+        
         Murid::create($data);
         return redirect()->route('admin.murid.index')->with('message', "Murid Berhasil Ditambahkan!!");
         

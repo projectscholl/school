@@ -31,26 +31,26 @@ class WaliMuridController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $data = $request->validate([
-            'name' => 'required|max:255|string',
-            'email' => 'required|email|unique:users',
-            'telepon' => 'required|string',
-            'image' => 'nullable|mimes:jpeg,png,gif',
-            'password' => 'required',
-        ]);
+{
+    $data = $request->validate([
+        'name' => 'required|max:255|string',
+        'email' => 'required|email|unique:users',
+        'telepon' => 'required|string',
+        'image' => 'nullable|mimes:jpeg,png,gif',
+        'password' => 'required',
+    ]);
 
-        $data['password'] = bcrypt($data['password']);
-        $data['role'] = 'WALI';
+    $data['password'] = bcrypt($data['password']);
+    $data['role'] = 'WALI';
 
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('public/storage/image');
-            $data['image'] = $imagePath;
-        }
-
-        User::create($data);
-        return redirect()->route('admin.walimurid.index')->with('message', 'Wali murid berhasil ditambahkan!');
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('storage/image');
+        $data['image'] = $imagePath;
     }
+
+    User::create($data);
+    return redirect()->route('admin.walimurid.index')->with('message', 'Wali murid berhasil ditambahkan!');
+}
 
     /**
      * Display the specified resource.

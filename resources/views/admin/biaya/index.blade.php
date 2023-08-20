@@ -12,6 +12,34 @@
             <div class="container-xxl flex-grow-1 container-p-y">
                 <!-- Bordered Table -->
                 <div class="card">
+                    @if (session('message'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ session('message') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <script>
+                            setTimeout(function() {
+                                document.getElementById('auto-dismiss-alert').remove();
+                            }, 2000);
+                        </script>
+                    @endif
+                    @if (session('delete'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>{{ session('delete') }}!</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <script>
+                            setTimeout(function() {
+                                document.getElementById('auto-dismiss-alert').remove();
+                            }, 2000);
+                        </script>
+                    @endif
+                    @if (session('pesan'))
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>{{ session('pesan') }}!</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <h5 class="card-header">Data Biaya Tables</h5>
                     <a href="{{ route('admin.biaya.create') }}" class="btn btn-primary col-2 ms-4">Tambah Data</a>
                     <div class="card-body">
@@ -27,21 +55,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>SPP Angkatan 2022</td>
-                                        <td>Rp 200.000.00</td>
-                                        <td>admin</td>
-                                        <td class="d-flex">
-
-                                            <a href="{{ route('admin.biaya.edit', ['biaya' => 1]) }}"
-                                                class="btn btn-warning me-2"><i class="bx bx-edit-alt"></i>
-                                            </a>
-                                            <form action="">
-                                                <button class="btn btn-danger"><i class="bx bx-trash"></i></button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                    @foreach ($biaya as $index => $item)
+                                        <tr>
+                                            <td><strong>{{ $index + 1 }}</strong></td>
+                                            <td>{{ $item->nama }}</td>
+                                            <td>{{  $item->angkatan->tahun }}</td>
+                                            <td>Rp {{ number_format($item->total_biaya) }}</td>
+                                            <td class="d-flex">
+                                                <a href="{{ route('admin.biaya.edit', $item->id) }}"
+                                                    class="btn btn-warning me-2"><i class="bx bx-edit-alt"></i>
+                                                </a>
+                                                <form action="{{ route('admin.biaya.destroy' , $item->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger"><i class="bx bx-trash"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>           
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

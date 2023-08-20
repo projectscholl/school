@@ -21,6 +21,11 @@ class Murid extends Model
         return $this->belongsTo(Angkatan::class, 'id_angkatans');
     }
 
+    public function biaya()
+    {
+        return $this->belongsTo(Biaya::class, 'id_angkatans');
+    }
+
     protected $fillable = [
         'id_users',
         'name',
@@ -30,6 +35,5 @@ class Murid extends Model
         'id_angkatans',
         'biaya_id'
     ];
-
-
+    
 }

@@ -16,7 +16,7 @@
 </head>
 
 <body
-    style="background-image : url('/storage/image/background.jpg'); background-repeat:no-repeat; background-size:cover; ">
+    style="background-image : url('storage/image/sekolah.jpg'); background-repeat:no-repeat; background-size:cover; ">
     <div class="container-fluid sticky-top d-flex align-items-center justify-content-between"
         style="background-color:rgba(0,0,0,0.5);">
         <div class="row p-2">
@@ -57,7 +57,7 @@
                 tomorrow <br>Learn as if you were to live forever.
             </h1>
             <div class="d-flex mt-4 align-items-center">
-                <a href="" class="btn btn-light" style="font-family: Public sans, serif;">LOGIN WALI
+                <a href="{{ route('login-wali') }}" class="btn btn-light" style="font-family: Public sans, serif;">LOGIN WALI
                     MURID</a>
                 <a href="" class="btn btn-outline-light ms-4" style="font-family: Public sans, serif;">DAFTAR
                     WALI

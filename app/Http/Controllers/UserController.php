@@ -43,7 +43,7 @@ class UserController extends Controller
             'password_confirm' => 'required|same:password',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-        // cache the file
+        
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('storage/image'), $imageName);
         $user = User::create([

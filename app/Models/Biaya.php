@@ -14,4 +14,14 @@ class Biaya extends Model
         'id_angkatans',
         'total_biaya',
     ];
+
+    public function angkatan()
+    {
+        return $this->belongsTo(Angkatan::class, 'id_angkatans');
+    }
+    
+    public function murids()
+    {
+        return $this->belongsTo(Murid::class, 'id_biayas');
+    }
 }

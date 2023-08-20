@@ -12,7 +12,9 @@ class BiayaController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('admin.biaya.index', compact('user'));
+        $biaya = Biaya::get(); 
+        $angkatan = Angkatan::all();
+        return view('admin.biaya.index', compact('user', 'biaya', 'angkatan'));
     }
 
     public function create()
@@ -28,12 +30,13 @@ class BiayaController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nama' => 'required',
+            'nama' => 'required|max:255',
             'id_angkatans' => 'required',
             'total_biaya' => 'required',
         ]);
 
         Biaya::create($data);
+        dd($data);
         return redirect()->route('admin.biaya.index')->with('message' , "Biaya Berhasil Dibuat!!!");
     }
 
@@ -42,7 +45,7 @@ class BiayaController extends Controller
      */
     public function show(string $id)
     {
-
+        //
     }
 
     /**
@@ -50,8 +53,9 @@ class BiayaController extends Controller
      */
     public function edit(string $id)
     {
-        $user = Auth::user();
-        return view('admin.biaya.edit', compact('user'));
+        $biaya = Biaya::find($id);
+        $angkatan = Angkatan::all(); 
+        return view('admin.biaya.edit', compact('biaya', 'angkatan'));
     }
 
     /**
@@ -59,7 +63,17 @@ class BiayaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            'nama' => 'required|max:255',
+            'id_angkatans' => 'required',
+            'total_biaya' => 'required',
+        ]);
+
+        $biaya = Biaya::findOrFail($id);
+        $result = $biaya->update($data);
+        // dd($result);
+
+        return redirect()->route('admin.biaya.index')->with('pesan' , "Biaya Berhasil Diedit!!!");
     }
 
     /**
@@ -67,6 +81,8 @@ class BiayaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $biaya = Biaya::findOrFail($id);
+        $biaya->delete();
+        return redirect()->route('admin.biaya.index')->with('delete', "Biaya Berhasil Dihapus!!");
     }
 }

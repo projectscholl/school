@@ -75,8 +75,8 @@
                                 <label for="content">Angkatan</label>
                                 <select name="id_angkatans" id="id_angkatans" class="form-control" required>
                                     <option disabled selected>-----------</option>
-                                    @foreach ($angkatan as $item)
-                                        <option value="{{ $item->id }}">{{ $item->tahun }}</option>
+                                    @foreach ($biaya as $item)
+                                        <option value="{{ $item->angkatan->id }}">{{ $item->angkatan->tahun }}</option>
                                     @endforeach
                                 </select>
                                 @error('id_angkatans')
