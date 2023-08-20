@@ -8,6 +8,7 @@ use App\Http\Controllers\BiayaController;
 use App\Http\Controllers\InstansiController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MuridController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\TagihanWaliController;
@@ -40,8 +41,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //Admin
 Route::middleware(['IsAdmin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-    Route::get('/profile/{id}/edit', [AdminController::class, 'edit'])->name('profile.edit');
-    Route::put('/profile/{id}', [AdminController::class, 'update'])->name('profile.update');
+    Route::get('profile', [AdminController::class, 'edit'])->name('profile.edit');
+    Route::put('profile', [AdminController::class, 'update'])->name('profile.update');
     Route::resource('/bank', BankController::class);
     Route::resource('/user', UserController::class);
     Route::resource('/murid', MuridController::class);
@@ -54,6 +55,9 @@ Route::middleware(['IsAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran');
     Route::get('/pembayaran/detail', [PembayaranController::class, 'show'])->name('pembayaran.detail');
     Route::get('/bayar/{id}', [TagihanController::class, 'bayarIpaymu'])->name('bayar');
+    Route::get('/laporan-tagihan', [PdfController::class, 'tagihan'])->name('laporan.tagihan');
+    Route::get('/laporan-pembayaran', [PdfController::class, 'pembayaran'])->name('laporan.pembayaran');
+
     // Route::get('/laporan', [])
 });
 

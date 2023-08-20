@@ -49,29 +49,28 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Biaya</th>
-                                        <th>Angkatan</th>
-                                        <th>Total Biaya</th>
+                                        <th>tahun</th>
+                                        <th>user</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($biaya as $index => $item)
+                                    @foreach ($biaya as $key => $value)
                                         <tr>
-                                            <td><strong>{{ $index + 1 }}</strong></td>
-                                            <td>{{ $item->nama }}</td>
-                                            <td>{{  $item->angkatan->tahun }}</td>
-                                            <td>Rp {{ number_format($item->total_biaya) }}</td>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $value->nama }}</td>
+                                            <td>{{ $value->angkatans->tahun }}</td>
+                                            <td>{{ $user->name }}</td>
                                             <td class="d-flex">
-                                                <a href="{{ route('admin.biaya.edit', $item->id) }}"
+
+                                                <a href="{{ route('admin.biaya.edit', ['biaya' => 1]) }}"
                                                     class="btn btn-warning me-2"><i class="bx bx-edit-alt"></i>
                                                 </a>
-                                                <form action="{{ route('admin.biaya.destroy' , $item->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
+                                                <form action="">
                                                     <button class="btn btn-danger"><i class="bx bx-trash"></i></button>
                                                 </form>
                                             </td>
-                                        </tr>           
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
