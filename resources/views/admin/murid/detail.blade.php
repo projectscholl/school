@@ -24,7 +24,7 @@
                                 <hr>
                                 <div>ANGKATAN : {{ $murids->angkatan->tahun ?? 'Tidak ada Angkatan' }} </div>
                                 <hr>
-                                <div>BIAYA : {{ $murids->id_biaya ?? 'Tidak ada Biaya' }} </div>
+                                <div>BIAYA : Rp {{ number_format($murids->angkatan->biaya->total_biaya) }} </div>
                                 <hr>
                             </div>
                         </div>

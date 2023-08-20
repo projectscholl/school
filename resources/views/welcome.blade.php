@@ -50,7 +50,7 @@
                         position-relative"
         style="background-color: rgba(0,0,0,0.5); height:100vh;">
         <div class="position-absolute" style="top:25%; left:10%">
-            <p class="text-light" style="font-family: Public sans, serif;">Welcome To Smk Tadika</p>
+            <p class="text-light" style="font-family: Public sans, serif;">Welcome To SMK Tadika</p>
             <h1 style="font-family: Public sans, serif; font-weight:700;" class="text-light ">Live as if you
                 were to
                 die
