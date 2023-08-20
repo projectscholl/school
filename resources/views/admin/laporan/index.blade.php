@@ -19,7 +19,7 @@
                                     <option value="">2023</option>
                                     <option value="">2024</option>
                                 </select>
-                                <a href=""
+                                <a href="{{ route('admin.laporan.pembayaran') }}"
                                     class="d-flex align-items-center justify-content-around px-5 btn btn-primary mt-3 col-md-2">
                                     <i class='bx bx-book-content'></i>
                                     Cetak
@@ -41,7 +41,7 @@
                                     <option value="">2023</option>
                                     <option value="">2024</option>
                                 </select>
-                                <a href=""
+                                <a href="{{ route('admin.laporan.tagihan') }}"
                                     class="d-flex align-items-center justify-content-around px-5 btn btn-primary mt-3 col-md-2">
                                     <i class='bx bx-book-content'></i>
                                     Cetak

@@ -38,6 +38,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users,email',
+            'telepon' => 'required',
             'role' => 'required|in:ADMIN,WALI',
             'password' => 'required',
             'password_confirm' => 'required|same:password',
@@ -65,7 +66,6 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        
     }
 
     /**
@@ -119,7 +119,7 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy($id)
-    {  
+    {
         $user = User::find($id);
         if ($user == Auth::user()) {
             return redirect()->route('admin.user.index')->with('error', 'User Sedang dipakai');

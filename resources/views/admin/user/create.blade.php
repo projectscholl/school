@@ -32,6 +32,11 @@
                                             @enderror"
                                                 type="text" id="firstName" name="name" value="{{ old('name') }}"
                                                 autofocus />
+                                            @error('name')
+                                                <div id="validationServer05Feedback" class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="telepone" class="form-label">Telephone</label>
@@ -39,7 +44,12 @@
                                                 class="form-control @error('telepon')
                                             is-invalid
                                         @enderror"
-                                                type="text" name="telepon" id="telepon" value="{{ old('name') }}" />
+                                                type="text" name="telepon" id="telepon" value="{{ old('telepon') }}" />
+                                            @error('telepon')
+                                                <div id="validationServer05Feedback" class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="email" class="form-label">E-mail</label>
@@ -49,6 +59,11 @@
                                         @enderror"
                                                 type="email" id="email" name="email"
                                                 placeholder="john.doe@example.com" value="{{ old('email') }}" />
+                                            @error('email')
+                                                <div id="validationServer05Feedback" class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                         <div class="mb-3
                                                 col-md-6">
@@ -64,6 +79,11 @@
                                         @enderror"
                                                 type="password" id="password" name="password" placeholder=""
                                                 id="password" />
+                                            @error('password')
+                                                <div id="validationServer05Feedback" class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                             <div class="d-flex">
                                                 <label>Show password</label>
                                                 <input type="checkbox" id="checkbox" class="ms-2">
@@ -77,6 +97,11 @@
                                         @enderror"
                                                 type="password" id="password_confirm" name="password_confirm"
                                                 placeholder="" />
+                                            @error('password_confirm')
+                                                <div id="validationServer05Feedback" class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3 col-md-6 d-flex flex-column">
@@ -87,7 +112,12 @@
                                                 class="form-control @error('image')
                                             is-invalid
                                         @enderror"
-                                                value="{{ old('name') }}" onchange="loadFile(event)">
+                                                value="{{ old('image') }}" onchange="loadFile(event)">
+                                            @error('image')
+                                                <div id="validationServer05Feedback" class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                             <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 2Mb
                                         </div>
                                         <div class="mt-2">
