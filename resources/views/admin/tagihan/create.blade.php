@@ -21,8 +21,8 @@
                                 @csrf
                                 @method('POST')
                                 <div class="form-group mb-3">
-                                    <label for="nama">Pilih Angkatan</label>
-                                    <select name="id_angkatans" id="" class="form-control">
+                                    <label for="nama">Pilih Biaya</label>
+                                    <select name="id_biayas" id="id_biayas" class="form-control">
                                         @foreach ($biaya as $item)
                                             <option value="{{ $item->angkatans->id }}">{{ $item->angkatans->tahun }}
                                             </option>

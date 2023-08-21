@@ -25,7 +25,7 @@
                                 <div class="">
                                     <img src="{{ asset('storage/image/tutwuri1.png') }}" alt="" width="100"
                                         height="100" class="d-block rounded">
-                                    <form id="formAccountSettings" method="POST" onsubmit="return false"
+                                    <form id="formAccountSettings" action="" method="POST" onsubmit="return false"
                                         enctype="multipart/form-data">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
@@ -34,8 +34,13 @@
                                                     autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
+                                                <label for="logo" class="form-label">Nama Instansi</label>
+                                                <input class="form-control" type="text" id="name" name="name"
+                                                    autofocus />
+                                            </div>
+                                            <div class="mb-3 col-md-6">
                                                 <label for="telepone" class="form-label">Telephone</label>
-                                                <input class="form-control" type="text" name="lastName" id="lastName" />
+                                                <input class="form-control" type="text" name="telepon" id="telepon" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="email" class="form-label">E-mail</label>
@@ -44,7 +49,7 @@
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label class="form-label" for="country">Alamat</label>
-                                                <input class="form-control" type="text" id="alamat" name="text"
+                                                <input class="form-control" type="text" id="alamat" name="alamat"
                                                     placeholder="Jl.Manggur" />
                                             </div>
                                             <div class="mb-3 col-md-6">

@@ -45,8 +45,11 @@
                                     <td>Nomor Tagihan : <strong>#09092</strong></td>
                                 </tr>
                                 <tr>
-                                    <td>Invoice Tagihan : <strong class="cursor-pointer"><i class='bx bx-copy-alt'></i>
-                                            Cetak</strong></td>
+                                    <td class="d-flex align-items-center">Invoice Tagihan : <button type="submit" class="btn btn-link">
+                                        <strong>
+                                            <i class="menu-icon tf-icons bx bx-copy ms-2"></i>Cetak
+                                        </strong>
+                                    </button></td>
                                 </tr>
                                 <tr>
                                     <td>Total Tagihan : <strong class="">500.000</strong></td>

@@ -53,7 +53,15 @@
                                         </div>
                                         <div class="form-group mb-3">
                                             <label for="content">Kelas</label>
-                                            <input type="number" class="form-control" name="kelas" id="kelas" required value="{{ old('kelas', $murid->kelas) }}">
+                                            <select name="kelas" id="kelas" class="form-control" required>
+                                                <option disabled selected>-----------</option>
+                                                @foreach ( ['10', '11' , '12'] as $item)
+                                                <option value="{{ $item }}" {{ old('kelas', $murid->kelas) == $item ? 'selected' : ''}} >{{ $item }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('kelas')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="form-group mb-3">
                                             <label for="content">Angkatan</label>

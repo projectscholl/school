@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class WaliMuridController extends Controller
 {
@@ -40,7 +41,7 @@ class WaliMuridController extends Controller
         'password' => 'required',
     ]);
 
-    $data['password'] = bcrypt($data['password']);
+    $data['password'] =  Hash::make($request->password);
     $data['role'] = 'WALI';
 
     if ($request->hasFile('image')) {
