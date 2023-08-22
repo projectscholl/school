@@ -20,6 +20,10 @@ class Tagihan extends Model
     {
         return $this->hasMany(Murid::class, 'id_murid');
     }
+    public function biaya()
+    {
+        return $this->belongsTo(BIaya::class, 'id_biayas');
+    }
     public function detailTagihan()
     {
         return $this->hasMany(TagihanDetail::class);

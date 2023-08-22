@@ -70,7 +70,7 @@
                                             </div>
                                         </div>
                                         <span class="fw-semibold d-block mb-1">Total Murid</span>
-                                        <h3 class="card-title mb-2">{{ $jumlahMurid }}</h3>
+                                        <h3 class="card-title mb-4">{{ $jumlahMurid }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -95,49 +95,167 @@
                                             </div>
                                         </div>
                                         <span class="fw-semibold d-block mb-1">Total Sudah Bayar</span>
-                                        <h3 class="card-title mb-2">0</h3>
-                                        <small class="text-success fw-semibold">Rp 1.000.000.00</small>
+                                        <h3 class="card-title mb-4">0</h3>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
-                    <!-- Total Revenue -->
-                    <!--/ Total Revenue -->
+                </div>
+                <div class="row">
+                    <!-- Status Tagihan -->
+                    <div class="col-md-6 col-lg-4 col-xl-6 order-0 mb-4">
+                        <div class="card h-100">
+                            <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                                <div class="card-title mb-0">
+                                    <h5 class="m-0 me-2">Status Tagihan</h5>
+                                </div>
+                            </div>
+                            <div class="card-body mt-5">
+                                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <!--- Status Tagihan -->
+                    <!-- Status Tagihan -->
+                    <div class="col-md-6 col-lg-4 col-xl-6 order-0 mb-4">
+                        <div class="card h-100">
+                            <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                                <div class="card-title mb-0">
+                                    <h5 class="m-0 me-2">Status Pembayaran</h5>
+                                </div>
+                            </div>
+                            <div class="card-body mt-5">
+                                <canvas id="herChart" style="width:100%;max-width:600px"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <!--- Status Tagihan -->
+                </div>
+                {{-- <div class="row">
+                    <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+                        <!-- Transactions -->
+                                <div class="card h-100">
+                                    <div class="card-header d-flex align-items-center justify-content-between">
+                                        <h5 class="card-title m-0 me-2">Transactions</h5>
+                                    </div>
+                                    <div class="card-body">
+                                    </div>
+                                </div>
+                        <!--/ Transactions -->
+                    </div>
+                    <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+                        <!-- Transactions -->
+                                <div class="card h-100">
+                                    <div class="card-header d-flex align-items-center justify-content-between">
+                                        <h5 class="card-title m-0 me-2">Transactions</h5>
+                                    </div>
+                                    <div class="card-body">
+                                    </div>
+                                </div>
+                        <!--/ Transactions -->
+                    </div>
+                    <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+                        <!-- Transactions -->
+                                <div class="card h-100">
+                                    <div class="card-header d-flex align-items-center justify-content-between">
+                                        <h5 class="card-title m-0 me-2">Transactions</h5>
+                                    </div>
+                                    <div class="card-body">
+                                    </div>
+                                </div>
+                        <!--/ Transactions -->
+                    </div>
+                </div> --}}
+            </div>
+        </div>
+        <!-- / Content -->
+
+        <!-- Footer -->
+        <footer class="content-footer footer bg-footer-theme">
+            <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                <div class="mb-2 mb-md-0">
+                    ©
+                    <script>
+                        document.write(new Date().getFullYear());
+                    </script>
+                    , made with ❤️ by
+                    <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
+                </div>
+                <div>
+                    <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
+                    <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
+                        Themes</a>
+
+                    <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
+                        target="_blank" class="footer-link me-4">Documentation</a>
+
+                    <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank"
+                        class="footer-link me-4">Support</a>
                 </div>
             </div>
-            <!-- / Content -->
+        </footer>
+        <!-- / Footer -->
 
-            <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
-                <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                    <div class="mb-2 mb-md-0">
-                        ©
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script>
-                        , made with ❤️ by
-                        <a href="https://themeselection.com" target="_blank"
-                            class="footer-link fw-bolder">ThemeSelection</a>
-                    </div>
-                    <div>
-                        <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                        <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
-                            Themes</a>
 
-                        <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                            target="_blank" class="footer-link me-4">Documentation</a>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-                        <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank"
-                            class="footer-link me-4">Support</a>
-                    </div>
-                </div>
-            </footer>
-            <!-- / Footer -->
+        <script>
+            var xValues = ["Lunas", "Belum Bayar"];
+            var yValues = [55, 49];
+            var barColors = [
+                "#EEFBE7",
+                "#e0f7fc",
+            ];
 
-            <div class="content-backdrop fade"></div>
-        </div>
-        <!-- Content wrapper -->
+            new Chart("myChart", {
+                type: "pie",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "World Wide Wine Production 2018"
+                    }
+                }
+            });
+        </script>
+
+        <script>
+            var xValues = ["Dikonfirmasi", "Belum Dikonfirmasi"];
+            var yValues = [55, 49];
+            var barColors = [
+                "#EEFBE7",
+                "#e0f7fc",
+            ];
+
+            new Chart("herChart", {
+                type: "doughnut",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "World Wide Wine Production 2018"
+                    }
+                }
+            });
+        </script>
+
+        <div class="content-backdrop fade"></div>
+    </div>
+    <!-- Content wrapper -->
     </div>
     <!-- / Layout page -->
 

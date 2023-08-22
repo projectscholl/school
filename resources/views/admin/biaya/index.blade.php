@@ -63,10 +63,12 @@
                                             <td>{{ $user->name }}</td>
                                             <td class="d-flex">
 
-                                                <a href="{{ route('admin.biaya.edit', ['biaya' => 1]) }}"
+                                                <a href="{{ route('admin.biaya.edit', $value->id) }}"
                                                     class="btn btn-warning me-2"><i class="bx bx-edit-alt"></i>
                                                 </a>
-                                                <form action="">
+                                                <form action="{{ route('admin.biaya.destroy', $value->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
                                                     <button class="btn btn-danger"><i class="bx bx-trash"></i></button>
                                                 </form>
                                             </td>

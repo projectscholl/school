@@ -21,7 +21,7 @@
                                 @csrf
                                 @method('POST')
                                 <div class="form-group mb-3">
-                                    <label for="nama">Pilih Angkatan</label>
+                                    <label for="nama">Pilih Biaya Angkatan</label>
                                     <select name="id_siswa" id="" class="form-control">
                                         @foreach ($murids as $key => $value)
                                             <option value="{{ $key }}">
