@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Murid extends Model
 {
     use HasFactory;
-    
 
-    
+
+
     public function User()
     {
         return $this->belongsTo(User::class, 'id_users')->where('role', 'WALI');
@@ -35,5 +35,4 @@ class Murid extends Model
         'id_angkatans',
         'biaya_id'
     ];
-    
 }

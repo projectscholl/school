@@ -31,11 +31,7 @@
                                         <p class="mb-4">
                                             Kamu mendapatkan <span class="fw-bold">10</span> notifikasi
                                             konfirmasi belum
-                                            kamu lihat klik untuk melihat
                                         </p>
-
-                                        <a href="javascript:;" class="btn btn-sm btn-outline-primary">Lihat
-                                            Notifikasi</a>
                                     </div>
                                 </div>
                                 <div class="col-sm-5 text-center text-sm-left">

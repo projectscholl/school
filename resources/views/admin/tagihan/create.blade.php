@@ -22,9 +22,11 @@
                                 @method('POST')
                                 <div class="form-group mb-3">
                                     <label for="nama">Pilih Angkatan</label>
-                                    <select name="id_angkatans" id="" class="form-control">
-                                        @foreach ($biaya as $item)
-                                            <option value="{{ $item->angkatans->id }}">{{ $item->angkatans->tahun }}
+                                    <select name="id_siswa" id="" class="form-control">
+                                        @foreach ($murids as $key => $value)
+                                            <option value="{{ $key }}">
+                                                {{ $value }}
+
                                             </option>
                                         @endforeach
                                     </select>

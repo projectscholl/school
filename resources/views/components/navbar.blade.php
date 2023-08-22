@@ -1,9 +1,11 @@
 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
     id="layout-navbar">
     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+
         <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
             <i class="bx bx-menu bx-sm"></i>
         </a>
+
     </div>
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
@@ -17,9 +19,35 @@
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             <!-- Place this tag where you want the button to render. -->
-            <li class="nav-item me-3" style="width: 100%;">
-                <i class='bx bx-bell'></i>
-            </li>
+            <div class="dropdown" style="">
+                <li class="nav-item me-3 " style="" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                    id="dropdownMenuButton1">
+                    <i class='bx bx-bell'></i>
+                </li>
+                @if (Auth::user()->role == 'ADMIN')
+                    <div class="dropdown-menu dropdown-menu-end" style="width: ;" aria-labelledby="dropdownMenuButton1">
+                        <span class="dropdown-item"><b>Notification</b></span>
+                        <div class="dropdown-item d-flex">
+                            <div class="d-flex flex-column">
+                                <span>Pembayaran Tagihan</span>
+                                <a href="#">Sandi telah melakukan pembayaran</a>
+                                <p class="text-little mt-1 text-secondary" style="font-size:13px;">3 Hari lalu</p>
+                            </div>
+                            <span type="button" class="">&#10005;</span type="button">
+                        </div>
+                        <div class="dropdown-item d-flex">
+                            <div class="d-flex flex-column">
+                                <span>Pembayaran Tagihan</span>
+                                <a href="#">Sandi telah melakukan pembayaran</a>
+                                <p class="text-little mt-1 text-secondary" style="font-size:13px;">3 Hari lalu</p>
+                            </div>
+                            <span type="button" class="">&#10005;</span type="button">
+                        </div>
+                    </div>
+                @else
+                @endif()
+
+            </div>
 
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">

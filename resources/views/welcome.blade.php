@@ -16,7 +16,7 @@
 </head>
 
 <body
-    style="background-image : url('storage/image/sekolah.jpg'); background-repeat:no-repeat; background-size:cover; ">
+    style="background-image : url('storage/image/background.jpg'); background-repeat:no-repeat; background-size:cover; ">
     <div class="container-fluid sticky-top d-flex align-items-center justify-content-between"
         style="background-color:rgba(0,0,0,0.5);">
         <div class="row p-2">
@@ -66,21 +66,27 @@
         </div>
         <footer class="fixed-bottom w-100  d-flex align-items-center bg-black justify-content-center"
             style="background-color:rgba(0, 0, 0, 0);">
-            <span class="text-light" style="font-family: Public sans, serif;">Create by Admin</span>
-            <hr style="width:5px;height:30px; background-color:rgb(4, 232, 205);" class="mx-2">
+            <a href="" class="text-light text-decoration-none"
+                style="font-family: Public sans, serif;">Bantuan</a>
+            <hr style="width:3px;height:30px; background-color:rgb(4, 232, 205);" class="mx-2">
             <a class="text-light" style="font-family: Public sans, serif;">Tlp : 0863712326</a>
             @guest
-                <hr style="width:5px;height:30px; background-color:rgb(4, 232, 205);" class="mx-2">
+                <hr style="width:3px;height:30px; background-color:rgb(4, 232, 205);" class="mx-2">
 
                 <a href="{{ route('login') }}" class="text-light text-decoration-none"
                     style="font-family: Public sans, serif;">Login
                     Admin</a>
-                <hr style="width:5px;height:30px; background-color:rgb(4, 232, 205);" class="mx-2">
+                <hr style="width:3px;height:30px; background-color:rgb(4, 232, 205);" class="mx-2">
 
                 <a href="{{ route('login-wali') }}" class="text-light text-decoration-none"
                     style="font-family: Public sans, serif;">Login
                     Wali Murid</a>
+
+
             @endguest
+            <hr style="width:3px;height:30px; background-color:rgb(4, 232, 205);" class="mx-2">
+            <a href="" class="text-danger text-decoration-none" style="font-family: Public sans, serif;">@2023
+                Copyright by Tadika</a>
 
 
 

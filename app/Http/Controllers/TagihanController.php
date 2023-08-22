@@ -22,7 +22,10 @@ class TagihanController extends Controller
     {
         $user = Auth::user();
         $biaya = Biaya::with('angkatans')->get();
-        return view('admin.tagihan.create', compact('user', 'biaya'));
+        $siswa = Murid::with('angkatan')->get();
+        $murids = $siswa->pluck('angkatan.tahun', 'id_angkatans');
+
+        return view('admin.tagihan.create', compact('user', 'biaya', 'murids'));
     }
 
     /**

@@ -22,7 +22,7 @@ class MuridController extends Controller
     {
         $user = Auth::user();
         $biaya = Biaya::with('angkatan')->get();
-        $users = User::where('role' , 'WALI')->get();
+        $users = User::where('role', 'WALI')->get();
         return view('admin.murid.create', compact('user', 'users', 'biaya'));
     }
 
@@ -40,10 +40,9 @@ class MuridController extends Controller
             'kelas' => 'required',
         ]);
 
-        
+
         Murid::create($data);
         return redirect()->route('admin.murid.index')->with('message', "Murid Berhasil Ditambahkan!!");
-        
     }
 
     /**
@@ -62,8 +61,8 @@ class MuridController extends Controller
     public function edit($id)
     {
         $murid = Murid::find($id);
-        $users =  User::where('role' , 'WALI')->get();; 
-        $angkatan = Angkatan::all(); 
+        $users =  User::where('role', 'WALI')->get();;
+        $angkatan = Angkatan::all();
 
         return view('admin.murid.edit', compact('murid', 'users', 'angkatan'));
     }
@@ -73,20 +72,20 @@ class MuridController extends Controller
      */
     public function update(Request $request, string $id)
     {
-    $data = $request->validate([
-        'name' => 'required|max:255|string',
-        'nisn' => 'required|max:10',
-        'id_users' => 'required',
-        'jurusan' => 'required',
-        'id_angkatans' => 'required',
-        'kelas' => 'required',
-    ]);
+        $data = $request->validate([
+            'name' => 'required|max:255|string',
+            'nisn' => 'required|max:10',
+            'id_users' => 'required',
+            'jurusan' => 'required',
+            'id_angkatans' => 'required',
+            'kelas' => 'required',
+        ]);
 
-    $murid = Murid::find($id);
-    $result = $murid->update($data);
-    // dd($result);
+        $murid = Murid::find($id);
+        $result = $murid->update($data);
+        // dd($result);
 
-    return redirect()->route('admin.murid.index')->with('pesan', "Murid Berhasil Diedit!!");
+        return redirect()->route('admin.murid.index')->with('pesan', "Murid Berhasil Diedit!!");
     }
 
 
