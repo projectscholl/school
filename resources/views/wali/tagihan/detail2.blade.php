@@ -54,10 +54,14 @@
                                     <tr>
                                         <td>Total Tagihan : <strong class="">100.000</strong></td>
                                     </tr>
+                                    <tr>
+                                        <td>Total Bayar : <strong class="">1000.000</strong></td>
+                                    </tr>
                                 </tbody>
                             </table>
                             <div class="container mx-auto d-flex justify-content-center align-items-center gap-2">
-                                <a href="{{ route('wali.tagihan.bayar') }}" class="btn btn-primary my-4 w-50 text-light">Bayar Bank</a>
+                                <a href="{{ route('wali.tagihan.bayar') }}"
+                                    class="btn btn-primary my-4 w-50 text-light">Bayar Bank</a>
                                 <a class="btn btn-primary my-4 w-50 text-light">iPaymu</a>
                             </div>
                         </div>

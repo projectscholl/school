@@ -14,4 +14,8 @@ class PdfController extends Controller
     {
         return view('admin.pdf.pembayaran-pdf');
     }
+    public function spp()
+    {
+        return view('admin.pdf.spp-pdf');
+    }
 }

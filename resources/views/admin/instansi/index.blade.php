@@ -36,16 +36,17 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="logo" class="form-label">Nama Instansi</label>
                                                 <input class="form-control" type="text" id="name" name="name"
-                                                    autofocus />
+                                                    value="SMK Tadika" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="telepone" class="form-label">Telephone</label>
-                                                <input class="form-control" type="text" name="telepon" id="telepon" />
+                                                <input class="form-control" type="text" name="telepon" id="telepon"
+                                                    value="083129378" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="email" class="form-label">E-mail</label>
                                                 <input class="form-control" type="text" id="email" name="email"
-                                                    placeholder="john.doe@example.com" />
+                                                    placeholder="john.doe@example.com" value="johnde@gmail.com" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label class="form-label" for="country">Alamat</label>

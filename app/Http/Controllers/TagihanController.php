@@ -33,6 +33,13 @@ class TagihanController extends Controller
      */
     public function store(Request $request)
     {
+        //1.Lakukan validation
+        //2.Ambil Data siswa yang ditagihakan berdasarkan angkatan
+        //4.Lakukan perulangan berdasarkan data siswa
+        //5.didalam perulanagan, Simpan Tagihan berdasarkan biaya dana siswa
+        //6.Simpan notifikasi database untuk tagihan
+        //7.Kirim pesan whatsaap
+        //8.Redirict
         $this->validate($request, [
             'id_angkatans' => 'required',
             'start_date' => 'required',

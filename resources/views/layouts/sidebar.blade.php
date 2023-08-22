@@ -49,6 +49,13 @@
                         <div data-i18n="Without menu">Data Tagihan</div>
                     </a>
                 </li>
+                <!--Data Profile-->
+                <li class="{{ Route::is('profile.*') ? $active : $nonActive }}">
+                    <a href="{{ route('profile.edit', Auth::user()->id) }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-user"></i>
+                        <div data-i18n="Without menu">Profile</div>
+                    </a>
+                </li>
             </ul>
         @endif
 
