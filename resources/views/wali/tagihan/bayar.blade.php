@@ -1,4 +1,4 @@
-@extends('layouts.master')
+</html>@extends('layouts.master')
 
 @section('title, detail')
 @section('content')
@@ -20,15 +20,15 @@
                     <h5 class="card-header">Pembayaran Bank</h5>
                     <div class="card-body">
                         <div class="table-responsive text-nowrap">
-                            <form action="" method="" enctype="multipart/form-data">
+                            {{-- <form action="#" method="" enctype="multipart/form-data"> --}}
                                 @csrf
                                 <div class="form-group mb-3">
                                     <label for="" class="mb-2">Nama Pengirim</label>
-                                    <input type="text" class="form-control" placeholder="Masukkan Nama Pengirim" required>
+                                    <input type="text" class="form-control" placeholder="Masukkan Nama Pengirim">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="" class="mb-2">Rekening Pengirim</label>
-                                    <input type="number" class="form-control" placeholder="Masukkan Nama Pengirim" required>
+                                    <input type="number" class="form-control" placeholder="Masukkan Nama Pengirim">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="" class="mb-2">Rekening Operator</label>
@@ -39,12 +39,14 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="" class="mb-2">Bukti Transfer</label>
-                                    <input type="file" class="form-control" placeholder="Masukkan Nama Pengirim" required>
+                                    <input type="file" class="form-control" placeholder="Masukkan Nama Pengirim">
                                 </div>
                                 <div class="container mx-auto d-flex justify-content-center align-items-center gap-2">
-                                    <button href="{{ route('wali.tagihan.bayar') }}" class="btn btn-primary my-4 w-50 text-light">Konfirmasi</button>
+                                <a href="{{ route('wali.tagihan.result') }}" class="w-50">
+                                    <button class="btn btn-primary my-4 w-50 text-light">Konfirmasi</button>
+                                </a>
                                 </div>
-                            </form>
+                            {{-- </form> --}}
                         </div>
                     </div>
                 </div>

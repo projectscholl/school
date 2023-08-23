@@ -28,13 +28,9 @@
                                             <label for="content">Nama Wali</label>
                                             <select name="id_users" id="id_users" class="form-control" required>
                                                 <option disabled selected>-----------</option>
-                                                @if ($murid->id_users)
                                                     @foreach ($users as $item)
                                                         <option value="{{ $item->id }}" {{ old('id_users', $murid->id_users) == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
                                                     @endforeach
-                                                @else
-                                                    <option value="" selected>Tidak Ada Wali</option>
-                                                @endif
                                             </select>
                                         </div>
                                         <div class="form-group mb-3">

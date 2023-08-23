@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title','Tagihan')
+@section('title', 'Tagihan')
 @section('content')
     <!-- Layout wrapper -->
     @include('layouts.sidebar')
@@ -27,7 +27,7 @@
                         <hr>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 order-2 mt-4">
+                <div class="col-md-6 col-lg-12 order-2 mt-4">
                     <div class="card h-100">
                         <div class="card-header d-flex align-items-center justify-content-between">
                             <h5 class="card-title m-0 me-2">Spp Angkatan 2022</h5>
@@ -40,169 +40,85 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <ul class="p-0 m-0">
-                                    <li class="d-flex mb-4 pb-1 align-items-center">
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-0">Juni</h6>
-                                            </div>
-                                            <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">Rp.200.000</h6>
-                                            </div>
-                                            <div class="user-progress gap-1">
-                                                <a href="" class="text-danger">Belum</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex mb-4 pb-1 align-items-center">
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-0">July</h6>
-                                            </div>
-                                            <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">Rp.200.000</h6>
-                                            </div>
-                                            <div class="user-progress gap-1">
-                                                <a href="" class="text-danger">Belum</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex mb-4 pb-1 align-items-center">
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-0">Agustus</h6>
-                                            </div>
-                                            <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">Rp.200.000</h6>
-                                            </div>
-                                            <div class="user-progress gap-1">
-                                                <a href="" class="text-danger">Belum</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex mb-4 pb-1 align-items-center">
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-0">September</h6>
-                                            </div>
-                                            <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">Rp.200.000</h6>
-                                            </div>
-                                            <div class="user-progress gap-1">
-                                                <a href="" class="text-danger">Belum</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex mb-4 pb-1 align-items-center">
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-0">Oktober</h6>
-                                            </div>
-                                            <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">Rp.200.000</h6>
-                                            </div>
-                                            <div class="user-progress gap-1">
-                                                <a href="" class="text-danger">Belum</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex mb-4 pb-1 align-items-center">
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-0">November</h6>
-                                            </div>
-                                            <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">Rp.200.000</h6>
-                                            </div>
-                                            <div class="user-progress gap-1">
-                                                <a href="" class="text-danger">Belum</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex mb-4 pb-1 align-items-center">
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-0">Desember</h6>
-                                            </div>
-                                            <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">Rp.200.000</h6>
-                                            </div>
-                                            <div class="user-progress gap-1">
-                                                <a href="" class="text-danger">Belum</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex mb-4 pb-1 align-items-center">
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-0">Januari</h6>
-                                            </div>
-                                            <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">Rp.200.000</h6>
-                                            </div>
-                                            <div class="user-progress gap-1">
-                                                <a href="" class="text-danger">Belum</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex mb-4 pb-1 align-items-center">
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-0">Februari</h6>
-                                            </div>
-                                            <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">Rp.200.000</h6>
-                                            </div>
-                                            <div class="user-progress gap-1">
-                                                <a href="" class="text-danger">Belum</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex mb-4 pb-1 align-items-center">
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-0">Maret</h6>
-                                            </div>
-                                            <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">Rp.200.000</h6>
-                                            </div>
-                                            <div class="user-progress gap-1">
-                                                <a href="" class="text-danger">Belum</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex mb-4 pb-1 align-items-center">
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-0">April</h6>
-                                            </div>
-                                            <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">Rp.200.000</h6>
-                                            </div>
-                                            <div class="user-progress gap-1">
-                                                <a href="" class="text-danger">Belum</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex mb-4 pb-1 align-items-center">
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-0">Mei</h6>
-                                            </div>
-                                            <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">Rp.200.000</h6>
-                                            </div>
-                                            <div class="user-progress gap-1">
-                                                <a href="" class="text-danger">Belum</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                            </ul>
+                            <table class="table table-bordered">
+                                <thead class="bg-dark">
+                                    <tr>
+                                        <th class="text-white">Bulan</th>
+                                        <th class="text-white">Total</th>
+                                        <th class="text-white d-flex">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Juni</td>
+                                        <td>200.000</td>
+                                        <td>
+                                            <div class="text-danger"><strong>Belum</strong></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>July</td>
+                                        <td>200.000</td>
+                                        <td>
+                                            <div class="text-danger"><strong>Belum</strong></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Oktober</td>
+                                        <td>200.000</td>
+                                        <td>
+                                            <div class="text-danger"><strong>Belum</strong></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>November</td>
+                                        <td>200.000</td>
+                                        <td>
+                                            <div class="text-danger"><strong>Belum</strong></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Desember</td>
+                                        <td>200.000</td>
+                                        <td>
+                                            <div class="text-danger"><strong>Belum</strong></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Januari</td>
+                                        <td>200.000</td>
+                                        <td>
+                                            <div class="text-danger"><strong>Belum</strong></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>February</td>
+                                        <td>200.000</td>
+                                        <td>
+                                            <div class="text-danger"><strong>Belum</strong></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maret</td>
+                                        <td>200.000</td>
+                                        <td>
+                                            <div class="text-danger"><strong>Belum</strong></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mei</td>
+                                        <td>200.000</td>
+                                        <td>
+                                            <div class="text-danger"><strong>Belum</strong></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
                 <a href="{{ route('wali.tagihan.detail') }}" class="btn btn-primary mt-3 w-25">Detail</a>
-            </div>       
+            </div>
             <!--/ Bordered Table -->
         </div>
     </div>

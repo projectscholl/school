@@ -24,4 +24,9 @@ class TagihanWaliController extends Controller
     {
         return view('wali.tagihan.bayar');
     }
+
+    public function result()
+    {
+        return view('wali.tagihan.result');
+    }
 }

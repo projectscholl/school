@@ -49,14 +49,48 @@
                                 </thead>
                                 <tbody class="table-border-bottom-0">
                                     <tr>
-                                        <td>Total Tagihan : <strong class="">100.000</strong></td>
+                                        <td>Nomor Tagihan : <strong>#09092</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="d-flex align-items-center">Invoice Tagihan : <button type="submit" class="btn btn-link">
+                                            <strong>
+                                                <i class="menu-icon tf-icons bx bx-copy ms-2"></i>Cetak
+                                            </strong>
+                                        </button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Tagihan : <strong class="">500.000</strong></td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <div class="container mx-auto d-flex justify-content-center align-items-center gap-2">
-                                <a href="{{ route('wali.tagihan.bayar') }}" class="btn btn-primary my-4 w-50 text-light">Bayar Bank</a>
-                                <a class="btn btn-primary my-4 w-50 text-light">iPaymu</a>
-                            </div>
+                            <table class="table">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th class="text-white">Pembayaran Information</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-border-bottom-0">
+                                    <tr>
+                                        <td>Metode Pembayaran : <strong>Online</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanggal Pembayaran : <strong class="">25/05/2050</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Tagihan : <strong class="">500.000</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jumlah Pembayaran : <strong class="">1000.000</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bukti Pembayaran : <strong class="">-</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status Konfirmasi : <strong class="">Pending</strong></td>
+                                    </tr>
+                                    <tr></tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

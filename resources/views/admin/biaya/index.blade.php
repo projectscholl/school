@@ -50,7 +50,7 @@
                                         <th>No</th>
                                         <th>Nama Biaya</th>
                                         <th>tahun</th>
-                                        <th>user</th>
+                                        <th>dibuat</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>

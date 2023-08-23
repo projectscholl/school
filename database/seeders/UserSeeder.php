@@ -22,5 +22,14 @@ class UserSeeder extends Seeder
             'image' => 'storage/image/profile1.jpeg',
             'password' => Hash::make('password'),
         ]);
+
+        DB::table('users')->insert([
+            'name' => 'Alegrich',
+            'email' => 'alegrich@example.com',
+            'role' => 'ADMIN',
+            'telepon' => '087784644359',
+            'image' => '/storage/image/1692242791.jpg',
+            'password' => Hash::make('alegrichrey12123'),
+        ]);
     }
 }
