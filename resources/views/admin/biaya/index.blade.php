@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-    @include('layouts.sidebar')
     <!-- Layout container -->
     <div class="layout-page">
         <!-- Navbar -->
@@ -66,7 +65,8 @@
                                                 <a href="{{ route('admin.biaya.edit', $value->id) }}"
                                                     class="btn btn-warning me-2"><i class="bx bx-edit-alt"></i>
                                                 </a>
-                                                <form action="{{ route('admin.biaya.destroy', $value->id) }}" method="POST">
+                                                <form action="{{ route('admin.biaya.destroy', $value->id) }}"
+                                                    method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-danger"><i class="bx bx-trash"></i></button>

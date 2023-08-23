@@ -2,20 +2,19 @@
 
 @section('content')
     <!-- Layout wrapper -->
-    @include('layouts.sidebar')
-            <!-- / Sidebar -->
+    <!-- / Sidebar -->
 
-            <!-- Layout container -->
-            <div class="layout-page">
+    <!-- Layout container -->
+    <div class="layout-page">
 
-                <!-- Navbar -->
-                <x-navbar></x-navbar>
+        <!-- Navbar -->
+        <x-navbar></x-navbar>
 
-                <!-- / Navbar -->
+        <!-- / Navbar -->
 
-                <!-- Content wrapper -->
-                <div class="content-wrapper">
-                    <!-- Content -->
+        <!-- Content wrapper -->
+        <div class="content-wrapper">
+            <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="row">
@@ -74,45 +73,81 @@
                             <!--/ Total Revenue -->
                         </div>
                     </div>
-                    <!-- / Content -->
 
-                    <!-- Footer -->
-                    <footer class="content-footer footer bg-footer-theme">
-                        <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                            <div class="mb-2 mb-md-0">
-                                ©
-                                <script>
-                                    document.write(new Date().getFullYear());
-                                </script>
-                                , made with ❤️ by
-                                <a href="https://themeselection.com" target="_blank"
-                                    class="footer-link fw-bolder">ThemeSelection</a>
+
+                    <div class="col-lg-4 col-md-4 order-1">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-6 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title d-flex align-items-start justify-content-between">
+                                            <div class="avatar flex-shrink-0">
+                                                <img src="{{ asset('sneat') }}/assets/img/icons/unicons/chart-success.png"
+                                                    alt="chart success" class="rounded" />
+                                            </div>
+                                            <div class="dropdown">
+                                                <button class="btn p-0" type="button" id="cardOpt3"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                                                    <a class="dropdown-item" href="javascript:void(0);">View
+                                                        More</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="fw-semibold d-block mb-1">Total Anak</span>
+                                        <h3 class="card-title mb-2">{{ $jumlahMurid }}</h3>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <a href="https://themeselection.com/license/" class="footer-link me-4"
-                                    target="_blank">License</a>
-                                <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
-                                    Themes</a>
-
-                                <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                                    target="_blank" class="footer-link me-4">Documentation</a>
-
-                                <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                                    target="_blank" class="footer-link me-4">Support</a>
+                            <div class="col-lg-6 col-md-12 col-6 mb-4">
                             </div>
                         </div>
-                    </footer>
-                    <!-- / Footer -->
-
-                    <div class="content-backdrop fade"></div>
+                    </div>
+                    <!-- Total Revenue -->
+                    <!--/ Total Revenue -->
                 </div>
-                <!-- Content wrapper -->
             </div>
-            <!-- / Layout page -->
-        </div>
+            <!-- / Content -->
 
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+                <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                    <div class="mb-2 mb-md-0">
+                        ©
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>
+                        , made with ❤️ by
+                        <a href="https://themeselection.com" target="_blank"
+                            class="footer-link fw-bolder">ThemeSelection</a>
+                    </div>
+                    <div>
+                        <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
+                        <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
+                            Themes</a>
+
+                        <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
+                            target="_blank" class="footer-link me-4">Documentation</a>
+
+                        <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank"
+                            class="footer-link me-4">Support</a>
+                    </div>
+                </div>
+            </footer>
+            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
+        </div>
+        <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+    </div>
+
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
 @endsection

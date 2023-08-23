@@ -3,7 +3,6 @@
 @section('title', 'Tagihan')
 @section('content')
     <!-- Layout wrapper -->
-    @include('layouts.sidebar')
 
     <!-- Layout container -->
     <div class="layout-page">
@@ -30,7 +29,8 @@
                 <div class="col-md-6 col-lg-12 order-2 mt-4">
                     <div class="card h-100">
                         <div class="card-header d-flex align-items-center justify-content-between">
-                            <h5 class="card-title m-0 me-2">Spp Angkatan 2022</h5>
+                            <h5 class=" m-0 me-2">Spp Angkatan 2022</h5>
+
                             <div class="dropdown">
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
                                     <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
@@ -46,6 +46,7 @@
                                         <th class="text-white">Bulan</th>
                                         <th class="text-white">Total</th>
                                         <th class="text-white d-flex">Status</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>

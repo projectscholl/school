@@ -5,7 +5,6 @@
     <!-- Layout wrapper -->
     <!-- Menu -->
     <!-- sidebar -->
-    @include('layouts.sidebar')
     <!-- Layout container -->
     <div class="layout-page">
 
@@ -30,12 +29,8 @@
                                             🎉</h5>
                                         <p class="mb-4">
                                             Kamu mendapatkan <span class="fw-bold">10</span> notifikasi
-                                            konfirmasi belum
-                                            kamu lihat klik untuk melihat
+                                            konfirmasi belum dilihat
                                         </p>
-
-                                        <a href="javascript:;" class="btn btn-sm btn-outline-primary">Lihat
-                                            Notifikasi</a>
                                     </div>
                                 </div>
                                 <div class="col-sm-5 text-center text-sm-left">
@@ -156,7 +151,7 @@
         <!-- / Content -->
 
         <!-- Footer -->
-        <footer class="content-footer footer bg-footer-theme">
+        {{-- <footer class="content-footer footer bg-footer-theme">
             <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                 <div class="mb-2 mb-md-0">
                     ©
@@ -178,7 +173,7 @@
                         class="footer-link me-4">Support</a>
                 </div>
             </div>
-        </footer>
+        </footer> --}}
         <!-- / Footer -->
 
 

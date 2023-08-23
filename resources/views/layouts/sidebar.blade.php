@@ -6,7 +6,7 @@
     @endphp
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" data-bg-class="bg-menu-theme">
         <div class="app-brand demo mb-3 ">
-            <a class="app-brand-link">
+            <a class="app-brand-link" href="{{ route('welcome') }}">
                 <img src="{{ asset('storage/image/tutwuri1.png') }}" alt="" width="30px">
                 <span class="demo menu-text fw-bolder ms-2 fs-3">Tadika</span>
             </a>
@@ -47,6 +47,13 @@
                     <a href="{{ route('wali.tagihan.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-wallet-alt"></i>
                         <div data-i18n="Without menu">Data Tagihan</div>
+                    </a>
+                </li>
+                <!--Data Profile-->
+                <li class="{{ Route::is('profile.*') ? $active : $nonActive }}">
+                    <a href="{{ route('profile.edit', Auth::user()->id) }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-user"></i>
+                        <div data-i18n="Without menu">Profile</div>
                     </a>
                 </li>
             </ul>

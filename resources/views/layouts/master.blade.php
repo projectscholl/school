@@ -14,7 +14,7 @@
 
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('sneat') }}/assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('storage/image/tutwuri1.png') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -58,7 +58,9 @@
     <main class="">
         <div class="layout-wrapper layout-content-navbar">
             <div class="layout-container">
+                @include('layouts.sidebar')
                 @yield('content')
+
             </div>
         </div>
     </main>

@@ -22,7 +22,10 @@ class TagihanController extends Controller
     {
         $user = Auth::user();
         $biaya = Biaya::with('angkatans')->get();
-        return view('admin.tagihan.create', compact('user', 'biaya'));
+        $siswa = Murid::with('angkatan')->get();
+        $murids = $siswa->pluck('angkatan.tahun', 'id_angkatans');
+
+        return view('admin.tagihan.create', compact('user', 'biaya', 'murids'));
     }
 
     /**
@@ -30,35 +33,29 @@ class TagihanController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        //1.Lakukan validation
+        //2.Ambil Data siswa yang ditagihakan berdasarkan angkatan
+        //4.Lakukan perulangan berdasarkan data siswa
+        //5.didalam perulanagan, Simpan Tagihan berdasarkan biaya dana siswa
+        //6.Simpan notifikasi database untuk tagihan
+        //7.Kirim pesan whatsaap
+        //8.Redirict
+        $validate = $this->validate($request, [
             'id_angkatans' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
         ]);
 
-        $user = Auth::user()->id;
 
-        $siswa = Murid::with('angkatan')->get();
-
-        foreach ($siswa as $itemSiswa) {
-            $tanggalTagihan = Carbon::parse($request->start_date);
-            $bulanTagihan = $tanggalTagihan->format('m');
-            $tahunTagihan = $tanggalTagihan->format('Y');
-            $tagihan = Tagihan::create([
-                'id_angkatans' => $request->id_angkatans,
-                'id_user' => $user,
-                'start_date', $tanggalTagihan,
-                'end_date' => $request->end_date,
-            ]);
-            // $tagihanDetail = TagihanDetail::create([
-            //     'id_tagihan' => ,
-            // ]);
-        }
+        // $tagihanDetail = TagihanDetail::create([
+        //     'id_tagihan' => ,
+        // ]);
 
 
 
 
-        dd($tagihan);
+
+        dd($validate);
     }
 
     /**

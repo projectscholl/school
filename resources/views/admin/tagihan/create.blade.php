@@ -3,7 +3,6 @@
 @section('title', 'Tagihan create')
 @section('content')
     <!-- Sidebar -->
-    @include('layouts.sidebar')
     <!-- Layout container -->
     <div class="layout-page">
         <!-- Navbar -->
@@ -21,10 +20,12 @@
                                 @csrf
                                 @method('POST')
                                 <div class="form-group mb-3">
-                                    <label for="nama">Pilih Biaya</label>
-                                    <select name="id_biayas" id="id_biayas" class="form-control">
-                                        @foreach ($biaya as $item)
-                                            <option value="{{ $item->angkatans->id }}">{{ $item->angkatans->tahun }}
+                                    <label for="nama">Pilih Biaya Angkatan</label>
+                                    <select name="id_siswa" id="" class="form-control">
+                                        @foreach ($murids as $key => $value)
+                                            <option value="{{ $key }}">
+                                                {{ $value }}
+
                                             </option>
                                         @endforeach
                                     </select>

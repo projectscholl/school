@@ -2,10 +2,7 @@
 
 @section('title', 'User')
 @section('content')
-    <!-- Layout wrapper -->
-    <!-- Sidebar -->
-    @include('layouts.sidebar')
-    <!-- Layout container -->
+
     <div class="layout-page">
         <!-- Navbar -->
         <x-navbar></x-navbar>

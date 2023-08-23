@@ -1,40 +1,35 @@
 @extends('layouts.master')
 
+@section('title', 'Profile')
 @section('content')
     <!-- Layout wrapper -->
-    <!-- Sidebar -->
 
+    <!-- / Sidebar -->
 
     <!-- Layout container -->
     <div class="layout-page">
+
         <!-- Navbar -->
-        <x-navbar>
-        </x-navbar>
+        <x-navbar></x-navbar>
+
+        <!-- / Navbar -->
+
         <!-- Content wrapper -->
         <div class="content-wrapper">
-
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Profile Settings</span>
-                    Account
-                </h4>
                 <div class="row">
-                    @if (session('message'))
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <strong>{{ session('message') }}!</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
                     <div class="col-md-12">
-                        <div class="card mb-4">
-                            <h5 class="card-header">Profile details</h5>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Profile</h5>
+                            </div>
                             <div class="card-body">
                                 <div class="d-flex align-items-start gap-4">
-                                    <img src="{{ asset('storage/image/' . $user->image) }}" alt="" width="100"
+                                    <img src="{{ asset('storage/' . $user->image) }}" alt="" width="100"
                                         height="100" class="d-block rounded">
-                                    <form action="{{ route('admin.profile.update', $user->id) }}" method="POST"
-                                        enctype="multipart/form-data">
+                                    <form id="" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
                                         <div class="row">
@@ -84,15 +79,13 @@
                                                 <button type="reset" class="btn btn-outline-secondary">Cancel</button>
                                             </div>
                                     </form>
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--/ Transactions -->
                 </div>
-                <!-- / Content -->
             </div>
         </div>
     </div>
-    <!-- / Menu -->
 @endsection

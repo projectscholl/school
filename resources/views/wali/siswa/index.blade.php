@@ -2,13 +2,12 @@
 
 @section('content')
     <!-- Layout wrapper -->
-    @include('layouts.sidebar')
 
-            <!-- Layout container -->
-            <div class="layout-page">
-                <!-- Navbar -->
-                <x-navbar></x-navbar>
-                <div class="content-wrapper">
+    <!-- Layout container -->
+    <div class="layout-page">
+        <!-- Navbar -->
+        <x-navbar></x-navbar>
+        <div class="content-wrapper">
 
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
@@ -16,7 +15,7 @@
                 <div class="card">
                     <h5 class="card-header">Data Siswa</h5>
                     <div class="card-body">
-                        <table class="table" id="myTable" >
+                        <table class="table" id="myTable">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -28,7 +27,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($wali as $index => $item)
-                                <tr>
+                                    <tr>
                                         <td>
                                             <i class="fab fa-angular fa-lg text-danger me-3"></i>
                                             <strong>
@@ -49,11 +48,11 @@
                                                     </button>
                                                 </form>
                                             @else
-                                                Tidak ada Biaya 
+                                                Tidak ada Biaya
                                             @endif
-                                        </td>                                        
+                                        </td>
                                     </tr>
-                                    @endforeach
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

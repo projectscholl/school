@@ -2,7 +2,6 @@
 
 @section('title, Pembayaran')
 @section('content')
-    @include('layouts.sidebar')
 
     <!-- Layout container -->
     <div class="layout-page overflow-auto">
@@ -45,11 +44,12 @@
                                     <td>Nomor Tagihan : <strong>#09092</strong></td>
                                 </tr>
                                 <tr>
-                                    <td class="d-flex align-items-center">Invoice Tagihan : <button type="submit" class="btn btn-link">
-                                        <strong>
-                                            <i class="menu-icon tf-icons bx bx-copy ms-2"></i>Cetak
-                                        </strong>
-                                    </button></td>
+                                    <td class="d-flex align-items-center">Invoice Tagihan : <button type="submit"
+                                            class="btn btn-link">
+                                            <strong>
+                                                <i class="menu-icon tf-icons bx bx-copy ms-2"></i>Cetak
+                                            </strong>
+                                        </button></td>
                                 </tr>
                                 <tr>
                                     <td>Total Tagihan : <strong class="">500.000</strong></td>

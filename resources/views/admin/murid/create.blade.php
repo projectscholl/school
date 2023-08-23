@@ -3,7 +3,6 @@
 @section('content')
     <!-- Layout wrapper -->
     <!-- Sidebar -->
-    @include('layouts.sidebar')
 
     <!-- Layout container -->
     <div class="layout-page">
@@ -51,8 +50,8 @@
                                 <label for="content">Jurusan</label>
                                 <select name="jurusan" id="jurusan" class="form-control" required>
                                     <option disabled selected>-----------</option>
-                                    @foreach ( ['teknik mesin', 'teknik komputer'] as $item)
-                                    <option value="{{ $item }}">{{ $item }}</option>
+                                    @foreach (['teknik mesin', 'teknik komputer'] as $item)
+                                        <option value="{{ $item }}">{{ $item }}</option>
                                     @endforeach
                                 </select>
                                 @error('jurusan')
@@ -63,8 +62,8 @@
                                 <label for="content">Kelas</label>
                                 <select name="kelas" id="kelas" class="form-control" required>
                                     <option disabled selected>-----------</option>
-                                    @foreach ( ['10', '11' , '12'] as $item)
-                                    <option value="{{ $item }}">{{ $item }}</option>
+                                    @foreach (['10', '11', '12'] as $item)
+                                        <option value="{{ $item }}">{{ $item }}</option>
                                     @endforeach
                                 </select>
                                 @error('kelas')
@@ -72,7 +71,7 @@
                                 @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <label for="content">Angkatan</label>
+                                <label for="content">Pembayaran Spp</label>
                                 <select name="id_angkatans" id="id_angkatans" class="form-control" required>
                                     <option disabled selected>-----------</option>
                                     @foreach ($biaya as $item)
@@ -80,6 +79,14 @@
                                     @endforeach
                                 </select>
                                 @error('id_angkatans')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="nama">Address</label>
+                                <input type="text" class="form-control" name="address" id="address"
+                                    placeholder="Jl.chicago" required>
+                                @error('address')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
