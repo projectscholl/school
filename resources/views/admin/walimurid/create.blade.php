@@ -2,7 +2,6 @@
 
 @section('content')
     <!-- Layout wrapper -->
-    @include('layouts.sidebar')
 
     <!-- Layout container -->
     <div class="layout-page">
@@ -37,7 +36,7 @@
                                 <label for="image" class="form-label">Image</label>
                                 <input type="file" name="image" id="image" class="form-control">
                                 <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 2Mb</p>
-                            </div>                            
+                            </div>
                             <div class="form-group mb-3">
                                 <label for="content" class="mb-3">Telepon</label>
                                 <input type="number" class="form-control" name="telepon" id="telepon"

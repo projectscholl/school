@@ -3,7 +3,6 @@
 @section('title', 'Siswa')
 @section('content')
     <!-- Layout wrapper -->
-    @include('layouts.sidebar')
     <!-- Layout container -->
     <div class="layout-page">
         <!-- Navbar -->
@@ -82,7 +81,7 @@
                                                 @else
                                                     Tidak ada Biaya
                                                 @endif
-                                            </td>                                                                                        
+                                            </td>
                                             <td class="d-flex">
 
                                                 <a href="{{ route('admin.murid.show', $item->id) }}"

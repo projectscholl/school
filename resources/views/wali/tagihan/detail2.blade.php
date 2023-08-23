@@ -2,7 +2,6 @@
 
 @section('title, detail')
 @section('content')
-    @include('layouts.sidebar')
 
     <!-- Layout container -->
     <div class="layout-page overflow-auto">

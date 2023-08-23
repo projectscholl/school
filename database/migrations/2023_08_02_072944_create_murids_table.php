@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('nisn');
             $table->set('jurusan', ['teknik mesin', 'teknik komputer']);
             $table->foreignId('id_angkatans')->nullable();
-            $table->set('kelas', ['10','11','12']);
+            $table->set('kelas', ['10', '11', '12']);
+            $table->text('address');
             $table->timestamps();
         });
     }

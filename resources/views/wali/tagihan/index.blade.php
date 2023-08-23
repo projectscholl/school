@@ -3,7 +3,6 @@
 @section('title', 'Tagihan')
 @section('content')
     <!-- Layout wrapper -->
-    @include('layouts.sidebar')
 
     <!-- Layout container -->
     <div class="layout-page">

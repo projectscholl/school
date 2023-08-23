@@ -2,7 +2,6 @@
 
 @section('content')
     <!-- Layout wrapper -->
-    @include('layouts.sidebar')
     <!-- Layout container -->
     <div class="layout-page">
         <!-- Navbar -->
@@ -15,13 +14,13 @@
                 <div class="card">
                     <h5 class="card-header">Edit Biaya</h5>
                     <div class="card-body">
-                        <form action="{{ route('admin.biaya.update' , ['biaya' => $biaya->id]) }}" method="POST">
+                        <form action="{{ route('admin.biaya.update', ['biaya' => $biaya->id]) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="form-group mb-3">
                                 <label for="nama">Nama Biaya</label>
                                 <input type="text" class="form-control" name="nama" id="nama"
-                                placeholder="Masukkan Nama Biaya" value="{{ old('nama', $biaya->nama) }}">
+                                    placeholder="Masukkan Nama Biaya" value="{{ old('nama', $biaya->nama) }}">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="content">Angkatan</label>
@@ -29,7 +28,8 @@
                                     <option disabled selected>-----------</option>
                                     @if ($biaya->angkatan)
                                         @foreach ($angkatan as $item)
-                                            <option value="{{ $item->id }}" {{ old('id_angkatans', $biaya->angkatan->id) == $item->id ? 'selected' : '' }}>
+                                            <option value="{{ $item->id }}"
+                                                {{ old('id_angkatans', $biaya->angkatan->id) == $item->id ? 'selected' : '' }}>
                                                 {{ $item->tahun }}
                                             </option>
                                         @endforeach

@@ -33,6 +33,8 @@ class Murid extends Model
         'jurusan',
         'kelas',
         'id_angkatans',
-        'biaya_id'
+        'biaya_id',
+        'address',
+
     ];
 }

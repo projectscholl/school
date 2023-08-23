@@ -1,8 +1,9 @@
 @extends('layouts.master')
 
+@section('title', 'Profile')
 @section('content')
     <!-- Layout wrapper -->
-    @include('layouts.sidebar')
+
     <!-- / Sidebar -->
 
     <!-- Layout container -->
@@ -19,14 +20,14 @@
 
             <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="row">
-                    <div class="col-lg-8 mb-4 order-0">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
                                 <h5>Profile</h5>
                             </div>
                             <div class="card-body">
                                 <div class="d-flex align-items-start gap-4">
-                                    <img src="{{ asset('storage/image/' . $user->image) }}" alt="" width="100"
+                                    <img src="{{ asset('storage/' . $user->image) }}" alt="" width="100"
                                         height="100" class="d-block rounded">
                                     <form id="" method="POST" enctype="multipart/form-data">
                                         @csrf

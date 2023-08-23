@@ -67,7 +67,7 @@
         <footer class="fixed-bottom w-100  d-flex align-items-center bg-black justify-content-center"
             style="background-color:rgba(0, 0, 0, 0);">
             <a href="" class="text-light text-decoration-none"
-                style="font-family: Public sans, serif;">Bantuan</a>
+                style="font-family: Public sans, serif;">admin@gmail.com</a>
             <hr style="width:3px;height:30px; background-color:rgb(4, 232, 205);" class="mx-2">
             <a class="text-light" style="font-family: Public sans, serif;">Tlp : 0863712326</a>
             @guest

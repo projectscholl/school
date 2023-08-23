@@ -2,7 +2,6 @@
 
 @section('title', 'Laporan')
 @section('content')
-    @include('layouts.sidebar')
     <div class="layout-page">
         <x-navbar></x-navbar>
         <div class="content-wrapper">

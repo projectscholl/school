@@ -96,7 +96,7 @@
 }
 
 .text-primary {
-  color: #696cff !important;
+  color: #4048ff !important;
 }
 
 .text-body[href]:hover {
@@ -207,9 +207,9 @@ button.list-group-item-primary.active {
 
 .btn-primary {
   color: #fff;
-  background-color: #696cff;
+  background-color: #4048ff;
   border-color: #696cff;
-  box-shadow: 0 0.125rem 0.25rem 0 rgba(105, 108, 255, 0.4);
+  box-shadow: 0 0.125rem 0.25rem 0 rgba(64, 108, 255, 0.4);
 }
 .btn-primary:hover {
   color: #fff;
@@ -748,22 +748,22 @@ html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item .menu-lin
   color: #696cff;
 }
 .bg-menu-theme .menu-inner > .menu-item.active > .menu-link {
-  color: #696cff;
-  background-color: rgba(105, 108, 255, 0.16) !important;
+  color: #4048ff;
+  background-color: rgba(206,230,243,1) !important;
 }
 .bg-menu-theme .menu-inner > .menu-item.active:before {
-  background: #696cff;
+  background: #CEE6F3;
 }
 .bg-menu-theme .menu-sub > .menu-item > .menu-link:before {
   background-color: #b4bdc6 !important;
 }
 .bg-menu-theme .menu-sub > .menu-item.active > .menu-link:not(.menu-toggle):before {
-  background-color: #696cff !important;
+  background-color: #4048ff !important;
   border: 3px solid #e7e7ff !important;
 }
 
 .app-brand .layout-menu-toggle {
-  background-color: #696cff;
+  background-color: #4048ff;
   border: 7px solid #f5f5f9;
 }
 .app-brand .layout-menu-toggle i {

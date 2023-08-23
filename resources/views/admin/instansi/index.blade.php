@@ -2,7 +2,6 @@
 
 @section('title', 'Instansi')
 @section('content')
-    @include('layouts.sidebar')
     <!-- Layout container -->
     <div class="layout-page">
         <!-- Navbar -->

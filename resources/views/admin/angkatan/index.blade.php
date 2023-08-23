@@ -2,7 +2,6 @@
 
 @section('content')
     <!-- Layout wrapper -->
-    @include('layouts.sidebar')
     <!-- Layout container -->
     <div class="layout-page">
         <!-- Navbar -->
@@ -17,13 +16,13 @@
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <strong>{{ session('message') }}</strong>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>                 
+                        </div>
                     @endif
                     @if (session('delete'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>{{ session('delete') }}!</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>                    
+                            <strong>{{ session('delete') }}!</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                     @endif
                     <h5 class="card-header">Angkatan Tables</h5>
                     <a href="{{ route('admin.angkatan.create') }}" class="btn btn-primary col-2 ms-4">Tambah Angkatan</a>
@@ -54,7 +53,8 @@
                                                 {{-- <a href="{{ route('admin.walimurid.edit', $item->id) }}"
                                                     class="btn btn-warning me-2"><i class="bx bx-edit-alt"></i>
                                                 </a> --}}
-                                                <form action="{{ route('admin.angkatan.destroy', $item->id) }}" method="POST">
+                                                <form action="{{ route('admin.angkatan.destroy', $item->id) }}"
+                                                    method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-danger"><i class="bx bx-trash"></i></button>

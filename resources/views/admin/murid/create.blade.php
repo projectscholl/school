@@ -3,7 +3,6 @@
 @section('content')
     <!-- Layout wrapper -->
     <!-- Sidebar -->
-    @include('layouts.sidebar')
 
     <!-- Layout container -->
     <div class="layout-page">
@@ -80,6 +79,14 @@
                                     @endforeach
                                 </select>
                                 @error('id_angkatans')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="nama">Address</label>
+                                <input type="text" class="form-control" name="address" id="address"
+                                    placeholder="Jl.chicago" required>
+                                @error('address')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

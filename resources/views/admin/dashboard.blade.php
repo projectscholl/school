@@ -5,7 +5,6 @@
     <!-- Layout wrapper -->
     <!-- Menu -->
     <!-- sidebar -->
-    @include('layouts.sidebar')
     <!-- Layout container -->
     <div class="layout-page">
 

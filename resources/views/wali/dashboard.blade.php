@@ -2,7 +2,6 @@
 
 @section('content')
     <!-- Layout wrapper -->
-    @include('layouts.sidebar')
     <!-- / Sidebar -->
 
     <!-- Layout container -->

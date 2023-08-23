@@ -4,7 +4,6 @@
 @section('content')
     <!-- Layout wrapper -->
     <!-- Sidebar -->
-    @include('layouts.sidebar')
 
     <!-- Layout container -->
     <div class="layout-page">
