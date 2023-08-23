@@ -22,8 +22,8 @@ class TagihanController extends Controller
     {
         $user = Auth::user();
         $biaya = Biaya::with('angkatans')->get();
-        $siswa = Murid::with('angkatan')->get();
-        $murids = $siswa->pluck('angkatan.tahun', 'id_angkatans');
+        $siswa = Murid::with('biaya')->get();
+        $murids = $siswa->pluck('biaya.nama', 'id_angkatans');
 
         return view('admin.tagihan.create', compact('user', 'biaya', 'murids'));
     }
