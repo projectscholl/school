@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Angkatan;
 use App\Models\Biaya;
+use App\Models\Instansi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,15 +13,17 @@ class BiayaController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $biaya = Biaya::with('angkatans')->get();
-        return view('admin.biaya.index', compact('user', 'biaya'));
+        $instansi = Instansi::first();
+        $biaya = Biaya::with('angkatan')->get();
+        return view('admin.biaya.index', compact('user', 'biaya', 'instansi'));
     }
 
     public function create()
     {
+        $instansi = Instansi::first();
         $user = Auth::user();
         $angkatan = Angkatan::all();
-        return view('admin.biaya.create', compact('user', 'angkatan'));
+        return view('admin.biaya.create', compact('user', 'angkatan','instansi'));
     }
 
     /**
@@ -51,9 +54,10 @@ class BiayaController extends Controller
      */
     public function edit(string $id)
     {
+        $instansi = Instansi::first();
         $biaya = Biaya::find($id);
         $angkatan = Angkatan::all(); 
-        return view('admin.biaya.edit', compact('biaya', 'angkatan'));
+        return view('admin.biaya.edit', compact('biaya', 'angkatan', 'instansi'));
     }
 
     /**

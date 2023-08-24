@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('telepon');
             $table->string('email')->unique();
             $table->string('alamat');
+            $table->string('tanda_tangan');
             $table->timestamps();
         });
     }

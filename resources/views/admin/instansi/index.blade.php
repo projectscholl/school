@@ -22,10 +22,10 @@
                             <div class="card-header">Instansi</div>
                             <div class="card-body">
                                 <div class="">
-                                    <img src="{{ asset('storage/image/tutwuri1.png') }}" alt="" width="100"
-                                        height="100" class="d-block rounded">
-                                    <form id="formAccountSettings" action="" method="POST" onsubmit="return false"
-                                        enctype="multipart/form-data">
+                                    <img src="{{ asset('storage/image/' . $instansi->logo)}}" alt="" width="100" height="100" class="d-block rounded">
+                                    <form id="formAccountSettings" action="{{ route('admin.instansi.update', $instansi->id) }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
                                                 <label for="logo" class="form-label">Logo</label>
@@ -35,26 +35,27 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="logo" class="form-label">Nama Instansi</label>
                                                 <input class="form-control" type="text" id="name" name="name"
-                                                    value="SMK Tadika" autofocus />
+                                                    value="{{ old('name', $instansi->name) }}" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="telepone" class="form-label">Telephone</label>
                                                 <input class="form-control" type="text" name="telepon" id="telepon"
-                                                    value="083129378" />
+                                                    value="{{ old('telepon', $instansi->telepon) }}" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="email" class="form-label">E-mail</label>
                                                 <input class="form-control" type="text" id="email" name="email"
-                                                    placeholder="john.doe@example.com" value="johnde@gmail.com" />
+                                                    placeholder="john.doe@example.com" value="{{ old('email', $instansi->email) }}" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label class="form-label" for="country">Alamat</label>
                                                 <input class="form-control" type="text" id="alamat" name="alamat"
-                                                    placeholder="Jl.Manggur" />
+                                                    placeholder="Jl.Manggur" value="{{ old('alamat', $instansi->alamat) }}"/>
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="" class="form-label">Tanda Tangan</label>
-                                                <input type="file" name="" id="" class="form-control">
+                                                <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}" alt="" width="100" height="100" class="d-block rounded">
+                                                <input type="file" name="tanda_tangan" id="tanda_tangan" class="form-control mt-2">
                                                 <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of
                                                     800K
                                             </div>

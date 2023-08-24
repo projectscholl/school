@@ -7,8 +7,8 @@
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" data-bg-class="bg-menu-theme">
         <div class="app-brand demo mb-3 ">
             <a class="app-brand-link" href="{{ route('welcome') }}">
-                <img src="{{ asset('storage/image/tutwuri1.png') }}" alt="" width="30px">
-                <span class="demo menu-text fw-bolder ms-2 fs-3">Tadika</span>
+                <img src="{{ asset('storage/image/' . $instansi->logo)}}" alt="" width="30px">
+                <span class="demo menu-text fw-bolder ms-2 fs-3">{{ $instansi->name }}</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">

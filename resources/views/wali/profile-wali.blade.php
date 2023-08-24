@@ -26,9 +26,9 @@
                                 <h5>Profile</h5>
                             </div>
                             <div class="card-body">
+                                <img src="{{ asset('storage/image/' . $user->image) }}" alt="" width="100"
+                                    height="100" class="d-block rounded mb-3">
                                 <div class="d-flex align-items-start gap-4">
-                                    <img src="{{ asset('storage/' . $user->image) }}" alt="" width="100"
-                                        height="100" class="d-block rounded">
                                     <form id="" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
@@ -56,17 +56,17 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="old_password" class="form-label">Old Password</label>
                                                 <input class="form-control" type="password" id="password"
-                                                    name="old_password" placeholder="****" />
-                                            </div>
-                                            <div class="mb-3 col-md-6">
-                                                <label for="password" class="form-label">New Password</label>
-                                                <input class="form-control" type="password" id="email" name="password"
-                                                    placeholder="****" />
+                                                    name="old_password" placeholder="****" value="{{ $user->password }}"/>
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="old_password" class="form-label">Password Confirmation</label>
                                                 <input class="form-control" type="password" id="email"
                                                     name="password_confirmation" placeholder="****" />
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="password" class="form-label">New Password</label>
+                                                <input class="form-control" type="password" id="email" name="password"
+                                                    placeholder="****" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="" class="form-label">Image</label>

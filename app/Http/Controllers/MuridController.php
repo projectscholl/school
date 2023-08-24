@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Angkatan;
 use App\Models\Biaya;
+use App\Models\Instansi;
 use App\Models\Murid;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,17 +14,19 @@ class MuridController extends Controller
 {
     public function index()
     {
+        $instansi = Instansi::first();
         $user = Auth::user();
         $murids = Murid::all();
-        return view('admin.murid.index', compact('murids', 'user'));
+        return view('admin.murid.index', compact('murids', 'user', 'instansi'));
     }
 
     public function create()
     {
         $user = Auth::user();
+        $instansi = Instansi::first();
         $biaya = Biaya::with('angkatan')->get();
         $users = User::where('role', 'WALI')->get();
-        return view('admin.murid.create', compact('user', 'users', 'biaya'));
+        return view('admin.murid.create', compact('user', 'users', 'biaya', 'instansi'));
     }
 
     /**
@@ -51,9 +54,10 @@ class MuridController extends Controller
      */
     public function show(string $id)
     {
+        $instansi = Instansi::first();
         $user = Auth::user();
         $murids = Murid::findOrFail($id);
-        return view('admin.murid.detail', compact('user', 'murids'));
+        return view('admin.murid.detail', compact('user', 'murids', 'instansi'));
     }
 
     /**
@@ -61,13 +65,14 @@ class MuridController extends Controller
      */
     public function edit($id)
     {
+        $instansi = Instansi::first();
         $murid = Murid::find($id);
         $users =  User::where('role' , 'WALI')->get();
         $angkatan = Angkatan::all(); 
         $users =  User::where('role', 'WALI')->get();
         $angkatan = Angkatan::all();
 
-        return view('admin.murid.edit', compact('murid', 'users', 'angkatan'));
+        return view('admin.murid.edit', compact('murid', 'users', 'angkatan', 'instansi'));
     }
 
     /**

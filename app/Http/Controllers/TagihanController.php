@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Biaya;
+use App\Models\Instansi;
 use App\Models\Murid;
 use App\Models\Tagihan;
 use App\Models\TagihanDetail;
@@ -15,17 +16,19 @@ class TagihanController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('admin.tagihan.index', compact('user'));
+        $instansi = Instansi::first();
+        return view('admin.tagihan.index', compact('user', 'instansi'));
     }
 
     public function create()
     {
         $user = Auth::user();
+        $instansi = Instansi::first();
         $biaya = Biaya::with('angkatans')->get();
         $siswa = Murid::with('angkatan')->get();
-        $murids = $siswa->pluck('angkatan.tahun', 'id_angkatans');
+        $murids = $siswa->pluck('biaya.nama', 'id_angkatans');
 
-        return view('admin.tagihan.create', compact('user', 'biaya', 'murids'));
+        return view('admin.tagihan.create', compact('user', 'biaya', 'murids', 'instansi'));
     }
 
     /**
@@ -47,6 +50,7 @@ class TagihanController extends Controller
         ]);
 
 
+        dd($validate);
         // $tagihanDetail = TagihanDetail::create([
         //     'id_tagihan' => ,
         // ]);
@@ -55,7 +59,6 @@ class TagihanController extends Controller
 
 
 
-        dd($validate);
     }
 
     /**
@@ -64,7 +67,8 @@ class TagihanController extends Controller
     public function show(string $id)
     {
         $user = Auth::user();
-        return view('admin.tagihan.detail', compact('user'));
+        $instansi = Instansi::first();
+        return view('admin.tagihan.detail', compact('user', 'instansi'));
     }
 
     /**

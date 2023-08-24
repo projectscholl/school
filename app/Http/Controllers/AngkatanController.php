@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Angkatan;
+use App\Models\Instansi;
 use Illuminate\Http\Request;
 
 class AngkatanController extends Controller
@@ -12,8 +13,9 @@ class AngkatanController extends Controller
      */
     public function index()
     {
+        $instansi = Instansi::first();
         $angkatan = Angkatan::all();
-        return view('admin.angkatan.index', compact('angkatan'));
+        return view('admin.angkatan.index', compact('angkatan', 'instansi'));
     }
 
     /**
@@ -21,7 +23,8 @@ class AngkatanController extends Controller
      */
     public function create()
     {
-        return view('admin.angkatan.create');
+        $instansi = Instansi::first();
+        return view('admin.angkatan.create', compact('instansi'));
     }
 
     /**

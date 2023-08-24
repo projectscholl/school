@@ -113,6 +113,9 @@
                                             <div class="text-danger"><strong>Belum</strong></div>
                                         </td>
                                     </tr>
+                                    {{-- <a href="{{ route('spp') }}" class="btn btn-primary"><strong>
+                                        <i class="menu-icon tf-icons bx bx-copy"></i>Cetak Kartu spp
+                                    </strong></a> --}}
                                 </tbody>
                             </table>
                         </div>

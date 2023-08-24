@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instansi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +17,10 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $instansi = Instansi::first();
         $user = Auth::user();
         $user1 = User::where('role', 'ADMIN')->get();
-        return view('admin.user.index', compact('user1', 'user'));
+        return view('admin.user.index', compact('user1', 'user', 'instansi'));
     }
 
 
@@ -27,7 +29,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        $instansi = Instansi::first();
+        return view('admin.user.create', compact('instansi'));
     }
 
     /**
@@ -74,8 +77,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-
-        return view('admin.user.edit', compact('user'));
+        $instansi = Instansi::first();
+        return view('admin.user.edit', compact('user', 'instansi'));
     }
 
     /**

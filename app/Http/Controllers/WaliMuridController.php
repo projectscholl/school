@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instansi;
 use App\Models\Murid;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,9 +14,10 @@ class WaliMuridController extends Controller
 {
     public function index()
     {
+        $instansi = Instansi::first();
         $user = Auth::user();
         $walimurids = User::where('role', 'WALI')->get();
-        return view('admin.walimurid.index', compact('walimurids', 'user'));
+        return view('admin.walimurid.index', compact('walimurids', 'user','instansi'));
     }
 
     /**
@@ -23,44 +25,48 @@ class WaliMuridController extends Controller
      */
     public function create()
     {
+        $instansi = Instansi::first();
         $user = Auth::user();
         $murid = Murid::all();
-        return view('admin.walimurid.create', compact('user', 'murid'));
+        return view('admin.walimurid.create', compact('user', 'murid', 'instansi'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    $data = $request->validate([
-        'name' => 'required|max:255|string',
-        'email' => 'required|email|unique:users',
-        'telepon' => 'required|string',
-        'image' => 'nullable|mimes:jpeg,png,gif',
-        'password' => 'required',
-    ]);
+    {
+        $data = $request->validate([
+            'name' => 'required|max:255|string',
+            'email' => 'required|email|unique:users',
+            'telepon' => 'required|string',
+            'image' => 'nullable|mimes:jpeg,png,gif',
+            'password' => 'required',
+        ]);
 
-    $data['password'] =  Hash::make($request->password);
-    $data['role'] = 'WALI';
+        $data['password'] = Hash::make($request->password);
+        $data['role'] = 'WALI';
 
-    if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('storage/image');
-        $data['image'] = $imagePath;
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->storeAs('public/image', $imageName); 
+            $data['image'] = '' . $imageName; 
+        }
+
+        $user = User::create($data);
+
+        return redirect()->route('admin.walimurid.index')->with('message', 'Wali murid berhasil ditambahkan!');
     }
-
-    User::create($data);
-    return redirect()->route('admin.walimurid.index')->with('message', 'Wali murid berhasil ditambahkan!');
-}
 
     /**
      * Display the specified resource.
      */
     public function show($id)
     {
+        $instansi = Instansi::first();
         $user = User::find($id);
         $murid = Murid::all();
-        return view('admin.walimurid.detail', compact('user', 'murid'));
+        return view('admin.walimurid.detail', compact('user', 'murid', 'instansi'));
     }
 
     /**
@@ -68,8 +74,9 @@ class WaliMuridController extends Controller
      */
     public function edit(string $id)
     {
+        $instansi = Instansi::first();
         $user = User::find($id);
-        return view('admin.walimurid.edit', compact('user'));
+        return view('admin.walimurid.edit', compact('user', 'instansi'));
     }
 
     /**

@@ -78,6 +78,7 @@ Route::middleware(['Wali'])->group(function () {
     Route::get('/tagihan/detail', [TagihanWaliController::class, 'detail'])->name('wali.tagihan.detail');
     Route::get('/tagihan/detail2', [TagihanWaliController::class, 'detail2'])->name('wali.tagihan.detail2');
     Route::get('/tagihan/bayar', [TagihanWaliController::class, 'bayar'])->name('wali.tagihan.bayar');
+    Route::get('/tagihan/result', [TagihanWaliController::class, 'result'])->name('wali.tagihan.result');
     Route::get('/spp', [PdfController::class, 'spp'])->name('spp');
 });
 

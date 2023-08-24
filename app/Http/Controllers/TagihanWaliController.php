@@ -2,31 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instansi;
 use Illuminate\Http\Request;
 
 class TagihanWaliController extends Controller
 {
     public function index()
     {
-        return view('wali.tagihan.index');
+        $instansi = Instansi::first();
+        return view('wali.tagihan.index', compact('instansi'));
     }
 
     public function detail()
     {
-        return view('wali.tagihan.detail');
+        $instansi = Instansi::first();
+        return view('wali.tagihan.detail', compact('instansi'));
     }
     public function detail2()
     {
-        return view('wali.tagihan.detail2');
+        $instansi = Instansi::first();
+        return view('wali.tagihan.detail2', compact('instansi'));
     }
 
     public function bayar()
     {
-        return view('wali.tagihan.bayar');
+        $instansi = Instansi::first();
+        return view('wali.tagihan.bayar', compact('instansi'));
     }
 
     public function result()
     {
-        return view('wali.tagihan.result');
+        $instansi = Instansi::first();
+        return view('wali.tagihan.result', compact('instansi'));
     }
 }

@@ -58,7 +58,7 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $value->nama }}</td>
-                                            <td>{{ $value->angkatans->tahun }}</td>
+                                            <td>{{ $value->angkatan->tahun }}</td>
                                             <td>{{ $user->name }}</td>
                                             <td class="d-flex">
 
