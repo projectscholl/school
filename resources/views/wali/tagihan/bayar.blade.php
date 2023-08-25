@@ -2,7 +2,6 @@
 
 @section('title, detail')
 @section('content')
-    @include('layouts.sidebar')
 
     <!-- Layout container -->
     <div class="layout-page overflow-auto">
@@ -24,11 +23,13 @@
                                 @csrf
                                 <div class="form-group mb-3">
                                     <label for="" class="mb-2">Nama Pengirim</label>
-                                    <input type="text" class="form-control" placeholder="Masukkan Nama Pengirim" required>
+                                    <input type="text" class="form-control" placeholder="Masukkan Nama Pengirim"
+                                        required>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="" class="mb-2">Rekening Pengirim</label>
-                                    <input type="number" class="form-control" placeholder="Masukkan Nama Pengirim" required>
+                                    <input type="number" class="form-control" placeholder="Masukkan Nama Pengirim"
+                                        required>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="" class="mb-2">Rekening Operator</label>
@@ -39,10 +40,12 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="" class="mb-2">Bukti Transfer</label>
-                                    <input type="file" class="form-control" placeholder="Masukkan Nama Pengirim" required>
+                                    <input type="file" class="form-control" placeholder="Masukkan Nama Pengirim"
+                                        required>
                                 </div>
                                 <div class="container mx-auto d-flex justify-content-center align-items-center gap-2">
-                                    <button href="{{ route('wali.tagihan.bayar') }}" class="btn btn-primary my-4 w-50 text-light">Konfirmasi</button>
+                                    <button href="{{ route('wali.tagihan.bayar') }}"
+                                        class="btn btn-primary my-4 w-50 text-light">Konfirmasi</button>
                                 </div>
                             </form>
                         </div>

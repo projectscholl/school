@@ -34,6 +34,7 @@ class MuridController extends Controller
         $data = $request->validate([
             'name' => 'required | max:255 | string',
             'nisn' => 'required | max:10',
+            'id_users' => 'nullable',
             'jurusan' => 'required',
             'id_angkatans' => 'required',
             'address' => 'required',
@@ -75,10 +76,11 @@ class MuridController extends Controller
         $data = $request->validate([
             'name' => 'required|max:255|string',
             'nisn' => 'required|max:10',
-            'id_users' => 'required',
+            'id_users' => 'nullable',
             'jurusan' => 'required',
             'id_angkatans' => 'required',
             'kelas' => 'required',
+            'address' => 'required',
         ]);
 
         $murid = Murid::find($id);

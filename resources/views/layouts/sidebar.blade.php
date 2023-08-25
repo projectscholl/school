@@ -56,6 +56,19 @@
                         <div data-i18n="Without menu">Profile</div>
                     </a>
                 </li>
+                <!--Logout-->
+                <li class="menu-item" style="">
+                    <a class="menu-link" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+                        <i class="bx
+                bx-power-off me-2"></i>
+                        <span class="align-middle">Log Out</span>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
             </ul>
         @endif
 
@@ -166,6 +179,19 @@
 
                         <div data-i18n="Without menu">Laporan</div>
                     </a>
+                </li>
+                <!--Logout-->
+                <li class="menu-item">
+                    <a class="menu-link" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+                        <i class="bx
+                bx-power-off me-2"></i>
+                        <span class="align-middle">Logout</span>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </li>
             </ul>
         @endif

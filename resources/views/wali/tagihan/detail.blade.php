@@ -2,7 +2,6 @@
 
 @section('title', 'Bayar')
 @section('content')
-    @include('layouts.sidebar')
     <!-- Layout container -->
     <div class="layout-page">
         <!-- Navbar -->
@@ -19,7 +18,8 @@
                                 <tr>
                                     <th class="text-white">Bulan</th>
                                     <th class="text-white">Total</th>
-                                    <th class="text-white d-flex">Pilih<input class="ms-2" type="checkbox" id="selectAll"></th>
+                                    <th class="text-white d-flex">Pilih<input class="ms-2" type="checkbox" id="selectAll">
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>

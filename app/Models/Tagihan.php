@@ -11,6 +11,10 @@ class Tagihan extends Model
 
     protected $fillable = [
         'id_murid',
+        'nama_biaya',
+        'nama_murid',
+        'desc',
+        'total_biaya',
         'id_user',
         'start_date',
         'end_date',

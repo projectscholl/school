@@ -12,7 +12,7 @@ class TagihanDetail extends Model
     protected $fillable = [
         'id_tagihan',
         'nama_biaya',
-        'total_biaya',
+        'jumlah_biaya',
     ];
 
     public function tagihan()

@@ -78,6 +78,7 @@
                                         <option value="{{ $item->angkatan->id }}">{{ $item->angkatan->tahun }}</option>
                                     @endforeach
                                 </select>
+                                <p>(Silahkan membuat biaya terlebih dahulu)</p>
                                 @error('id_angkatans')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror

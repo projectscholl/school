@@ -23,12 +23,13 @@
                                         placeholder="Masukkan Nama Biaya">
                                 </div>
                                 <label for="nama">Angkatan</label>
-                                <select name="id_angkatans" id="id_angkatans" class="form-control">
+                                <select name="id_angkatans" id="id_angkatans" class="form-control mb-2">
                                     <option disabled selected>-------</option>
                                     @foreach ($angkatan as $item)
                                         <option value="{{ $item->id }}" required>{{ $item->tahun }}</option>
                                     @endforeach
                                 </select>
+                                <p>(Tambahkan data angkatan terlebih dahulu)</p>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="nama">Total Biaya</label>

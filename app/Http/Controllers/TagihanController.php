@@ -24,7 +24,6 @@ class TagihanController extends Controller
         $biaya = Biaya::with('angkatans')->get();
         $siswa = Murid::with('biaya')->get();
         $murids = $siswa->pluck('biaya.nama', 'id_angkatans');
-
         return view('admin.tagihan.create', compact('user', 'biaya', 'murids'));
     }
 
@@ -40,11 +39,37 @@ class TagihanController extends Controller
         //6.Simpan notifikasi database untuk tagihan
         //7.Kirim pesan whatsaap
         //8.Redirict
-        $validate = $this->validate($request, [
-            'id_angkatans' => 'required',
+        $validate = $request->validate([
+            'id_murid' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
+            'desc' => 'required',
         ]);
+        $idMurid = $validate['id_murid'];
+        $murids = Murid::query();
+        $murids = $murids->where('id_angkatans', $idMurid)->get();
+
+        $biaya = Murid::with('biaya')->where('id_angkatans', $idMurid)->get();
+
+        foreach ($biaya as $biayas) {
+            $dataTagihan = [
+                'id_murid' => $biayas->id,
+                'nama_biaya' => $biayas->biaya->nama,
+                'nama_murid' => $biayas->name,
+                'total_biaya' => $biayas->biaya->total_biaya,
+                'desc' => $validate['desc'],
+                'start_date' => $validate['start_date'],
+                'end_date' => $validate['end_date'],
+
+            ];
+
+
+            print_r($dataTagihan);
+            echo '<br>';
+        }
+
+
+
 
 
         // $tagihanDetail = TagihanDetail::create([
@@ -55,7 +80,7 @@ class TagihanController extends Controller
 
 
 
-        dd($validate);
+
     }
 
     /**

@@ -44,7 +44,7 @@ class UserController extends Controller
             'password_confirm' => 'required|same:password',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-        
+
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('storage/image'), $imageName);
         $user = User::create([
@@ -125,7 +125,7 @@ class UserController extends Controller
             return redirect()->route('admin.user.index')->with('error', 'User Sedang dipakai');
         }
         $user->delete();
-
-        return redirect()->route('admin.user.index')->with('success', 'Berhasil dihapus');
+        
+        return redirect()->route('admin.user.index');
     }
 }
