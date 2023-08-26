@@ -14,6 +14,7 @@ class Instansi extends Model
         'name',
         'telepon',
         'email',
-        'alamat'
+        'alamat',
+        'tanda_tangan'
     ];
 }

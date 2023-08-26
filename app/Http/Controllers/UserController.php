@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Instansi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,10 +16,9 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $instansi = Instansi::first();
         $user = Auth::user();
         $user1 = User::where('role', 'ADMIN')->get();
-        return view('admin.user.index', compact('user1', 'user', 'instansi'));
+        return view('admin.user.index', compact('user1', 'user'));
     }
 
 
@@ -29,8 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $instansi = Instansi::first();
-        return view('admin.user.create', compact('instansi'));
+        return view('admin.user.create');
     }
 
     /**
@@ -47,7 +44,7 @@ class UserController extends Controller
             'password_confirm' => 'required|same:password',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-        
+
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('storage/image'), $imageName);
         $user = User::create([
@@ -60,7 +57,7 @@ class UserController extends Controller
             'image' => $imageName,
         ]);
         if ($user) {
-            return redirect(route('admin.user.index'))->with('success', 'Data Admin berhasil dibuat');
+            return redirect(route('admin.user.index'))->with('success', 'Data berhasil dibuat');
         }
     }
 
@@ -77,8 +74,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $instansi = Instansi::first();
-        return view('admin.user.edit', compact('user', 'instansi'));
+
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -115,7 +112,7 @@ class UserController extends Controller
         }
         $user->update($data);
         // dd($data);
-        return redirect(route('admin.user.index'))->with('edit', 'Data Admin Berhasil di update');
+        return redirect(route('admin.user.index'))->with('success', 'Berhasil di update');
     }
 
     /**
@@ -129,6 +126,6 @@ class UserController extends Controller
         }
         $user->delete();
 
-        return redirect()->route('admin.user.index')->with('delete', 'Berhasil dihapus');
+        return redirect()->route('admin.user.index');
     }
 }

@@ -13,13 +13,13 @@ class InstansiController extends Controller
         $instansi = Instansi::first();
         return view('admin.instansi.index', compact('instansi'));
     }
-    
+
 
 
     public function edit(string $id)
     {
         $instansi = Instansi::find($id);
-        return view('admin.instansi.index' , compact('instansi'));
+        return view('admin.instansi.index', compact('instansi'));
     }
 
     public function update(Request $request, $id)
@@ -39,23 +39,25 @@ class InstansiController extends Controller
             if ($instansi->logo) {
                 Storage::delete($instansi->logo);
             }
-    
+
             $logoPath = $request->file('logo')->store('/storage/image');
             $data['logo'] = $logoPath;
         }
-    
+
         if ($request->hasFile('tanda_tangan')) {
             if ($instansi->tanda_tangan) {
                 Storage::delete($instansi->tanda_tangan);
             }
-    
-            $tandaTanganPath = $request->file('tanda_tangan')->store('storage/image');
-            $data['tanda_tangan'] = $tandaTanganPath;
+
+            $content = $request->file('tanda_tangan');
+            $imageName = time() . '.' . $content->extension();
+            $path = 'image/' . $imageName;
+            Storage::disk('public')->put($path, file_get_contents($content));
+            $data['tanda_tangan'] = $imageName;
         }
 
         $instansi->update($data);
 
         return redirect()->route('admin.instansi.index')->with('pesan', "Data Instansi berhasil diperbarui!!");
     }
-
 }

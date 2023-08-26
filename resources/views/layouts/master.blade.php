@@ -1,3 +1,6 @@
+@php
+    $instansi = \App\Models\Instansi::first();
+@endphp
 <!DOCTYPE html>
 
 <html lang="en" class="light-style customizer-hide" dir="ltr" data-theme="theme-default"
@@ -14,7 +17,7 @@
 
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('storage/image/tutwuri1.png') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset($instansi->logo) }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -48,8 +51,12 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('sneat') }}/assets/js/config.js"></script>
+    <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
     <!--Tables-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.js"></script>
+
 
 </head>
 

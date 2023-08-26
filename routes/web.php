@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginWaliController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\BiayaController;
 use App\Http\Controllers\InstansiController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MuridController;
@@ -46,7 +47,12 @@ Route::middleware(['IsAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::get('profile', [AdminController::class, 'edit'])->name('profile.edit');
     Route::put('profile', [AdminController::class, 'update'])->name('profile.update');
-
+    Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
+    Route::get('/kelas/create', [KelasController::class, 'create'])->name('kelas.create');
+    Route::post('/kelas', [KelasController::class, 'store'])->name('kelas.store');
+    Route::get('/kelas/edit/{id}/edit', [KelasController::class, 'edit'])->name('kelas.edit');
+    Route::put('/kelas/{id}', [KelasController::class, 'update'])->name('kelas.update');
+    Route::resource('/bank', BankController::class);
     Route::resource('/instansi', BankController::class);
     Route::resource('/jurusan', JurusanController::class);
     Route::resource('/user', UserController::class);
@@ -82,7 +88,6 @@ Route::middleware(['Wali'])->group(function () {
     Route::get('/tagihan/bayar', [TagihanWaliController::class, 'bayar'])->name('wali.tagihan.bayar');
     Route::get('/tagihan/result', [TagihanWaliController::class, 'result'])->name('wali.tagihan.result');
     Route::get('admin/spp/pdf/{id_users}', [PdfController::class, 'spp'])->name('admin.spp.pdf');
-
 });
 
 Route::get('logout', function () {

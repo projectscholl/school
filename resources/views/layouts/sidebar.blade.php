@@ -7,7 +7,8 @@
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" data-bg-class="bg-menu-theme">
         <div class="app-brand demo mb-3 ">
             <a class="app-brand-link" href="{{ route('welcome') }}">
-                <img src="{{ asset('storage/image/' . $instansi->logo)}}" alt="" width="30px">
+
+                <img src="{{ asset($instansi->logo) }}" alt="" width="30px">
                 <span class="demo menu-text fw-bolder ms-2 fs-3">{{ $instansi->name }}</span>
             </a>
 
@@ -56,6 +57,19 @@
                         <div data-i18n="Without menu">Profile</div>
                     </a>
                 </li>
+                <!--Logout-->
+                <li class="menu-item" style="">
+                    <a class="menu-link" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+                        <i class="bx
+                bx-power-off me-2"></i>
+                        <span class="align-middle">Log Out</span>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
             </ul>
         @endif
 
@@ -77,6 +91,29 @@
                     <span class="menu-header-text">DATA TRANSAKSI</span>
                 </li>
 
+                <!--Data Angakatan-->
+                <li class="{{ Route::is('admin.angkatan.*') ? $active : $nonActive }}">
+                    <a href="{{ route('admin.angkatan.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-detail"></i>
+                        <div data-i18n="Analytics">Data Angkatan</div>
+                    </a>
+                </li>
+
+                <!--Data Jurusan-->
+                <li class="{{ Route::is('admin.jurusan.*') ? $active : $nonActive }}">
+                    <a href="{{ route('admin.jurusan.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-collection"></i>
+                        <div data-i18n="Analytics">Data Jurusan</div>
+                    </a>
+                </li>
+
+                <!--Data Kelas-->
+                <li class="{{ Route::is('admin.kelas.*') ? $active : $nonActive }}">
+                    <a href="{{ route('admin.kelas.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-group"></i>
+                        <div data-i18n="Analytics">Data Kelas</div>
+                    </a>
+                </li>
                 <!--Data Biaya-->
                 <li class="{{ Route::is('admin.biaya.*') ? $active : $nonActive }}">
                     <a href="{{ route('admin.biaya.index') }}" class="menu-link">
@@ -107,7 +144,6 @@
                         <div data-i18n="Without menu">Laporan</div>
                     </a>
                 </li>
-
                 <!-- Layouts -->
                 <li class="menu-header small text-uppercase">
                     <span class="menu-header-text">SETTING USER</span>
@@ -152,8 +188,6 @@
                         <div data-i18n="Analytics">Data Wali Murid</div>
                     </a>
                 </li>
-
-
                 <!--Account setting-->
                 <li
                     class="menu-item {{ Route::is('admin.profile.*', 'admin.instansi.*', 'admin.bank.*') ? 'active open' : '' }}">
@@ -175,6 +209,19 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <!--Logout-->
+                <li class="menu-item">
+                    <a class="menu-link" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+                        <i class="bx
+                bx-power-off me-2"></i>
+                        <span class="align-middle">Logout</span>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </li>
             </ul>
         @endif

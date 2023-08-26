@@ -17,16 +17,19 @@ class Angkatan extends Model
     {
         return $this->belongsTo(Murid::class, 'id_angkatans');
     }
-    
+
     public function biaya()
     {
         return $this->hasOne(Biaya::class, 'id_angkatans');
-        return $this->belongsTo(Murid::class);
     }
 
     public function jurusan()
     {
         return $this->hasMany(Jurusan::class);
     }
-}
 
+    public function kelas()
+    {
+        return $this->hasMany(Kelas::class);
+    }
+}

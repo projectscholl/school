@@ -541,10 +541,10 @@ button.list-group-item-primary.active {
 .form-floating > .form-control:focus ~ label,
 .form-floating > .form-control:not(:placeholder-shown) ~ label,
 .form-floating > .form-select ~ label {
-  color: #696cff;
+  color: #697A8D;
 }
 .form-floating > .form-control:-webkit-autofill ~ label {
-  color: #696cff;
+  color: #697A8D;
 }
 
 .svg-illustration svg {

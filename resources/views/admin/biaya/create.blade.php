@@ -42,27 +42,7 @@
                                 <select name="id_kelas" id="kelas" class="form-control mb-3" required>
                                     <option disabled selected>-------</option>
                                 </select>
-                                {{-- <script>
-                                    const angkatanSelect = document.getElementById('id_angkatans');
-                                    const jurusanSelect = document.getElementById('id_jurusans');
-        
-                                    // Data jurusan (ambil dari variabel PHP yang dikirim ke tampilan)
-                                    const jurusanData = @json($jurusans);
-        
-                                    angkatanSelect.addEventListener('change', () => {
-                                        const angkatanId = angkatanSelect.value;
-                                        const jurusanOptions = jurusanData[angkatanId] || [];
-        
-                                        jurusanSelect.innerHTML = '<option disabled selected>-------</option>';
-        
-                                        jurusanOptions.forEach(jurusan => {
-                                            const option = document.createElement('option');
-                                            option.value = jurusan.id;
-                                            option.textContent = jurusan.nama;
-                                            jurusanSelect.appendChild(option);
-                                        });
-                                    });
-                                </script> --}}
+                                <p>(Tambahkan data angkatan terlebih dahulu)</p>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="nama">Total Biaya</label>

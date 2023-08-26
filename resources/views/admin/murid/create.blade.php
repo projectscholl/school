@@ -50,10 +50,11 @@
                                 <label for="content">Angkatan</label>
                                 <select name="id_angkatans" id="id_angkatans" class="form-control" required>
                                     <option disabled selected>-----------</option>
-                                    @foreach ($biaya as $item)
+                                    @foreach ($angkatan as $item)
                                         <option value="{{ $item->angkatan->id }}">{{ $item->angkatan->tahun }}</option>
                                     @endforeach
                                 </select>
+                                <p>(Silahkan membuat biaya terlebih dahulu)</p>
                                 @error('id_angkatans')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror

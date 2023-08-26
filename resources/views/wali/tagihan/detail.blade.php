@@ -2,7 +2,6 @@
 
 @section('title', 'Tagihan')
 @section('content')
-    <!-- Layout wrapper -->
 
     <!-- Layout container -->
     <div class="layout-page">
@@ -46,7 +45,7 @@
                                         <th class="text-white">Bulan</th>
                                         <th class="text-white">Total</th>
                                         <th class="text-white d-flex">Status</th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody>

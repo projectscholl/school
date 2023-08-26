@@ -22,8 +22,11 @@
                             <div class="card-header">Instansi</div>
                             <div class="card-body">
                                 <div class="">
-                                    <img src="{{ asset('storage/image/' . $instansi->logo)}}" alt="" width="100" height="100" class="d-block rounded">
-                                    <form id="formAccountSettings" action="{{ route('admin.instansi.update', $instansi->id) }}" method="POST" enctype="multipart/form-data">
+                                    <img src="{{ asset($instansi->logo) }}" alt="" width="100" height="100"
+                                        class="d-block rounded">
+                                    <form id="formAccountSettings"
+                                        action="{{ route('admin.instansi.update', $instansi->id) }}" method="POST"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
                                         <div class="row">
@@ -45,17 +48,21 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="email" class="form-label">E-mail</label>
                                                 <input class="form-control" type="text" id="email" name="email"
-                                                    placeholder="john.doe@example.com" value="{{ old('email', $instansi->email) }}" />
+                                                    placeholder="john.doe@example.com"
+                                                    value="{{ old('email', $instansi->email) }}" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label class="form-label" for="country">Alamat</label>
                                                 <input class="form-control" type="text" id="alamat" name="alamat"
-                                                    placeholder="Jl.Manggur" value="{{ old('alamat', $instansi->alamat) }}"/>
+                                                    placeholder="Jl.Manggur"
+                                                    value="{{ old('alamat', $instansi->alamat) }}" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="" class="form-label">Tanda Tangan</label>
-                                                <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}" alt="" width="100" height="100" class="d-block rounded">
-                                                <input type="file" name="tanda_tangan" id="tanda_tangan" class="form-control mt-2">
+                                                <img src="{{ asset('storage/image/' . $instansi->tanda_tangan) }}"
+                                                    alt="" width="100" height="100" class="d-block rounded">
+                                                <input type="file" name="tanda_tangan" id="tanda_tangan"
+                                                    class="form-control mt-2">
                                                 <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of
                                                     800K
                                             </div>
@@ -84,7 +91,7 @@
                                         <div class="mb-3 col-md-6">
                                             <label for="logo" class="form-label">No Rekening</label>
                                             <input class="form-control" type="number" id="firstName" name="no_rekening"
-                                                autofocus/>
+                                                autofocus />
                                         </div>
                                         <div class="mt-2">
                                             <button type="submit" class="btn btn-primary me-2">Submit</button>
