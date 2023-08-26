@@ -19,7 +19,10 @@ class Biaya extends Model
     {
         return $this->belongsTo(Angkatan::class, 'id_angkatans');
     }
-    
+    public function jurusan()
+    {
+        return $this->belongsTo(Jurusan::class, 'id_jurusans');
+    }
     public function murids()
     {
         return $this->belongsTo(Murid::class, 'id_biayas');

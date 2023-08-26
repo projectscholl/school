@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Angkatan;
 use App\Models\Biaya;
 use App\Models\Instansi;
+use App\Models\Jurusan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,8 +23,9 @@ class BiayaController extends Controller
     {
         $instansi = Instansi::first();
         $user = Auth::user();
+        $jurusans = Jurusan::all();
         $angkatan = Angkatan::all();
-        return view('admin.biaya.create', compact('user', 'angkatan','instansi'));
+        return view('admin.biaya.create', compact('user', 'angkatan','instansi', 'jurusans'));
     }
 
     /**

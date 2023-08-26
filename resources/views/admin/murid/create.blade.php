@@ -41,8 +41,20 @@
                             <div class="form-group mb-3">
                                 <label for="nama">NISN</label>
                                 <input type="text" class="form-control" name="nisn" id="nisn"
-                                    placeholder="Masukkan NISN" required>
+                                placeholder="Masukkan NISN" required>
                                 @error('nisn')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="content">Angkatan</label>
+                                <select name="id_angkatans" id="id_angkatans" class="form-control" required>
+                                    <option disabled selected>-----------</option>
+                                    @foreach ($biaya as $item)
+                                        <option value="{{ $item->angkatan->id }}">{{ $item->angkatan->tahun }}</option>
+                                    @endforeach
+                                </select>
+                                @error('id_angkatans')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -67,18 +79,6 @@
                                     @endforeach
                                 </select>
                                 @error('kelas')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="content">Angkatan</label>
-                                <select name="id_angkatans" id="id_angkatans" class="form-control" required>
-                                    <option disabled selected>-----------</option>
-                                    @foreach ($biaya as $item)
-                                        <option value="{{ $item->angkatan->id }}">{{ $item->angkatan->tahun }}</option>
-                                    @endforeach
-                                </select>
-                                @error('id_angkatans')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

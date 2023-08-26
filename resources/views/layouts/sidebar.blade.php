@@ -132,7 +132,7 @@
                 <!--Data Jurusan-->
                 <li class="{{ Route::is('admin.jurusan.*') ? $active : $nonActive }}">
                     <a href="{{ route('admin.jurusan.index') }}" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-collection"></i>
+                        <i class="menu-icon tf-icons bx bx-book"></i>
                         <div data-i18n="Analytics">Data Jurusan</div>
                     </a>
                 </li>
