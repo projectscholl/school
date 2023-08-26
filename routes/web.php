@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginWaliController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\BiayaController;
 use App\Http\Controllers\InstansiController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MuridController;
 use App\Http\Controllers\PdfController;
@@ -45,7 +46,7 @@ Route::middleware(['IsAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::get('profile', [AdminController::class, 'edit'])->name('profile.edit');
     Route::put('profile', [AdminController::class, 'update'])->name('profile.update');
-
+    Route::resource('/kelas', KelasController::class);
     Route::resource('/bank', BankController::class);
     Route::resource('/user', UserController::class);
     Route::resource('/murid', MuridController::class);
