@@ -7,9 +7,7 @@
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" data-bg-class="bg-menu-theme">
         <div class="app-brand demo mb-3 ">
             <a class="app-brand-link" href="{{ route('welcome') }}">
-                @php
-                    $instansi = \App\Models\Instansi::first();
-                @endphp
+
                 <img src="{{ asset($instansi->logo) }}" alt="" width="30px">
                 <span class="demo menu-text fw-bolder ms-2 fs-3">{{ $instansi->name }}</span>
             </a>

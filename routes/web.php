@@ -47,9 +47,12 @@ Route::middleware(['IsAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::get('profile', [AdminController::class, 'edit'])->name('profile.edit');
     Route::put('profile', [AdminController::class, 'update'])->name('profile.update');
-    Route::resource('/kelas', KelasController::class);
+    Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
+    Route::get('/kelas/create', [KelasController::class, 'create'])->name('kelas.create');
+    Route::post('/kelas', [KelasController::class, 'store'])->name('kelas.store');
+    Route::get('/kelas/edit/{id}/edit', [KelasController::class, 'edit'])->name('kelas.edit');
+    Route::put('/kelas/{id}', [KelasController::class, 'update'])->name('kelas.update');
     Route::resource('/bank', BankController::class);
-
     Route::resource('/instansi', BankController::class);
     Route::resource('/jurusan', JurusanController::class);
     Route::resource('/user', UserController::class);

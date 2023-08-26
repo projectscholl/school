@@ -44,6 +44,15 @@
                     <h5 class="card-header">Murid Tables</h5>
                     <a href="{{ route('admin.murid.create') }}" class="btn btn-primary col-2 ms-4">Tambah Murid</a>
                     <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="col-md-10">
+                                    <form action="">
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                         <div class="table-responsive text-nowrap">
                             <table class="table" id="myTable">
                                 <thead>

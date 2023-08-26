@@ -10,11 +10,11 @@
                     <div class="card-header">
                         <h5>
                             Table Data Kelas</h5>
-                        <a href="" class="btn btn-primary">Tambah kelas</a>
+                        <a href="{{ route('admin.kelas.create') }}" class="btn btn-primary">Tambah kelas</a>
 
                     </div>
                     <div class="card-body">
-                        <table class="table" id="myTables">
+                        <table class="table" id="myTable">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -25,16 +25,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>XI</td>
-                                    <td>IPA 1</td>
-                                    <td>2022</td>
-                                    <td>
-                                        <a href="" class="btn btn-warning"><i class='bx bx-edit-alt'></i></a>
-                                    </td>
-                                </tr>
+                                @foreach ($kelas as $index => $item)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $item->kelas }}</td>
+                                        <td>{{ $item->angkatans->tahun }}</td>
+                                        <td>{{ $item->jurusans->nama }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.kelas.edit', $item->id) }}" class="btn btn-warning"><i
+                                                    class='bx bx-edit-alt'></i></a>
+                                        </td>
+                                    </tr>
                             </tbody>
+                            @endforeach
+
                         </table>
                     </div>
                 </div>
