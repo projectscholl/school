@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Angkatan;
 use App\Models\Instansi;
+use App\Models\Jurusan;
 use Illuminate\Http\Request;
 
-class AngkatanController extends Controller
+class JurusanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,8 @@ class AngkatanController extends Controller
     public function index()
     {
         $instansi = Instansi::first();
-        $angkatan = Angkatan::all();
-        return view('admin.angkatan.index', compact('angkatan', 'instansi'));
+        $jurusans = Jurusan::with('angkatans')->get();
+        return view('admin.jurusan.index', compact('instansi', 'jurusans'));
     }
 
     /**
@@ -24,7 +25,8 @@ class AngkatanController extends Controller
     public function create()
     {
         $instansi = Instansi::first();
-        return view('admin.angkatan.create', compact('instansi'));
+        $angkatan = Angkatan::get();
+        return view('admin.jurusan.create', compact('instansi', 'angkatan'));
     }
 
     /**
@@ -33,13 +35,11 @@ class AngkatanController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'tahun' => 'required|unique:angkatans,tahun' 
-        ], [
-            'tahun.unique' => 'Tahun angkatan sudah ada.'
+            'id_angkatans' => 'required',
+            'nama' => 'required|max:255'
         ]);
-
-        Angkatan::create($data);
-        return redirect()->route('admin.angkatan.index')->with('message', "Angkatan Berhasil Ditambahkan!!");
+        Jurusan::create($data);
+        return redirect()->route('admin.jurusan.index')->with('pesan', "Jurusan Berhasil Di Buat!!");
     }
 
     /**
@@ -55,9 +55,7 @@ class AngkatanController extends Controller
      */
     public function edit(string $id)
     {
-        $angkatan = Angkatan::find($id);
-        $instansi = Instansi::first();
-        return view('admin.angkatan.edit', compact('angkatan', 'instansi'));
+        //
     }
 
     /**
@@ -65,15 +63,7 @@ class AngkatanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = $request->validate([
-            'tahun' => 'required|unique:angkatans,tahun' 
-        ], [
-            'tahun.unique' => 'Tahun angkatan sudah ada.'
-        ]);
-
-        $angkatan = Angkatan::findOrFail($id);
-        $angkatan->update($data);
-        return redirect()->route('admin.angkatan.index')->with('pesan', "Angkatan Berhasil Di Update!!");
+        //
     }
 
     /**
@@ -81,6 +71,6 @@ class AngkatanController extends Controller
      */
     public function destroy(string $id)
     {
-        
+        //
     }
 }

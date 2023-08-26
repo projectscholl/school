@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Instansi;
 use App\Models\Murid;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -62,8 +63,9 @@ class LoginWaliController extends Controller
 
     public function dashboard()
     {
+        $instansi = Instansi::first();
         $wali_id = Auth::user()->id;
         $jumlahMurid = Murid::where('id_users', $wali_id)->count();
-        return view('wali.dashboard', compact('jumlahMurid'));
+        return view('wali.dashboard', compact('jumlahMurid', 'instansi'));
     }
 }

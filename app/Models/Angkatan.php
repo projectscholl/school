@@ -23,5 +23,10 @@ class Angkatan extends Model
         return $this->hasOne(Biaya::class, 'id_angkatans');
         return $this->belongsTo(Murid::class);
     }
+
+    public function jurusan()
+    {
+        return $this->hasMany(Jurusan::class);
+    }
 }
 

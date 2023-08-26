@@ -2,20 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instansi;
+use App\Models\Murid;
 use Illuminate\Http\Request;
 
 class PdfController extends Controller
 {
     public function tagihan()
     {
-        return view('admin.pdf.tagihan-pdf');
+        $instansi = Instansi::first();
+        return view('admin.pdf.tagihan-pdf', compact('instansi'));
     }
     public function pembayaran()
     {
-        return view('admin.pdf.pembayaran-pdf');
+        $instansi = Instansi::first();
+        return view('admin.pdf.pembayaran-pdf', compact('instansi'));
     }
     public function spp()
     {
-        return view('admin.pdf.spp-pdf');
+        $instansi = Instansi::first();
+        $murid = Murid::get();
+        return view('admin.pdf.spp-pdf', compact('instansi', 'murid'));
     }
 }

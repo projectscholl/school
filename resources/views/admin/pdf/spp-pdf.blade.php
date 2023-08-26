@@ -390,10 +390,10 @@ in bold.
         <div class="headerSection">
             <!-- As a logo we take an SVG element and add the name in an standard H1 element behind it. -->
             <div class="logoAndName">
-                <img src="{{ asset('storage/image/tutwuri1.png') }}" alt="" width="50">
+                <img src="{{ asset('storage/image/' . $instansi->logo)}}" alt="" width="50">
                 <div class="w-100 d-flex flex-column ms-2">
-                    <h1 class="text-black">SMK TADIKA </h1>
-                    <span>Route 66, Chicago</span>
+                    <h1 class="text-black">{{ $instansi->name }}</h1>
+                    <span>{{ $instansi->alamat }}</span>
                 </div>
             </div>
             <!-- Details about the invoice are on the right top side of each page. -->
@@ -410,6 +410,8 @@ in bold.
             Kelas : 10.
             <br>
             Jurusan : Teknik Komputer.
+            <br>
+            NISN : (3456789012)
         </p>
     </div>
 
@@ -445,7 +447,7 @@ in bold.
                         2 July 2022
                     </td>
                     <td>
-
+                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
                     </td>
                     <td class="">
                         blasdl
@@ -463,7 +465,7 @@ in bold.
                         2 Agustus 2022
                     </td>
                     <td>
-
+                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
                     </td>
                     <td class="">
                         blasdl
@@ -481,7 +483,7 @@ in bold.
                         2 September 2022
                     </td>
                     <td>
-
+                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
                     </td>
                     <td class="">
                         blasdl
@@ -499,7 +501,7 @@ in bold.
                         2 Oktober 2022
                     </td>
                     <td>
-
+                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
                     </td>
                     <td class="">
                         blasdl
@@ -517,7 +519,7 @@ in bold.
                         2 November 2022
                     </td>
                     <td>
-
+                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
                     </td>
                     <td class="">
                         blasdl
@@ -535,7 +537,7 @@ in bold.
                         2 Desember 2022
                     </td>
                     <td>
-
+                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
                     </td>
                     <td class="">
                         blasdl
@@ -553,7 +555,7 @@ in bold.
                         2 January 2022
                     </td>
                     <td>
-
+                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
                     </td>
                     <td class="">
                         blasdl
@@ -571,7 +573,7 @@ in bold.
                         2 February 2022
                     </td>
                     <td>
-
+                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
                     </td>
                     <td class="">
                         blasdl
@@ -589,7 +591,7 @@ in bold.
                         2 Maret 2022
                     </td>
                     <td>
-
+                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
                     </td>
                     <td class="">
                         blasdl
@@ -607,7 +609,7 @@ in bold.
                         2 April 2022
                     </td>
                     <td>
-
+                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
                     </td>
                     <td class="">
                         blasdl
@@ -625,7 +627,7 @@ in bold.
                         2 Mei 2022
                     </td>
                     <td>
-
+                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
                     </td>
                     <td class="">
                         blasdl
@@ -634,16 +636,16 @@ in bold.
                 <tr>
                     <td>12</td>
                     <td>
-                        <b>Juny</b>
+                        <b>June</b>
                     </td>
                     <td>
                         Rp.220.000
                     </td>
                     <td>
-                        2 Juny 2022
+                        2 June 2022
                     </td>
                     <td>
-
+                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
                     </td>
                     <td class="">
                         blasdl

@@ -2,12 +2,60 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instansi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class InstansiController extends Controller
 {
     public function index()
     {
-        return view('admin.instansi.index');
+        $instansi = Instansi::first();
+        return view('admin.instansi.index', compact('instansi'));
     }
+    
+
+
+    public function edit(string $id)
+    {
+        $instansi = Instansi::find($id);
+        return view('admin.instansi.index' , compact('instansi'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = $request->validate([
+            'logo' => 'nullable|mimes:jpeg,png',
+            'name' => 'required|max:255',
+            'telepon' => 'required|string',
+            'tanda_tangan' => 'nullable|mimes:jpeg,png',
+            'email' => 'required|email|unique:instansis,email,' . $id,
+            'alamat' => 'required|string',
+        ]);
+
+        $instansi = Instansi::find($id);
+
+        if ($request->hasFile('logo')) {
+            if ($instansi->logo) {
+                Storage::delete($instansi->logo);
+            }
+    
+            $logoPath = $request->file('logo')->store('/storage/image');
+            $data['logo'] = $logoPath;
+        }
+    
+        if ($request->hasFile('tanda_tangan')) {
+            if ($instansi->tanda_tangan) {
+                Storage::delete($instansi->tanda_tangan);
+            }
+    
+            $tandaTanganPath = $request->file('tanda_tangan')->store('storage/image');
+            $data['tanda_tangan'] = $tandaTanganPath;
+        }
+
+        $instansi->update($data);
+
+        return redirect()->route('admin.instansi.index')->with('pesan', "Data Instansi berhasil diperbarui!!");
+    }
+
 }

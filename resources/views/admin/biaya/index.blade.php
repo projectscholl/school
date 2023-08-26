@@ -49,7 +49,7 @@
                                         <th>No</th>
                                         <th>Nama Biaya</th>
                                         <th>tahun</th>
-                                        <th>user</th>
+                                        <th>dibuat</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -58,7 +58,7 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $value->nama }}</td>
-                                            <td>{{ $value->angkatans->tahun }}</td>
+                                            <td>{{ $value->angkatan->tahun }}</td>
                                             <td>{{ $user->name }}</td>
                                             <td class="d-flex">
 

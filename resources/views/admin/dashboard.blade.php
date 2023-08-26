@@ -56,17 +56,6 @@
                                                 <img src="{{ asset('sneat') }}/assets/img/icons/unicons/chart-success.png"
                                                     alt="chart success" class="rounded" />
                                             </div>
-                                            <div class="dropdown">
-                                                <button class="btn p-0" type="button" id="cardOpt3"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                                    <a class="dropdown-item" href="javascript:void(0);">View
-                                                        More</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                                </div>
-                                            </div>
                                         </div>
                                         <span class="fw-semibold d-block mb-1">Total Murid</span>
                                         <h3 class="card-title mb-4">{{ $jumlahMurid }}</h3>
@@ -81,20 +70,10 @@
                                                 <img src="{{ asset('sneat') }}/assets/img/icons/unicons/wallet-info.png"
                                                     alt="chart success" class="rounded" />
                                             </div>
-                                            <div class="dropdown">
-                                                <button class="btn p-0" type="button" id="cardOpt3"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                                    <a class="dropdown-item" href="javascript:void(0);">View
-                                                        More</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                                </div>
-                                            </div>
                                         </div>
                                         <span class="fw-semibold d-block mb-1">Total Sudah Bayar</span>
-                                        <h3 class="card-title mb-4">0</h3>
+                                        <h3 class="card-title mb-1">0</h3>
+                                        <small class="text-success fw-semibold"><strong>Rp1.000.000</strong></small>
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +151,7 @@
         <!-- / Content -->
 
         <!-- Footer -->
-        {{-- <footer class="content-footer footer bg-footer-theme">
+        <footer class="content-footer footer bg-footer-theme">
             <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                 <div class="mb-2 mb-md-0">
                     ©
@@ -194,7 +173,7 @@
                         class="footer-link me-4">Support</a>
                 </div>
             </div>
-        </footer> --}}
+        </footer>
         <!-- / Footer -->
 
 

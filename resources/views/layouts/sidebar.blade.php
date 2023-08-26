@@ -7,8 +7,11 @@
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" data-bg-class="bg-menu-theme">
         <div class="app-brand demo mb-3 ">
             <a class="app-brand-link" href="{{ route('welcome') }}">
-                <img src="{{ asset('storage/image/tutwuri1.png') }}" alt="" width="30px">
-                <span class="demo menu-text fw-bolder ms-2 fs-3">Tadika</span>
+                @php
+                    $instansi = \App\Models\Instansi::first();
+                @endphp
+                <img src="{{ asset($instansi->logo) }}" alt="" width="30px">
+                <span class="demo menu-text fw-bolder ms-2 fs-3">{{ $instansi->name }}</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -98,6 +101,14 @@
                     </a>
                 </li>
 
+                <!--Data Jurusan-->
+                <li class="{{ Route::is('admin.jurusan.*') ? $active : $nonActive }}">
+                    <a href="{{ route('admin.jurusan.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-collection"></i>
+                        <div data-i18n="Analytics">Data Jurusan</div>
+                    </a>
+                </li>
+
                 <!--Data Kelas-->
                 <li class="{{ Route::is('admin.kelas.*') ? $active : $nonActive }}">
                     <a href="{{ route('admin.kelas.index') }}" class="menu-link">
@@ -163,7 +174,6 @@
                         <div data-i18n="Analytics">Data Wali Murid</div>
                     </a>
                 </li>
-
                 <!--Account setting-->
                 <li
                     class="menu-item {{ Route::is('admin.profile.*', 'admin.instansi.*', 'admin.bank.*') ? 'active open' : '' }}">

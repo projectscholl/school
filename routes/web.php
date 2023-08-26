@@ -7,6 +7,7 @@ use App\Http\Controllers\BankController;
 use App\Http\Controllers\BiayaController;
 use App\Http\Controllers\InstansiController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MuridController;
 use App\Http\Controllers\PdfController;
@@ -48,6 +49,9 @@ Route::middleware(['IsAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::put('profile', [AdminController::class, 'update'])->name('profile.update');
     Route::resource('/kelas', KelasController::class);
     Route::resource('/bank', BankController::class);
+
+    Route::resource('/instansi', BankController::class);
+    Route::resource('/jurusan', JurusanController::class);
     Route::resource('/user', UserController::class);
     Route::resource('/murid', MuridController::class);
     Route::resource('/walimurid', WaliMuridController::class);
@@ -73,13 +77,14 @@ Route::post('loginprocess', [LoginWaliController::class, 'loginprocess'])->name(
 Route::middleware(['Wali'])->group(function () {
     Route::get('/wali', [LoginWaliController::class, 'dashboard'])->name('wali.dashboard');
     Route::get('/profile', [ProfileWaliController::class, 'edit'])->name('profile.edit');
-    Route::get('/siswa', [WaliSiswaController::class, 'index'])->name('wali.siswa.index');
     Route::get('wali/siswa', [WaliSiswaController::class, 'index'])->name('wali.siswa.index');
     Route::get('/tagihan', [TagihanWaliController::class, 'index'])->name('wali.tagihan.index');
     Route::get('/tagihan/detail', [TagihanWaliController::class, 'detail'])->name('wali.tagihan.detail');
-    Route::get('/tagihan/detail2', [TagihanWaliController::class, 'detail2'])->name('wali.tagihan.detail2');
+    Route::get('/tagihan/pembayaran', [TagihanWaliController::class, 'pembayaran'])->name('wali.tagihan.pembayaran');
+    Route::get('/tagihan/pilih_pembayaran', [TagihanWaliController::class, 'pilih_pembayaran'])->name('wali.tagihan.pilih_pembayaran');
     Route::get('/tagihan/bayar', [TagihanWaliController::class, 'bayar'])->name('wali.tagihan.bayar');
-    Route::get('/spp', [PdfController::class, 'spp'])->name('spp');
+    Route::get('/tagihan/result', [TagihanWaliController::class, 'result'])->name('wali.tagihan.result');
+    Route::get('admin/spp/pdf/{id_users}', [PdfController::class, 'spp'])->name('admin.spp.pdf');
 });
 
 Route::get('logout', function () {

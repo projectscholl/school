@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="content">Nama Wali</label>
-                                <select name="id_users" id="id_users" class="form-control" required>
+                                <select name="id_users" id="id_users" class="form-control" >
                                     <option disabled selected>-----------</option>
                                     @foreach ($users as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -71,7 +71,7 @@
                                 @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <label for="content">Pembayaran Spp</label>
+                                <label for="content">Angkatan</label>
                                 <select name="id_angkatans" id="id_angkatans" class="form-control" required>
                                     <option disabled selected>-----------</option>
                                     @foreach ($biaya as $item)

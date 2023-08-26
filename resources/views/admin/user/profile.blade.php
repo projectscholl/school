@@ -30,9 +30,9 @@
                         <div class="card mb-4">
                             <h5 class="card-header">Profile details</h5>
                             <div class="card-body">
+                                <img src="{{ asset('storage/image/' . $user->image) }}" alt="" width="100"
+                                    height="100" class="d-block rounded mb-3">
                                 <div class="d-flex align-items-start gap-4">
-                                    <img src="{{ asset('storage/image/' . $user->image) }}" alt="" width="100"
-                                        height="100" class="d-block rounded">
                                     <form action="{{ route('admin.profile.update', $user->id) }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf

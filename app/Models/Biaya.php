@@ -24,8 +24,5 @@ class Biaya extends Model
     {
         return $this->belongsTo(Murid::class, 'id_biayas');
     }
-    public function angkatans()
-    {
-        return $this->belongsTo(Angkatan::class, 'id_angkatans');
-    }
+
 }

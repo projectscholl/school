@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instansi;
 use Illuminate\Http\Request;
 
 class LaporanController extends Controller
 {
     public function index()
     {
-        return view('admin.laporan.index');
+        $instansi = Instansi::first();
+        return view('admin.laporan.index', compact('instansi'));
     }
 }

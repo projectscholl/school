@@ -125,7 +125,7 @@ class UserController extends Controller
             return redirect()->route('admin.user.index')->with('error', 'User Sedang dipakai');
         }
         $user->delete();
-        
+
         return redirect()->route('admin.user.index');
     }
 }

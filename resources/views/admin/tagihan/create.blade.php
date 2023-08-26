@@ -36,12 +36,12 @@
                                 <div class="form-group mb-3">
                                     <label for="start_date">Tanggal Tagihan </label>
                                     <input type="date" class="form-control" name="start_date" id="start_date"
-                                        placeholder="Masukkan Nama Biaya">
+                                        >
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="end_date">Tenggat Tagihan </label>
                                     <input type="date" class="form-control" name="end_date" id="end_date"
-                                        placeholder="Masukkan Nama Biaya">
+                                        >
                                 </div>
                                 <div class="form-group mb-3">
                                     <div class="form-floating">

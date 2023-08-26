@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instansi;
 use App\Models\Murid;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,14 +20,16 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $instansi = Instansi::first();
         $user = Auth::user();
         $jumlahMurid = Murid::count();
-        return view('admin.dashboard', compact('user', 'jumlahMurid'));
+        return view('admin.dashboard', compact('user', 'jumlahMurid', 'instansi'));
     }
     public function edit()
     {
         $user = User::find(Auth::user()->id);
-        return view('admin.user.profile', compact('user'));
+        $instansi = Instansi::first();
+        return view('admin.user.profile', compact('user', 'instansi'));
     }
     public function update(Request $request)
     {

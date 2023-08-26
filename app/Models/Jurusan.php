@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Instansi extends Model
+class Jurusan extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'logo',
-        'name',
-        'telepon',
-        'email',
-        'alamat'
+        'id_angkatans',
+        'nama'
     ];
+
+    public function angkatans()
+    {
+        return $this->belongsTo(Angkatan::class, 'id_angkatans');
+    }
 }
