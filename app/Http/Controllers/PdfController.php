@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Instansi;
+use App\Models\Murid;
 use Illuminate\Http\Request;
 
 class PdfController extends Controller
@@ -20,6 +21,7 @@ class PdfController extends Controller
     public function spp()
     {
         $instansi = Instansi::first();
-        return view('admin.pdf.spp-pdf', compact('instansi'));
+        $murid = Murid::get();
+        return view('admin.pdf.spp-pdf', compact('instansi', 'murid'));
     }
 }

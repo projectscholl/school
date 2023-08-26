@@ -54,7 +54,6 @@
                                         <th>Jurusan</th>
                                         <th>Kelas</th>
                                         <th>Angkatan</th>
-                                        <th>Biaya</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -75,13 +74,6 @@
                                             <td>{{ $item->jurusan }}</td>
                                             <td>{{ $item->kelas }}</td>
                                             <td>{{ $item->angkatan->tahun ?? 'Tidak ada Angkatan' }}</td>
-                                            <td>
-                                                @if ($item->angkatan && $item->angkatan->biaya)
-                                                    Rp {{ number_format($item->angkatan->biaya->total_biaya) }}
-                                                @else
-                                                    Tidak ada Biaya
-                                                @endif
-                                            </td>
                                             <td class="d-flex">
 
                                                 <a href="{{ route('admin.murid.show', $item->id) }}"

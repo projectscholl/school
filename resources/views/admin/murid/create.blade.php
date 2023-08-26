@@ -71,7 +71,7 @@
                                 @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <label for="content">Pembayaran Spp</label>
+                                <label for="content">Angkatan</label>
                                 <select name="id_angkatans" id="id_angkatans" class="form-control" required>
                                     <option disabled selected>-----------</option>
                                     @foreach ($biaya as $item)

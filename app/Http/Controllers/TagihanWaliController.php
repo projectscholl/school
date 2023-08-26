@@ -18,12 +18,16 @@ class TagihanWaliController extends Controller
         $instansi = Instansi::first();
         return view('wali.tagihan.detail', compact('instansi'));
     }
-    public function detail2()
+    public function pembayaran()
     {
         $instansi = Instansi::first();
-        return view('wali.tagihan.detail2', compact('instansi'));
+        return view('wali.tagihan.pembayaran', compact('instansi'));
     }
-
+    public function pilih_pembayaran()
+    {
+        $instansi = Instansi::first();
+        return view('wali.tagihan.pilih_pembayaran', compact('instansi'));
+    }
     public function bayar()
     {
         $instansi = Instansi::first();

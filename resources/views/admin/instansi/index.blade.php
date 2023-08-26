@@ -73,24 +73,24 @@
                         <div class="card-header">Bank Account</div>
                         <div class="card-body">
                             <div class="">
-                                <form id="formAccountSettings" method="POST" onsubmit="return false"
-                                    enctype="multipart/form-data">
+                                <form id="formAccountSettings" action="#" method="POST">
+                                    @csrf
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
                                             <label for="logo" class="form-label">Nama</label>
-                                            <input class="form-control" type="text" id="firstName" name="logo"
-                                                autofocus value="ASEP" />
+                                            <input class="form-control" type="text" id="firstName" name="nama"
+                                                autofocus />
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="logo" class="form-label">No Rekening</label>
-                                            <input class="form-control" type="number" id="firstName" name="logo"
-                                                autofocus value="8976544323" />
+                                            <input class="form-control" type="number" id="firstName" name="no_rekening"
+                                                autofocus/>
                                         </div>
                                         <div class="mt-2">
-                                            <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                                            <button type="submit" class="btn btn-primary me-2">Submit</button>
                                         </div>
                                 </form>
-                                <table class="table">
+                                <table class="table mt-3">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -102,8 +102,8 @@
                                     <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td>ASEP</td>
-                                            <td>8976544323</td>
+                                            <td>Kurniawan</td>
+                                            <td>123456789</td>
                                             <td class="d-flex">
                                                 <a href="" class="btn btn-warning me-2">Edit</a>
                                                 <form action="" class="">

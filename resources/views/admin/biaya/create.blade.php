@@ -23,7 +23,21 @@
                                         placeholder="Masukkan Nama Biaya">
                                 </div>
                                 <label for="nama">Angkatan</label>
-                                <select name="id_angkatans" id="id_angkatans" class="form-control">
+                                <select name="id_angkatans" id="id_angkatans" class="form-control mb-3">
+                                    <option disabled selected>-------</option>
+                                    @foreach ($angkatan as $item)
+                                        <option value="{{ $item->id }}" required>{{ $item->tahun }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="nama">Jurusan</label>
+                                <select name="id_angkatans" id="id_angkatans" class="form-control mb-3">
+                                    <option disabled selected>-------</option>
+                                    @foreach ($angkatan as $item)
+                                        <option value="{{ $item->id }}" required>{{ $item->tahun }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="nama">Kelas</label>
+                                <select name="id_angkatans" id="id_angkatans" class="form-control mb-3">
                                     <option disabled selected>-------</option>
                                     @foreach ($angkatan as $item)
                                         <option value="{{ $item->id }}" required>{{ $item->tahun }}</option>

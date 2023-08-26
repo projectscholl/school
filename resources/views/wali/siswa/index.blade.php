@@ -22,6 +22,7 @@
                                     <th>NAMA</th>
                                     <th>KELAS</th>
                                     <th>ANGKATAN</th>
+                                    <th>Kartu SPP</th>
                                     <th>BIAYA SEKOLAH</th>
                                 </tr>
                             </thead>
@@ -37,16 +38,14 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->kelas }}</td>
                                         <td>{{ $item->angkatan->tahun }}</td>
+                                        <td>
+                                            <strong>
+                                                <a href="{{ route('admin.spp.pdf', ['id_users' => $item->id]) }}"><i class="menu-icon tf-icons bx bx-copy ms-2"></i>Download</a>
+                                            </strong>
+                                        </td>
                                         <td class="d-flex align-items-center">
                                             @if ($item->angkatan && $item->angkatan->biaya)
                                                 Rp {{ number_format($item->angkatan->biaya->total_biaya) }}
-                                                <form action="{{ route('wali.tagihan.index') }}">
-                                                    <button type="submit" class="btn btn-link">
-                                                        <strong>
-                                                            <i class="menu-icon tf-icons bx bx-detail ms-2"></i>Detail
-                                                        </strong>
-                                                    </button>
-                                                </form>
                                             @else
                                                 Tidak ada Biaya
                                             @endif

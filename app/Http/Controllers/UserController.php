@@ -60,7 +60,7 @@ class UserController extends Controller
             'image' => $imageName,
         ]);
         if ($user) {
-            return redirect(route('admin.user.index'))->with('success', 'Data berhasil dibuat');
+            return redirect(route('admin.user.index'))->with('success', 'Data Admin berhasil dibuat');
         }
     }
 
@@ -115,7 +115,7 @@ class UserController extends Controller
         }
         $user->update($data);
         // dd($data);
-        return redirect(route('admin.user.index'))->with('success', 'Berhasil di update');
+        return redirect(route('admin.user.index'))->with('edit', 'Data Admin Berhasil di update');
     }
 
     /**
@@ -129,6 +129,6 @@ class UserController extends Controller
         }
         $user->delete();
 
-        return redirect()->route('admin.user.index')->with('success', 'Berhasil dihapus');
+        return redirect()->route('admin.user.index')->with('delete', 'Berhasil dihapus');
     }
 }
