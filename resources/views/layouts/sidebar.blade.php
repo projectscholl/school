@@ -91,37 +91,6 @@
                     <span class="menu-header-text">DATA TRANSAKSI</span>
                 </li>
 
-                <!--Data Angakatan-->
-                <li class="{{ Route::is('admin.angkatan.*') ? $active : $nonActive }}">
-                    <a href="{{ route('admin.angkatan.index') }}" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-detail"></i>
-                        <div data-i18n="Analytics">Data Angkatan</div>
-                    </a>
-                </li>
-
-                <!--Data Jurusan-->
-                <li class="{{ Route::is('admin.jurusan.*') ? $active : $nonActive }}">
-                    <a href="{{ route('admin.jurusan.index') }}" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-collection"></i>
-                        <div data-i18n="Analytics">Data Jurusan</div>
-                    </a>
-                </li>
-
-                <!--Data Kelas-->
-                <li class="{{ Route::is('admin.kelas.*') ? $active : $nonActive }}">
-                    <a href="{{ route('admin.kelas.index') }}" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-group"></i>
-                        <div data-i18n="Analytics">Data Kelas</div>
-                    </a>
-                </li>
-                <!--Data Biaya-->
-                <li class="{{ Route::is('admin.biaya.*') ? $active : $nonActive }}">
-                    <a href="{{ route('admin.biaya.index') }}" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-money"></i>
-                        <div data-i18n="Analytics">Data Biaya</div>
-                    </a>
-                </li>
-                <!--Data Tagihan-->
                 <li class="{{ Route::is('admin.tagihan.*', 'admin.bayar') ? $active : $nonActive }}">
                     <a href="{{ route('admin.tagihan.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-wallet-alt"></i>
@@ -170,6 +139,14 @@
                     <a href="{{ route('admin.jurusan.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-book"></i>
                         <div data-i18n="Analytics">Data Jurusan</div>
+                    </a>
+                </li>
+
+                <!--Data Kelas-->
+                <li class="{{ Route::is('admin.kelas.*') ? $active : $nonActive }}">
+                    <a href="{{ route('admin.kelas.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-group"></i>
+                        <div data-i18n="Analytics">Data Kelas</div>
                     </a>
                 </li>
 

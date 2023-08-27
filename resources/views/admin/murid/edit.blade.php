@@ -40,46 +40,60 @@
                                     placeholder="Masukkan NISN" required value="{{ old('nisn', $murid->nisn) }}">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="content">Jurusan</label>
-                                <select name="jurusan" id="jurusan" class="form-control" required>
-                                    <option disabled selected>-----------</option>
-                                    @foreach (['teknik mesin', 'teknik komputer'] as $item)
-                                        <option value="{{ $item }}"
-                                            {{ old('jurusan', $murid->jurusan) == $item ? 'selected' : '' }}>
-                                            {{ $item }}</option>
+                                <label for="id_angkatans">Masukkan angkatan</label>
+                                <select name="id_angkatans" id="id_angkatans" class="form-control">
+                                    <option value="">---------</option>
+                                    @foreach ($angkatan as $data)
+                                        <option value="{{ $data->id }}">{{ $data->tahun }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="content">Kelas</label>
-                                <select name="kelas" id="kelas" class="form-control" required>
-                                    <option disabled selected>-----------</option>
-                                    @foreach (['10', '11', '12'] as $item)
-                                        <option value="{{ $item }}"
-                                            {{ old('kelas', $murid->kelas) == $item ? 'selected' : '' }}>
-                                            {{ $item }}</option>
-                                    @endforeach
+                                <label for="id_jurusans">Masukkan Jurusan</label>
+                                <select name="id_jurusans" id="id_jurusans" class="form-control">
+                                    
                                 </select>
-                                @error('kelas')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <label for="content">Angkatan</label>
-                                <select name="id_angkatans" id="id_angkatans" class="form-control" required>
-                                    <option disabled selected>-----------</option>
-                                    @if ($murid->angkatan)
-                                        @foreach ($angkatan as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ old('id_angkatans', $murid->angkatan->id) == $item->id ? 'selected' : '' }}>
-                                                {{ $item->tahun }}
-                                            </option>
-                                        @endforeach
-                                    @else
-                                        <option value="" selected>Tidak Ada Angkatan</option>
-                                    @endif
+                                <label for="id_kelas">Masukkan kelas</label>
+                                <select name="id_kelas" id="id_kelas" class="form-control">
+
                                 </select>
-                            </div>
+                                <script>
+                                    const angkatanSelect = document.getElementById('id_angkatans');
+                                    const jurusanSelect = document.getElementById('id_jurusans');
+                                    const kelasSelect = document.getElementById('id_kelas');
+                                    
+                                    const jurusanGrouped = @json($jurusanGrouped);
+                                    const kelasGrouped = @json($kelasGrouped); 
+                                    
+                                    angkatanSelect.addEventListener('change', () => {
+                                        const angkatanId = angkatanSelect.value;
+                                        const jurusanOptions = jurusanGrouped[angkatanId] || [];
+                                        
+                                        jurusanSelect.innerHTML = '';
+                                        
+                                        jurusanOptions.forEach(jurusan => {
+                                            const option = document.createElement('option');
+                                            option.value = jurusan.id;
+                                            option.textContent = jurusan.nama;
+                                            jurusanSelect.appendChild(option);
+                                        });
+                                        
+                                        const jurusanId = jurusanSelect.value;
+                                        const kelasOptions = kelasGrouped[jurusanId] || [];
+                                        
+                                        kelasSelect.innerHTML = '';
+                                        
+                                        kelasOptions.forEach(kelas => {
+                                            const option = document.createElement('option');
+                                            option.value = kelas.id;
+                                            option.textContent = kelas.kelas;
+                                            kelasSelect.appendChild(option);
+                                        });
+                                    });
+                                </script>    
+                            </div>   
                             <button type="submit" class="btn btn-primary">Update</button>
                         </form>
                         <!--/ Bordered Table -->

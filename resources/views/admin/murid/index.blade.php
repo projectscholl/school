@@ -80,8 +80,8 @@
                                                 <strong>{{ $item->User->name ?? 'Tidak ada wali murid' }}</strong>
                                             </td>
                                             <td><strong>{{ $item->name }}</strong></td>
-                                            <td>{{ $item->jurusan }}</td>
-                                            <td>{{ $item->kelas }}</td>
+                                            <td>{{ $item->jurusans->nama }}</td>
+                                            <td>{{ $item->kelas->kelas }}</td>
                                             <td>{{ $item->angkatan->tahun ?? 'Tidak ada Angkatan' }}</td>
                                             <td class="d-flex">
 

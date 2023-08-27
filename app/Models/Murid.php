@@ -21,19 +21,24 @@ class Murid extends Model
         return $this->belongsTo(Angkatan::class, 'id_angkatans');
     }
 
-    public function biaya()
+    public function jurusans()
     {
-        return $this->belongsTo(Biaya::class, 'id_angkatans');
+        return $this->belongsTo(Jurusan::class, 'id_jurusans');
     }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'id_kelas');
+    }
+
 
     protected $fillable = [
         'id_users',
         'name',
         'nisn',
-        'jurusan',
-        'kelas',
+        'id_jurusans',
+        'id_kelas',
         'id_angkatans',
-        'biaya_id',
         'address',
 
     ];

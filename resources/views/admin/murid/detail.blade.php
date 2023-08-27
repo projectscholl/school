@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Layout wrapper -->
-    @include('layouts.sidebar')
+
 
             <!-- Layout container -->
             <div class="layout-page">
@@ -18,13 +18,11 @@
                             <div class="card-body">
                                 <div>NAMA :  {{ $murids->name }} </div>
                                 <hr>
-                                <div>KELAS : {{ $murids->kelas }} </div>
-                                <hr>
-                                <div>JURUSAN : {{ $murids->jurusan }} </div>
-                                <hr>
                                 <div>ANGKATAN : {{ $murids->angkatan->tahun ?? 'Tidak ada Angkatan' }} </div>
                                 <hr>
-                                <div>BIAYA : Rp {{ number_format($murids->angkatan->biaya->total_biaya) }} </div>
+                                <div>JURUSAN : {{ $murids->jurusans->nama }} </div>
+                                <hr>
+                                <div>KELAS : {{ $murids->kelas->kelas ?? 'Tidak ada Kelas' }} </div>
                                 <hr>
                             </div>
                         </div>

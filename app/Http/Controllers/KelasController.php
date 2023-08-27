@@ -14,12 +14,15 @@ class KelasController extends Controller
         $kelas = Kelas::with('angkatans', 'jurusans')->get();
         return view('admin.kelas.index', compact('kelas'));
     }
+
     public function create()
     {
-        $jurusan = Jurusan::all();
         $angkatan = Angkatan::all();
-        return view('admin.kelas.create', compact('jurusan', 'angkatan'));
+        $jurusanGrouped = Jurusan::with('angkatans')->get()->groupBy('id_angkatans');
+
+        return view('admin.kelas.create', compact('angkatan', 'jurusanGrouped'));
     }
+
     public function store(Request $request)
     {
         $validate = $request->validate([
@@ -30,16 +33,16 @@ class KelasController extends Controller
 
         Kelas::create($validate);
 
-        return redirect()->route('admin.kelas.index');
+        return redirect()->route('admin.kelas.index')->with('message', "Kelas Berhasil Ditambahkan!!");
     }
 
     public function edit($id)
     {
         $kelas = Kelas::find($id);
-        $jurusan = Jurusan::all();
+        $jurusanGrouped = Jurusan::with('angkatans')->get()->groupBy('id_angkatans');
         $angkatan = Angkatan::all();
 
-        return view('admin.kelas.edit', compact('angkatan', 'jurusan', 'kelas'));
+        return view('admin.kelas.edit', compact('angkatan', 'jurusanGrouped', 'kelas'));
     }
 
     public function update(Request $request, $id)
@@ -54,6 +57,6 @@ class KelasController extends Controller
 
         $class->update($data);
 
-        return redirect()->route('admin.kelas.index');
+        return redirect()->route('admin.kelas.index')->with('edit', "Kelas Berhasil Diupdate!!");;
     }
 }

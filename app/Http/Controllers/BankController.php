@@ -11,9 +11,9 @@ class BankController extends Controller
     public function index()
     {
         $banks = Bank::all();
-        dd($banks);
-        // return view('admin.instansi.index', compact('banks'));
+        return view('admin.instansi.index', compact('banks'));
     }
+
 
     public function edit(string $id)
     {
@@ -25,7 +25,7 @@ class BankController extends Controller
     {
         $data = $request->validate([
             'nama' => 'required|max:255',
-            'no_rekening' => 'required|string',
+            'no_rekening' => 'required|max:10',
         ]);
 
         Bank::create($data);
