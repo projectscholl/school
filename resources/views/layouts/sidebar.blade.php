@@ -8,7 +8,7 @@
         <div class="app-brand demo mb-3 ">
             <a class="app-brand-link" href="{{ route('welcome') }}">
 
-                <img src="{{ asset($instansi->logo) }}" alt="" width="30px">
+                <img src="{{ asset('/storage/image/' . $instansi->logo) }}" alt="" width="30px">
                 <span class="demo menu-text fw-bolder ms-2 fs-3">{{ $instansi->name }}</span>
             </a>
 

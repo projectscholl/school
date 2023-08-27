@@ -22,8 +22,8 @@
                             <div class="card-header">Instansi</div>
                             <div class="card-body">
                                 <div class="">
-                                    <img src="{{ asset($instansi->logo) }}" alt="" width="100" height="100"
-                                        class="d-block rounded">
+                                    <img src="{{ asset('storage/image/' . $instansi->logo) }}" alt="" width="100"
+                                        height="100" class="d-block rounded">
                                     <form id="formAccountSettings"
                                         action="{{ route('admin.instansi.update', $instansi->id) }}" method="POST"
                                         enctype="multipart/form-data">

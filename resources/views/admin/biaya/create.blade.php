@@ -30,20 +30,26 @@
                                     @endforeach
                                 </select>
                                 <label for="nama">Jurusan</label>
-                                <select name="id_angkatans" id="id_angkatans" class="form-control mb-3">
+                                <select name="id_jurusans" id="id_jurusans" class="form-control mb-3">
                                     <option disabled selected>-------</option>
                                     @foreach ($angkatan as $item)
                                         <option value="{{ $item->id }}" required>{{ $item->tahun }}</option>
                                     @endforeach
                                 </select>
                                 <label for="nama">Kelas</label>
-                                <select name="id_angkatans" id="id_angkatans" class="form-control mb-3">
+                                <select name="id_kelas" id="id_kelas" class="form-control mb-3">
                                     <option disabled selected>-------</option>
                                     @foreach ($angkatan as $item)
                                         <option value="{{ $item->id }}" required>{{ $item->tahun }}</option>
                                     @endforeach
                                 </select>
                                 <p>(Tambahkan data angkatan terlebih dahulu)</p>
+                                <label for="nama">status</label>
+                                <select name="status" id="status" class="form-control mb-3">
+                                    <option disabled selected>-------</option>
+                                    <option value="routine">Routine</option>
+                                    <option value="optional">Optional</option>
+                                </select>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="nama">Total Biaya</label>

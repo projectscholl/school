@@ -14,11 +14,15 @@ class KelasController extends Controller
         $kelas = Kelas::with('angkatans', 'jurusans')->get();
         return view('admin.kelas.index', compact('kelas'));
     }
-    public function create()
+    public function create(Request $request)
     {
-        $jurusan = Jurusan::all();
         $angkatan = Angkatan::all();
-        return view('admin.kelas.create', compact('jurusan', 'angkatan'));
+        return view('admin.kelas.create', compact('angkatan'));
+    }
+    public function getJurusan($id)
+    {
+        $jurusan = Jurusan::where('id_angkatans', $id)->with('angkatans')->get();
+        return response()->json($jurusan);
     }
     public function store(Request $request)
     {

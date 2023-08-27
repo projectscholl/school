@@ -10,19 +10,21 @@ class Biaya extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama',
         'id_angkatans',
+        'id_kelas',
+        'id_jurusans',
+        'nama_biaya',
         'total_biaya',
+        'status',
     ];
 
     public function angkatan()
     {
         return $this->belongsTo(Angkatan::class, 'id_angkatans');
     }
-    
+
     public function murids()
     {
         return $this->belongsTo(Murid::class, 'id_biayas');
     }
-
 }

@@ -20,10 +20,10 @@ class BiayaController extends Controller
 
     public function create()
     {
-        $instansi = Instansi::first();
         $user = Auth::user();
         $angkatan = Angkatan::all();
-        return view('admin.biaya.create', compact('user', 'angkatan','instansi'));
+        $biaya = Biaya::all();
+        return view('admin.biaya.create', compact('user', 'angkatan', 'biaya'));
     }
 
     /**
@@ -56,7 +56,7 @@ class BiayaController extends Controller
     {
         $instansi = Instansi::first();
         $biaya = Biaya::find($id);
-        $angkatan = Angkatan::all(); 
+        $angkatan = Angkatan::all();
         return view('admin.biaya.edit', compact('biaya', 'angkatan', 'instansi'));
     }
 
@@ -75,7 +75,7 @@ class BiayaController extends Controller
         $result = $biaya->update($data);
         // dd($result);
 
-        return redirect()->route('admin.biaya.index')->with('pesan' , "Biaya Berhasil Diedit!!!");
+        return redirect()->route('admin.biaya.index')->with('pesan', "Biaya Berhasil Diedit!!!");
     }
 
     /**
