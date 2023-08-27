@@ -17,4 +17,6 @@ class Instansi extends Model
         'alamat',
         'tanda_tangan'
     ];
+
+    
 }

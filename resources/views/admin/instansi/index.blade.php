@@ -85,12 +85,12 @@
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
                                             <label for="logo" class="form-label">Nama</label>
-                                            <input class="form-control" type="text" id="firstName" name="nama"
+                                            <input class="form-control" type="text" id="nama" name="nama"
                                                 autofocus />
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="logo" class="form-label">No Rekening</label>
-                                            <input class="form-control" type="number" id="firstName" name="no_rekening"
+                                            <input class="form-control" type="number" id="no_rekening" name="no_rekening"
                                                 autofocus />
                                         </div>
                                         <div class="mt-2">
@@ -107,19 +107,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Kurniawan</td>
-                                            <td>123456789</td>
-                                            <td class="d-flex">
-                                                <a href="" class="btn btn-warning me-2">Edit</a>
-                                                <form action="" class="">
-                                                    <button class="btn btn-danger">
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Asep</td>
+                                                <td>7784596325</td>
+                                                <td class="d-flex">
+                                                    <a href="#" class="btn btn-warning me-2">Edit</a>
+                                                    <form action="#" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-danger show_confirm">Delete</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
                                     </tbody>
                                 </table>
                             </div>

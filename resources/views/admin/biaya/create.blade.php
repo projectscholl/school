@@ -22,26 +22,23 @@
                                     <input type="text" class="form-control" name="nama" id="nama"
                                         placeholder="Masukkan Nama Biaya">
                                 </div>
-                                <label for="nama">Angkatan</label>
-                                <select name="id_angkatans" id="id_angkatans" class="form-control mb-3">
+                                <label for="id_angkatans">Angkatan</label>
+                                <select name="id_angkatans" id="id_angkatans" class="form-control mb-3" required>
                                     <option disabled selected>-------</option>
                                     @foreach ($angkatan as $item)
-                                        <option value="{{ $item->id }}" required>{{ $item->tahun }}</option>
+                                        <option value="{{ $item->id }}">{{ $item->tahun }}</option>
                                     @endforeach
                                 </select>
                                 <label for="nama">Jurusan</label>
                                 <select name="id_jurusans" id="id_jurusans" class="form-control mb-3">
                                     <option disabled selected>-------</option>
-                                    @foreach ($angkatan as $item)
-                                        <option value="{{ $item->id }}" required>{{ $item->tahun }}</option>
+                                    @foreach ($jurusans as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                     @endforeach
                                 </select>
                                 <label for="nama">Kelas</label>
                                 <select name="id_kelas" id="id_kelas" class="form-control mb-3">
                                     <option disabled selected>-------</option>
-                                    @foreach ($angkatan as $item)
-                                        <option value="{{ $item->id }}" required>{{ $item->tahun }}</option>
-                                    @endforeach
                                 </select>
                                 <p>(Tambahkan data angkatan terlebih dahulu)</p>
                                 <label for="nama">status</label>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Angkatan;
 use App\Models\Biaya;
 use App\Models\Instansi;
+use App\Models\Jurusan;
+use App\Models\Kelas;
 use App\Models\Murid;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,9 +26,11 @@ class MuridController extends Controller
     {
         $user = Auth::user();
         $instansi = Instansi::first();
-        $biaya = Biaya::with('angkatan')->get();
+        $angkatan = Angkatan::all();
+        $jurusanGrouped = Jurusan::with('angkatans')->get()->groupBy('id_angkatans');
+        $kelasGrouped = Kelas::with('jurusans')->get()->groupBy('id_jurusans');
         $users = User::where('role', 'WALI')->get();
-        return view('admin.murid.create', compact('user', 'users', 'biaya', 'instansi'));
+        return view('admin.murid.create', compact('user', 'users', 'angkatan', 'instansi', 'jurusanGrouped', 'kelasGrouped'));
     }
 
     /**
@@ -38,13 +42,11 @@ class MuridController extends Controller
             'name' => 'required | max:255 | string',
             'nisn' => 'required | max:10',
             'id_users' => 'nullable',
-            'jurusan' => 'required',
             'id_angkatans' => 'required',
+            'id_jurusans' => 'required',
+            'id_kelas' => 'required',
             'address' => 'required',
-            'kelas' => 'required',
         ]);
-
-
         Murid::create($data);
         return redirect()->route('admin.murid.index')->with('message', "Murid Berhasil Ditambahkan!!");
     }
@@ -69,10 +71,11 @@ class MuridController extends Controller
         $murid = Murid::find($id);
         $users =  User::where('role' , 'WALI')->get();
         $angkatan = Angkatan::all(); 
+        $jurusanGrouped = Jurusan::with('angkatans')->get()->groupBy('id_angkatans');
+        $kelasGrouped = Kelas::with('jurusans')->get()->groupBy('id_jurusans');
         $users =  User::where('role', 'WALI')->get();
-        $angkatan = Angkatan::all();
 
-        return view('admin.murid.edit', compact('murid', 'users', 'angkatan', 'instansi'));
+        return view('admin.murid.edit', compact('murid', 'users', 'angkatan', 'instansi', 'jurusanGrouped', 'kelasGrouped'));
     }
 
     /**
@@ -84,8 +87,9 @@ class MuridController extends Controller
             'name' => 'required|max:255|string',
             'nisn' => 'required|max:10',
             'id_users' => 'nullable',
-            'jurusan' => 'required',
+            'id_jurusans' => 'required',
             'id_angkatans' => 'required',
+            'id_kelas' => 'required',
             'kelas' => 'required',
             'address' => 'required',
         ]);

@@ -55,7 +55,10 @@ class JurusanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $angkatan = Angkatan::all(); 
+        $instansi = Instansi::first();
+        $jurusan = Jurusan::find($id);
+        return view('admin.jurusan.edit', compact('angkatan', 'instansi', 'jurusan'));
     }
 
     /**
@@ -63,7 +66,13 @@ class JurusanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            'id_angkatans' => 'required',
+            'nama' => 'required|max:255'
+        ]);
+        $jurusan = Jurusan::findOrFail($id); 
+        $jurusan->update($data);
+        return redirect()->route('admin.jurusan.index')->with('edit', "Jurusan Berhasil Di Update!!");
     }
 
     /**

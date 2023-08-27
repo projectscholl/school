@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="content">Nama Wali</label>
-                                <select name="id_users" id="id_users" class="form-control" >
+                                <select name="id_users" id="id_users" class="form-control">
                                     <option disabled selected>-----------</option>
                                     @foreach ($users as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -47,41 +47,67 @@
                                 @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <label for="content">Jurusan</label>
-                                <select name="jurusan" id="jurusan" class="form-control" required>
-                                    <option disabled selected>-----------</option>
-                                    @foreach (['teknik mesin', 'teknik komputer'] as $item)
-                                        <option value="{{ $item }}">{{ $item }}</option>
+                                <label for="id_angkatans">Masukkan angkatan</label>
+                                <select name="id_angkatans" id="id_angkatans" class="form-control">
+                                    <option value="">---------</option>
+                                    @foreach ($angkatan as $data)
+                                        <option value="{{ $data->id }}">{{ $data->tahun }}</option>
                                     @endforeach
                                 </select>
-                                @error('jurusan')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <label for="content">Kelas</label>
-                                <select name="kelas" id="kelas" class="form-control" required>
-                                    <option disabled selected>-----------</option>
-                                    @foreach (['10', '11', '12'] as $item)
-                                        <option value="{{ $item }}">{{ $item }}</option>
-                                    @endforeach
+                                <label for="id_jurusans">Masukkan Jurusan</label>
+                                <select name="id_jurusans" id="id_jurusans" class="form-control">
+
                                 </select>
-                                @error('kelas')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <label for="content">Angkatan</label>
-                                <select name="id_angkatans" id="id_angkatans" class="form-control" required>
-                                    <option disabled selected>-----------</option>
-                                    @foreach ($biaya as $item)
-                                        <option value="{{ $item->angkatan->id }}">{{ $item->angkatan->tahun }}</option>
-                                    @endforeach
+                                <label for="id_kelas">Masukkan kelas</label>
+                                <select name="id_kelas" id="id_kelas" class="form-control">
+
                                 </select>
-                                <p>(Silahkan membuat biaya terlebih dahulu)</p>
-                                @error('id_angkatans')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
+                                <script>
+                                    const angkatanSelect = document.getElementById('id_angkatans');
+                                    const jurusanSelect = document.getElementById('id_jurusans');
+                                    const kelasSelect = document.getElementById('id_kelas');
+
+                                    const jurusanGrouped = @json($jurusanGrouped);
+                                    const kelasGrouped = @json($kelasGrouped);
+
+                                    angkatanSelect.addEventListener('change', () => {
+                                        const angkatanId = angkatanSelect.value;
+                                        const jurusanOptions = jurusanGrouped[angkatanId] || [];
+
+                                        jurusanSelect.innerHTML = '<option value="">Pilih Jurusan</option>';
+
+                                        jurusanOptions.forEach(jurusan => {
+                                            const option = document.createElement('option');
+                                            option.value = jurusan.id;
+                                            option.textContent = jurusan.nama;
+                                            jurusanSelect.appendChild(option);
+                                        });
+
+                                        updateKelasOptions();
+                                    });
+
+                                    jurusanSelect.addEventListener('change', () => {
+                                        updateKelasOptions();
+                                    });
+
+                                    function updateKelasOptions() {
+                                        const jurusanId = jurusanSelect.value;
+                                        const kelasOptions = kelasGrouped[jurusanId] || [];
+
+                                        kelasSelect.innerHTML = '<option value="">Pilih Kelas</option>';
+
+                                        kelasOptions.forEach(kelas => {
+                                            const option = document.createElement('option');
+                                            option.value = kelas.id;
+                                            option.textContent = kelas.kelas;
+                                            kelasSelect.appendChild(option);
+                                        });
+                                    }
+                                </script>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="nama">Address</label>

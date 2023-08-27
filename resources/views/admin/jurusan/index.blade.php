@@ -12,12 +12,12 @@
             <div class="container-xxl flex-grow-1 container-p-y">
                 <!-- Bordered Table -->
                 <div class="card">
-                    {{-- @if (session('message'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>{{ session('message') }}</strong>
+                    @if (session('edit'))
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>{{ session('edit') }}</strong>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                    @endif --}}
+                    @endif
                     @if (session('pesan'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <strong>{{ session('pesan') }}!</strong>
@@ -55,9 +55,11 @@
                                                 <strong>{{ $item->nama }}</strong>
                                             </td>
                                             <td class="d-flex">
-                                                <a href="#"
-                                                    class="btn btn-warning me-2"><i class="bx bx-edit-alt"></i>
+                                                <a href="{{ route('admin.jurusan.edit', $item->id) }}"class="btn btn-warning me-2"><i class="bx bx-edit-alt"></i>
                                                 </a>
+                                                <form action="">
+                                                    <button class="btn btn-danger"><i class="bx bx-trash-alt"></i></button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
