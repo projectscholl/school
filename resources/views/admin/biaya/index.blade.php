@@ -57,8 +57,8 @@
                                     @foreach ($biaya as $key => $value)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $value->nama }}</td>
-                                            <td>{{ $value->angkatan->tahun }}</td>
+                                            <td>{{ $value->nama_biaya }}</td>
+                                            <td>{{ $value->angkatans->tahun }}</td>
                                             <td>{{ $user->name }}</td>
                                             <td class="d-flex">
 

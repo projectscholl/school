@@ -14,8 +14,7 @@ class Biaya extends Model
         'id_kelas',
         'id_jurusans',
         'nama_biaya',
-        'total_biaya',
-        'status',
+        'jenis_biaya',
     ];
 
     public function angkatans()
@@ -29,5 +28,10 @@ class Biaya extends Model
     public function murids()
     {
         return $this->belongsTo(Murid::class, 'id_biayas');
+    }
+
+    public function tagihans()
+    {
+        return $this->hasMany(Tagihan::class);
     }
 }

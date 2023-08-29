@@ -91,10 +91,11 @@
                     <span class="menu-header-text">DATA TRANSAKSI</span>
                 </li>
 
-                <li class="{{ Route::is('admin.tagihan.*', 'admin.bayar') ? $active : $nonActive }}">
-                    <a href="{{ route('admin.tagihan.index') }}" class="menu-link">
+
+                <li class="{{ Route::is('admin.biaya.*') ? $active : $nonActive }}">
+                    <a href="{{ route('admin.biaya.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-wallet-alt"></i>
-                        <div data-i18n="Without menu">Data Tagihan</div>
+                        <div data-i18n="Without menu">Data biaya</div>
                     </a>
                 </li>
                 <!--Data Pembayaran-->

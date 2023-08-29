@@ -17,9 +17,7 @@ return new class extends Migration
             $table->foreignId('id_kelas');
             $table->foreignId('id_jurusans');
             $table->string('nama_biaya');
-            $table->bigInteger('total_biaya');
-
-            $table->set('status', ['routine', 'optional']);
+            $table->set('jenis_biaya', ['routine', 'tidakRoutine']);
             $table->timestamps();
         });
     }
