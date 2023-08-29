@@ -43,14 +43,20 @@
                                         <td>{{ $item->kelas }}</td>
                                         <td>{{ $item->angkatans->tahun }}</td>
                                         <td>{{ $item->jurusans->nama }}</td>
-                                        <td>
-                                            <a href="{{ route('admin.kelas.edit', $item->id) }}" class="btn btn-warning"><i
+                                        <td class="d-flex">
+                                            <a href="{{ route('admin.kelas.edit', $item->id) }}" class="btn btn-warning me-2"><i
                                                     class='bx bx-edit-alt'></i></a>
+                                            <form action="#"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger show_confirm" type="submit"><i
+                                                        class="bx bx-trash"></i></button>
+                                            </form>
                                         </td>
-                                    </tr>
-                            </tbody>
+                                    </tr>  
                             @endforeach
-
+                        </tbody>
                         </table>
                     </div>
                 </div>
@@ -58,3 +64,36 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.27/sweetalert2.min.js"
+        integrity="sha512-mJQ9oQHzLM2zXe1cwiHmnMddNrmjv1YlaKZe1rM4J7q8JTnNn9UgeJVBV9jyV/lVGdXymVx6odhgwNZjQD8AqA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.slim.js"
+        integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $('.show_confirm').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            Swal.fire({
+                title: 'Yakin?',
+                text: "Kamu Akan Menghapus Kelas!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Iya, Hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                    Swal.fire(
+                        'Terhapus!',
+                        'Kamu telah menghapus Kelas!!.',
+                        'success'
+                    )
+                }
+            });
+        });
+    </script>
+@endpush

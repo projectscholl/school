@@ -18,6 +18,12 @@
                 </h4>
                 <div class="row">
                     <div class="col-md-12">
+                        @if (session('pesan'))
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>{{ session('pesan') }}!</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
                         <div class="card mb-3">
                             <div class="card-header">Instansi</div>
                             <div class="card-body">
@@ -76,11 +82,17 @@
                         </div>
 
                     </div>
+                    @if (session('message'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session('message') }}!</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
                     <div class="card mt-4">
                         <div class="card-header">Bank Account</div>
                         <div class="card-body">
                             <div class="">
-                                <form id="formAccountSettings" action="#" method="POST">
+                                <form id="formAccountSettings" action="{{ route('admin.instansi.store') }}" method="POST">
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
@@ -107,12 +119,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($banks as $bank)
                                             <tr>
                                                 <td>1</td>
-                                                <td>Asep</td>
-                                                <td>7784596325</td>
+                                                <td>{{ $bank->nama }}</td>
+                                                <td>{{ $bank->no_rekening }}</td>
                                                 <td class="d-flex">
-                                                    <a href="#" class="btn btn-warning me-2">Edit</a>
                                                     <form action="#" method="POST">
                                                         @csrf
                                                         @method('DELETE')
@@ -120,6 +132,7 @@
                                                     </form>
                                                 </td>
                                             </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

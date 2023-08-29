@@ -109,6 +109,6 @@ class MuridController extends Controller
     {
         $murid =  Murid::findOrFail($id);
         $murid->delete();
-        return redirect()->route('admin.murid.index')->with('delete', "Murid Berhasil Dihapus!!");
+        return redirect()->route('admin.murid.index');
     }
 }

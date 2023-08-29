@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bank;
 use App\Models\Instansi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -11,15 +12,26 @@ class InstansiController extends Controller
     public function index()
     {
         $instansi = Instansi::first();
-        return view('admin.instansi.index', compact('instansi'));
+        $banks = Bank::all();
+        return view('admin.instansi.index', compact('instansi', 'banks'));
     }
-
-
 
     public function edit(string $id)
     {
         $instansi = Instansi::find($id);
         return view('admin.instansi.index', compact('instansi'));
+    }
+    
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'nama' => 'required|max:255',
+            'no_rekening' => 'required|max:10',
+        ]);
+
+        Bank::create($data);
+
+        return redirect()->route('admin.instansi.index')->with('message', "Data Bank berhasil Di tambah!!");
     }
 
     public function update(Request $request, $id)

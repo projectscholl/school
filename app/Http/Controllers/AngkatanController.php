@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Angkatan;
 use App\Models\Instansi;
+use App\Models\Jurusan;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 
 class AngkatanController extends Controller
@@ -81,6 +83,15 @@ class AngkatanController extends Controller
      */
     public function destroy(string $id)
     {
-        
+        $angkatan = Angkatan::findOrFail($id);
+
+        Kelas::where('id_angkatans', $angkatan->id)->delete();
+        Kelas::where('id_jurusans', $angkatan->id)->delete();
+
+        Jurusan::where('id_angkatans', $angkatan->id)->delete();
+
+        $angkatan->delete();
+
+        return redirect()->route('admin.angkatan.index');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Angkatan;
 use App\Models\Instansi;
 use App\Models\Jurusan;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 
 class JurusanController extends Controller
@@ -80,6 +81,10 @@ class JurusanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $jurusan = Jurusan::findOrFail($id);
+        Kelas::where('id_jurusans', $jurusan->id)->delete();
+        $jurusan->delete();
+
+        return redirect()->route('admin.jurusan.index');
     }
 }
