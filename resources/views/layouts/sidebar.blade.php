@@ -8,7 +8,7 @@
         <div class="app-brand demo mb-3 ">
             <a class="app-brand-link" href="{{ route('welcome') }}">
 
-                <img src="{{ asset($instansi->logo) }}" alt="" width="30px">
+                <img src="{{ asset('/storage/image/' . $instansi->logo) }}" alt="" width="30px">
                 <span class="demo menu-text fw-bolder ms-2 fs-3">{{ $instansi->name }}</span>
             </a>
 
@@ -91,10 +91,11 @@
                     <span class="menu-header-text">DATA TRANSAKSI</span>
                 </li>
 
-                <li class="{{ Route::is('admin.tagihan.*', 'admin.bayar') ? $active : $nonActive }}">
-                    <a href="{{ route('admin.tagihan.index') }}" class="menu-link">
+
+                <li class="{{ Route::is('admin.biaya.*') ? $active : $nonActive }}">
+                    <a href="{{ route('admin.biaya.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-wallet-alt"></i>
-                        <div data-i18n="Without menu">Data Tagihan</div>
+                        <div data-i18n="Without menu">Data biaya</div>
                     </a>
                 </li>
                 <!--Data Pembayaran-->

@@ -10,16 +10,18 @@ class Biaya extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama',
         'id_angkatans',
-        'total_biaya',
+        'id_kelas',
+        'id_jurusans',
+        'nama_biaya',
+        'jenis_biaya',
     ];
 
-    public function angkatan()
+    public function angkatans()
     {
         return $this->belongsTo(Angkatan::class, 'id_angkatans');
     }
-    public function jurusan()
+    public function jurusans()
     {
         return $this->belongsTo(Jurusan::class, 'id_jurusans');
     }
@@ -28,4 +30,8 @@ class Biaya extends Model
         return $this->belongsTo(Murid::class, 'id_biayas');
     }
 
+    public function tagihans()
+    {
+        return $this->hasMany(Tagihan::class);
+    }
 }

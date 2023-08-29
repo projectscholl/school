@@ -10,23 +10,20 @@ class Tagihan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_murid',
-        'nama_biaya',
-        'nama_murid',
-        'desc',
-        'total_biaya',
-        'id_user',
+        'id_biayas',
         'start_date',
         'end_date',
+        'amount',
+        'status',
     ];
 
     public function murids()
     {
         return $this->hasMany(Murid::class, 'id_murid');
     }
-    public function biaya()
+    public function biayas()
     {
-        return $this->belongsTo(BIaya::class, 'id_biayas');
+        return $this->belongsTo(Biaya::class, 'id_biayas');
     }
     public function detailTagihan()
     {

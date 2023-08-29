@@ -37,6 +37,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -49,6 +51,7 @@ Route::middleware(['IsAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::put('profile', [AdminController::class, 'update'])->name('profile.update');
     Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
     Route::get('/kelas/create', [KelasController::class, 'create'])->name('kelas.create');
+    Route::get('/kelas/getJurusan/{id}', [KelasController::class, 'getJurusan'])->name('admin.getJurusan');
     Route::post('/kelas', [KelasController::class, 'store'])->name('kelas.store');
     Route::get('/kelas/edit/{id}/edit', [KelasController::class, 'edit'])->name('kelas.edit');
     Route::put('/kelas/{id}', [KelasController::class, 'update'])->name('kelas.update');
@@ -87,8 +90,4 @@ Route::middleware(['Wali'])->group(function () {
     Route::get('/tagihan/bayar', [TagihanWaliController::class, 'bayar'])->name('wali.tagihan.bayar');
     Route::get('/tagihan/result', [TagihanWaliController::class, 'result'])->name('wali.tagihan.result');
     Route::get('admin/spp/pdf/{id_users}', [PdfController::class, 'spp'])->name('admin.spp.pdf');
-});
-
-Route::get('logout', function () {
-    Auth::user()->logout();
 });

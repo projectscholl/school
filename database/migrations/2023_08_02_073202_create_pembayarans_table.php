@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_biayas');
+            $table->foreignId('id_tagihans');
+            $table->integer('amount');
+            $table->foreignId('id_users');
+            $table->string('payment_status');
+            $table->string('payment_links');
             $table->timestamps();
         });
     }

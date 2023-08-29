@@ -51,9 +51,11 @@ class InstansiController extends Controller
             if ($instansi->logo) {
                 Storage::delete($instansi->logo);
             }
-
-            $logoPath = $request->file('logo')->store('/storage/image');
-            $data['logo'] = $logoPath;
+            $content = $request->file('logo');
+            $imageName = time() . '.' . $content->extension();
+            $path = 'image/' . $imageName;
+            Storage::disk('public')->put($path, file_get_contents($content));
+            $data['logo'] = $imageName;
         }
 
         if ($request->hasFile('tanda_tangan')) {
