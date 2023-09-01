@@ -40,7 +40,7 @@ class BiayaController extends Controller
             'id_kelas' => 'required',
             'id_jurusans' => 'required',
             'nama_biaya' => 'required',
-            'jenis_biaya' => 'required',
+            'jenis_biaya' => 'required|in:routine,tidakRoutine',
         ]);
 
         $data2 = $request->validate([
@@ -53,17 +53,18 @@ class BiayaController extends Controller
         $biaya = Biaya::create($data);
 
 
-        $date = request()->input('start_date');
+        $dateStart = request()->input('start_date');
         $dateEnd =  request()->input('end_date');
         $amount = request()->input('amount');
+        // dd($dateStart);
 
         foreach ($amount as $index => $n) {
+
             $Tagihan = Tagihan::create([
                 'id_biayas' => $biaya->id,
                 'amount' => $n,
-                'start_date' => $date[$index],
+                'start_date' => $dateStart[$index],
                 'end_date' => $dateEnd[$index],
-                'status' => $request->status,
             ]);
         }
 
@@ -118,6 +119,10 @@ class BiayaController extends Controller
     {
         $biaya = Biaya::findOrFail($id);
         $biaya->delete();
-        return redirect()->route('admin.biaya.index')->with('delete', "Biaya Berhasil Dihapus!!");
+        if ($biaya) {
+            $tagihan = Tagihan::find($biaya->id);
+            $tagihan->delete();
+        }
+        return redirect()->route('admin.biaya.index');
     }
 }
