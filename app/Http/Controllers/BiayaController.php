@@ -39,7 +39,7 @@ class BiayaController extends Controller
             'id_angkatans' => 'required',
             'id_kelas' => 'required',
             'id_jurusans' => 'required',
-            'nama_biaya' => 'required',
+            'nama_biaya' => 'required|max:50',
             'jenis_biaya' => 'required|in:routine,tidakRoutine',
         ]);
 
@@ -118,11 +118,10 @@ class BiayaController extends Controller
     public function destroy(string $id)
     {
         $biaya = Biaya::findOrFail($id);
+        $tagihan = Tagihan::where('id_biayas', $id);
+        $tagihan->delete();
         $biaya->delete();
-        if ($biaya) {
-            $tagihan = Tagihan::find($biaya->id);
-            $tagihan->delete();
-        }
+
         return redirect()->route('admin.biaya.index');
     }
 }

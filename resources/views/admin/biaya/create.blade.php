@@ -368,7 +368,7 @@
                     routine[i].setAttribute('required', true);
                 }
                 for (i = 0; i < date1.length; i++) {
-                    date1[i].setAttribute('name', 'amount[]');
+                    date1[i].setAttribute('name', 'start_date[]');
                     date1[i].setAttribute('required', true);
                 }
                 for (i = 0; i < date2.length; i++) {
