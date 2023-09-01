@@ -6,8 +6,7 @@
         <x-navbar></x-navbar>
         <div class="content-wrapper">
             <div class="container-xxl flex-grow-1 container-p-y">
-                <div class="card">
-                    @if (session('edit'))
+                @if (session('edit'))
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
                             <strong>{{ session('edit') }}</strong>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -19,11 +18,11 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>                 
                     @endif
+                <div class="card">
                     <div class="card-header">
                         <h5>
                             Table Data Kelas</h5>
                         <a href="{{ route('admin.kelas.create') }}" class="btn btn-primary">Tambah kelas</a>
-
                     </div>
                     <div class="card-body">
                         <table class="table" id="myTable">

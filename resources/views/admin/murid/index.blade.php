@@ -42,10 +42,12 @@
                         </div>
                     @endif
                     <h5 class="card-header">Murid Tables</h5>
-                    <a href="{{ route('admin.murid.create') }}" class="btn btn-primary col-2 ms-4">Tambah Murid</a>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <a href="{{ route('admin.murid.create') }}" class="btn btn-primary col-2 ms-4">Tambah Murid</a>
+                    </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="col-md-10">
                                     <form action="">
                                         
@@ -60,9 +62,9 @@
                                         <th>No</th>
                                         <th>Nama Wali</th>
                                         <th>Nama</th>
+                                        <th>Angkatan</th>
                                         <th>Jurusan</th>
                                         <th>Kelas</th>
-                                        <th>Angkatan</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -80,9 +82,9 @@
                                                 <strong>{{ $item->User->name ?? 'Tidak ada wali murid' }}</strong>
                                             </td>
                                             <td><strong>{{ $item->name }}</strong></td>
+                                            <td>{{ $item->angkatans->tahun ?? 'Tidak ada Angkatan' }}</td>
                                             <td>{{ $item->jurusans->nama ?? 'Tidak ada Jurusan' }}</td>
                                             <td>{{ $item->kelas->kelas ?? 'Tidak ada Kelas' }}</td>
-                                            <td>{{ $item->angkatan->tahun ?? 'Tidak ada Angkatan' }}</td>
                                             <td class="d-flex">
 
                                                 <a href="{{ route('admin.murid.show', $item->id) }}"

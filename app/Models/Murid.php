@@ -16,7 +16,7 @@ class Murid extends Model
         return $this->belongsTo(User::class, 'id_users')->where('role', 'WALI');
     }
 
-    public function angkatan()
+    public function angkatans()
     {
         return $this->belongsTo(Angkatan::class, 'id_angkatans');
     }

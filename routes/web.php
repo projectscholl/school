@@ -84,8 +84,8 @@ Route::middleware(['Wali'])->group(function () {
     Route::get('/profile', [ProfileWaliController::class, 'edit'])->name('profile.edit');
     Route::get('wali/siswa', [WaliSiswaController::class, 'index'])->name('wali.siswa.index');
     Route::get('/tagihan', [TagihanWaliController::class, 'index'])->name('wali.tagihan.index');
-    Route::get('/tagihan/detail', [TagihanWaliController::class, 'detail'])->name('wali.tagihan.detail');
-    Route::get('/tagihan/pembayaran', [TagihanWaliController::class, 'pembayaran'])->name('wali.tagihan.pembayaran');
+    Route::get('/tagihan/detail/{Id}', [TagihanWaliController::class, 'detail'])->name('wali.tagihan.detail');
+    Route::get('/tagihan/pembayaran/{id}', [TagihanWaliController::class, 'pembayaran'])->name('wali.tagihan.pembayaran');
     Route::get('/tagihan/pilih_pembayaran', [TagihanWaliController::class, 'pilih_pembayaran'])->name('wali.tagihan.pilih_pembayaran');
     Route::get('/tagihan/bayar', [TagihanWaliController::class, 'bayar'])->name('wali.tagihan.bayar');
     Route::get('/tagihan/result', [TagihanWaliController::class, 'result'])->name('wali.tagihan.result');

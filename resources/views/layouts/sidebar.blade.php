@@ -5,12 +5,17 @@
         $nonActive = 'menu-item';
     @endphp
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" data-bg-class="bg-menu-theme">
-        <div class="app-brand demo mb-3 ">
-            <a class="app-brand-link" href="{{ route('welcome') }}">
-
-                <img src="{{ asset('/storage/image/' . $instansi->logo) }}" alt="" width="30px">
-                <span class="demo menu-text fw-bolder ms-2 fs-3">{{ $instansi->name }}</span>
-            </a>
+        <div class="app-brand demo mb-3" style="height: 100px;">
+            <div class="d-flex flex-column">
+                <div class="d-flex align-items-center justify-content-center">
+                    <a class="app-brand-link" href="{{ route('welcome') }}">
+                        <img src="{{ asset('/storage/image/' . $instansi->logo) }}" alt="" width="60px" height="50px">
+                    </a>
+                </div>
+                <div class="mt-2">
+                    <span class="demo menu-text fw-bolder ms-2 fs-3">{{ $instansi->name }}</span>
+                </div>
+            </div>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                 <i class="bx bx-chevron-left bx-sm align-middle"></i>

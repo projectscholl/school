@@ -18,7 +18,7 @@
                             <div class="card-body">
                                 <div>NAMA :  {{ $murids->name }} </div>
                                 <hr>
-                                <div>ANGKATAN : {{ $murids->angkatan->tahun ?? 'Tidak ada Angkatan' }} </div>
+                                <div>ANGKATAN : {{ $murids->angkatans->tahun ?? 'Tidak ada Angkatan' }} </div>
                                 <hr>
                                 <div>JURUSAN : {{ $murids->jurusans->nama }} </div>
                                 <hr>

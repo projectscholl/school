@@ -56,7 +56,7 @@
                                     <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td>July</td>
+                                            <td>Juli</td>
                                             <td><input type="amount" class="form-control" name="amount[]"></td>
                                             <td><input type="date" name="start_date[]" id=""
                                                     class="form-control">
@@ -116,7 +116,7 @@
                                         </tr>
                                         <tr>
                                             <td>7</td>
-                                            <td>January</td>
+                                            <td>Januari</td>
                                             <td><input type="amount" class="form-control" name="amount[]"></td>
                                             <td><input type="date" name="start_date[]" id=""
                                                     class="form-control">
@@ -127,7 +127,7 @@
                                         </tr>
                                         <tr>
                                             <td>8</td>
-                                            <td>Febuary</td>
+                                            <td>Februari</td>
                                             <td><input type="amount" class="form-control" name="amount[]"></td>
                                             <td><input type="date" name="start_date[]" id=""
                                                     class="form-control">
@@ -160,7 +160,7 @@
                                         </tr>
                                         <tr>
                                             <td>11</td>
-                                            <td>Mey</td>
+                                            <td>Mei</td>
                                             <td><input type="number" class="form-control" name="amount[]"></td>
                                             <td><input type="date" name="start_date[]" id=""
                                                     class="form-control">
@@ -171,7 +171,7 @@
                                         </tr>
                                         <tr>
                                             <td>12</td>
-                                            <td>Juny</td>
+                                            <td>Juni</td>
                                             <td><input type="amount" class="form-control" name="amount[]"></td>
                                             <td><input type="date" name="start_date[]" id=""
                                                     class="form-control">
@@ -186,12 +186,12 @@
                             <!--Input date pembayaran tidak routine-->
                             <div class="d-none" id="date">
                                 <div class="form-group mb-3">
-                                    <label for="start_date">Tanggal mulai</label>
+                                    <label for="start_date">Tanggal Mulai</label>
                                     <input type="date" class="form-control" name="start_date[]" id="start_date"
                                         placeholder="Masukkan Nama Biaya">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="end_date">Tanggal mulai</label>
+                                    <label for="end_date">Tanggal Berakhir</label>
                                     <input type="date" class="form-control" name="end_date[]" id="end_date"
                                         placeholder="">
                                 </div>

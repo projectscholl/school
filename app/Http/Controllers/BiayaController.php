@@ -117,6 +117,7 @@ class BiayaController extends Controller
     public function destroy(string $id)
     {
         $biaya = Biaya::findOrFail($id);
+        Tagihan::where('id_biayas', $biaya->id);
         $biaya->delete();
         return redirect()->route('admin.biaya.index')->with('delete', "Biaya Berhasil Dihapus!!");
     }

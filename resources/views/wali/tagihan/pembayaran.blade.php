@@ -22,77 +22,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Juni</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>July</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Agustus</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Oktober</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>November</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Desember</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Januari</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>February</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Maret</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Mei</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                            </tbody>
+                                @foreach ($bulan as $bulans)
+                                    <tr>
+                                        <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $bulans->start_date)->format('F') }}</td>
+                                        <td>Rp {{ number_format($bulans->amount) }}</td>
+                                        <td>
+                                            <input type="checkbox" data-select name="selected_months[]" value="{{ $bulans->id }}">
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>                            
                         </table>
                         <a href="{{ route('wali.tagihan.pilih_pembayaran') }}" class="btn btn-success mt-3 w-25">Pilih Pembayaran</a>
                     </div>

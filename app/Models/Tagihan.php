@@ -17,10 +17,7 @@ class Tagihan extends Model
         'status',
     ];
 
-    public function murids()
-    {
-        return $this->hasMany(Murid::class, 'id_murid');
-    }
+    
     public function biayas()
     {
         return $this->belongsTo(Biaya::class, 'id_biayas');
