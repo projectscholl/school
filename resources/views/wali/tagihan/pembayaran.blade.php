@@ -22,18 +22,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($bulan as $bulans)
-                                    <tr>
-                                        <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $bulans->start_date)->format('F') }}</td>
-                                        <td>Rp {{ number_format($bulans->amount) }}</td>
-                                        <td>
-                                            <input type="checkbox" data-select name="selected_months[]" value="{{ $bulans->id }}">
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                <form action="" method="POST">
+                                    @foreach ($bulan as $bulans)
+                                        <tr>
+                                            <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $bulans->start_date)->format('F') }}</td>
+                                            <td>Rp {{ number_format($bulans->amount) }}</td>
+                                            <td>
+                                                <input type="checkbox" data-select name="selected_months[]" value="{{ $bulans->id }}">
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </form>
                             </tbody>                            
                         </table>
-                        <a href="{{ route('wali.tagihan.pilih_pembayaran') }}" class="btn btn-success mt-3 w-25">Pilih Pembayaran</a>
+                        <a href="{{ route('wali.tagihan.pilih_pembayaran', ['id' => $tagihan->id]) }}" class="btn btn-success mt-3 w-25">Pilih Pembayaran</a>
                     </div>
                 </div>
             </div>

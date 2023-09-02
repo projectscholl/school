@@ -34,13 +34,16 @@ class TagihanWaliController extends Controller
     public function pembayaran(string $id)
     {
         $instansi = Instansi::first();
+        $tagihan = Biaya::find($id);
         $bulan = Tagihan::where('id_biayas', $id)->get();
-        return view('wali.tagihan.pembayaran', compact('instansi', 'bulan'));
+        return view('wali.tagihan.pembayaran', compact('instansi', 'bulan', 'tagihan'));
     }
-    public function pilih_pembayaran()
+    public function pilih_pembayaran(string $id)
     {
         $instansi = Instansi::first();
-        return view('wali.tagihan.pilih_pembayaran', compact('instansi'));
+        $tagihan = Biaya::find($id);
+        $user = Auth::user();
+        return view('wali.tagihan.pilih_pembayaran', compact('instansi', 'user', 'tagihan'));
     }
     public function bayar()
     {

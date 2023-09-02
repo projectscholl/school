@@ -13,7 +13,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
                 <!-- Bordered Table -->
                 <div class="card">
-                    <h5 class="card-header mb-4">Tagihan </h5>
+                    <h5 class="card-header mb-4">Tagihan <strong>{{ $tagihan->murids->name }}</strong></h5>
                     <div class="card-body">
                         <div>NAMA : {{ $tagihan->murids->name }}</div>
                         <hr>
