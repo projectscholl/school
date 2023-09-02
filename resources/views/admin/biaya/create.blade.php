@@ -7,14 +7,13 @@
         <!-- Navbar -->
         <x-navbar></x-navbar>
         <div class="content-wrapper">
-
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
                 <!-- Bordered Table -->
                 <div class="card">
                     <h5 class="card-header">Tambah Biaya</h5>
                     <div class="card-body">
-                        @if ($errors->any())
+                        {{-- @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -22,23 +21,32 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        @endif
+                        @endif --}}
                         <form action="{{ route('admin.biaya.store') }}" method="POST">
                             @csrf
 
                             <div class="form-group mb-3">
                                 <label for="nama">Nama Biaya</label>
-                                <input type="text" class="form-control" name="nama_biaya" id="nama_biaya"
-                                    placeholder="Masukkan Nama Biaya">
+                                <input type="text"
+                                    class="form-control @error('nama_biaya')
+                                is-invalid
+                            @enderror"
+                                    name="nama_biaya" id="nama_biaya" placeholder="Masukkan Nama Biaya"
+                                    value="{{ old('nama_biaya') }}" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="">Jenis Biaya</label>
-                                <select name="jenis_biaya" id="status" class="form-control mb-3"
-                                    onchange="enableBrand(this)">
-                                    <option disabled selected>-------</option>
-                                    <option value="routine">Routine</option>
+                                <select name="jenis_biaya" id="status"
+                                    class="form-control @error('jenis_biaya')
+                                    is-invalid 
+                                @enderror"
+                                    onchange="enableBrand(this)" required>
+                                    <option selected>--Pilih---</option>
+                                    <option value="routine">Routine
+                                    </option>
                                     <option value="tidakRoutine">Tidak routine</option>
                                 </select>
+                                <span class="fs">--Harus memelih jenis biaya--</span>
                             </div>
                             <!--table pembayaran perbulan-->
                             <div class="form-group mb-3">
@@ -53,158 +61,219 @@
                                         </tr>
                                     </thead>
 
+                                    {{-- this input yang routine --}}
                                     <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td>Juli</td>
-                                            <td><input type="amount" class="form-control" name="amount[]"></td>
-                                            <td><input type="date" name="start_date[]" id=""
-                                                    class="form-control">
+                                            <td>July</td>
+                                            <td><input type="number"
+                                                    class="form-control @error('amount[]')
+                                                    is-invalid
+                                                @enderror tess routine"
+                                                    name="amount[]" value="{{ old('amount[]') }}"></td>
+                                            <td><input type="date" name="start_date[]" class="form-control tess date1">
                                             </td>
-                                            <td><input type="date" name="end_date[]" id="" class="form-control">
+                                            <td><input type="date" name="end_date[]" class="form-control tess date2">
+
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
                                             <td>Agustus</td>
-                                            <td><input type="amount" class="form-control" name="amount[]"></td>
-                                            <td><input type="date" name="start_date[]" id=""
-                                                    class="form-control">
+                                            <td><input type="number"
+                                                    class="form-control @error('amount[]')
+                                                is-invalid
+                                            @enderror tess routine"
+                                                    name="amount[]" value="{{ old('amount[]') }}"></td>
+                                            <td><input type="date" name="start_date[]" class="form-control tess date1">
                                             </td>
-                                            <td><input type="date" name="end_date[]" id="" class="form-control">
+                                            <td><input type="date" name="end_date[]" class="form-control tess date2">
+
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
                                             <td>September</td>
-                                            <td><input type="amount" class="form-control" name="amount[]"></td>
-                                            <td><input type="date" name="start_date[]" id=""
-                                                    class="form-control">
+                                            <td><input type="number"
+                                                    class="form-control @error('amount[]')
+                                                is-invalid
+                                            @enderror tess routine"
+                                                    name="amount[]" value="{{ old('amount[]') }}"></td>
+                                            <td><input type="date" name="start_date[]" class="form-control tess date1">
                                             </td>
-                                            <td><input type="date" name="end_date[]" id="" class="form-control">
+                                            <td><input type="date" name="end_date[]" class="form-control tess date2">
+
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>4</td>
                                             <td>Oktober</td>
-                                            <td><input type="amount" class="form-control" name="amount[]"></td>
-                                            <td><input type="date" name="start_date[]" id=""
-                                                    class="form-control">
+                                            <td><input type="number"
+                                                    class="form-control @error('amount[]')
+                                                is-invalid
+                                            @enderror tess routine"
+                                                    name="amount[]" value="{{ old('amount[]') }}"></td>
+                                            <td><input type="date" name="start_date[]" class="form-control tess date1">
                                             </td>
-                                            <td><input type="date" name="end_date[]" id="" class="form-control">
+                                            <td><input type="date" name="end_date[]" class="form-control tess date2">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>5</td>
                                             <td>November</td>
-                                            <td><input type="amount" class="form-control" name="amount[]"></td>
-                                            <td><input type="date" name="start_date[]" id=""
-                                                    class="form-control">
+                                            <td><input type="number"
+                                                    class="form-control @error('amount[]')
+                                                is-invalid
+                                            @enderror tess routine"
+                                                    name="amount[]" value="{{ old('amount[]') }}"></td>
+                                            <td><input type="date" name="start_date[]" class="form-control tess date1">
                                             </td>
-                                            <td><input type="date" name="end_date[]" id="" class="form-control">
+                                            <td><input type="date" name="end_date[]" class="form-control tess date2">
+
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>6</td>
                                             <td>Desember</td>
-                                            <td><input type="amount" class="form-control" name="amount[]"></td>
-                                            <td><input type="date" name="start_date[]" id=""
-                                                    class="form-control">
+                                            <td><input type="number"
+                                                    class="form-control @error('amount[]')
+                                                is-invalid
+                                            @enderror tess routine"
+                                                    name="amount[]" value="{{ old('amount[]') }}"></td>
+                                            <td><input type="date" name="start_date[]" class="form-control tess date1">
                                             </td>
-                                            <td><input type="date" name="end_date[]" id="" class="form-control">
+                                            <td><input type="date" name="end_date[]" class="form-control tess date2">
+
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>7</td>
-                                            <td>Januari</td>
-                                            <td><input type="amount" class="form-control" name="amount[]"></td>
-                                            <td><input type="date" name="start_date[]" id=""
-                                                    class="form-control">
+                                            <td>January</td>
+                                            <td><input type="number"
+                                                    class="form-control @error('amount[]')
+                                                is-invalid
+                                            @enderror tess routine"
+                                                    name="amount[]" value="{{ old('amount[]') }}"></td>
+                                            <td><input type="date" name="start_date[]" class="form-control tess date1">
                                             </td>
-                                            <td><input type="date" name="end_date[]" id=""
-                                                    class="form-control">
+                                            <td><input type="date" name="end_date[]" class="form-control tess date2">
+
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>8</td>
-                                            <td>Februari</td>
-                                            <td><input type="amount" class="form-control" name="amount[]"></td>
-                                            <td><input type="date" name="start_date[]" id=""
-                                                    class="form-control">
+                                            <td>Febuary</td>
+                                            <td><input type="number"
+                                                    class="form-control @error('amount[]')
+                                                is-invalid
+                                            @enderror tess routine"
+                                                    name="amount[]" value="{{ old('amount[]') }}"></td>
+                                            <td><input type="date" name="start_date[]"
+                                                    class="form-control tess date1">
                                             </td>
-                                            <td><input type="date" name="end_date[]" id=""
-                                                    class="form-control">
+                                            <td><input type="date" name="end_date[]" class="form-control tess date2">
+
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>9</td>
                                             <td>Maret</td>
-                                            <td><input type="amount" class="form-control" name="amount[]"></td>
-                                            <td><input type="date" name="start_date[]" id=""
-                                                    class="form-control">
+                                            <td><input type="number"
+                                                    class="form-control @error('amount[]')
+                                                is-invalid
+                                            @enderror tess routine"
+                                                    name="amount[]" value="{{ old('amount[]') }}"></td>
+                                            <td><input type="date" name="start_date[]"
+                                                    class="form-control tess date1">
                                             </td>
-                                            <td><input type="date" name="end_date[]" id=""
-                                                    class="form-control">
+                                            <td><input type="date" name="end_date[]" class="form-control tess date2">
+
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>10</td>
                                             <td>April</td>
-                                            <td><input type="amount" class="form-control" name="amount[]"></td>
-                                            <td><input type="date" name="start_date[]" id=""
-                                                    class="form-control">
+                                            <td><input type="number"
+                                                    class="form-control @error('amount[]')
+                                                is-invalid
+                                            @enderror tess routine"
+                                                    name="amount[]" value="{{ old('amount[]') }}"></td>
+                                            <td><input type="date" name="start_date[]"
+                                                    class="form-control tess date1">
                                             </td>
-                                            <td><input type="date" name="end_date[]" id=""
-                                                    class="form-control">
+                                            <td><input type="date" name="end_date[]" class="form-control tess date2">
+
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>11</td>
-                                            <td>Mei</td>
-                                            <td><input type="number" class="form-control" name="amount[]"></td>
-                                            <td><input type="date" name="start_date[]" id=""
-                                                    class="form-control">
+                                            <td>Mey</td>
+                                            <td><input type="number"
+                                                    class="form-control @error('amount[]')
+                                                is-invalid
+                                            @enderror tess routine"
+                                                    name="amount[]" value="{{ old('amount[]') }}"></td>
+                                            <td><input type="date" name="start_date[]"
+                                                    class="form-control tess date1">
                                             </td>
-                                            <td><input type="date" name="end_date[]" id=""
-                                                    class="form-control">
+                                            <td><input type="date" name="end_date[]" class="form-control tess date2">
+
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>12</td>
-                                            <td>Juni</td>
-                                            <td><input type="amount" class="form-control" name="amount[]"></td>
-                                            <td><input type="date" name="start_date[]" id=""
-                                                    class="form-control">
+                                            <td>Juny</td>
+                                            <td><input type="number"
+                                                    class="form-control @error('amount[]')
+                                                is-invalid
+                                            @enderror tess routine"
+                                                    name="amount[]" value="{{ old('amount[]') }}"></td>
+                                            <td><input type="date" name="start_date[]"
+                                                    class="form-control tess date1">
                                             </td>
-                                            <td><input type="date" name="end_date[]" id=""
-                                                    class="form-control">
+                                            <td><input type="date" name="end_date[]" class="form-control tess date2">
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <!--Input date pembayaran tidak routine-->
+
                             <div class="d-none" id="date">
                                 <div class="form-group mb-3">
-                                    <label for="start_date">Tanggal Mulai</label>
-                                    <input type="date" class="form-control" name="start_date[]" id="start_date"
-                                        placeholder="Masukkan Nama Biaya">
+                                    <label for="mount">Total biaya</label>
+                                    <input type="number"
+                                        class="form-control @error('amount[]')
+                                        is-invalid
+                                    @enderror optional notroutine"
+                                        name="amount[]" placeholder="Masukkan Nama Biaya" value="{{ old('amount[]') }}">
+                                    @error('amount[]')
+                                        <div id="validationServer03Feedback" class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="end_date">Tanggal Berakhir</label>
-                                    <input type="date" class="form-control" name="end_date[]" id="end_date"
-                                        placeholder="">
+                                    <label for="start_date">Tanggal mulai</label>
+                                    <input type="date" class="form-control optional time1" name="start_date[]"
+                                        id="time" placeholder="Masukkan Nama Biaya">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="start_date">Total biaya</label>
-                                    <input type="number" class="form-control" name="mount[]" id="mount"
-                                        placeholder="Masukkan Nama Biaya">
+                                    <label for="end_date">Tanggal tenggat</label>
+                                    <input type="date" class="form-control optional time2" name="end_date[]"
+                                        id="time" placeholder="">
                                 </div>
+
                             </div>
-                            <div class="form-group mb-3">
+                            <div class="form-group
+                                        mb-3">
                                 <label for="id_angkatans">Masukkan angkatan</label>
-                                <select name="id_angkatans" id="id_angkatans" class="form-control">
-                                    <option value="">---------</option>
+                                <select name="id_angkatans" id="id_angkatans"
+                                    class="form-control @error('id_angkatans')
+                                    is-invalid
+                                @enderror"
+                                    required>
+                                    <option value="">--Pilih--</option>
                                     @foreach ($angkatan as $data)
                                         <option value="{{ $data->id }}">{{ $data->tahun }}</option>
                                     @endforeach
@@ -212,12 +281,20 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="id_jurusans">Masukkan Jurusan</label>
-                                <select name="id_jurusans" id="id_jurusans" class="form-control">
+                                <select name="id_jurusans" id="id_jurusans"
+                                    class="form-control @error('id_jurusans')
+                                    is-invalid
+                                @enderror"
+                                    required>
                                 </select>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="id_kelas">Masukkan kelas</label>
-                                <select name="id_kelas" id="id_kelas" class="form-control">
+                                <select name="id_kelas" id="id_kelas"
+                                    class="form-control @error('id_kelas')
+                                    is-invalid
+                                @enderror"
+                                    required>
 
                                 </select>
                                 <script>
@@ -275,16 +352,64 @@
 @push('scripts')
     <script type="text/javascript">
         function enableBrand(status) {
-            console.log(status.value);
             if (status.value == "routine") {
                 document.getElementById('result').classList.remove('d-none');
                 document.getElementById('date').classList.add('d-none');
-
+                const routine = document.querySelectorAll('.routine');
+                const date1 = document.querySelectorAll('.date1');
+                const date2 = document.querySelectorAll('.date2');
+                const optional = document.querySelectorAll('.optional');
+                optional.forEach(function(optionals) {
+                    optionals.removeAttribute('name');
+                    optionals.removeAttribute('required');
+                });
+                for (i = 0; i < routine.length; i++) {
+                    routine[i].setAttribute('name', 'amount[]');
+                    routine[i].setAttribute('required', true);
+                }
+                for (i = 0; i < date1.length; i++) {
+                    date1[i].setAttribute('name', 'start_date[]');
+                    date1[i].setAttribute('required', true);
+                }
+                for (i = 0; i < date2.length; i++) {
+                    date2[i].setAttribute('name', 'end_date[]');
+                    date2[i].setAttribute('required', true);
+                }
             } else if (status.value == "tidakRoutine") {
                 document.getElementById('result').classList.add('d-none');
                 document.getElementById('date').classList.remove('d-none');
+                const optionals = document.querySelector(".optional");
+                const notRoutine = document.querySelectorAll(".notroutine");
+                const time1 = document.querySelectorAll(".time1");
+                const time2 = document.querySelectorAll(".time2");
+                const collections = document.querySelectorAll(".tess");
+                collections.forEach(function(collection) {
+                    collection.removeAttribute('name');
+                    collection.removeAttribute('required');
+                });
+                for (i = 0; i < notRoutine.length; i++) {
+                    notRoutine[i].setAttribute('name', 'amount[]');
+                    notRoutine[i].setAttribute('required', true);
+                }
+                for (i = 0; i < time1.length; i++) {
+                    time1[i].setAttribute('name', 'start_date[]');
+                    time1[i].setAttribute('required', true);
+                }
+                for (i = 0; i < time2.length; i++) {
+                    time2[i].setAttribute('name', 'end_date[]');
+                    time2[i].setAttribute('required', true);
+                }
 
             } else {
+                const collections = document.querySelectorAll(".tess");
+                const optional = document.querySelectorAll('.optional');
+                collections.forEach(function(collection) {
+                    collection.removeAttribute('required');
+                });
+                optional.forEach(function(optionals) {
+                    optionals.removeAttribute('required');
+                });
+
                 document.getElementById('result').classList.add('d-none');
                 document.getElementById('date').classList.add('d-none');
 
