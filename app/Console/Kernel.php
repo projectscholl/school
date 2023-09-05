@@ -18,7 +18,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        $schedule->command('notification:cron')->everyMinute();;
+        $schedule->command('notification:cron')->everyFiveSeconds();;
     }
 
     /**

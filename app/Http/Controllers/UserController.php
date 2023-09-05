@@ -39,7 +39,7 @@ class UserController extends Controller
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users,email',
             'telepon' => 'required',
-            'role' => 'required|in:ADMIN,WALI',
+            'role' => 'required|in:ADMIN',
             'password' => 'required',
             'password_confirm' => 'required|same:password',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',

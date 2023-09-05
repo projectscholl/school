@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('id_biayas');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->string('mounth')->nullable();
             $table->integer('amount');
             $table->string('status')->default('BELUM');
             $table->timestamps();

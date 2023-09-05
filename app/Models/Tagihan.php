@@ -14,6 +14,7 @@ class Tagihan extends Model
         'id_biayas',
         'start_date',
         'end_date',
+        'mounth',
         'amount',
         'status',
     ];
