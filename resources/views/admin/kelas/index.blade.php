@@ -45,7 +45,7 @@
                                         <td class="d-flex">
                                             <a href="{{ route('admin.kelas.edit', $item->id) }}" class="btn btn-warning me-2"><i
                                                     class='bx bx-edit-alt'></i></a>
-                                            <form action="#"
+                                            <form action="{{ route('admin.kelas.destroy', $item->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')

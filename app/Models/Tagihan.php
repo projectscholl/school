@@ -18,7 +18,6 @@ class Tagihan extends Model
         'status',
     ];
 
-    
     public function biayas()
     {
         return $this->belongsTo(Biaya::class, 'id_biayas');

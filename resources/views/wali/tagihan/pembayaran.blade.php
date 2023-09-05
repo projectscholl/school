@@ -21,21 +21,34 @@
                                     <th class="text-white d-flex">Pilih<input class="ms-2" type="checkbox" id="selectAll"></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <form action="" method="POST">
+                            <form action="#" method="POST">
+                                @csrf
+                                <tbody>
                                     @foreach ($bulan as $bulans)
                                         <tr>
                                             <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $bulans->start_date)->format('F') }}</td>
                                             <td>Rp {{ number_format($bulans->amount) }}</td>
                                             <td>
-                                                <input type="checkbox" data-select name="selected_months[]" value="{{ $bulans->id }}">
+                                                <input type="checkbox" data-select name="amount[]" value="{{ $bulans->id }}" required>
                                             </td>
                                         </tr>
                                     @endforeach
-                                </form>
-                            </tbody>                            
+                                </tbody>
                         </table>
-                        <a href="{{ route('wali.tagihan.pilih_pembayaran', ['id' => $tagihan->id]) }}" class="btn btn-success mt-3 w-25">Pilih Pembayaran</a>
+                            <button type="submit" class="btn btn-success mt-3 w-25">Pilih Pembayaran</button>
+                            </form>
+                            
+                            @if ($errors->any())
+                                <div class="alert alert-danger alert-dismissible fade show mt-3">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </ul>
+                                </div>
+                            @endif
+                            
                     </div>
                 </div>
             </div>

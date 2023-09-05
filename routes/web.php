@@ -12,6 +12,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MuridController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PembayaranWaliController;
 use App\Http\Controllers\ProfileWaliController;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\TagihanWaliController;
@@ -55,6 +56,7 @@ Route::middleware(['IsAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::post('/kelas', [KelasController::class, 'store'])->name('kelas.store');
     Route::get('/kelas/edit/{id}/edit', [KelasController::class, 'edit'])->name('kelas.edit');
     Route::put('/kelas/{id}', [KelasController::class, 'update'])->name('kelas.update');
+    Route::delete('/kelas/{id}', [KelasController::class, 'destroy'])->name('kelas.destroy');
     Route::resource('/instansi', BankController::class);
     Route::resource('/jurusan', JurusanController::class);
     Route::resource('/user', UserController::class);
@@ -85,7 +87,8 @@ Route::middleware(['Wali'])->group(function () {
     Route::get('wali/siswa', [WaliSiswaController::class, 'index'])->name('wali.siswa.index');
     Route::get('/tagihan', [TagihanWaliController::class, 'index'])->name('wali.tagihan.index');
     Route::get('/tagihan/detail/{Id}', [TagihanWaliController::class, 'detail'])->name('wali.tagihan.detail');
-    Route::get('/tagihan/pembayaran/{id}', [TagihanWaliController::class, 'pembayaran'])->name('wali.tagihan.pembayaran');
+    Route::get('/tagihan/pembayaran/{id}', [PembayaranWaliController::class, 'index'])->name('wali.tagihan.pembayaran');
+    Route::post('/tagihan/pembayaran/store', [PembayaranWaliController::class, 'store'])->name('wali.tagihan.pembayaran.store');
     Route::get('/tagihan/pilih_pembayaran/{id}', [TagihanWaliController::class, 'pilih_pembayaran'])->name('wali.tagihan.pilih_pembayaran');
     Route::get('/tagihan/bayar', [TagihanWaliController::class, 'bayar'])->name('wali.tagihan.bayar');
     Route::get('/tagihan/result', [TagihanWaliController::class, 'result'])->name('wali.tagihan.result');

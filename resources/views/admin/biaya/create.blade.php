@@ -46,7 +46,7 @@
                                     </option>
                                     <option value="tidakRoutine">Tidak routine</option>
                                 </select>
-                                <span class="fs">--Harus memelih jenis biaya--</span>
+                                <span class="fs">--Harus memilih jenis biaya--</span>
                             </div>
                             <!--table pembayaran perbulan-->
                             <div class="form-group mb-3">
@@ -65,7 +65,7 @@
                                     <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td>July</td>
+                                            <td>Juli</td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
                                                     is-invalid
@@ -148,7 +148,7 @@
                                         </tr>
                                         <tr>
                                             <td>7</td>
-                                            <td>January</td>
+                                            <td>Januari</td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
@@ -162,7 +162,7 @@
                                         </tr>
                                         <tr>
                                             <td>8</td>
-                                            <td>Febuary</td>
+                                            <td>Febuari</td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
@@ -207,7 +207,7 @@
                                         </tr>
                                         <tr>
                                             <td>11</td>
-                                            <td>Mey</td>
+                                            <td>Mei</td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
@@ -222,7 +222,7 @@
                                         </tr>
                                         <tr>
                                             <td>12</td>
-                                            <td>Juny</td>
+                                            <td>Juni</td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
                                                 is-invalid

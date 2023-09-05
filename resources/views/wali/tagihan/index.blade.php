@@ -29,17 +29,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($tagihan as $index => $tagihans)
-                                        <tr>
-                                            <td>{{ $index + 1 }}</td>
-                                            <td>{{ $tagihans->murids->name }}</td>
-                                            <td>{{ $tagihans->angkatans->tahun }}</td>
-                                            <td>{{ $tagihans->jurusans->nama }}</td>
-                                            <td>{{ $tagihans->kelas->kelas }}</td>
-                                            <td class="d-flex">
-                                                <a href="{{ route('wali.tagihan.detail', $tagihans->id) }}" class="btn btn-primary me-2">Detail</a>
-                                            </td>
-                                        </tr>
+                                        @foreach ($biayaItems as $tagihans)
+                                            @foreach ($tagihans->murids as $index => $murid)
+                                                <tr>
+                                                    <td>{{ $index + 1 }}</td>
+                                                    <td>
+                                                        {{ $murid->name }}<br>
+                                                    </td>
+                                                    <td>{{ $tagihans->angkatans->tahun }}</td>
+                                                    <td>{{ $tagihans->jurusans->nama }}</td>
+                                                    <td>{{ $tagihans->kelas->kelas }}</td>
+                                                    <td class="d-flex">
+                                                        <a href="{{ route('wali.tagihan.detail', $tagihans->id).'?idmurid='.$murid->id }}" class="btn btn-primary me-2">Detail</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         @endforeach
                                     </tbody>
                                 </table>

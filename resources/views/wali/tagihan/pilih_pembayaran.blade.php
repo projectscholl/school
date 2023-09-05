@@ -27,19 +27,19 @@
                                 </thead>
                                 <tbody class="table-border-bottom-0">
                                     <tr>
-                                        <td>Nama Murid : <strong>{{ $tagihan->murids->name }}</strong></td>
+                                        <td>Nama Murid : <strong>{{ $murid->name }}</strong></td>
                                     </tr>
                                     <tr>
-                                        <td>Nama Wali Murid : <strong>{{ $tagihan->murids->User->name }}</strong></td>
+                                        <td>Nama Wali Murid : <strong>{{ $murid->User->name }}</strong></td>
                                     </tr>
                                     <tr>
-                                        <td>Angkatan : <strong>{{ $tagihan->murids->angkatans->tahun }}</strong></td>
+                                        <td>Angkatan : <strong>{{ $murid->angkatans->tahun }}</strong></td>
                                     </tr>
                                     <tr>
-                                        <td>Jurusan : <strong> {{ $tagihan->murids->jurusans->nama }}</strong></td>
+                                        <td>Jurusan : <strong> {{ $murid->jurusans->nama }}</strong></td>
                                     </tr>
                                     <tr>
-                                        <td>Kelas : <strong>{{ $tagihan->murids->kelas->kelas }}</strong></td>
+                                        <td>Kelas : <strong>{{ $murid->kelas->kelas }}</strong></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -54,7 +54,7 @@
                                         <td>Status Tagihan : <strong>Belum Dibayar</strong></td>
                                     </tr> --}}
                                     <tr>
-                                        <td>Total Tagihan : <strong class="">100.000</strong></td>
+                                        <td>Total Dibayar : <strong class="">Rp 100.000</strong></td>
                                     </tr>
                                 </tbody>
                             </table>

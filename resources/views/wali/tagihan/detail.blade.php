@@ -13,15 +13,15 @@
             <div class="container-xxl flex-grow-1 container-p-y">
                 <!-- Bordered Table -->
                 <div class="card">
-                    <h5 class="card-header mb-4">Tagihan <strong>{{ $tagihan->murids->name }}</strong></h5>
+                    <h5 class="card-header mb-4">Tagihan <strong>{{ $murid->name }}</strong></h5>
                     <div class="card-body">
-                        <div>NAMA : {{ $tagihan->murids->name }}</div>
+                        <div>NAMA : {{ $murid->name }}</div>
                         <hr>
-                        <div>ANGKATAN : {{ $tagihan->murids->angkatans->tahun }}</div>
+                        <div>ANGKATAN : {{ $murid->angkatans->tahun }}</div>
                         <hr>
-                        <div>JURUSAN : {{ $tagihan->murids->jurusans->nama }}</div>
+                        <div>JURUSAN : {{ $murid->jurusans->nama }}</div>
                         <hr>
-                        <div>KELAS : {{ $tagihan->murids->kelas->kelas }}</div>
+                        <div>KELAS : {{ $murid->kelas->kelas }}</div>
                         <hr>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                                             </td>
                                             <td>Rp {{ number_format($bulans->amount) }}</td>
                                             <td>
-                                                <div class="text-danger"><strong>Belum</strong></div>
+                                                <div class="text-danger"><strong>{{ $bulans->status }}</strong></div>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('wali.tagihan.pembayaran', ['id' => $tagihan->id]) }}" class="btn btn-primary mt-3 w-25">Detail Bayar</a>
+                <a href="{{ route('wali.tagihan.pembayaran', $tagihan->id).'?idmurid='.$murid->id }}" class="btn btn-primary me-2 mt-3 w-25">Detail</a>
             </div>
             <!--/ Bordered Table -->
         </div>
