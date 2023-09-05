@@ -19,7 +19,7 @@
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach
-                                </ul>
+                                </ul>       
                             </div>
                         @endif --}}
                         <form action="{{ route('admin.biaya.store') }}" method="POST">
@@ -65,7 +65,9 @@
                                     <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td>July</td>
+                                            <td>July<input type="hidden" value="July" name="mounth[]"
+                                                    class="mounth tess">
+                                            </td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
                                                     is-invalid
@@ -79,7 +81,9 @@
                                         </tr>
                                         <tr>
                                             <td>2</td>
-                                            <td>Agustus</td>
+                                            <td>Agustus <input type="hidden" value="Agustus" name="mounth[]"
+                                                    class="mounth tess">
+                                            </td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
@@ -93,7 +97,8 @@
                                         </tr>
                                         <tr>
                                             <td>3</td>
-                                            <td>September</td>
+                                            <td>September<input type="hidden" value="September" name="mounth[]"
+                                                    class="mounth tess"></td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
@@ -107,7 +112,9 @@
                                         </tr>
                                         <tr>
                                             <td>4</td>
-                                            <td>Oktober</td>
+                                            <td>Oktober<input type="hidden" value="Oktober" name="mounth[]"
+                                                    class="mounth tess">
+                                            </td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
@@ -120,7 +127,9 @@
                                         </tr>
                                         <tr>
                                             <td>5</td>
-                                            <td>November</td>
+                                            <td>November<input type="hidden" value="November" name="mounth[]"
+                                                    class="mounth tess">
+                                            </td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
@@ -134,13 +143,15 @@
                                         </tr>
                                         <tr>
                                             <td>6</td>
-                                            <td>Desember</td>
+                                            <td>Desember<input type="hidden" value="Desember" name="mounth[]"
+                                                    class="mounth tess"></td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
                                             @enderror tess routine"
                                                     name="amount[]" value="{{ old('amount[]') }}"></td>
-                                            <td><input type="date" name="start_date[]" class="form-control tess date1">
+                                            <td><input type="date" name="start_date[]"
+                                                    class="form-control tess date1">
                                             </td>
                                             <td><input type="date" name="end_date[]" class="form-control tess date2">
 
@@ -148,13 +159,15 @@
                                         </tr>
                                         <tr>
                                             <td>7</td>
-                                            <td>January</td>
+                                            <td>January<input type="hidden" value="January" name="mounth[]"
+                                                    class="mounth tess"></td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
                                             @enderror tess routine"
                                                     name="amount[]" value="{{ old('amount[]') }}"></td>
-                                            <td><input type="date" name="start_date[]" class="form-control tess date1">
+                                            <td><input type="date" name="start_date[]"
+                                                    class="form-control tess date1">
                                             </td>
                                             <td><input type="date" name="end_date[]" class="form-control tess date2">
 
@@ -162,7 +175,8 @@
                                         </tr>
                                         <tr>
                                             <td>8</td>
-                                            <td>Febuary</td>
+                                            <td>Febuary<input type="hidden" value="February" name="mounth[]"
+                                                    class="mounth tess"></td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
@@ -177,7 +191,8 @@
                                         </tr>
                                         <tr>
                                             <td>9</td>
-                                            <td>Maret</td>
+                                            <td>Maret<input type="hidden" value="Maret" name="mounth[]"
+                                                    class="mounth tess"></td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
@@ -192,7 +207,8 @@
                                         </tr>
                                         <tr>
                                             <td>10</td>
-                                            <td>April</td>
+                                            <td>April<input type="hidden" value="April" name="mounth[]"
+                                                    class="mounth tess"></td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
@@ -207,7 +223,9 @@
                                         </tr>
                                         <tr>
                                             <td>11</td>
-                                            <td>Mey</td>
+                                            <td>Mey <input type="hidden" value="Mei" name="mounth[]"
+                                                    class="mounth tess">
+                                            </td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
@@ -221,7 +239,9 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>12</td>
+                                            <td>12 <input type="hidden" value="Juny" name="mounth[]"
+                                                    class="mounth tess">
+                                            </td>
                                             <td>Juny</td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
@@ -242,6 +262,7 @@
                             <div class="d-none" id="date">
                                 <div class="form-group mb-3">
                                     <label for="mount">Total biaya</label>
+                                    <input type="hidden" value="" name="mounth[]" class="optional">
                                     <input type="number"
                                         class="form-control @error('amount[]')
                                         is-invalid
@@ -265,15 +286,10 @@
                                 </div>
 
                             </div>
-                            <div class="form-group
-                                        mb-3">
+                            <div class="form-group mb-3">
                                 <label for="id_angkatans">Masukkan angkatan</label>
-                                <select name="id_angkatans" id="id_angkatans"
-                                    class="form-control @error('id_angkatans')
-                                    is-invalid
-                                @enderror"
-                                    required>
-                                    <option value="">--Pilih--</option>
+                                <select name="id_angkatans" id="id_angkatans" class="form-control" required>
+                                    <option value="">---------</option>
                                     @foreach ($angkatan as $data)
                                         <option value="{{ $data->id }}">{{ $data->tahun }}</option>
                                     @endforeach
@@ -281,20 +297,13 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="id_jurusans">Masukkan Jurusan</label>
-                                <select name="id_jurusans" id="id_jurusans"
-                                    class="form-control @error('id_jurusans')
-                                    is-invalid
-                                @enderror"
-                                    required>
+                                <select name="id_jurusans" id="id_jurusans" class="form-control" required>
+
                                 </select>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="id_kelas">Masukkan kelas</label>
-                                <select name="id_kelas" id="id_kelas"
-                                    class="form-control @error('id_kelas')
-                                    is-invalid
-                                @enderror"
-                                    required>
+                                <select name="id_kelas" id="id_kelas" class="form-control" required>
 
                                 </select>
                                 <script>
@@ -355,14 +364,19 @@
             if (status.value == "routine") {
                 document.getElementById('result').classList.remove('d-none');
                 document.getElementById('date').classList.add('d-none');
+                const mounth = document.querySelectorAll('.mounth');
                 const routine = document.querySelectorAll('.routine');
                 const date1 = document.querySelectorAll('.date1');
                 const date2 = document.querySelectorAll('.date2');
                 const optional = document.querySelectorAll('.optional');
                 optional.forEach(function(optionals) {
                     optionals.removeAttribute('name');
+                    optionals.removeAttribute('value');
                     optionals.removeAttribute('required');
                 });
+                for (i = 0; i < mounth.length; i++) {
+                    routine[i].setAttribute('name', 'mounth[]');
+                }
                 for (i = 0; i < routine.length; i++) {
                     routine[i].setAttribute('name', 'amount[]');
                     routine[i].setAttribute('required', true);

@@ -30,7 +30,10 @@ class Murid extends Model
     {
         return $this->belongsTo(Kelas::class, 'id_kelas');
     }
-
+    public function biayas()
+    {
+        return $this->hasMany(Biaya::class)->where('id_angkatans')->where('id_jurusans')->where('id_kelas');
+    }
 
     protected $fillable = [
         'id_users',

@@ -1,3 +1,6 @@
+@php
+    $instansi = \App\Models\Instansi::first();
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +24,7 @@
         style="background-color:rgba(0,0,0,0.5);">
         <div class="row p-2">
             <div class="d-flex align-items-center ps-5">
-                <img src="{{ asset('storage/image/tutwuri1.png') }}" alt="" width="50">
+                <img src="{{ asset('storage/image/' . $instansi->logo) }}" alt="" width="50">
                 <h2 class="ms-3 text-light" style="font-family: Public sans, serif;">SMK TADIKA</h2>
             </div>
         </div>

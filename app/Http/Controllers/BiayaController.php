@@ -46,6 +46,7 @@ class BiayaController extends Controller
         $data2 = $request->validate([
             'start_date.*' => 'nullable',
             'end_date.*' => 'nullable',
+            'mounth.*' => 'nullable',
             'amount.*' => 'required',
             'status' => 'nullable',
         ]);
@@ -55,6 +56,7 @@ class BiayaController extends Controller
 
         $dateStart = request()->input('start_date');
         $dateEnd =  request()->input('end_date');
+        $mounth =  request()->input('mounth');
         $amount = request()->input('amount');
         // dd($dateStart);
 
@@ -62,6 +64,7 @@ class BiayaController extends Controller
 
             $Tagihan = Tagihan::create([
                 'id_biayas' => $biaya->id,
+                'mounth' => $mounth[$index],
                 'amount' => $n,
                 'start_date' => $dateStart[$index],
                 'end_date' => $dateEnd[$index],
@@ -86,28 +89,68 @@ class BiayaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        $instansi = Instansi::first();
-        $biaya = Biaya::find($id);
+        $user = Auth::user();
         $angkatan = Angkatan::all();
-        return view('admin.biaya.edit', compact('biaya', 'angkatan', 'instansi'));
+        $jurusanGrouped = Jurusan::with('angkatans')->get()->groupBy('id_angkatans');
+        $kelasGrouped = Kelas::with('jurusans')->get()->groupBy('id_jurusans');
+
+        $biaya = Biaya::with('tagihans')->find($id);
+        $tagihan = Tagihan::where('id_biayas', $id)->get();
+
+        return view('admin.biaya.edit', compact('user', 'angkatan', 'jurusanGrouped', 'kelasGrouped', 'biaya', 'tagihan'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $data = $request->validate([
-            'nama' => 'required|max:255',
             'id_angkatans' => 'required',
-            'total_biaya' => 'required',
+            'id_kelas' => 'required',
+            'id_jurusans' => 'required',
+            'nama_biaya' => 'required|max:50',
+            'jenis_biaya' => 'required|in:routine,tidakRoutine',
         ]);
 
-        $biaya = Biaya::findOrFail($id);
-        $result = $biaya->update($data);
-        // dd($result);
+        $data2 = $request->validate([
+            'start_date.*' => 'nullable',
+            'end_date.*' => 'nullable',
+            'mounth.*' => 'nullable',
+            'amount.*' => 'required',
+            'status' => 'nullable',
+        ]);
+
+        $biaya = Biaya::with('tagihans')->find($id);
+
+        $tagihan = Tagihan::where('id_biayas', $id);
+
+
+        $dateStart = request()->input('start_date');
+        $dateEnd = request()->input('end_date');
+        $mounth = request()->input('mounth');
+        $amount = request()->input('amount');
+
+        $tagihan->delete();
+        if ($request->amount) {
+            foreach ($amount as $key => $value) {
+                $data1 = [
+                    'id_biayas' => $id,
+                    'start_date' => $dateStart[$key],
+                    'end_date' => $dateEnd[$key],
+                    'amount' => $value,
+                    'mounth' => $mounth[$key],
+                ];
+                Tagihan::create($data1);
+            }
+        }
+        $biaya->update($data);
+
+
+
+        // dd($result); 
 
         return redirect()->route('admin.biaya.index')->with('pesan', "Biaya Berhasil Diedit!!!");
     }
