@@ -8,6 +8,7 @@ use App\Models\Murid;
 use App\Models\Pembayaran;
 use App\Models\Tagihan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PembayaranWaliController extends Controller
 {
@@ -35,28 +36,38 @@ class PembayaranWaliController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        
-        $validatedData = $request->validate([
-            'amount' => 'required',
-        ]);
+        $instansi = Instansi::first();
+        $tagihan = Biaya::find($id);
+        $IdMurid = $_GET['idmurid'];
+        $murid = Murid::find($IdMurid);
+        $bulan = Tagihan::where('id_biayas', $tagihan->id)->get();
 
-        $idBiaya = Tagihan::where('id_biayas', 'id');
-        $idTagihans = Tagihan::where('id');
-
-        
-        foreach ($idTagihans as $idTagihan) {
-            Pembayaran::create([
-                'id_biayas' => $idBiaya->id,
-                'id_tagihans' => $idTagihan,
-                'amount' => $validatedData['amount'],
-                'id_users' => $request->input('id_users'),
-            ]);
+        if (!$request->amount) {
+            return view('wali.tagihan.pembayaran', compact('instansi', 'bulan', 'tagihan', 'murid'))->with('error', 'Pilih setidaknya satu tagihan.');
         }
 
-        print_r($validatedData['amount']);
-        return redirect()->route('wali.tagihan.pilih_pembayaran',  $idBiaya->id);
+        // $key disini adalah index nya, jadi kita ini buat manual index dari blade tadi. amount[{{ $bulans->id }}], $bulans->id ini adalah index manual yang kita masukin kedalam array nya amount
+        foreach ($request->amount as $key => $value) {
+            $tagihs[] = Tagihan::where('id', $key)->first();
+        }
+        
+        $tagihans = $tagihs;
+
+        dd($tagihans); // coba di run rey, ss kasih ke aku di wa.
+        
+        return redirect()->route('wali.tagihan.pilih_pembayaran', ['id' => $request->amount]);
+    }
+
+    public function pilih_pembayaran(Request $request, string $id, string $idmurid)
+    {
+        $user = Auth::user();
+        $instansi = Instansi::first();
+        $tagihan = Biaya::find($id);
+        $idMurid = $_GET['idmurid'];
+        $murid = Murid::find($idMurid);
+        return redirect()->route('wali.tagihan.pilih_pembayaran', compact('instansi', 'user', 'tagihan', 'murid'));
     }
 
 

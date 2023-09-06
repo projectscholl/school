@@ -65,7 +65,7 @@
                                     <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td>July<input type="hidden" value="July" name="mounth[]"
+                                            <td>Juli<input type="hidden" value="Juli" name="mounth[]"
                                                     class="mounth tess">
                                             </td>
                                             <td><input type="number"
@@ -81,7 +81,7 @@
                                         </tr>
                                         <tr>
                                             <td>2</td>
-                                            <td>Agustus <input type="hidden" value="Agustus" name="mounth[]"
+                                            <td>Agustus<input type="hidden" value="Agustus" name="mounth[]"
                                                     class="mounth tess">
                                             </td>
                                             <td><input type="number"
@@ -159,7 +159,7 @@
                                         </tr>
                                         <tr>
                                             <td>7</td>
-                                            <td>January<input type="hidden" value="January" name="mounth[]"
+                                            <td>Januari<input type="hidden" value="Januari" name="mounth[]"
                                                     class="mounth tess"></td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
@@ -175,7 +175,7 @@
                                         </tr>
                                         <tr>
                                             <td>8</td>
-                                            <td>Febuary<input type="hidden" value="February" name="mounth[]"
+                                            <td>Februari<input type="hidden" value="Februari" name="mounth[]"
                                                     class="mounth tess"></td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
@@ -223,7 +223,7 @@
                                         </tr>
                                         <tr>
                                             <td>11</td>
-                                            <td>Mey <input type="hidden" value="Mei" name="mounth[]"
+                                            <td>Mei <input type="hidden" value="Mei" name="mounth[]"
                                                     class="mounth tess">
                                             </td>
                                             <td><input type="number"
@@ -239,10 +239,10 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>12 <input type="hidden" value="Juny" name="mounth[]"
+                                            <td>12 <input type="hidden" value="Juni" name="mounth[]"
                                                     class="mounth tess">
                                             </td>
-                                            <td>Juny</td>
+                                            <td>Juni</td>
                                             <td><input type="number"
                                                     class="form-control @error('amount[]')
                                                 is-invalid

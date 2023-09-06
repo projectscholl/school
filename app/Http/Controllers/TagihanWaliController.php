@@ -93,16 +93,7 @@ class TagihanWaliController extends Controller
         return view('wali.tagihan.pembayaran', compact('instansi', 'bulan', 'tagihan', 'murid'));
     }
 
-    
-    public function pilih_pembayaran(Request $request, string $id)
-    {
-        $user = Auth::user();
-        $instansi = Instansi::first();
-        $tagihan = Biaya::find($id);
-        $idMurid = $_GET['idmurid'];
-        $murid = Murid::find($idMurid);
-        return view('wali.tagihan.pilih_pembayaran', compact('instansi', 'user', 'tagihan', 'murid'));
-    }
+
     public function bayar()
     {
         $instansi = Instansi::first();

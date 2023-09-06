@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('id_tagihans');
             $table->foreignId('id_users');
             $table->string('payment_status');
-            $table->string('payment_links');
+            $table->string('payment_links')->nullable();
             $table->timestamps();
         });
     }

@@ -50,8 +50,7 @@
                                 <tbody>
                                     @foreach ($bulan as $bulans)
                                         <tr>
-                                            <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $bulans->start_date)->format('F') }}
-                                            </td>
+                                            <td>{{ $bulans->mounth }}</td>
                                             <td>Rp {{ number_format($bulans->amount) }}</td>
                                             <td>
                                                 <div class="text-danger"><strong>{{ $bulans->status }}</strong></div>

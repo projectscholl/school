@@ -21,38 +21,56 @@
                                     <th class="text-white d-flex">Pilih<input class="ms-2" type="checkbox" id="selectAll"></th>
                                 </tr>
                             </thead>
-                            <form action="#" method="POST">
-                                @csrf
+                            <form action="{{ route('wali.tagihan.pembayaran.store', $tagihan->id) . '?idmurid=.$murid->id' }}" method="GET">
                                 <tbody>
                                     @foreach ($bulan as $bulans)
                                         <tr>
-                                            <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $bulans->start_date)->format('F') }}</td>
+                                            <td>{{ $bulans->mounth }}</td>
                                             <td>Rp {{ number_format($bulans->amount) }}</td>
-                                            <td>
-                                                <input type="checkbox" data-select name="amount[]" value="{{ $bulans->id }}" required>
-                                            </td>
+                                            <td> 
+                                                <input type="checkbox" data-select name="amount[{{ $bulans->id }}]" value="{{ $bulans->id }}" data-id="{{ $bulans->id }}" >
+                                            </td>                   
                                         </tr>
                                     @endforeach
                                 </tbody>
-                        </table>
-                            <button type="submit" class="btn btn-success mt-3 w-25">Pilih Pembayaran</button>
+                                <button type="submit" class="btn btn-success mt-3 w-25">Pilih Pembayaran</button>
                             </form>
-                            
                             @if ($errors->any())
                                 <div class="alert alert-danger alert-dismissible fade show mt-3">
                                     <ul>
                                         @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
+                                        <li>{{ $error }}</li>
                                         @endforeach
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </ul>
                                 </div>
                             @endif
-                            
+                        </table>
                     </div>
                 </div>
             </div>
             <script>
+
+                const selectedData = [];
+
+                const checkboxes = document.querySelectorAll('input[data-select]');
+
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', function () {
+                        if (this.checked) {
+                            const rowId = this.getAttribute('data-id');
+                            const month = document.querySelector(`tr[data-id="${rowId}"] td:first-child`).textContent;
+                            const amount = document.querySelector(`tr[data-id="${rowId}"] td:nth-child(2)`).textContent;
+
+                            // Tambahkan nilai ke dalam objek selectedData
+                            selectedData.push({ month, amount });
+
+                            // Untuk melihat isi objek selectedData saat ini
+                            console.log(selectedData);
+                        }
+                    });
+                });
+
                 document.addEventListener("DOMContentLoaded", function() {
                     const selectAllCheckbox = document.querySelector("#selectAll");
                     const checkboxes = document.querySelectorAll("[data-select]");
