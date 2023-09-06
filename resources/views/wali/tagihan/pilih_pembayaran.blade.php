@@ -54,7 +54,7 @@
                                         <td>Status Tagihan : <strong>Belum Dibayar</strong></td>
                                     </tr> --}}
                                     <tr>
-                                        <td>Total Dibayar : <strong class="">Rp 100.000</strong></td>
+                                        <td>Total Dibayar : <strong class="">Rp {{ number_format($tagihans) }}</strong></td>
                                     </tr>
                                 </tbody>
                             </table>

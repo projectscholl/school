@@ -51,29 +51,32 @@ class BiayaController extends Controller
             'status' => 'nullable',
         ]);
 
-        $biaya = Biaya::create($data);
-
-
         $dateStart = request()->input('start_date');
         $dateEnd =  request()->input('end_date');
         $mounth =  request()->input('mounth');
         $amount = request()->input('amount');
-        // dd($dateStart);
+        
+        $biaya = Biaya::create($data);
 
-        foreach ($amount as $index => $n) {
-
+        if ($request->jenis_biaya == 'routine') {
+            foreach ($amount as $index => $n) {
+    
+                $Tagihan = Tagihan::create([
+                    'id_biayas' => $biaya->id,
+                    'mounth' => $mounth[$index],
+                    'amount' => $n,
+                    'start_date' => $dateStart[$index],
+                    'end_date' => $dateEnd[$index],
+                ]);
+            }
+        } else {
             $Tagihan = Tagihan::create([
                 'id_biayas' => $biaya->id,
-                'mounth' => $mounth[$index],
-                'amount' => $n,
-                'start_date' => $dateStart[$index],
-                'end_date' => $dateEnd[$index],
+                'amount' => $amount[0],
+                'start_date' => $dateStart[0],
+                'end_date' => $dateEnd[0],
             ]);
         }
-
-
-
-
 
         return redirect()->route('admin.biaya.index')->with('message', "Biaya Berhasil Dibuat!!!");
     }

@@ -21,11 +21,13 @@
                                     <th class="text-white d-flex">Pilih<input class="ms-2" type="checkbox" id="selectAll"></th>
                                 </tr>
                             </thead>
-                            <form action="{{ route('wali.tagihan.pembayaran.store', $tagihan->id) . '?idmurid=.$murid->id' }}" method="GET">
+                            <form id="pembayaran" action="{{ route('wali.tagihan.pembayaran.store', $tagihan->id) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="idmurid" value="{{ $murid->id }}">
                                 <tbody>
                                     @foreach ($bulan as $bulans)
                                         <tr>
-                                            <td>{{ $bulans->mounth }}</td>
+                                            <td>{{ $bulans->mounth ?? '-' }}</td>
                                             <td>Rp {{ number_format($bulans->amount) }}</td>
                                             <td> 
                                                 <input type="checkbox" data-select name="amount[{{ $bulans->id }}]" value="{{ $bulans->id }}" data-id="{{ $bulans->id }}" >
@@ -33,7 +35,6 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <button type="submit" class="btn btn-success mt-3 w-25">Pilih Pembayaran</button>
                             </form>
                             @if ($errors->any())
                                 <div class="alert alert-danger alert-dismissible fade show mt-3">
@@ -46,6 +47,7 @@
                                 </div>
                             @endif
                         </table>
+                        <button form="pembayaran" type="submit" class="btn btn-success mt-3 w-25">Pilih Pembayaran</button>
                     </div>
                 </div>
             </div>

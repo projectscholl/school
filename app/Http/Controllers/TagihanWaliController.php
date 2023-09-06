@@ -80,7 +80,6 @@ class TagihanWaliController extends Controller
         $IdMurid = $_GET['idmurid'];
         $murid = Murid::find($IdMurid);
         $bulan = Tagihan::where('id_biayas', $tagihan->id)->get();
-        // dd($IdMurid);
         return view('wali.tagihan.detail', compact('instansi', 'tagihan', 'bulan', 'murid'));
     }
     public function pembayaran(string $id)
