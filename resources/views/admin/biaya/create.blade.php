@@ -46,7 +46,7 @@
                                     </option>
                                     <option value="tidakRoutine">Tidak routine</option>
                                 </select>
-                                <span class="fs">--Harus memelih jenis biaya--</span>
+                                <span class="fs">--Harus memilih jenis biaya--</span>
                             </div>
                             <!--table pembayaran perbulan-->
                             <div class="form-group mb-3">
@@ -68,11 +68,11 @@
                                             <td>July<input type="hidden" value="July" name="mounth[]"
                                                     class="mounth tess">
                                             </td>
-                                            <td><input type="number"
+                                            <td><input type="text"
                                                     class="form-control @error('amount[]')
                                                     is-invalid
-                                                @enderror tess routine"
-                                                    name="amount[]" value="{{ old('amount[]') }}"></td>
+                                                @enderror tess routine rupiah"
+                                                    name="amount[]" value="{{ old('amount[]') }}" id="harga"></td>
                                             <td><input type="date" name="start_date[]" class="form-control tess date1">
                                             </td>
                                             <td><input type="date" name="end_date[]" class="form-control tess date2">
@@ -84,10 +84,10 @@
                                             <td>Agustus <input type="hidden" value="Agustus" name="mounth[]"
                                                     class="mounth tess">
                                             </td>
-                                            <td><input type="number"
+                                            <td><input type="text"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
-                                            @enderror tess routine"
+                                            @enderror tess routine rupiah"
                                                     name="amount[]" value="{{ old('amount[]') }}"></td>
                                             <td><input type="date" name="start_date[]" class="form-control tess date1">
                                             </td>
@@ -99,10 +99,10 @@
                                             <td>3</td>
                                             <td>September<input type="hidden" value="September" name="mounth[]"
                                                     class="mounth tess"></td>
-                                            <td><input type="number"
+                                            <td><input type="text"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
-                                            @enderror tess routine"
+                                            @enderror tess routine rupiah"
                                                     name="amount[]" value="{{ old('amount[]') }}"></td>
                                             <td><input type="date" name="start_date[]" class="form-control tess date1">
                                             </td>
@@ -115,10 +115,10 @@
                                             <td>Oktober<input type="hidden" value="Oktober" name="mounth[]"
                                                     class="mounth tess">
                                             </td>
-                                            <td><input type="number"
+                                            <td><input type="text"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
-                                            @enderror tess routine"
+                                            @enderror tess routine rupiah"
                                                     name="amount[]" value="{{ old('amount[]') }}"></td>
                                             <td><input type="date" name="start_date[]" class="form-control tess date1">
                                             </td>
@@ -130,10 +130,10 @@
                                             <td>November<input type="hidden" value="November" name="mounth[]"
                                                     class="mounth tess">
                                             </td>
-                                            <td><input type="number"
+                                            <td><input type="text"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
-                                            @enderror tess routine"
+                                            @enderror tess routine rupiah"
                                                     name="amount[]" value="{{ old('amount[]') }}"></td>
                                             <td><input type="date" name="start_date[]" class="form-control tess date1">
                                             </td>
@@ -145,10 +145,10 @@
                                             <td>6</td>
                                             <td>Desember<input type="hidden" value="Desember" name="mounth[]"
                                                     class="mounth tess"></td>
-                                            <td><input type="number"
+                                            <td><input type="text"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
-                                            @enderror tess routine"
+                                            @enderror tess routine rupiah"
                                                     name="amount[]" value="{{ old('amount[]') }}"></td>
                                             <td><input type="date" name="start_date[]"
                                                     class="form-control tess date1">
@@ -161,10 +161,10 @@
                                             <td>7</td>
                                             <td>January<input type="hidden" value="January" name="mounth[]"
                                                     class="mounth tess"></td>
-                                            <td><input type="number"
+                                            <td><input type="text"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
-                                            @enderror tess routine"
+                                            @enderror tess routine rupiah"
                                                     name="amount[]" value="{{ old('amount[]') }}"></td>
                                             <td><input type="date" name="start_date[]"
                                                     class="form-control tess date1">
@@ -177,10 +177,10 @@
                                             <td>8</td>
                                             <td>Febuary<input type="hidden" value="February" name="mounth[]"
                                                     class="mounth tess"></td>
-                                            <td><input type="number"
+                                            <td><input type="text"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
-                                            @enderror tess routine"
+                                            @enderror tess routine rupiah"
                                                     name="amount[]" value="{{ old('amount[]') }}"></td>
                                             <td><input type="date" name="start_date[]"
                                                     class="form-control tess date1">
@@ -193,10 +193,10 @@
                                             <td>9</td>
                                             <td>Maret<input type="hidden" value="Maret" name="mounth[]"
                                                     class="mounth tess"></td>
-                                            <td><input type="number"
+                                            <td><input type="text"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
-                                            @enderror tess routine"
+                                            @enderror tess routine rupiah"
                                                     name="amount[]" value="{{ old('amount[]') }}"></td>
                                             <td><input type="date" name="start_date[]"
                                                     class="form-control tess date1">
@@ -209,10 +209,10 @@
                                             <td>10</td>
                                             <td>April<input type="hidden" value="April" name="mounth[]"
                                                     class="mounth tess"></td>
-                                            <td><input type="number"
+                                            <td><input type="text"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
-                                            @enderror tess routine"
+                                            @enderror tess routine rupiah"
                                                     name="amount[]" value="{{ old('amount[]') }}"></td>
                                             <td><input type="date" name="start_date[]"
                                                     class="form-control tess date1">
@@ -226,10 +226,10 @@
                                             <td>Mey <input type="hidden" value="Mei" name="mounth[]"
                                                     class="mounth tess">
                                             </td>
-                                            <td><input type="number"
+                                            <td><input type="text"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
-                                            @enderror tess routine"
+                                            @enderror tess routine rupiah"
                                                     name="amount[]" value="{{ old('amount[]') }}"></td>
                                             <td><input type="date" name="start_date[]"
                                                     class="form-control tess date1">
@@ -243,10 +243,10 @@
                                                     class="mounth tess">
                                             </td>
                                             <td>Juny</td>
-                                            <td><input type="number"
+                                            <td><input type="text"
                                                     class="form-control @error('amount[]')
                                                 is-invalid
-                                            @enderror tess routine"
+                                            @enderror tess routine rupiah"
                                                     name="amount[]" value="{{ old('amount[]') }}"></td>
                                             <td><input type="date" name="start_date[]"
                                                     class="form-control tess date1">
@@ -263,10 +263,10 @@
                                 <div class="form-group mb-3">
                                     <label for="mount">Total biaya</label>
                                     <input type="hidden" value="" name="mounth[]" class="optional">
-                                    <input type="number"
+                                    <input type="text"
                                         class="form-control @error('amount[]')
                                         is-invalid
-                                    @enderror optional notroutine"
+                                    @enderror optional notroutine rupiah"
                                         name="amount[]" placeholder="Masukkan Nama Biaya" value="{{ old('amount[]') }}">
                                     @error('amount[]')
                                         <div id="validationServer03Feedback" class="invalid-feedback">
@@ -349,7 +349,7 @@
                                     }
                                 </script>
                             </div>
-                            <button type="submit" class="btn btn-primary">Tambahkan</button>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
                     </div>
                     </form>
                 </div>
@@ -359,6 +359,15 @@
     </div>
 @endsection
 @push('scripts')
+
+    <script src="{{ asset('sneat/js/jquery.mask.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.rupiah').mask("#.##0", {
+                reverse: true
+            });
+        })
+    </script>
     <script type="text/javascript">
         function enableBrand(status) {
             if (status.value == "routine") {
@@ -369,6 +378,7 @@
                 const date1 = document.querySelectorAll('.date1');
                 const date2 = document.querySelectorAll('.date2');
                 const optional = document.querySelectorAll('.optional');
+
                 optional.forEach(function(optionals) {
                     optionals.removeAttribute('name');
                     optionals.removeAttribute('value');

@@ -1,3 +1,6 @@
+@php
+    $instansi = \App\Models\Instansi::first();
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -390,9 +393,9 @@ in bold.
         <div class="headerSection">
             <!-- As a logo we take an SVG element and add the name in an standard H1 element behind it. -->
             <div class="logoAndName">
-                <img src="{{ asset('storage/image/tutwuri1.png') }}" alt="" width="50">
+                <img src="{{ asset('storage/image/' . $instansi->logo) }}" alt="" width="50">
                 <div class="w-100 d-flex flex-column ms-2">
-                    <h1 class="text-black">SMK TADIKA </h1>
+                    <h1 class="text-black">{{ $instansi->name }}</h1>
                     <span>Route 66, Chicago</span>
                 </div>
             </div>
@@ -400,7 +403,9 @@ in bold.
             <div class="invoiceDetails">
                 <h2><b>Laporan Tagihan Spp</b></h2>
                 <p>
-                    Tahun 2022
+                    Tahun @foreach ($tahun as $tahuns)
+                        {{ $tahuns->tahun }}
+                    @endforeach
                     <br>
                     Admin@example.com
                 </p>
@@ -419,7 +424,7 @@ in bold.
             <thead>
                 <tr class="table-secondary">
                     <th>No</th>
-                    <th>NISN</th>
+                    <th>NAMA TAGIHAN</th>
                     <th>NAMA</th>
                     <th>ANGKATAN</th>
                     <th>TANGGAL TAGIHAN</th>
@@ -430,156 +435,50 @@ in bold.
             </thead>
             <!-- The single invoice items are all within the TBODY of the table. -->
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>
-                        <b>9892149</b>
-                    </td>
-                    <td>
-                        Asep
-                    </td>
-                    <td>
-                        2022
-                    </td>
-                    <td>
-                        January 2024
-                    </td>
-                    <td class="text-success">
-                        sudah
-                    </td>
-                    <td>
-                        220.000
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>
-                        <b>9892249</b>
-                    </td>
-                    <td>
-                        Jono
-                    </td>
-                    <td>
-                        2022
-                    </td>
-                    <td>
-                        September 2022
-                    </td>
-                    <td class="text-danger">
-                        belum
-                    </td>
-                    <td>
-                        220.000
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>
-                        <b>9892149</b>
-                    </td>
-                    <td>
-                        Udin
-                    </td>
-                    <td>
-                        2022
-                    </td>
-                    <td>
-                        January 2024
-                    </td>
-                    <td class="text-success">
-                        sudah
-                    </td>
-                    <td>
-                        220.000
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>
-                        <b>9892149</b>
-                    </td>
-                    <td>
-                        Wahyudi
-                    </td>
-                    <td>
-                        2022
-                    </td>
-                    <td>
-                        January 2024
-                    </td>
-                    <td class="text-danger">
-                        sudah
-                    </td>
-                    <td>
-                        220.000
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>
-                        <b>9892149</b>
-                    </td>
-                    <td>
-                        Suparman
-                    </td>
-                    <td>
-                        2022
-                    </td>
-                    <td>
-                        January 2024
-                    </td>
-                    <td class="text-success">
-                        sudah
-                    </td>
-                    <td>
-                        220.000
-                    </td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>
-                        <b>9892149</b>
-                    </td>
-                    <td>
-                        Kipli
-                    </td>
-                    <td>
-                        2022
-                    </td>
-                    <td>
-                        Oktober 2024
-                    </td>
-                    <td class="text-danger">
-                        Belum
-                    </td>
-                    <td>
-                        220.000
-                    </td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>
-                        <b>9892149</b>
-                    </td>
-                    <td>
-                        Saipuddin
-                    </td>
-                    <td>
-                        2022
-                    </td>
-                    <td>
-                        November 2024
-                    </td>
-                    <td class="text-success">
-                        sudah
-                    </td>
-                    <td>
-                        220.000
-                    </td>
-                </tr>
+                <?php $i = 0; ?>
+                @foreach ($biaya as $data)
+                    @foreach ($data->tagihans as $biayas)
+                        @foreach ($datas as $murid)
+                            <?php $i++; ?>
+                            <tr>
+                                <td>{{ $i }}</td>
+                                <td>
+                                    <b>{{ $data->nama_biaya }}</b>
+                                </td>
+                                <td>
+                                    {{ $murid->name }}
+                                </td>
+                                <td>
+                                    {{ $murid->angkatans->tahun }}
+                                </td>
+                                <td>
+                                    {{ $biayas->mounth == null ? '-' : $biayas->mounth }}
+                                </td>
+                                <td class="text-danger">
+                                    {{ $biayas->status }}
+                                </td>
+                                <td>
+                                    Rp.{{ number_format($biayas->amount, 2, ',', '.') }}
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endforeach
+                @endforeach
             </tbody>
         </table>
+        <div class="d-flex justify-content-between">
+            <p>Demikian Yang Kami Sampaikan Terimakasih Atas Kerjasamanya</p>
 
+            <div class="d-flex flex-column align-items-center">
+                <div>
+                    <span class="fw-bold">Hormat Kami</span>
+                </div>
+                <img src="{{ asset('storage/image/' . $instansi->tanda_tangan) }}" alt="" width="100px">
+                <div>
+                    <span>Kepala Sekolah</span>
+                </div>
+            </div>
+        </div>
     </main>
     <!-- Within the aside tag we will put the terms and conditions which shall be shown below the invoice table. -->
 

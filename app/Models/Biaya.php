@@ -26,15 +26,20 @@ class Biaya extends Model
     {
         return $this->belongsTo(Jurusan::class, 'id_jurusans');
     }
-
     public function kelas()
     {
         return $this->belongsTo(Kelas::class, 'id_kelas');
     }
+
     public function murids()
     {
-        return $this->hasMany(Murid::class);
+        return $this->hasMany(Murid::class, 'id_angkatans', 'id_angkatans')
+            ->where('id_jurusans', $this->id_jurusans)
+            ->where('id_kelas', $this->id_kelas);
     }
+
+
+
     public function tagihans()
     {
         return $this->hasMany(Tagihan::class, 'id_biayas');

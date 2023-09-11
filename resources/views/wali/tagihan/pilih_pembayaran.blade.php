@@ -21,22 +21,25 @@
                         <div class="table-responsive text-nowrap">
                             <table class="table">
                                 <thead class="table-dark">
-                                    <tr>
+                                    <tr>    
                                         <th class="text-white">Murid Information</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
                                     <tr>
-                                        <td>Nama Murid : <strong>Suherman</strong></td>
+                                        <td>Nama Murid : <strong>{{ $murid->name }}</strong></td>
                                     </tr>
                                     <tr>
-                                        <td>Nama Wali Murid : <strong>Lisa blackwhite</strong></td>
+                                        <td>Nama Wali Murid : <strong>{{ $murid->User->name }}</strong></td>
                                     </tr>
                                     <tr>
-                                        <td>Kelas : <strong>12</strong></td>
+                                        <td>Angkatan : <strong>{{ $murid->angkatans->tahun }}</strong></td>
                                     </tr>
                                     <tr>
-                                        <td>Jurusan : <strong>Teknik Komputer</strong></td>
+                                        <td>Jurusan : <strong> {{ $murid->jurusans->nama }}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kelas : <strong>{{ $murid->kelas->kelas }}</strong></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -47,14 +50,11 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-                                    <tr>
-                                        <td>Nomor Tagihan : <strong>#09092</strong></td>
-                                    </tr>
                                     {{-- <tr>
                                         <td>Status Tagihan : <strong>Belum Dibayar</strong></td>
                                     </tr> --}}
                                     <tr>
-                                        <td>Total Tagihan : <strong class="">100.000</strong></td>
+                                        <td>Total Dibayar : <strong class="">Rp 100.000</strong></td>
                                     </tr>
                                 </tbody>
                             </table>

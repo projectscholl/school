@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             MuridSeeder::class,
-            InstansiSeeder::class
+            InstansiSeeder::class,
+            NotifySeeder::class,
         ]);
     }
 }

@@ -46,7 +46,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function murid()
+    public function murids()
     {
         return $this->hasMany(Murid::class, 'id_users');
     }

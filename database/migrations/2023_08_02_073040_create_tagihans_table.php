@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('end_date')->nullable();
             $table->string('mounth')->nullable();
             $table->integer('amount');
-            $table->string('status')->default('PENDING');
+            $table->string('status')->default('BELUM');
             $table->timestamps();
         });
     }

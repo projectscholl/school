@@ -36,7 +36,7 @@
                                             </strong>
                                         </td>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->angkatan->tahun }}</td>
+                                        <td>{{ $item->angkatans->tahun }}</td>
                                         <td>{{ $item->jurusans->nama }}</td>
                                         <td>{{ $item->kelas->kelas }}</td>
                                         <td>

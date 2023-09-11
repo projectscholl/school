@@ -12,9 +12,14 @@ class TagihanDetail extends Model
     protected $fillable = [
         'id_tagihan',
         'nama_biaya',
+        'id_murids',
+        'status',
         'jumlah_biaya',
     ];
-
+    public function murids()
+    {
+        return $this->belongsTo(Murid::class, 'id_murids');
+    }
     public function tagihan()
     {
         return $this->belongsTo(Tagihan::class, 'id_tagihan');

@@ -7,12 +7,18 @@ use App\Models\Biaya;
 use App\Models\Instansi;
 use App\Models\Jurusan;
 use App\Models\Kelas;
+use App\Models\Murid;
+use App\Models\Notify;
 use App\Models\Tagihan;
+use App\Models\TagihanDetail;
+use App\Models\User;
+use App\Traits\Fonnte;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BiayaController extends Controller
 {
+    use Fonnte;
     public function index()
     {
         $user = Auth::user();
@@ -47,20 +53,21 @@ class BiayaController extends Controller
             'start_date.*' => 'nullable',
             'end_date.*' => 'nullable',
             'mounth.*' => 'nullable',
-            'amount.*' => 'required',
+            'amount.*' => 'required|numeric',
             'status' => 'nullable',
         ]);
 
         $biaya = Biaya::create($data);
 
-
         $dateStart = request()->input('start_date');
         $dateEnd =  request()->input('end_date');
         $mounth =  request()->input('mounth');
         $amount = request()->input('amount');
+        $valid = str_replace('.', '', $amount);
         // dd($dateStart);
+        $muridUser = Murid::with('User')->where('id_jurusans', $biaya->id_jurusans)->where('id_angkatans', $biaya->id_angkatans)->where('id_kelas', $biaya->id_kelas)->get();
 
-        foreach ($amount as $index => $n) {
+        foreach ($valid as $index => $n) {
 
             $Tagihan = Tagihan::create([
                 'id_biayas' => $biaya->id,
@@ -69,13 +76,39 @@ class BiayaController extends Controller
                 'start_date' => $dateStart[$index],
                 'end_date' => $dateEnd[$index],
             ]);
+            $murid = Murid::with('User')->where('id_angkatans', $biaya->id_angkatans)->where('id_jurusans', $biaya->id_jurusans)->where('id_kelas', $biaya->id_kelas)->get();
+            foreach ($murid as $key => $murids) {
+                TagihanDetail::create([
+                    'id_tagihan' => $Tagihan->id,
+                    'id_murids' => $murids->id,
+                    'nama_biaya' => $biaya->nama_biaya,
+                    'jumlah_biaya' => $n,
+                ]);
+                $users = User::where('id', $murids->id_users)->get();
+                $notify = Notify::where('id', 1)->get();
+                foreach ($users as $ray => $wali) {
+                    $messages = $notify[$ray]->notif . ' ' . $biaya->nama_biaya . ' ' . number_format($n, 2, ',', '.');
+                    $this->send_message($wali->telepon, $messages);
+                    // print_r($wali->telepon);
+                    // echo "<br>";
+                }
+            }
+            // foreach ($muridUser as $user) {
+            // }
+            // foreach ($Tagihan as $tagihanDetail) {
+            //     TagihanDetail::create([
+            //         'id_tagihan' => $tagihanDetail->id,
+            //         'id_murids' => $tagihanDetail->id,
+            //         'nama_biaya' => $tagihanDetail->biayas->nama_biaya,
+            //         'status' => $tagihanDetail->status,
+            //     ]);
+            // }
+
         }
 
 
 
-
-
-        return redirect()->route('admin.biaya.index')->with('message', "Biaya Berhasil Dibuat!!!");
+        return redirect()->route('admin.biaya.index')->with('success', "Biaya Berhasil Dibuat!!!");
     }
 
     /**

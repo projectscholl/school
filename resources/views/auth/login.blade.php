@@ -1,4 +1,7 @@
 <!-- Content -->
+@php
+    $instansi = \App\Models\Instansi::first();
+@endphp
 <!DOCTYPE html>
 
 <html lang="en" class="light-style customizer-hide" dir="ltr" data-theme="theme-default"
@@ -15,7 +18,7 @@
 
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('sneat') }}/assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('/storage/image/' . $instansi->logo) }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

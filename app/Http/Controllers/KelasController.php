@@ -59,4 +59,11 @@ class KelasController extends Controller
 
         return redirect()->route('admin.kelas.index')->with('edit', "Kelas Berhasil Diupdate!!");;
     }
+
+    public function destroy(string $id)
+    {
+        $kelas = Kelas::findOrFail($id);
+        $kelas->delete();
+        return redirect()->route('admin.kelas.index');
+    }
 }

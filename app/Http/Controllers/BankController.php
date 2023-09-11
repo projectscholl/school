@@ -8,17 +8,11 @@ use Illuminate\Http\Request;
 
 class BankController extends Controller
 {
-    public function index()
-    {
-        $banks = Bank::all();
-        return view('admin.instansi.index', compact('banks'));
-    }
-
-
     public function edit(string $id)
     {
         $instansi = Instansi::find($id);
-        return view('admin.instansi.bank.edit', compact('instansi'));
+        $bank = Bank::find($id);
+        return view('admin.instansi.bank.edit', compact('instansi', 'bank'));
     }
 
     public function store(Request $request)
@@ -32,4 +26,5 @@ class BankController extends Controller
 
         return redirect()->route('admin.instansi.index')->with('message', "Data Bank berhasil diperbarui!!");
     }
+    
 }

@@ -11,7 +11,6 @@ class PdfController extends Controller
     public function tagihan()
     {
         $instansi = Instansi::first();
-        return view('admin.pdf.tagihan-pdf', compact('instansi'));
     }
     public function pembayaran()
     {

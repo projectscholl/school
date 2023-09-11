@@ -21,80 +21,34 @@
                                     <th class="text-white d-flex">Pilih<input class="ms-2" type="checkbox" id="selectAll"></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Juni</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>July</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Agustus</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Oktober</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>November</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Desember</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Januari</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>February</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Maret</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Mei</td>
-                                    <td>200.000</td>
-                                    <td>
-                                        <input type="checkbox" data-select name="" id="">
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <form action="#" method="POST">
+                                @csrf
+                                <tbody>
+                                    @foreach ($bulan as $bulans)
+                                        <tr>
+                                            <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $bulans->start_date)->format('F') }}</td>
+                                            <td>Rp {{ number_format($bulans->amount) }}</td>
+                                            <td>
+                                                <input type="checkbox" data-select name="amount[]" value="{{ $bulans->id }}" required>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
                         </table>
-                        <a href="{{ route('wali.tagihan.pilih_pembayaran') }}" class="btn btn-success mt-3 w-25">Pilih Pembayaran</a>
+                            <button type="submit" class="btn btn-success mt-3 w-25">Pilih Pembayaran</button>
+                            </form>
+                            
+                            @if ($errors->any())
+                                <div class="alert alert-danger alert-dismissible fade show mt-3">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </ul>
+                                </div>
+                            @endif
+                            
                     </div>
                 </div>
             </div>
