@@ -9,7 +9,8 @@
             <div class="d-flex flex-column">
                 <div class="d-flex align-items-center justify-content-center">
                     <a class="app-brand-link" href="{{ route('welcome') }}">
-                        <img src="{{ asset('/storage/image/' . $instansi->logo) }}" alt="" width="60px" height="50px">
+                        <img src="{{ asset('/storage/image/' . $instansi->logo) }}" alt="" width="50px"
+                            height="50px">
                     </a>
                 </div>
                 <div class="mt-2">
@@ -111,26 +112,40 @@
                         <div data-i18n="Without menu">Data Pembayaran</div>
                     </a>
                 </li>
-                <!--Laporan-->
-                <li class="{{ Route::is('admin.laporan.index') ? $active : $nonActive }}">
-                    <a href="{{ route('admin.laporan.index') }}" class="menu-link">
-                        <i class="menu-icon tf-icons bx bxs-report"></i>
-
-                        <div data-i18n="Without menu">Laporan</div>
+                <!--Account setting-->
+                <li
+                    class="menu-item {{ Route::is('admin.profile.*', 'admin.instansi.*', 'admin.bank.*', 'admin.pesan-whatsaap.index') ? 'active open' : '' }}">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                        <div data-i18n="Account Settings">Account Setting</div>
                     </a>
+                    <ul class="menu-sub">
+                        <li class="{{ Route::is('admin.instansi.*', 'admin.bank.*') ? $active : $nonActive }}">
+                            <a href="{{ route('admin.instansi.index') }}" class="menu-link">
+                                <div data-i18n="Without menu">Setting Instansi</div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="menu-sub">
+                        <li class="{{ Route::is('admin.profile.*') ? $active : $nonActive }}">
+                            <a href="{{ route('admin.profile.edit', Auth::user()->id) }}" class="menu-link">
+                                <div data-i18n="Without menu">Profile</div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="menu-sub">
+                        <li class="{{ Route::is('admin.pesan-whatsaap.index') ? $active : $nonActive }}">
+                            <a href="{{ route('admin.pesan-whatsaap.index') }}" class="menu-link">
+                                <div data-i18n="Without menu">Notifications</div>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <!-- Layouts -->
                 <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text">SETTING USER</span>
+                    <span class="menu-header-text">DATA MASTER</span>
                 </li>
 
-                <!--Data User-->
-                <li class="{{ Route::is('admin.user.*') ? $active : $nonActive }}">
-                    <a href="{{ route('admin.user.index') }}" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-user"></i>
-                        <div data-i18n="Analytics">Data User</div>
-                    </a>
-                </li>
 
                 <!--Data Angakatan-->
                 <li class="{{ Route::is('admin.angkatan.*') ? $active : $nonActive }}">
@@ -155,7 +170,13 @@
                         <div data-i18n="Analytics">Data Kelas</div>
                     </a>
                 </li>
-
+                <!--Data Wali Murid-->
+                <li class="{{ Route::is('admin.walimurid.*') ? $active : $nonActive }}">
+                    <a href="{{ route('admin.walimurid.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-user"></i>
+                        <div data-i18n="Analytics">Data Wali Murid</div>
+                    </a>
+                </li>
                 <!--Data Siswa-->
                 <li class="{{ Route::is('admin.murid.*') ? $active : $nonActive }}">
                     <a href="{{ route('admin.murid.index') }}" class="menu-link">
@@ -164,34 +185,22 @@
                     </a>
                 </li>
 
-                <!--Data Wali Murid-->
-                <li class="{{ Route::is('admin.walimurid.*') ? $active : $nonActive }}">
-                    <a href="{{ route('admin.walimurid.index') }}" class="menu-link">
+                <!--Data User-->
+                <li class="{{ Route::is('admin.user.*') ? $active : $nonActive }}">
+                    <a href="{{ route('admin.user.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-user"></i>
-                        <div data-i18n="Analytics">Data Wali Murid</div>
+                        <div data-i18n="Analytics">Data User</div>
                     </a>
                 </li>
-                <!--Account setting-->
-                <li
-                    class="menu-item {{ Route::is('admin.profile.*', 'admin.instansi.*', 'admin.bank.*') ? 'active open' : '' }}">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                        <div data-i18n="Account Settings">Account Setting</div>
+
+
+                <!--Laporan-->
+                <li class="{{ Route::is('admin.laporan.index') ? $active : $nonActive }}">
+                    <a href="{{ route('admin.laporan.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bxs-report"></i>
+
+                        <div data-i18n="Without menu">Laporan</div>
                     </a>
-                    <ul class="menu-sub">
-                        <li class="{{ Route::is('admin.instansi.*', 'admin.bank.*') ? $active : $nonActive }}">
-                            <a href="{{ route('admin.instansi.index') }}" class="menu-link">
-                                <div data-i18n="Without menu">Setting Instansi</div>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="menu-sub">
-                        <li class="{{ Route::is('admin.profile.*') ? $active : $nonActive }}">
-                            <a href="{{ route('admin.profile.edit', Auth::user()->id) }}" class="menu-link">
-                                <div data-i18n="Without menu">Profile</div>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <!--Logout-->
                 <li class="menu-item">

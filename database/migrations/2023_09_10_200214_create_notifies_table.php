@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tagihan_details', function (Blueprint $table) {
+        Schema::create('notifies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_tagihan');
-            $table->foreignId('id_murids');
-            $table->string('status');
-            $table->string('nama_biaya');
-            $table->integer('jumlah_biaya');
+            $table->string('notif');
             $table->timestamps();
         });
     }
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tagihan_details');
+        Schema::dropIfExists('notifies');
     }
 };

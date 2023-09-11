@@ -2,11 +2,14 @@
 
 namespace App\Console;
 
+use App\Jobs\SendWhatsaapJob;
+use App\Traits\Fonnte;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+    use Fonnte;
     /**
      * Define the application's command schedule.
      */
@@ -18,7 +21,8 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        $schedule->command('notification:cron')->everyFiveSeconds();;
+        $schedule->command('notification:cron')->everyFifteenSeconds();
+        // $schedule->job(new SendWhatsaapJob())->everyFiveSeconds();
     }
 
     /**

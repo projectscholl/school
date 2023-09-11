@@ -83,16 +83,10 @@
 
                     </div>
                     @if (session('message'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>{{ session('message') }}!</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                    @endif
-                    @if (session('delete'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>{{ session('delete') }}!</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ session('message') }}!</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                     @endif
                     <div class="card mt-4">
                         <div class="card-header">Bank Account</div>
@@ -108,8 +102,8 @@
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="logo" class="form-label">No Rekening</label>
-                                            <input class="form-control" type="number" id="no_rekening" name="no_rekening"
-                                                autofocus />
+                                            <input class="form-control" type="number" id="no_rekening"
+                                                name="no_rekening" autofocus />
                                         </div>
                                         <div class="mt-2">
                                             <button type="submit" class="btn btn-primary me-2">Submit</button>
@@ -150,3 +144,4 @@
     </div>
 
 @endsection
+

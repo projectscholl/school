@@ -8,12 +8,15 @@ use App\Models\Instansi;
 use App\Models\Jurusan;
 use App\Models\Kelas;
 use App\Models\Murid;
+use App\Models\Tagihan;
 use App\Models\User;
+use App\Traits\Fonnte;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MuridController extends Controller
 {
+    use Fonnte;
     public function index()
     {
         $instansi = Instansi::first();
@@ -47,7 +50,27 @@ class MuridController extends Controller
             'id_kelas' => 'required',
             'address' => 'required',
         ]);
-        Murid::create($data);
+
+        $murid = Murid::create($data);
+        $biaya = Biaya::with('tagihans')->where('id_jurusans', $murid->id_jurusans)->where('id_angkatans', $murid->id_angkatans)->where('id_kelas', $murid->id_kelas)->get();
+        
+        $user = User::with('murids')->where('id', $murid->id_users)->get();
+
+
+        foreach ($biaya as $key => $biayas) {
+            foreach ($biayas->tagihans as $keys => $tagihans) {
+                foreach ($user as $waliUser) {
+                    if ($tagihans->mounth == null) {
+                        $tes1 = "Nama Tagihan : $biayas->nama_biaya : " . "Untuk Murid : " . $waliUser->name . " " . "Total : " . $tagihans->amount . " " . $tagihans->mounth;
+                        $this->send_message($murid->telepon, $tes1);
+                    } else {
+                        $tes2 = "Nama Tagihan : $biayas->nama_biaya : " . "Untuk Murid :  " . $waliUser->name . "  " . "Total : " . $tagihans->amount . " " . "Untuk Bulan : " . $tagihans->mounth;
+                        $this->send_message($murid->telepon, $tes2);
+                    }
+                }
+            }
+        }
+
         return redirect()->route('admin.murid.index')->with('message', "Murid Berhasil Ditambahkan!!");
     }
 
@@ -69,8 +92,8 @@ class MuridController extends Controller
     {
         $instansi = Instansi::first();
         $murid = Murid::find($id);
-        $users =  User::where('role' , 'WALI')->get();
-        $angkatan = Angkatan::all(); 
+        $users =  User::where('role', 'WALI')->get();
+        $angkatan = Angkatan::all();
         $jurusanGrouped = Jurusan::with('angkatans')->get()->groupBy('id_angkatans');
         $kelasGrouped = Kelas::with('jurusans')->get()->groupBy('id_jurusans');
         $users =  User::where('role', 'WALI')->get();

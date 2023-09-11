@@ -16,8 +16,8 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Profile Settings</span>
-                    Account
+                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Profile Settings /</span>
+                    Profile
                 </h4>
                 <div class="row">
                     @if (session('message'))
@@ -60,7 +60,7 @@
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="old_password" class="form-label">Old Password</label>
-                                                <input class="form-control" type="password" id="password"
+                                                <input class="form-control" type="password" id=""
                                                     name="old_password" placeholder="****" />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -71,7 +71,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="old_password" class="form-label">Password Confirmation</label>
                                                 <input class="form-control" type="password" id="email"
-                                                    name="password_confirmation" placeholder="****" />
+                                                    name="password_confirmation" placeholder="****" />Settings
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="" class="form-label">Image</label>

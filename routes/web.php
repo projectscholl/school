@@ -10,6 +10,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MuridController;
+use App\Http\Controllers\NotifyController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PembayaranWaliController;
@@ -73,7 +74,10 @@ Route::middleware(['IsAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::get('/bayar/{id}', [TagihanController::class, 'bayarIpaymu'])->name('bayar');
     Route::get('/laporan-tagihan', [PdfController::class, 'tagihan'])->name('laporan.tagihan');
     Route::get('/laporan-pembayaran', [PdfController::class, 'pembayaran'])->name('laporan.pembayaran');
-
+    Route::post('/laporan-tagihan/pdf', [LaporanController::class, 'Pdf'])->name('laporan.pdf');
+    Route::get('/pesan-whatsaap', [NotifyController::class, 'index'])->name('pesan-whatsaap.index');
+    Route::get('/pesan-whatsaap/edit/{id}', [NotifyController::class, 'edit'])->name('pesan-whatsaap.edit');
+    Route::put('/pesan-whatsaap/{id}', [NotifyController::class, 'update'])->name('pesan-whatsaap.update');
 
     // Route::get('/laporan', [])
 });

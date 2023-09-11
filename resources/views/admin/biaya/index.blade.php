@@ -9,35 +9,11 @@
 
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
+                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Biaya Manegement /</span>
+                    Biaya
+                </h4>
                 <!-- Bordered Table -->
-                @if (session('message'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>{{ session('message') }}</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <script>
-                        setTimeout(function() {
-                            document.getElementById('auto-dismiss-alert').remove();
-                        }, 2000);
-                    </script>
-                @endif
-                @if (session('delete'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>{{ session('delete') }}!</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <script>
-                        setTimeout(function() {
-                            document.getElementById('auto-dismiss-alert').remove();
-                        }, 2000);
-                    </script>
-                @endif
-                @if (session('pesan'))
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>{{ session('pesan') }}!</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
+
                 <div class="card">
                     <h5 class="card-header">Data Biaya Tables</h5>
                     <a href="{{ route('admin.biaya.create') }}" class="btn btn-primary col-2 ms-4">Tambah Data</a>
@@ -70,7 +46,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-danger show_confirm" type="submit"><i
-                                                        class="bx bx-trash"></i></button>
+                                                            class="bx bx-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -86,6 +62,19 @@
     </div>
 @endsection
 @push('scripts')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}")
+        @endif
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.27/sweetalert2.min.js"
         integrity="sha512-mJQ9oQHzLM2zXe1cwiHmnMddNrmjv1YlaKZe1rM4J7q8JTnNn9UgeJVBV9jyV/lVGdXymVx6odhgwNZjQD8AqA=="
