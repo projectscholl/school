@@ -54,12 +54,15 @@
                                         <td>Status Tagihan : <strong>Belum Dibayar</strong></td>
                                     </tr> --}}
                                     <tr>
+                                        @foreach ($id_tagihans as $item)
+                                            {{ $item }}
+                                        @endforeach
                                         <td>Total Dibayar : <strong class="">Rp {{ number_format($tagihans) }}</strong></td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="container mx-auto d-flex justify-content-center align-items-center gap-2">
-                                <a href="{{ route('wali.tagihan.bayar') }}" class="btn btn-primary my-4 w-50 text-light">Bayar Bank</a>
+                                <a href="{{ route('wali.tagihan.bayar', ['id' => $tagihans, 'idmurid' => $murid->id]) }}" class="btn btn-primary my-4 w-50 text-light">Bayar Bank</a>
                                 <a class="btn btn-primary my-4 w-50 text-light">iPaymu</a>
                             </div>
                         </div>

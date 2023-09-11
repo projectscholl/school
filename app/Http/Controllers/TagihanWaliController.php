@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bank;
 use App\Models\Biaya;
 use App\Models\Instansi;
 use App\Models\Murid;
+use App\Models\Pembayaran;
 use App\Models\Tagihan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,10 +51,10 @@ class TagihanWaliController extends Controller
 
 
         $biayaItems = Biaya::with('angkatans', 'jurusans', 'kelas')
-        ->whereIn('id_angkatans', $idAngkatan)
-        ->whereIn('id_jurusans', $idJurusan)
-        ->whereIn('id_kelas', $idKelas) 
-        ->get();
+            ->whereIn('id_angkatans', $idAngkatan)
+            ->whereIn('id_jurusans', $idJurusan)
+            ->whereIn('id_kelas', $idKelas)
+            ->get();
 
         // dd($biayaItems);
 
@@ -80,7 +82,8 @@ class TagihanWaliController extends Controller
         $IdMurid = $_GET['idmurid'];
         $murid = Murid::find($IdMurid);
         $bulan = Tagihan::where('id_biayas', $tagihan->id)->get();
-        return view('wali.tagihan.detail', compact('instansi', 'tagihan', 'bulan', 'murid'));
+        $confirmedPayments = Pembayaran::where('payment_status');
+        return view('wali.tagihan.detail', compact('instansi', 'tagihan', 'bulan', 'murid', 'confirmedPayments'));
     }
     public function pembayaran(string $id)
     {
@@ -93,15 +96,11 @@ class TagihanWaliController extends Controller
     }
 
 
-    public function bayar()
-    {
-        $instansi = Instansi::first();
-        return view('wali.tagihan.bayar', compact('instansi'));
-    }
 
-    public function result()
+    public function result($id)
     {
         $instansi = Instansi::first();
-        return view('wali.tagihan.result', compact('instansi'));
+        $tagihan = Tagihan::find($id); 
+        return view('wali.tagihan.result', compact('instansi', 'tagihan'));
     }
 }

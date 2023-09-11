@@ -15,8 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_tagihans');
             $table->foreignId('id_users');
-            $table->string('payment_status');
+            $table->string('payment_status')->default('Belum Di Konfirmasi');
             $table->string('payment_links')->nullable();
+            $table->string('total_bayar');
+            $table->string('nama_pengirim')->nullable();
+            $table->string('rek_pengirim')->nullable();
+            $table->string('bukti_transaksi')->nullable();
+            $table->string('identitas_penerima')->nullable();
             $table->timestamps();
         });
     }

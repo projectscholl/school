@@ -27,16 +27,19 @@
                                 </thead>
                                 <tbody class="table-border-bottom-0">
                                     <tr>
-                                        <td>Nama Murid : <strong>Suherman</strong></td>
+                                        <td>Nama Murid : <strong> }}</strong></td>
                                     </tr>
                                     <tr>
-                                        <td>Nama Wali Murid : <strong>Lisa blackwhite</strong></td>
+                                        <td>Nama Wali Murid : <strong>->name }}</strong></td>
                                     </tr>
                                     <tr>
-                                        <td>Kelas : <strong>12</strong></td>
+                                        <td>Angkatan : <strong>->tahun }}</strong></td>
                                     </tr>
                                     <tr>
-                                        <td>Jurusan : <strong>Teknik Komputer</strong></td>
+                                        <td>Jurusan : <strong> {jurusans->nama }}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kelas : <strong>->kelas }}</strong></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -47,9 +50,6 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-                                    <tr>
-                                        <td>Nomor Tagihan : <strong>#09092</strong></td>
-                                    </tr>
                                     <tr>
                                         <td class="d-flex align-items-center">Invoice Tagihan : <button type="submit" class="btn btn-link">
                                             <strong>
@@ -76,7 +76,7 @@
                                         <td>Tanggal Pembayaran : <strong class="">25/05/2050</strong></td>
                                     </tr>
                                     <tr>
-                                        <td>Total Tagihan : <strong class="">500.000</strong></td>
+                                        <td>Total Tagihan : <strong class="">Rp {{ number_format($tagihans) }}</strong></td>
                                     </tr>
                                     <tr>
                                         <td>Jumlah Pembayaran : <strong class="">1000.000</strong></td>

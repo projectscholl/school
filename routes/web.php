@@ -67,8 +67,9 @@ Route::middleware(['IsAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::resource('/tagihan', TagihanController::class);
     Route::resource('/laporan', LaporanController::class);
     Route::resource('/angkatan', AngkatanController::class);
-    Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran');
-    Route::get('/pembayaran/detail', [PembayaranController::class, 'show'])->name('pembayaran.detail');
+    Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
+    Route::get('/pembayaran/detail/{id}', [PembayaranController::class, 'show'])->name('pembayaran.detail');
+    Route::post('/pembayaran/detail/confirm/{id}', [PembayaranController::class, 'confirm'])->name('pembayaran.detail.confirm');
     Route::get('/bayar/{id}', [TagihanController::class, 'bayarIpaymu'])->name('bayar');
     Route::get('/laporan-tagihan', [PdfController::class, 'tagihan'])->name('laporan.tagihan');
     Route::get('/laporan-pembayaran', [PdfController::class, 'pembayaran'])->name('laporan.pembayaran');
@@ -88,9 +89,9 @@ Route::middleware(['Wali'])->group(function () {
     Route::get('/tagihan', [TagihanWaliController::class, 'index'])->name('wali.tagihan.index');
     Route::get('/tagihan/detail/{id}', [TagihanWaliController::class, 'detail'])->name('wali.tagihan.detail');
     Route::get('/tagihan/pembayaran/{id}', [PembayaranWaliController::class, 'index'])->name('wali.tagihan.pembayaran');
-    Route::post('/tagihan/pembayaran/store/{id}', [PembayaranWaliController::class, 'store'])->name('wali.tagihan.pembayaran.store');
-    Route::get('/tagihan/pilih_pembayaran/{id}/{idmurid}', [PembayaranWaliController::class, 'pilih_pembayaran'])->name('wali.tagihan.pilih_pembayaran');
-    Route::get('/tagihan/bayar', [TagihanWaliController::class, 'bayar'])->name('wali.tagihan.bayar');
-    Route::get('/tagihan/result', [TagihanWaliController::class, 'result'])->name('wali.tagihan.result');
+    Route::post('/tagihan/pembayaran/bank', [PembayaranWaliController::class, 'bank'])->name('wali.tagihan.pembayaran.bank');
+    Route::get('/tagihan/pilih_pembayaran/{idmurid}', [PembayaranWaliController::class, 'pilih_pembayaran'])->name('wali.tagihan.pilih_pembayaran');
+    Route::get('/tagihan/bayar/{idmurid}', [PembayaranWaliController::class, 'bayar'])->name('wali.tagihan.bayar');
+    Route::post('/tagihan/pembayaran/create', [PembayaranWaliController::class, 'create'])->name('wali.tagihan.bayar.create');
     Route::get('admin/spp/pdf/{id_users}', [PdfController::class, 'spp'])->name('admin.spp.pdf');
 });

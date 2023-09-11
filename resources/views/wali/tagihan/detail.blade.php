@@ -50,10 +50,14 @@
                                 <tbody>
                                     @foreach ($bulan as $bulans)
                                         <tr>
-                                            <td>{{ $bulans->mounth }}</td>
+                                            <td>{{ $bulans->mounth?? '-' }}</td>
                                             <td>Rp {{ number_format($bulans->amount) }}</td>
                                             <td>
-                                                <div class="text-danger"><strong>{{ $bulans->status }}</strong></div>
+                                                <div class="text-danger">
+                                                    <strong>
+                                                            <div class="text-{{ $bulans->status == 'SUDAH' ? 'success' : 'danger' }}">{{$bulans->status}}</div>
+                                                    </strong>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach

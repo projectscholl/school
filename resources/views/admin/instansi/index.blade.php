@@ -87,7 +87,13 @@
                                 <strong>{{ session('message') }}!</strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                        @endif
+                    @endif
+                    @if (session('delete'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>{{ session('delete') }}!</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                    @endif
                     <div class="card mt-4">
                         <div class="card-header">Bank Account</div>
                         <div class="card-body">
@@ -125,7 +131,7 @@
                                                 <td>{{ $bank->nama }}</td>
                                                 <td>{{ $bank->no_rekening }}</td>
                                                 <td class="d-flex">
-                                                    <form action="#" method="POST">
+                                                    <form action="{{ route('admin.instansi.destroy', $bank->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger show_confirm">Delete</button>

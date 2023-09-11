@@ -34,6 +34,11 @@ class Murid extends Model
     {
         return $this->hasMany(Biaya::class)->where('id_angkatans')->where('id_jurusans')->where('id_kelas');
     }
+    public function pembayarans()
+    {
+        return $this->hasMany(Pembayaran::class, 'id_users');
+    }
+
 
     protected $fillable = [
         'id_users',

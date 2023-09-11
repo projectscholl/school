@@ -15,6 +15,12 @@
         <div class="content-wrapper">
             <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="card">
+                    @if (session('pesan'))
+                        <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+                            <strong>{{ session('pesan') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <h5 class="card-header">Data Pembayaran</h5>
                     <div class="card-body">
                         <div class="table-responsive text-nowrap">
@@ -30,38 +36,33 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-                                    <tr>
-                                        <td>1</td>
-                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Jono</strong>
-                                        </td>
-                                        <td>Online</td>
-                                        <td>Confirmed</td>
-                                        <td>31/02/2090</td>
-                                        <td class="d-flex">
-                                            <a href="{{ route('admin.pembayaran.detail') }}" class="btn btn-warning me-2"><i
-                                                    class='tf-icons bx bx-detail'></i>
-                                                Detail</a>
-                                            <form action="">
-                                                <button class="btn btn-danger"><i class='bx bx-trash'></i> Hapus</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Jono</strong>
-                                        </td>
-                                        <td>Transfer</td>
-                                        <td><strong>Pending</strong></td>
-                                        <td>31/02/2090</td>
-                                        <td class="d-flex">
-                                            <a href="{{ route('admin.pembayaran.detail') }}" class="btn btn-warning me-2"><i
-                                                    class='tf-icons bx bx-detail'></i>
-                                                Detail</a>
-                                            <form action="">
-                                                <button class="btn btn-danger"><i class='bx bx-trash'></i> Hapus</button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                    @foreach ($pembayarans as $index => $pembayar)
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
+                                                <strong>{{ optional($pembayar->murids)->name ?? 'Tidak Ada Murid' }}</strong>
+                                            </td>
+                                            </td>
+                                            <td>
+                                                @if ($pembayar->payment_links)
+                                                    iPaymu
+                                                @else
+                                                    Bank
+                                                @endif
+                                            </td>
+                                            <td>{{ $pembayar->payment_status }}</td>
+                                            <td>{{ $pembayar->updated_at ? $pembayar->updated_at->format('d/m/Y') : '-' }}</td>
+                                            <td class="d-flex">
+                                                <a href="{{ route('admin.pembayaran.detail', $pembayar->id) }}"
+                                                    class="btn btn-warning me-2"><i class='tf-icons bx bx-detail'></i>
+                                                    Detail</a>
+                                                <form action="">
+                                                    <button class="btn btn-danger"><i class='bx bx-trash'></i>
+                                                        Hapus</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

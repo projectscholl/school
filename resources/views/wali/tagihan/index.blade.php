@@ -13,6 +13,12 @@
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
                 <!-- Bordered Table -->
+                @if (session('message'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ session('message') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>                 
+                    @endif
                     <div class="card">
                         <h5 class="card-header">Data Tagihan</h5>
                         <div class="card-body">
@@ -29,7 +35,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($biayaItems as $tagihans)
+                                        @foreach ($biayaItems as $index => $tagihans)
                                             @foreach ($tagihans->murids as $index => $murid)
                                                 <tr>
                                                     <td>{{ $index + 1 }}</td>

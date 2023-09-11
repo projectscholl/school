@@ -27,4 +27,8 @@ class Tagihan extends Model
     {
         return $this->hasMany(TagihanDetail::class);
     }
+    public function pembayarans()
+    {
+        return $this->hasMany(Pembayaran::class, 'id_tagihans');
+    }
 }
