@@ -33,7 +33,9 @@ class Murid extends Model
 
     public function biayas()
     {
-        return $this->hasMany(Biaya::class, 'id_angkatans', 'id_jurusans', 'id_kelas');
+        return $this->hasMany(Biaya::class, 'id_angkatans', 'id_angkatans')
+            ->where('id_jurusans', $this->id_jurusans)
+            ->where('id_kelas', $this->id_kelas);
     }
 
     public function tagihanDetail()
