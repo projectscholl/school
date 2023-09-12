@@ -29,15 +29,8 @@ class LaporanController extends Controller
         $kelas = $request->id_kelas;
         $tahun = Angkatan::where('id', $angkatans)->get();
         $datas = Murid::with('biayas')->where('id_angkatans', $angkatans)->where('id_jurusans', $jurusans)->where('id_kelas', $kelas)->get();
-        foreach ($datas as $murid) {
+        foreach ($datas as $index => $murid) {
             $biaya = Biaya::with('tagihans')->where('id_angkatans', $murid->id_angkatans)->where('id_jurusans', $murid->id_jurusans)->where('id_kelas', $murid->id_kelas)->get();
-
-            // foreach ($biaya as $biayas) {
-            //     print_r($biayas->nama_biaya);
-            //     foreach ($biayas->tagihans as $tagih) {
-            //         $tagihans = Tagihan::where('id_biayas', $biayas->id)->get();
-            //     }
-            // }
         }
         // $pdf = PDF::loadView('admin.pdf.tagihan-pdf', compact('datas', 'biaya', 'tahun'));
 
@@ -48,6 +41,6 @@ class LaporanController extends Controller
         // $pdf = PDF::loadView('admin.pdf.tagihan-pdf', compact('datas', 'biaya', 'tahun'));
         // $pdf->setPaper('A4', 'potrait');
         // return $pdf->stream('tagihan.pdf');
-        return view('admin.pdf.tagihan-pdf', compact('datas', 'biaya', 'tahun'));
+        return view('admin.pdf.tagihan-pdf', compact('biaya', 'datas',  'tahun'));
     }
 }

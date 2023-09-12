@@ -57,7 +57,7 @@ class UserController extends Controller
             'image' => $imageName,
         ]);
         if ($user) {
-            return redirect(route('admin.user.index'))->with('success', 'Data berhasil dibuat');
+            return redirect(route('admin.user.index'))->with('success', 'Berhasil membuat data User = ' . $request->name);
         }
     }
 
@@ -126,6 +126,6 @@ class UserController extends Controller
         }
         $user->delete();
 
-        return redirect()->route('admin.user.index');
+        return redirect()->route('admin.user.index')->with('success');
     }
 }
