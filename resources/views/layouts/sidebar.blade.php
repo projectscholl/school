@@ -133,13 +133,13 @@
                             </a>
                         </li>
                     </ul>
-                    <ul class="menu-sub">
+                    {{-- <ul class="menu-sub">
                         <li class="{{ Route::is('admin.pesan-whatsaap.index') ? $active : $nonActive }}">
                             <a href="{{ route('admin.pesan-whatsaap.index') }}" class="menu-link">
                                 <div data-i18n="Without menu">Notifications</div>
                             </a>
                         </li>
-                    </ul>
+                    </ul> --}}
                 </li>
                 <!-- Layouts -->
                 <li class="menu-header small text-uppercase">
