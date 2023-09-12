@@ -78,6 +78,7 @@ class BiayaController extends Controller
             ]);
             $murid = Murid::with('User')->where('id_angkatans', $biaya->id_angkatans)->where('id_jurusans', $biaya->id_jurusans)->where('id_kelas', $biaya->id_kelas)->get();
             foreach ($murid as $key => $murids) {
+                // print_r($murids->id);
                 TagihanDetail::create([
                     'id_tagihan' => $Tagihan->id,
                     'id_murids' => $murids->id,
@@ -108,7 +109,7 @@ class BiayaController extends Controller
 
 
 
-        return redirect()->route('admin.biaya.index')->with('success', "Biaya Berhasil Dibuat!!!");
+        // return redirect()->route('admin.biaya.index')->with('success', "Biaya Berhasil Dibuat!!!");
     }
 
     /**
@@ -214,13 +215,15 @@ class BiayaController extends Controller
     {
         $biaya = Biaya::findOrFail($id);
         $tagihan = Tagihan::where('id_biayas', $id);
-        foreach ($tagihan as $tagihanUser) {
+        $getTagihan = Tagihan::where('id_biayas', $id)->get();
+
+        foreach ($getTagihan as $tagihanUser) {
             $tagihanDetail = TagihanDetail::where('id_tagihan', $tagihanUser->id);
             $tagihanDetail->delete();
         }
         $tagihan->delete();
         $biaya->delete();
 
-        return redirect()->route('admin.biaya.index');
+        // return redirect()->route('admin.biaya.index');
     }
 }
