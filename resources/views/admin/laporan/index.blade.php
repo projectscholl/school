@@ -37,16 +37,25 @@
                                 @method('POST')
                                 <label for="" class="mb-2">Pilih Tahun Laporan</label>
                                 <div class="d-flex justify-content-around">
-                                    <select name="id_angkatans" id="id_angkatans" class="form-select me-2">
+                                    <select name="id_angkatans" id="id_angkatans"
+                                        class="form-select me-2 @error('id_angkatans')
+                                        is-invalid
+                                    @enderror">
                                         <option value="">--Pilih--</option>
                                         @foreach ($angkatan as $angkatans)
                                             <option value="{{ $angkatans->id }}">{{ $angkatans->tahun }}</option>
                                         @endforeach
                                     </select>
-                                    <select name="id_jurusans" id="id_jurusans" class="form-select me-2">
+                                    <select name="id_jurusans" id="id_jurusans"
+                                        class="form-select me-2 @error('id_jurusans')
+                                        is-invalid
+                                    @enderror">
 
                                     </select>
-                                    <select name="id_kelas" id="id_kelas" class="form-select"></select>
+                                    <select name="id_kelas" id="id_kelas"
+                                        class="form-select @error('id_kelas')
+                                        is-invalid
+                                    @enderror"></select>
                                     <script>
                                         const angkatanSelect = document.getElementById('id_angkatans');
                                         const jurusanSelect = document.getElementById('id_jurusans');

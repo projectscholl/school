@@ -24,6 +24,11 @@ class LaporanController extends Controller
     }
     public function Pdf(Request $request)
     {
+        $data = $request->validate([
+            'id_angkatans' => 'required',
+            'id_jurusans' => 'required',
+            'id_kelas' => 'required',
+        ]);
         $angkatans = $request->id_angkatans;
         $jurusans = $request->id_jurusans;
         $kelas = $request->id_kelas;

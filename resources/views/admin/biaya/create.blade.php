@@ -359,7 +359,6 @@
     </div>
 @endsection
 @push('scripts')
-
     <script src="{{ asset('sneat/js/jquery.mask.min.js') }}"></script>
     <script>
         $(document).ready(function() {

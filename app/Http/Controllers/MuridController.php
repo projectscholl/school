@@ -9,6 +9,7 @@ use App\Models\Jurusan;
 use App\Models\Kelas;
 use App\Models\Murid;
 use App\Models\Tagihan;
+use App\Models\TagihanDetail;
 use App\Models\User;
 use App\Traits\Fonnte;
 use Illuminate\Http\Request;
@@ -53,7 +54,7 @@ class MuridController extends Controller
 
         $murid = Murid::create($data);
         $biaya = Biaya::with('tagihans')->where('id_jurusans', $murid->id_jurusans)->where('id_angkatans', $murid->id_angkatans)->where('id_kelas', $murid->id_kelas)->get();
-        
+
         $user = User::with('murids')->where('id', $murid->id_users)->get();
 
 
@@ -77,12 +78,19 @@ class MuridController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         $instansi = Instansi::first();
         $user = Auth::user();
         $murids = Murid::findOrFail($id);
-        return view('admin.murid.detail', compact('user', 'murids', 'instansi'));
+        $biaya = Biaya::with('tagihans')->where('id_angkatans', $murids->id_angkatans)->where('id_jurusans', $murids->id_jurusans)->where('id_kelas', $murids->id_kelas)->get();
+        foreach ($biaya as $key => $biayas) {
+            $tagihans = Tagihan::where('id_biayas', $biayas->id)->get();
+            foreach ($tagihans as $tagihanMurid) {
+            }
+        }
+        $tagihanDetail = TagihanDetail::with('tagihan')->where('id_murids', $murids->id)->get();
+        return view('admin.murid.detail', compact('user', 'murids', 'instansi', 'biaya', 'tagihanDetail'));
     }
 
     /**
@@ -124,7 +132,10 @@ class MuridController extends Controller
         return redirect()->route('admin.murid.index')->with('pesan', "Murid Berhasil Diedit!!");
     }
 
-
+    public function bayarCash()
+    {
+        
+    }
     /**
      * Remove the specified resource from storage.
      */

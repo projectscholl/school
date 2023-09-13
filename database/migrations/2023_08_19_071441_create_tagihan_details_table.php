@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_tagihan');
             $table->foreignId('id_murids');
-            $table->string('status');
+            $table->string('status')->nullable();
+            $table->date('start_date');
+            $table->date('end_date');
             $table->string('nama_biaya');
             $table->integer('jumlah_biaya');
             $table->timestamps();

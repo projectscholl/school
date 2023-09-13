@@ -4,7 +4,7 @@
         $active = 'menu-item active';
         $nonActive = 'menu-item';
     @endphp
-    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" data-bg-class="bg-menu-theme">
+    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme sidebar" data-bg-class="bg-menu-theme">
         <div class="app-brand demo mb-3" style="height: 100px;">
             <div class="d-flex flex-column">
                 <div class="d-flex align-items-center justify-content-center">

@@ -82,6 +82,8 @@ class BiayaController extends Controller
                 TagihanDetail::create([
                     'id_tagihan' => $Tagihan->id,
                     'id_murids' => $murids->id,
+                    'start_date' => $dateStart[$key],
+                    'end_date' => $dateEnd[$key],
                     'nama_biaya' => $biaya->nama_biaya,
                     'jumlah_biaya' => $n,
                 ]);
@@ -109,7 +111,7 @@ class BiayaController extends Controller
 
 
 
-        // return redirect()->route('admin.biaya.index')->with('success', "Biaya Berhasil Dibuat!!!");
+        return redirect()->route('admin.biaya.index')->with('success', "Biaya Berhasil Dibuat!!!");
     }
 
     /**
@@ -192,6 +194,8 @@ class BiayaController extends Controller
                     $data2 = [
                         'id_tagihan' => $datas[$key]->id,
                         'id_murids' => $murids->id,
+                        'start_date' => $datas[$key]->start_date,
+                        'end_date' => $datas[$key]->end_date,
                         'nama_biaya' => $biaya->nama_biaya,
                         'jumlah_biaya' => $datas[$key]->amount,
                     ];
