@@ -19,13 +19,17 @@ class Tagihan extends Model
         'status',
     ];
 
+    public function murids()
+    {
+        return $this->belongsTo(Murid::class, 'id_murids');
+    }
     public function biayas()
     {
         return $this->belongsTo(Biaya::class, 'id_biayas');
     }
     public function detailTagihan()
     {
-        return $this->hasMany(TagihanDetail::class);
+        return $this->hasMany(TagihanDetail::class, 'id_tagihans');
     }
     public function pembayarans()
     {

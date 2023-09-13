@@ -91,11 +91,11 @@ Route::middleware(['Wali'])->group(function () {
     Route::get('/profile', [ProfileWaliController::class, 'edit'])->name('profile.edit');
     Route::get('wali/siswa', [WaliSiswaController::class, 'index'])->name('wali.siswa.index');
     Route::get('/tagihan', [TagihanWaliController::class, 'index'])->name('wali.tagihan.index');
-    Route::get('/tagihan/detail/{id}', [TagihanWaliController::class, 'detail'])->name('wali.tagihan.detail');
-    Route::get('/tagihan/pembayaran/{id}', [PembayaranWaliController::class, 'index'])->name('wali.tagihan.pembayaran');
-    Route::post('/tagihan/pembayaran/bank', [PembayaranWaliController::class, 'bank'])->name('wali.tagihan.pembayaran.bank');
-    Route::get('/tagihan/pilih_pembayaran/{idmurid}', [PembayaranWaliController::class, 'pilih_pembayaran'])->name('wali.tagihan.pilih_pembayaran');
-    Route::get('/tagihan/bayar/{idmurid}', [PembayaranWaliController::class, 'bayar'])->name('wali.tagihan.bayar');
+    Route::get('/tagihan/detail/{id}/{idmurid}', [TagihanWaliController::class, 'detail'])->name('wali.tagihan.detail');
+    Route::get('/tagihan/pembayaran/{id}/{idmurid}', [PembayaranWaliController::class, 'index'])->name('wali.tagihan.pembayaran');
+    Route::post('/tagihan/pembayaran/bank/{id}/{idmurid}', [PembayaranWaliController::class, 'bank'])->name('wali.tagihan.pembayaran.bank');
+    Route::get('/tagihan/pilih_pembayaran/{id}/{idmurid}', [PembayaranWaliController::class, 'pilih_pembayaran'])->name('wali.tagihan.pilih_pembayaran');
+    Route::get('/tagihan/bayar/{id}/p{idmurid}', [PembayaranWaliController::class, 'bayar'])->name('wali.tagihan.bayar');
     Route::post('/tagihan/pembayaran/create', [PembayaranWaliController::class, 'create'])->name('wali.tagihan.bayar.create');
     Route::get('admin/spp/pdf/{id_users}', [PdfController::class, 'spp'])->name('admin.spp.pdf');
 });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Instansi;
 use App\Models\Pembayaran;
 use App\Models\Tagihan;
+use App\Models\TagihanDetail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,19 +26,24 @@ class PembayaranController extends Controller
         $pembayaran = Pembayaran::find($id);
         return view('admin.pembayaran.detail', compact('user', 'instansi', 'pembayaran'));
     }
+
     public function confirm(Request $request, string $id)
     {
         $pembayaran = Pembayaran::find($id);
-        $tagihan = Tagihan::where('id', $pembayaran->id);
 
         if (!$pembayaran) {
             return response()->json(['message' => 'Pembayaran tidak ditemukan'], 404);
         }
+
+        $tagihan = Tagihan::where('id_biayas', $pembayaran->id);
+
+        if (!$tagihan) {
+            return response()->json(['message' => 'Tagihan tidak ditemukan'], 404);
+        }
+
         $tagihan->update(['status' => 'SUDAH']);
         $pembayaran->update(['payment_status' => 'Dikonfirmasi']);
-        
-        
 
-        return redirect()->route('admin.pembayaran')->with('pesan', 'Pembayaran Berhasil Di Konfirmasi');
+        return redirect()->route('admin.pembayaran.index')->with('pesan', 'Pembayaran Berhasil Di Konfirmasi');
     }
 }

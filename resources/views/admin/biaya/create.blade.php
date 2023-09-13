@@ -81,7 +81,7 @@
                                         </tr>
                                         <tr>
                                             <td>2</td>
-                                            <td>Agustus<input type="hidden" value="Agustus" name="mounth[]"
+                                            <td>Agustus <input type="hidden" value="Agustus" name="mounth[]"
                                                     class="mounth tess">
                                             </td>
                                             <td><input type="text"
@@ -359,7 +359,6 @@
     </div>
 @endsection
 @push('scripts')
-
     <script src="{{ asset('sneat/js/jquery.mask.min.js') }}"></script>
     <script>
         $(document).ready(function() {

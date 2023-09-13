@@ -16,11 +16,10 @@ class PembayaranWaliController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(string $id)
+    public function index(string $id, $IdMurid)
     {
         $instansi = Instansi::first();
         $tagihan = Biaya::find($id);
-        $IdMurid = $_GET['idmurid'];
         $murid = Murid::find($IdMurid);
         $bulan = Tagihan::where('id_biayas', $tagihan->id)->get();
         return view('wali.tagihan.pembayaran', compact('instansi', 'bulan', 'tagihan', 'murid'));
@@ -81,7 +80,7 @@ class PembayaranWaliController extends Controller
         session(['id_tagihans' => $id_tagihans]);
 
         return view('wali.tagihan.pilih_pembayaran', [
-            'id' => $biaya->id,
+            // 'id' => $biaya->id,
             'murid' => $murid,
             'tagihans' => array_sum($tagihans),
             'id_tagihans' => $id_tagihans
@@ -100,12 +99,13 @@ class PembayaranWaliController extends Controller
     }
 
 
-    public function bayar(Request $request, string $id)
+    public function bayar(Request $request, string $id, $idmurid)
     {
         $instansi = Instansi::first();
         $bank = Bank::all();
+        $tagihan = Biaya::find($id);
         $tagihan = Tagihan::find($id);
-        // $murid = Murid::find($idmurid);
+        $murid = Murid::find($idmurid);
         $totalTagihan = session('tagihans');
         $id_tagihans = session('id_tagihans');
         // dd($tagihan);

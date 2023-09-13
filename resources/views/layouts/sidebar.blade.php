@@ -106,7 +106,7 @@
                 </li>
                 <!--Data Pembayaran-->
                 <li class="{{ Route::is('admin.pembayaran', 'admin.pembayaran.detail') ? $active : $nonActive }}">
-                    <a href="{{ route('admin.pembayaran') }}" class="menu-link">
+                    <a href="{{ route('admin.pembayaran.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-credit-card-front"></i>
 
                         <div data-i18n="Without menu">Data Pembayaran</div>
@@ -133,13 +133,13 @@
                             </a>
                         </li>
                     </ul>
-                    {{-- <ul class="menu-sub">
+                    <ul class="menu-sub">
                         <li class="{{ Route::is('admin.pesan-whatsaap.index') ? $active : $nonActive }}">
                             <a href="{{ route('admin.pesan-whatsaap.index') }}" class="menu-link">
                                 <div data-i18n="Without menu">Notifications</div>
                             </a>
                         </li>
-                    </ul> --}}
+                    </ul>
                 </li>
                 <!-- Layouts -->
                 <li class="menu-header small text-uppercase">

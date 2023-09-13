@@ -48,7 +48,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($bulan as $bulans)
+                                    @foreach ($tagihanDetails as $bulans)
                                         <tr>
                                             <td>{{ $bulans->mounth?? '-' }}</td>
                                             <td>Rp {{ number_format($bulans->amount) }}</td>
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('wali.tagihan.pembayaran', $tagihan->id).'?idmurid='.$murid->id }}" class="btn btn-primary me-2 mt-3 w-25">Detail</a>
+                <a href="{{ route('wali.tagihan.pembayaran', ['id' => $tagihan->id, 'idmurid' => $murid->id]) }}" class="btn btn-primary mt-4">Detail</a>
             </div>
             <!--/ Bordered Table -->
         </div>

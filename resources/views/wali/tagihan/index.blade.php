@@ -40,13 +40,13 @@
                                                 <tr>
                                                     <td>{{ $index + 1 }}</td>
                                                     <td>
-                                                        {{ $murid->name }}<br>
+                                                        {{ $murid->name ?? 'Tidak Ada Data' }}<br>
                                                     </td>
-                                                    <td>{{ $tagihans->angkatans->tahun }}</td>
-                                                    <td>{{ $tagihans->jurusans->nama }}</td>
-                                                    <td>{{ $tagihans->kelas->kelas }}</td>
+                                                    <td>{{ $tagihans->angkatans->tahun ?? 'Tidak Ada Data' }}</td>
+                                                    <td>{{ $tagihans->jurusans->nama ?? 'Tidak Ada Data' }}</td>
+                                                    <td>{{ $tagihans->kelas->kelas ?? 'Tidak Ada Data' }}</td>
                                                     <td class="d-flex">
-                                                        <a href="{{ route('wali.tagihan.detail', $tagihans->id).'?idmurid='.$murid->id }}" class="btn btn-primary me-2">Detail</a>
+                                                        <a href="{{ route('wali.tagihan.detail', ['id' => $tagihans->id, 'idmurid' => $murid->id]) }}" class="btn btn-primary me-2">Detail</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

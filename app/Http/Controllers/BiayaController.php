@@ -69,26 +69,16 @@ class BiayaController extends Controller
 
         foreach ($valid as $index => $n) {
 
-        if ($request->jenis_biaya == 'routine') {
-            foreach ($amount as $index => $n) {
-    
-                $Tagihan = Tagihan::create([
-                    'id_biayas' => $biaya->id,
-                    'mounth' => $mounth[$index],
-                    'amount' => $n,
-                    'start_date' => $dateStart[$index],
-                    'end_date' => $dateEnd[$index],
-                ]);
-            }
-        } else {
             $Tagihan = Tagihan::create([
                 'id_biayas' => $biaya->id,
-                'amount' => $amount[0],
-                'start_date' => $dateStart[0],
-                'end_date' => $dateEnd[0],
+                'mounth' => $mounth[$index],
+                'amount' => $n,
+                'start_date' => $dateStart[$index],
+                'end_date' => $dateEnd[$index],
             ]);
             $murid = Murid::with('User')->where('id_angkatans', $biaya->id_angkatans)->where('id_jurusans', $biaya->id_jurusans)->where('id_kelas', $biaya->id_kelas)->get();
             foreach ($murid as $key => $murids) {
+                // print_r($murids->id);
                 TagihanDetail::create([
                     'id_tagihan' => $Tagihan->id,
                     'id_murids' => $murids->id,
@@ -121,7 +111,6 @@ class BiayaController extends Controller
 
         return redirect()->route('admin.biaya.index')->with('success', "Biaya Berhasil Dibuat!!!");
     }
-        }
 
     /**
      * Display the specified resource.
@@ -226,13 +215,15 @@ class BiayaController extends Controller
     {
         $biaya = Biaya::findOrFail($id);
         $tagihan = Tagihan::where('id_biayas', $id);
-        foreach ($tagihan as $tagihanUser) {
+        $getTagihan = Tagihan::where('id_biayas', $id)->get();
+
+        foreach ($getTagihan as $tagihanUser) {
             $tagihanDetail = TagihanDetail::where('id_tagihan', $tagihanUser->id);
             $tagihanDetail->delete();
         }
         $tagihan->delete();
         $biaya->delete();
 
-        return redirect()->route('admin.biaya.index');
+        // return redirect()->route('admin.biaya.index');
     }
 }
