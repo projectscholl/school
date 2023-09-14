@@ -29,12 +29,13 @@ class PembayaranController extends Controller
 
     public function confirm(Request $request, string $id)
     {
-        $pembayaran = Pembayaran::find($id);
+        $pembayaran = Pembayaran::with('TagihanDetail')->find($id);
 
         if (!$pembayaran) {
             return response()->json(['message' => 'Pembayaran tidak ditemukan'], 404);
         }
-        $tagihan = Tagihan::where('id_biayas', $pembayaran->id)->first();
+
+        $tagihan = Tagihan::where('id_biayas', $pembayaran->TagihanDetail->tagihan->biayas->id)->first();
         $tagihanDetail = TagihanDetail::where('id_tagihan', $tagihan->id)->where('id_murids', $pembayaran->TagihanDetail->id_murids)->first();
 
         if (!$tagihan) {

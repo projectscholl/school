@@ -13,6 +13,8 @@ class InstansiSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('instansis')->truncate();
+        
         DB::table('instansis')->insert([
             'logo' => 'storage/image/tutwuri1.png',
             'name' => 'Tadika',

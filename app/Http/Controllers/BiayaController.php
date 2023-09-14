@@ -71,7 +71,7 @@ class BiayaController extends Controller
 
             $Tagihan = Tagihan::create([
                 'id_biayas' => $biaya->id,
-                'mounth' => $mounth[$index],
+                'mounth' => $mounth ? $mounth[$index] : '',
                 'amount' => $n,
                 'start_date' => $dateStart[$index],
                 'end_date' => $dateEnd[$index],
@@ -224,6 +224,6 @@ class BiayaController extends Controller
         $tagihan->delete();
         $biaya->delete();
 
-        // return redirect()->route('admin.biaya.index');
+        return redirect()->route('admin.biaya.index');
     }
 }

@@ -65,8 +65,8 @@ class WaliMuridController extends Controller
     {
         $instansi = Instansi::first();
         $user = User::find($id);
-        $murid = Murid::all();
-        return view('admin.walimurid.detail', compact('user', 'murid', 'instansi'));
+        $murids = Murid::where('id_users', $user->id)->get();
+        return view('admin.walimurid.detail', compact('user', 'murids', 'instansi'));
     }
 
     /**
