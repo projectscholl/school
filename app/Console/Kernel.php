@@ -21,7 +21,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        $schedule->command('notification:cron')->everyFifteenSeconds();
+        $schedule->command('notification:cron')->timezone('Asia/Jakarta')->dailyAt('10.38');
         // $schedule->job(new SendWhatsaapJob())->everyFiveSeconds();
     }
 

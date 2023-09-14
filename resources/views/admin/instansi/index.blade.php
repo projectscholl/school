@@ -125,7 +125,7 @@
                                                 <td>{{ $bank->nama }}</td>
                                                 <td>{{ $bank->no_rekening }}</td>
                                                 <td class="d-flex">
-                                                    <form action="#" method="POST">
+                                                    <form action="{{ route('admin.instansi.destroy', $bank->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger show_confirm">Delete</button>

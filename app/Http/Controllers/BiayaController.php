@@ -30,6 +30,7 @@ class BiayaController extends Controller
     public function create()
     {
         $user = Auth::user();
+        $murids = Murid::first();
         $angkatan = Angkatan::all();
         $jurusanGrouped = Jurusan::with('angkatans')->get()->groupBy('id_angkatans');
         $kelasGrouped = Kelas::with('jurusans')->get()->groupBy('id_jurusans');
@@ -82,8 +83,8 @@ class BiayaController extends Controller
                 TagihanDetail::create([
                     'id_tagihan' => $Tagihan->id,
                     'id_murids' => $murids->id,
-                    'start_date' => $dateStart[$key],
-                    'end_date' => $dateEnd[$key],
+                    'start_date' => $dateStart[$index],
+                    'end_date' => $dateEnd[$index   ],
                     'nama_biaya' => $biaya->nama_biaya,
                     'jumlah_biaya' => $n,
                 ]);

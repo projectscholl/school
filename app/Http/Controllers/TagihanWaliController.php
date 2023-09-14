@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bank;
 use App\Models\Biaya;
 use App\Models\Instansi;
 use App\Models\Murid;
+use App\Models\Pembayaran;
 use App\Models\Tagihan;
+use App\Models\TagihanDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,17 +45,17 @@ class TagihanWaliController extends Controller
     {
         $user = Auth::user();
         $instansi = Instansi::first();
-        $anakWaliMurid = $user->murid;
+        $anakWaliMurid = $user->murids;
         $idAngkatan = $anakWaliMurid->pluck('id_angkatans')->toArray();
         $idJurusan = $anakWaliMurid->pluck('id_jurusans')->toArray();
         $idKelas = $anakWaliMurid->pluck('id_kelas')->toArray();
 
 
         $biayaItems = Biaya::with('angkatans', 'jurusans', 'kelas')
-        ->whereIn('id_angkatans', $idAngkatan)
-        ->whereIn('id_jurusans', $idJurusan)
-        ->whereIn('id_kelas', $idKelas) 
-        ->get();
+            ->whereIn('id_angkatans', $idAngkatan)
+            ->whereIn('id_jurusans', $idJurusan)
+            ->whereIn('id_kelas', $idKelas)
+            ->get();
 
         // dd($biayaItems);
 
@@ -72,46 +75,33 @@ class TagihanWaliController extends Controller
     // }
 
 
-
-    public function detail(string $id)
+    public function detail(string $id, $IdMurid)
     {
         $instansi = Instansi::first();
         $tagihan = Biaya::find($id);
-        $IdMurid = $_GET['idmurid'];
         $murid = Murid::find($IdMurid);
         $bulan = Tagihan::where('id_biayas', $tagihan->id)->get();
-        // dd($IdMurid);
-        return view('wali.tagihan.detail', compact('instansi', 'tagihan', 'bulan', 'murid'));
+        $confirmedPayments = Pembayaran::where('payment_status');
+        return view('wali.tagihan.detail', compact('instansi', 'tagihan', 'bulan', 'murid', 'confirmedPayments'));
     }
-    public function pembayaran(string $id)
+
+
+
+    public function pembayaran(string $id, $IdMurid)
     {
         $instansi = Instansi::first();
         $tagihan = Biaya::find($id);
-        $IdMurid = $_GET['idmurid'];
         $murid = Murid::find($IdMurid);
-        $bulan = Tagihan::where('id_biayas', $tagihan->id)->get();
+        $bulan = Tagihan::where('id_tagihans', $tagihan->id)->get();
         return view('wali.tagihan.pembayaran', compact('instansi', 'bulan', 'tagihan', 'murid'));
     }
 
-    
-    public function pilih_pembayaran(Request $request, string $id)
-    {
-        $user = Auth::user();
-        $instansi = Instansi::first();
-        $tagihan = Biaya::find($id);
-        $idMurid = $_GET['idmurid'];
-        $murid = Murid::find($idMurid);
-        return view('wali.tagihan.pilih_pembayaran', compact('instansi', 'user', 'tagihan', 'murid'));
-    }
-    public function bayar()
-    {
-        $instansi = Instansi::first();
-        return view('wali.tagihan.bayar', compact('instansi'));
-    }
 
-    public function result()
+
+    public function result($id)
     {
         $instansi = Instansi::first();
-        return view('wali.tagihan.result', compact('instansi'));
+        $tagihan = Tagihan::find($id);
+        return view('wali.tagihan.result', compact('instansi', 'tagihan'));
     }
 }

@@ -45,38 +45,41 @@
                     </div>
                     <div class="card-body">
                         <ul class="">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Tagihan</th>
-                                        <th>Tanggal Penagihan</th>
-                                        <th>Total Tagihan</th>
-                                        <th>Pilih</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    @if ($tagihanDetail != null)
-                                        @foreach ($tagihanDetail as $key => $tagihan)
-                                            <tr>
-                                                <td>{{ $key + 1 }}</td>
-                                                <td>{{ $tagihan->nama_biaya }}</td>
-                                                <td>{{ Carbon\Carbon::parse($tagihan->start_date)->toFormattedDateString() }}
-                                                </td>
-                                                <td>{{ $tagihan->jumlah_biaya }}</td>
-                                                <td><input type="checkbox" name="total[]"
-                                                        value="{{ $tagihan->jumlah_biaya }}"></td>
-                                            </tr>
-                                        @endforeach
-                                    @else
+                            <form action="{{ route('admin.murid.bayar', $murids->id) }}" method="POST">
+                                @csrf
+                                @method('POST')
+                                <table class="table table-bordered mb-3">
+                                    <thead>
                                         <tr>
-                                            <td class="w-100">null</td>
+                                            <th>No</th>
+                                            <th>Nama Tagihan</th>
+                                            <th>Tanggal Penagihan</th>
+                                            <th>Total Tagihan</th>
+                                            <th>Pilih</th>
                                         </tr>
-                                    @endif
-
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @if ($tagihanDetail != null)
+                                            @foreach ($tagihanDetail as $key => $tagihan)
+                                                <tr>
+                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $tagihan->nama_biaya }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($tagihan->start_date)->toFormattedDateString() }}
+                                                    </td>
+                                                    <td>Rp {{ number_format($tagihan->jumlah_biaya, 2, ',', '.') }}</td>
+                                                    <td><input type="checkbox" name="total[]"
+                                                            value="{{ $tagihan->jumlah_biaya }}"></td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td class="w-100">null</td>
+                                            </tr>
+                                        @endif
+                                    </tbody>
+                                </table>
+                                <button type="submit" href="" class="btn btn-primary">Bayar</button>
+                            </form>
                         </ul>
                     </div>
                 </div>

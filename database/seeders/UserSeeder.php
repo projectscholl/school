@@ -22,14 +22,33 @@ class UserSeeder extends Seeder
             'image' => 'storage/image/profile1.jpeg',
             'password' => Hash::make('password'),
         ]);
-
         DB::table('users')->insert([
-            'name' => 'Alegrich',
+            'name' => 'wali',
+            'email' => 'wali@example.com',
+            'role' => 'WALI',
+            'telepon' => '089789766754',
+            'password' => Hash::make('sandi'),
+        ]);
+        DB::table('users')->insert([
+            'name' => 'admin2',
+            'email' => 'admin2@example.com',
+            'role' => 'ADMIN',
+            'telepon' => '0923131290312',
+            'password' => Hash::make('password'),
+        ]);
+        DB::table('users')->insert([
+            'name' => 'alegrich',
             'email' => 'alegrich@example.com',
             'role' => 'ADMIN',
             'telepon' => '087784644359',
-            'image' => '/storage/image/1692242791.jpg',
-            'password' => Hash::make('alegrichrey12123'),
+            'password' => Hash::make('password'),
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Ahmad Subardjo',
+            'email' => 'subarjo@example.com',
+            'role' => 'WALI',
+            'telepon' => '+624104028706',
+            'password' => Hash::make('sandi'),
         ]);
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title, Pembayaran')
+@section('title', 'Pembayaran')
 @section('content')
 
     <!-- Layout container -->
@@ -19,19 +19,19 @@
                     <h5 class="card-header">Detail Pembayaran</h5>
                     <div class="table-responsive text-nowrap">
                         <table class="table">
-                            <thead class="table-dark">
+                            {{-- <thead class="table-dark">
                                 <tr>
                                     <th class="text-white">Murid Information</th>
                                 </tr>
-                            </thead>
-                            <tbody class="table-border-bottom-0">
+                            </thead> --}}
+                            {{-- <tbody class="table-border-bottom-0">
                                 <tr>
                                     <td>Nama Murid : <strong>Jono</strong></td>
                                 </tr>
                                 <tr>
-                                    <td>Nama Wali Murid : <strong>Lisa blackwhite</strong></td>
+                                    <td>Nama Wali Murid : <strong>{{ $pembayaran-> }}</strong></td>
                                 </tr>
-                            </tbody>
+                            </tbody> --}}
                         </table>
                         <table class="table">
                             <thead class="table-dark">
@@ -41,7 +41,7 @@
                             </thead>
                             <tbody class="table-border-bottom-0">
                                 <tr>
-                                    <td>Nomor Tagihan : <strong>#09092</strong></td>
+                                    <td>Nomor Tagihan : <strong>#{{ $pembayaran->id }}</strong></td>
                                 </tr>
                                 <tr>
                                     <td class="d-flex align-items-center">Invoice Tagihan : <button type="submit"
@@ -52,7 +52,7 @@
                                         </button></td>
                                 </tr>
                                 <tr>
-                                    <td>Total Tagihan : <strong class="">500.000</strong></td>
+                                    <td>Total Tagihan : <strong class="">Rp {{ number_format($pembayaran->total_bayar)}}</strong></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -64,36 +64,47 @@
                             </thead>
                             <tbody class="table-border-bottom-0">
                                 <tr>
-                                    <td>Metode Pembayaran : <strong>Online</strong></td>
+                                    <td>Metode Pembayaran : <strong>@if ($pembayaran->payment_links)
+                                        iPaymu
+                                    @else
+                                        Bank
+                                    @endif</td></strong></td>
                                 </tr>
                                 <tr>
-                                    <td>Tanggal Pembayaran : <strong class="">25/05/2050</strong></td>
+                                    <td>Tanggal Pembayaran : <strong class="">{{ $pembayaran->created_at }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Total Tagihan : <strong class="">500.000</strong></td>
+                                    <td>Total Tagihan : <strong class="">Rp {{ number_format($pembayaran->total_bayar)}}</strong></td>
                                 </tr>
                                 <tr>
-                                    <td>Jumlah Pembayaran : <strong class="">1000.000</strong></td>
+                                    <td>Jumlah Pembayaran : <strong class="">Rp {{ number_format($pembayaran->total_bayar)}}</strong></td>
                                 </tr>
                                 <tr>
-                                    <td>Bukti Pembayaran : <strong class="">-</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>Status Konfirmasi : <strong class="">Pending</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>Status Pembayaran : <strong class="">Bayar</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>Tanggal Konfirmasi : <strong class="">25/05/2050</strong></td>
-                                </tr>
-                                <tr></tr>
+                                    <td>Bukti Pembayaran : <img src="{{ asset('storage/image/' . $pembayaran->bukti_transaksi) }}" alt="Bukti Transaksi" width="100"></td>
+                                </tr>                                
                             </tbody>
                         </table>
-                        <button class="btn btn-primary my-4">Confirm</button>
+                        <form action="{{ route('admin.pembayaran.detail.confirm', $pembayaran->id) }}" method="POST">
+                            @csrf
+                            @if ($pembayaran->payment_status == 'Belum Di Konfirmasi')
+                                <button id="confirmButton" class="btn btn-primary my-4 w-100">Confirm</button>
+                            @else
+                                <button id="confirmButton" class="btn btn-primary my-4 w-100" disabled>Tagihan Sudah Lunas</button>
+                            @endif
+                        </form>                                           
                     </div>
                 </div>
             </div>
         </div>
 
+
+        <script>
+            
+            var confirmButton = document.getElementById('confirmButton');
+        
+            
+            confirmButton.addEventListener('click', function () {
+            confirmButton.style.display = 'none';
+            });
+        </script>        
     @endsection

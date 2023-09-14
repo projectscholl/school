@@ -42,6 +42,11 @@ class Murid extends Model
     {
         return $this->hasMany(TagihanDetail::class, 'id_murids');
     }
+    public function pembayarans()
+    {
+        return $this->hasMany(Pembayaran::class, 'id_users');
+    }
+
 
     protected $fillable = [
         'id_users',

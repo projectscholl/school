@@ -50,11 +50,16 @@
                                 <tbody>
                                     @foreach ($bulan as $bulans)
                                         <tr>
-                                            <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $bulans->start_date)->format('F') }}
-                                            </td>
+                                            <td>{{ $bulans->mounth ?? '-' }}</td>
                                             <td>Rp {{ number_format($bulans->amount) }}</td>
                                             <td>
-                                                <div class="text-danger"><strong>{{ $bulans->status }}</strong></div>
+                                                <div class="text-danger">
+                                                    <strong>
+                                                        <div
+                                                            class="text-{{ $bulans->status == 'SUDAH' ? 'success' : 'danger' }}">
+                                                            {{ $bulans->status }}</div>
+                                                    </strong>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -67,7 +72,8 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('wali.tagihan.pembayaran', $tagihan->id).'?idmurid='.$murid->id }}" class="btn btn-primary me-2 mt-3 w-25">Detail</a>
+                <a href="{{ route('wali.tagihan.pembayaran', ['id' => $tagihan->id, 'idmurid' => $murid->id]) }}"
+                    class="btn btn-primary mt-4">Detail</a>
             </div>
             <!--/ Bordered Table -->
         </div>

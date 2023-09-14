@@ -1,27 +1,25 @@
 @extends('layouts.master')
 
-@section('title, detail')
+@section('title', 'Siswa')
 @section('content')
-
+    <!-- Layout wrapper -->
     <!-- Layout container -->
-    <div class="layout-page overflow-auto">
+    <div class="layout-page">
         <!-- Navbar -->
-        <x-navbar>
-
-        </x-navbar>
-
-        <!-- / Navbar -->
-
+        <x-navbar></x-navbar>
         <div class="content-wrapper">
+
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="card">
-                    <h5 class="card-header">Detail Pembayaran</h5>
+                    <div class="card-header">
+                        <h5>Total Bayar</h5>
+                    </div>
                     <div class="card-body">
                         <div class="table-responsive text-nowrap">
                             <table class="table">
                                 <thead class="table-dark">
-                                    <tr>    
+                                    <tr>
                                         <th class="text-white">Murid Information</th>
                                     </tr>
                                 </thead>
@@ -46,29 +44,17 @@
                             <table class="table">
                                 <thead class="table-dark">
                                     <tr>
-                                        <th class="text-white">Tagihan Information</th>
+                                        <th class="text-white">Murid Information</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-                                    {{-- <tr>
-                                        <td>Status Tagihan : <strong>Belum Dibayar</strong></td>
-                                    </tr> --}}
                                     <tr>
-                                        @foreach ($id_tagihans as $item)
-                                            {{ $item }}
-                                        @endforeach
-                                        <td>Total Dibayar : <strong class="">Rp {{ number_format($tagihans) }}</strong></td>
+                                        <td>Total Pembayaran : <strong>Rp.{{ number_format($total) }}</strong></td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <div class="container mx-auto d-flex justify-content-center align-items-center gap-2">
-                                <a href="{{ route('wali.tagihan.bayar', ['id' => $tagihans, 'idmurid' => $murid->id]) }}" class="btn btn-primary my-4 w-50 text-light">Bayar Bank</a>
-                                <a class="btn btn-primary my-4 w-50 text-light">iPaymu</a>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-    @endsection
+        @endsection

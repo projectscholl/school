@@ -88,11 +88,11 @@ class WaliMuridController extends Controller
             'name' => 'max:255|string',
             'email' => 'email|unique:users,email,' . $id,
             'telepon' => 'required|string',
-            'password' => 'required',
+            // 'password' => 'required',
         ]);
         $user = User::find($id);
-        $user->update($data);
         // dd($user);
+        $user->update($data);
         return redirect()->route('admin.walimurid.index')->with('pesan', "Data Wali Murid berhasil diperbarui!!");
     }
 

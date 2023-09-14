@@ -40,7 +40,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="nama">NISN</label>
-                                <input type="text" class="form-control" name="nisn" id="nisn"
+                                <input type="text" class="form-control mb-3" name="nisn" id="nisn"
                                     placeholder="Masukkan NISN" required>
                                 @error('nisn')
                                     <div class="text-danger">{{ $message }}</div>

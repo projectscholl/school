@@ -105,8 +105,8 @@
                     </a>
                 </li>
                 <!--Data Pembayaran-->
-                <li class="{{ Route::is('admin.pembayaran', 'admin.pembayaran.detail') ? $active : $nonActive }}">
-                    <a href="{{ route('admin.pembayaran') }}" class="menu-link">
+                <li class="{{ Route::is('admin.pembayaran.*', 'admin.pembayaran.detail') ? $active : $nonActive }}">
+                    <a href="{{ route('admin.pembayaran.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-credit-card-front"></i>
 
                         <div data-i18n="Without menu">Data Pembayaran</div>

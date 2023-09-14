@@ -26,7 +26,7 @@ class InstansiController extends Controller
     {
         $data = $request->validate([
             'nama' => 'required|max:255',
-            'no_rekening' => 'required|max:10',
+            'no_rekening' => 'required|max:16|min:16',
         ]);
 
         Bank::create($data);
@@ -73,5 +73,11 @@ class InstansiController extends Controller
         $instansi->update($data);
 
         return redirect()->route('admin.instansi.index')->with('pesan', "Data Instansi berhasil diperbarui!!");
+    }
+    public function destroy(string $Id)
+    {
+        $bank = Bank::findOrFail($Id);
+        $bank->delete();
+        return redirect()->route('admin.instansi.index')->with('delete', "Data Bank berhasil Di Hapus!!");
     }
 }

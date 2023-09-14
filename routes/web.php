@@ -68,8 +68,9 @@ Route::middleware(['IsAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::resource('/tagihan', TagihanController::class);
     Route::resource('/laporan', LaporanController::class);
     Route::resource('/angkatan', AngkatanController::class);
-    Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran');
-    Route::get('/pembayaran/detail', [PembayaranController::class, 'show'])->name('pembayaran.detail');
+    Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
+    Route::get('/pembayaran/detail/{id}', [PembayaranController::class, 'show'])->name('pembayaran.detail');
+    Route::post('/pembayaran/detail/confirm/{id}', [PembayaranController::class, 'confirm'])->name('pembayaran.detail.confirm');
     Route::get('/bayar/{id}', [TagihanController::class, 'bayarIpaymu'])->name('bayar');
     Route::get('/laporan-tagihan', [PdfController::class, 'tagihan'])->name('laporan.tagihan');
     Route::get('/laporan-pembayaran', [PdfController::class, 'pembayaran'])->name('laporan.pembayaran');
@@ -77,6 +78,8 @@ Route::middleware(['IsAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::get('/pesan-whatsaap', [NotifyController::class, 'index'])->name('pesan-whatsaap.index');
     Route::get('/pesan-whatsaap/edit/{id}', [NotifyController::class, 'edit'])->name('pesan-whatsaap.edit');
     Route::put('/pesan-whatsaap/{id}', [NotifyController::class, 'update'])->name('pesan-whatsaap.update');
+    Route::post('/bayar/{id}', [PembayaranWaliController::class, 'bayarCash'])->name('murid.bayar');
+
 
     // Route::get('/laporan', [])
 });
@@ -90,11 +93,11 @@ Route::middleware(['Wali'])->group(function () {
     Route::get('/profile', [ProfileWaliController::class, 'edit'])->name('profile.edit');
     Route::get('wali/siswa', [WaliSiswaController::class, 'index'])->name('wali.siswa.index');
     Route::get('/tagihan', [TagihanWaliController::class, 'index'])->name('wali.tagihan.index');
-    Route::get('/tagihan/detail/{Id}', [TagihanWaliController::class, 'detail'])->name('wali.tagihan.detail');
-    Route::get('/tagihan/pembayaran/{id}', [PembayaranWaliController::class, 'index'])->name('wali.tagihan.pembayaran');
-    Route::post('/tagihan/pembayaran/store', [PembayaranWaliController::class, 'store'])->name('wali.tagihan.pembayaran.store');
-    Route::get('/tagihan/pilih_pembayaran/{id}', [TagihanWaliController::class, 'pilih_pembayaran'])->name('wali.tagihan.pilih_pembayaran');
-    Route::get('/tagihan/bayar', [TagihanWaliController::class, 'bayar'])->name('wali.tagihan.bayar');
-    Route::get('/tagihan/result', [TagihanWaliController::class, 'result'])->name('wali.tagihan.result');
+    Route::get('/tagihan/detail/{id}/{idmurid}', [TagihanWaliController::class, 'detail'])->name('wali.tagihan.detail');
+    Route::get('/tagihan/pembayaran/{id}/{idmurid}', [PembayaranWaliController::class, 'index'])->name('wali.tagihan.pembayaran');
+    Route::post('/tagihan/pembayaran/bank/{id}/{idmurid}', [PembayaranWaliController::class, 'bank'])->name('wali.tagihan.pembayaran.bank');
+    Route::get('/tagihan/pilih_pembayaran/{id}/{idmurid}', [PembayaranWaliController::class, 'pilih_pembayaran'])->name('wali.tagihan.pilih_pembayaran');
+    Route::get('/tagihan/bayar/{id}/p{idmurid}', [PembayaranWaliController::class, 'bayar'])->name('wali.tagihan.bayar');
+    Route::post('/tagihan/pembayaran/create', [PembayaranWaliController::class, 'create'])->name('wali.tagihan.bayar.create');
     Route::get('admin/spp/pdf/{id_users}', [PdfController::class, 'spp'])->name('admin.spp.pdf');
 });
