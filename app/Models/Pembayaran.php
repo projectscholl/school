@@ -10,7 +10,7 @@ class Pembayaran extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_tagihans',
+        'id_tagihan_details',
         'amount',
         'mounth',
         'id_users',
@@ -23,9 +23,9 @@ class Pembayaran extends Model
         'identitas_penerima'
     ];
 
-    public function tagihans()
+    public function TagihanDetail()
     {
-        return $this->belongsTo(Tagihan::class, 'id_tagihans');
+        return $this->belongsTo(TagihanDetail::class, 'id_tagihan_details');
     }
     public function murids()
     {

@@ -29,7 +29,7 @@ class Tagihan extends Model
     }
     public function detailTagihan()
     {
-        return $this->hasMany(TagihanDetail::class, 'id_tagihans');
+        return $this->hasMany(TagihanDetail::class, 'id_tagihan');
     }
     public function pembayarans()
     {

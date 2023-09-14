@@ -34,14 +34,14 @@ class PembayaranController extends Controller
         if (!$pembayaran) {
             return response()->json(['message' => 'Pembayaran tidak ditemukan'], 404);
         }
-
-        $tagihan = Tagihan::where('id_biayas', $pembayaran->id);
+        $tagihan = Tagihan::where('id_biayas', $pembayaran->id)->first();
+        $tagihanDetail = TagihanDetail::where('id_tagihan', $tagihan->id)->where('id_murids', $pembayaran->TagihanDetail->id_murids)->first();
 
         if (!$tagihan) {
             return response()->json(['message' => 'Tagihan tidak ditemukan'], 404);
         }
 
-        $tagihan->update(['status' => 'SUDAH']);
+        $tagihanDetail->update(['status' => 'SUDAH']);
         $pembayaran->update(['payment_status' => 'Dikonfirmasi']);
 
         return redirect()->route('admin.pembayaran.index')->with('pesan', 'Pembayaran Berhasil Di Konfirmasi');

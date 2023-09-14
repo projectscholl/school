@@ -81,11 +81,9 @@ class TagihanWaliController extends Controller
         $instansi = Instansi::first();
         $tagihan = Biaya::find($id);
         $murid = Murid::find($IdMurid);
-        $tagihanDetails = TagihanDetail::where('id_tagihan', $tagihan->id)
-        ->where('id_murids', $murid->id)
-        ->get();
+        $bulan = Tagihan::where('id_biayas', $tagihan->id)->get();
         $confirmedPayments = Pembayaran::where('payment_status');
-        return view('wali.tagihan.detail', compact('instansi', 'tagihan', 'tagihanDetails', 'murid', 'confirmedPayments'));
+        return view('wali.tagihan.detail', compact('instansi', 'tagihan', 'bulan', 'murid', 'confirmedPayments'));
     }
 
 

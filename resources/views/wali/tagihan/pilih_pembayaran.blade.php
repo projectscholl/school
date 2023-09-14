@@ -54,15 +54,21 @@
                                         <td>Status Tagihan : <strong>Belum Dibayar</strong></td>
                                     </tr> --}}
                                     <tr>
-                                        @foreach ($id_tagihans as $item)
-                                            {{ $item }}
+                                        @foreach ($tagihanDetails as $tagihanDetail)
+                                            {{ $tagihanDetail->id }}
                                         @endforeach
                                         <td>Total Dibayar : <strong class="">Rp {{ number_format($tagihans) }}</strong></td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="container mx-auto d-flex justify-content-center align-items-center gap-2">
-                                <a href="{{ route('wali.tagihan.bayar', ['id' => $tagihans, 'idmurid' => $murid->id]) }}" class="btn btn-primary my-4 w-50 text-light">Bayar Bank</a>
+                                <form action="{{ route('wali.tagihan.bayar', ['id' => $id, 'idmurid' => $murid->id]) }}" method="POST" class="w-50">
+                                    @csrf
+                                    @foreach ($tagihanDetails as $tagihanDetail)
+                                            <input type="hidden" name="tagihanDetails[]" value="{{ $tagihanDetail->id }}">
+                                    @endforeach
+                                    <button class="btn btn-primary my-4 w-100 text-light">Bayar Bank</button>
+                                </form>
                                 <a class="btn btn-primary my-4 w-50 text-light">iPaymu</a>
                             </div>
                         </div>

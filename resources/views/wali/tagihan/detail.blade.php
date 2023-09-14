@@ -48,18 +48,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($tagihanDetails as $bulans)
-                                        <tr>
-                                            <td>{{ $bulans->mounth?? '-' }}</td>
-                                            <td>Rp {{ number_format($bulans->amount) }}</td>
-                                            <td>
-                                                <div class="text-danger">
-                                                    <strong>
-                                                            <div class="text-{{ $bulans->status == 'SUDAH' ? 'success' : 'danger' }}">{{$bulans->status}}</div>
-                                                    </strong>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    @foreach ($bulan as $bulans)
+                                    @php
+                                        $tagihanDetails = App\Models\TagihanDetail::where('id_tagihan', $bulans->id)->where('id_murids', $murid->id)->get();
+                                    @endphp
+                                        @foreach ($tagihanDetails as $tagihanDetail)
+                                            <tr>
+                                                <td>{{ $bulans->mounth?? '-' }}</td>
+                                                <td>Rp {{ number_format($bulans->amount) }}</td>
+                                                <td>
+                                                    <div class="text-danger">
+                                                        <strong>
+                                                                <div class="text-{{ $tagihanDetail->status == 'SUDAH' ? 'success' : 'danger' }}">{{$tagihanDetail->status}}</div>
+                                                        </strong>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     @endforeach
 
                                     {{-- <a href="{{ route('spp') }}" class="btn btn-primary"><strong>
@@ -70,7 +75,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('wali.tagihan.pembayaran', ['id' => $tagihan->id, 'idmurid' => $murid->id]) }}" class="btn btn-primary mt-4">Detail</a>
+                <a href="{{ route('wali.tagihan.pembayaran', ['id' => $tagihan->id, 'idmurid' => $murid->id]) }}" class="btn btn-primary mt-2 w-25">Detail</a>
             </div>
             <!--/ Bordered Table -->
         </div>

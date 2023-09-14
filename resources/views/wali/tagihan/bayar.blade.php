@@ -1,4 +1,4 @@
-vb  </html>@extends('layouts.master')
+</html>@extends('layouts.master')
 
 @section('title, detail')
 @section('content')
@@ -26,8 +26,8 @@ vb  </html>@extends('layouts.master')
                                         <input type="text" class="form-control" placeholder="Masukkan Nama Pengirim" name="nama_pengirim" required>
                                     </div>
 
-                                    @foreach ($id_tagihans as $tagihan)
-                                    <input type="number" name="id_tagihans" value="{{ $tagihan }}">
+                                    @foreach ($tagihanDetails as $tagihanDetail)
+                                        <input type="number" name="id_tagihan_details" value="{{ $tagihanDetail->id }}">
                                     @endforeach
                                     <input type="number" name="total_bayar" value="{{ $totalTagihan }}">
                                     <p></p>
