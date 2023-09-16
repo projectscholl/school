@@ -17,42 +17,53 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive text-nowrap">
-                            <table class="table">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th class="text-white">Murid Information</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-border-bottom-0">
-                                    <tr>
-                                        <td>Nama Murid : <strong>{{ $murid->name }}</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nama Wali Murid : <strong>{{ $murid->User->name }}</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Angkatan : <strong>{{ $murid->angkatans->tahun }}</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jurusan : <strong> {{ $murid->jurusans->nama }}</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Kelas : <strong>{{ $murid->kelas->kelas }}</strong></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <table class="table">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th class="text-white">Murid Information</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-border-bottom-0">
-                                    <tr>
-                                        <td>Total Pembayaran : <strong>Rp.{{ number_format($total) }}</strong></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <form action="{{ route('admin.murid.bayar.proses', $murid->id) }}" method="POST">
+                                @csrf
+                                @method('POST')
+                                <table class="table table-bordered">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th class="text-white">Murid Information</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-border-bottom-0">
+                                        <tr>
+                                            <td>Nama Murid : <strong>{{ $murid->name }}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nama Wali Murid : <strong>{{ $murid->User->name }}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Angkatan : <strong>{{ $murid->angkatans->tahun }}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jurusan : <strong> {{ $murid->jurusans->nama }}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kelas : <strong>{{ $murid->kelas->kelas }}</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table table-bordered mb-3">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th class="text-white">Murid Information</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-border-bottom-0">
+                                        <tr>
+                                            <td>Total Pembayaran :
+                                                <strong>Rp.{{ number_format($total, 2, ',', '.') }}</strong>
+                                                <input type="hidden" name="total_bayar" value="{{ $total }}">
+                                                @foreach ($tagihan as $item)
+                                                    <input type="hidden" name="id[]" value="{{ $item }}">
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button type="submit" class="btn btn-primary">Bayar Sekarang</button>
+                            </form>
                         </div>
                     </div>
                 </div>

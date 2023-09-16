@@ -54,6 +54,7 @@
                                             <th>No</th>
                                             <th>Nama Tagihan</th>
                                             <th>Tanggal Penagihan</th>
+                                            <th>Status</th>
                                             <th>Total Tagihan</th>
                                             <th>Pilih</th>
                                         </tr>
@@ -64,11 +65,13 @@
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $tagihan->nama_biaya }}</td>
-                                                    <td>{{ Carbon\Carbon::parse($tagihan->start_date)->toFormattedDateString() }}
+                                                    <td>{{ Carbon\Carbon::parse($tagihan->end_date)->toFormattedDateString() }}
                                                     </td>
+                                                    <td>{{ $tagihan->status }}</td>
                                                     <td>Rp {{ number_format($tagihan->jumlah_biaya, 2, ',', '.') }}</td>
-                                                    <td><input type="checkbox" name="total[]"
-                                                            value="{{ $tagihan->jumlah_biaya }}"></td>
+                                                    <td><input type="checkbox" name="id[]" value="{{ $tagihan->id }}"
+                                                            {{ $tagihan->status == 'SUDAH' ? 'disabled' : '' }}>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         @else

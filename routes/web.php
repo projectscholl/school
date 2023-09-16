@@ -79,6 +79,8 @@ Route::middleware(['IsAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::get('/pesan-whatsaap/edit/{id}', [NotifyController::class, 'edit'])->name('pesan-whatsaap.edit');
     Route::put('/pesan-whatsaap/{id}', [NotifyController::class, 'update'])->name('pesan-whatsaap.update');
     Route::post('/bayar/{id}', [PembayaranWaliController::class, 'bayarCash'])->name('murid.bayar');
+    Route::post('/bayar/proses/{id}', [PembayaranWaliController::class, 'bayarCashProses'])->name('murid.bayar.proses');
+
 
 
     // Route::get('/laporan', [])

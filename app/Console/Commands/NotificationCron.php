@@ -44,7 +44,7 @@ class NotificationCron extends Command
 
         // $send = "Assalamualaikum Wr.Wb Bapak/Ibu $user->name Kami ingin Mengumumkan Tagihan Untuk Saudara " . $user->murids->name . "." . "<br>" . "Untuk Biaya $biaya->nama_biaya " . " " . "Dengan Total " . $tagihan->amount;
         foreach ($biaya as $biayas) {
-            $tagihans = Tagihan::with('biayas')->where('id_biayas', $biayas->id)->where('end_date', date('Y-m-d'))->get();
+            $tagihans = Tagihan::with('biayas')->where('id_biayas', $biayas->id)->where('end_date', date('Y-m-d'))->where('status', 'BELUM')->get();
             foreach ($tagihans as $tagihan) {
                 $user = Murid::with('User')->where('id_angkatans', $biayas->id_angkatans)->where('id_jurusans', $biayas->id_jurusans)->where('id_kelas', $biayas->id_kelas)->get();
                 foreach ($user as $users) {
@@ -52,7 +52,7 @@ class NotificationCron extends Command
                     $notification = Notify::where('id', 2)->get();
                     foreach ($wali as $keys => $walis) {
                         if ($tagihan->end_date == date('Y-m-d')) {
-                            $send = $notification[$keys]->notif .  url('http://127.0.0.1:8000/login-wali');
+                            $send = $notification[$keys]->notif . ' ' . $users->name . ' ' . number_format($tagihan->amount, 2, ',', '.') . ' ' . url('http://127.0.0.1:8000/login-wali');
                             $this->send_message($walis->telepon, $send);
                         }
                         //         $walis = Murid::with('User')->where('id_users', $users->User->id)->get();

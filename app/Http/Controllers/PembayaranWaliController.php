@@ -8,6 +8,7 @@ use App\Models\Instansi;
 use App\Models\Murid;
 use App\Models\Pembayaran;
 use App\Models\Tagihan;
+use App\Models\TagihanDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -115,12 +116,46 @@ class PembayaranWaliController extends Controller
     }
     public function bayarCash(Request $request, $id)
     {
-        $tagihan = $request->total;
-        $total = array_sum($tagihan);
+        $tagihan = $request->id;
+        foreach ($tagihan as $idTagihan) {
+            $tagihans = TagihanDetail::where('id', $idTagihan)->get();
+            foreach ($tagihans as $t) {
+                $jumlahBiaya[] = $t->jumlah_biaya;
+                // print_r($t->jumlah_biaya);
+            }
+        }
+        $total = array_sum($jumlahBiaya);
         $murid = Murid::where('id', $id)->first();
         return view('admin.murid.bayar', compact('tagihan', 'total', 'murid'));
     }
 
+    public function bayarCashProses(Request $request, $id)
+    {
+
+        $data = $request->validate([
+            'total_bayar' => 'required',
+        ]);
+        $total = $request->total_bayar;
+        $id = $request->id;
+        $auth = Auth::user();
+        $murid = Murid::where('id', $id)->first();
+
+        foreach ($id as $keys => $id_details) {
+            Pembayaran::create([
+                'id_tagihans' => $id_details,
+                'id_users' => $auth->id,
+                'total_bayar' => $total,
+                'payment_status' => 'Di konfirmasi',
+                'nama_pengirim' => $auth->name,
+            ]);
+            $tagihandetail = TagihanDetail::where('id', $id_details);
+            $sudah = 'SUDAH';
+            $tagihandetail->update([
+                'status' => $sudah,
+            ]);
+        }
+        return redirect()->route('admin.murid.index');
+    }
     /**
      * Display the specified resource.
      */

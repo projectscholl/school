@@ -68,6 +68,7 @@ class BiayaController extends Controller
         // dd($dateStart);
         $muridUser = Murid::with('User')->where('id_jurusans', $biaya->id_jurusans)->where('id_angkatans', $biaya->id_angkatans)->where('id_kelas', $biaya->id_kelas)->get();
 
+
         foreach ($valid as $index => $n) {
 
             $Tagihan = Tagihan::create([
@@ -84,30 +85,11 @@ class BiayaController extends Controller
                     'id_tagihan' => $Tagihan->id,
                     'id_murids' => $murids->id,
                     'start_date' => $dateStart[$index],
-                    'end_date' => $dateEnd[$index   ],
+                    'end_date' => $dateEnd[$index],
                     'nama_biaya' => $biaya->nama_biaya,
                     'jumlah_biaya' => $n,
                 ]);
-                // $users = User::where('id', $murids->id_users)->get();
-                // $notify = Notify::where('id', 1)->get();
-                // foreach ($users as $ray => $wali) {
-                //     $messages = $notify[$ray]->notif . ' ' . $biaya->nama_biaya . ' ' . number_format($n, 2, ',', '.');
-                //     $this->send_message($wali->telepon, $messages);
-                //     // print_r($wali->telepon);
-                //     // echo "<br>";
-                // }
             }
-            // foreach ($muridUser as $user) {
-            // }
-            // foreach ($Tagihan as $tagihanDetail) {
-            //     TagihanDetail::create([
-            //         'id_tagihan' => $tagihanDetail->id,
-            //         'id_murids' => $tagihanDetail->id,
-            //         'nama_biaya' => $tagihanDetail->biayas->nama_biaya,
-            //         'status' => $tagihanDetail->status,
-            //     ]);
-            // }
-
         }
 
 
@@ -161,58 +143,39 @@ class BiayaController extends Controller
         ]);
 
         $biaya = Biaya::with('tagihans')->find($id);
-        $tagihansDelete = Tagihan::where('id_biayas', $id);
-        $tagihans = Tagihan::where('id_biayas', $id)->get();
 
         $murid = Murid::with('biayas')->where('id_angkatans', $biaya->id_angkatans)->where('id_jurusans', $biaya->id_jurusans)->where('id_kelas', $biaya->id_kelas)->get();
-
-
-        $dateStart = request()->input('start_date');
-        $dateEnd = request()->input('end_date');
-        $mounth = request()->input('mounth');
-        $amount = request()->input('amount');
-        foreach ($tagihans as $tagihanMurid) {
-            $tagihanDetail = TagihanDetail::where('id_tagihan', $tagihanMurid->id);
-            $tagihanDetail->delete();
-        }
-        $tagihansDelete->delete();
-
+        $dateStart = $request->start_date;
+        $dateEnd = $request->end_date;
+        $mounth = $request->mounth;
+        $amount = $request->amount;
+        $valid = str_replace('.', '', $amount);
         // $tagihanDetail->delete();
-        if ($request->amount) {
-            foreach ($amount as $key => $value) {
-                $data1 = [
-                    'id_biayas' => $id,
-                    'start_date' => $dateStart[$key],
-                    'end_date' => $dateEnd[$key],
-                    'amount' => $value,
-                    'mounth' => $mounth[$key],
-                ];
-                Tagihan::create($data1);
-
-                foreach ($murid as $murids) {
-                    $datas = Tagihan::where('id_biayas', $id)->get();
-
-                    $data2 = [
-                        'id_tagihan' => $datas[$key]->id,
-                        'id_murids' => $murids->id,
-                        'start_date' => $datas[$key]->start_date,
-                        'end_date' => $datas[$key]->end_date,
-                        'nama_biaya' => $biaya->nama_biaya,
-                        'jumlah_biaya' => $datas[$key]->amount,
-                    ];
-                    TagihanDetail::create($data2);
-                }
+        $ids = $request->id;
+        foreach ($ids as $keys => $value) {
+            $tagihans = Tagihan::where('id', $ids[$keys]);
+            $tagihans->update([
+                'id_biayas' => $id,
+                'start_date' => $dateStart[$keys],
+                'end_date' => $dateEnd[$keys],
+                'amount' => $valid[$keys],
+                'mounth' => $mounth[$keys],
+            ]);
+            $tagihanGet = Tagihan::where('id', $ids[$keys])->get();
+            foreach ($tagihanGet as $index => $tagihs) {
+                $tagihanDetails = TagihanDetail::where('id_tagihan', $tagihs->id);
+                $tagihanDetails->update([
+                    'start_date' => $dateStart[$keys],
+                    'end_date' => $dateEnd[$keys],
+                    'nama_biaya' => $biaya->nama_biaya,
+                    'jumlah_biaya' => $valid[$keys],
+                ]);
             }
+            $biaya->update($data);
+            // dd($result);     
+            return redirect()->route('admin.biaya.index')->with('pesan', "Biaya Berhasil Diedit!!!");
         }
-        $biaya->update($data);
-
-
-
-        // dd($result); 
-
-        return redirect()->route('admin.biaya.index')->with('pesan', "Biaya Berhasil Diedit!!!");
     }
-
     /**
      * Remove the specified resource from storage.
      */
