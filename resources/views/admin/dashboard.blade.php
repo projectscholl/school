@@ -181,7 +181,7 @@
 
         <script>
             var xValues = ["Lunas", "Belum Bayar"];
-            var yValues = [55, 49];
+            var yValues = [{{ $jumlahLunas }}, {{ $jumlahBelumBayar }}];
             var barColors = [
                 "#EEFBE7",
                 "#e0f7fc",
@@ -207,7 +207,7 @@
 
         <script>
             var xValues = ["Dikonfirmasi", "Belum Dikonfirmasi"];
-            var yValues = [55, 49];
+            var yValues = [{{ $pembayaranDikonfirmasi }}, {{ $pembayaranBelum_Dikonfirmasi }}];
             var barColors = [
                 "#EEFBE7",
                 "#e0f7fc",

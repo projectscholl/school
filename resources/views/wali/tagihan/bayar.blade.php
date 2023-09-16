@@ -27,9 +27,9 @@
                                     </div>
 
                                     @foreach ($tagihanDetails as $tagihanDetail)
-                                        <input type="number" name="id_tagihan_details" value="{{ $tagihanDetail->id }}">
+                                        <input type="hidden" name="id_tagihan_details[]" value="{{ $tagihanDetail->id }}">
                                     @endforeach
-                                    <input type="number" name="total_bayar" value="{{ $totalTagihan }}">
+                                    <input type="hidden" name="total_bayar" value="{{ $totalTagihan }}">
                                     <p></p>
 
                                     <div class="form-group mb-3">

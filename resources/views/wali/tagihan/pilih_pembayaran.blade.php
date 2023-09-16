@@ -53,12 +53,12 @@
                                     {{-- <tr>
                                         <td>Status Tagihan : <strong>Belum Dibayar</strong></td>
                                     </tr> --}}
-                                    <tr>
+                                    {{-- <tr>
                                         @foreach ($tagihanDetails as $tagihanDetail)
                                             {{ $tagihanDetail->id }}
                                         @endforeach
                                         <td>Total Dibayar : <strong class="">Rp {{ number_format($tagihans) }}</strong></td>
-                                    </tr>
+                                    </tr> --}}
                                 </tbody>
                             </table>
                             <div class="container mx-auto d-flex justify-content-center align-items-center gap-2">

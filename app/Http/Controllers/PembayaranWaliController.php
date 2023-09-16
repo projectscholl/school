@@ -43,12 +43,17 @@ class PembayaranWaliController extends Controller
         $imagePath = $request->file('bukti_transaksi')->store('public/image');
         
         $imageName = basename($imagePath);
-        $data['id_tagihan_details'] = $request->input('id_tagihan_details');
-        $data['id_users'] = Auth::id();
+        $idTagihanDetails = $request->input('id_tagihan_details');
 
-        // Simpan data ke dalam database
+        $data['id_users'] = Auth::id();
+        $pembayarans = Pembayaran::create($data);
+        foreach ($idTagihanDetails as $idTagihanDetail) {
+            $tagihanDetail = TagihanDetail::find($idTagihanDetail);
+            $tagihanDetail->update(['id_pembayarans' => $pembayarans->id]);
+        }
         // dd($data);
-        Pembayaran::create($data);
+
+        
 
         return redirect()->route('wali.tagihan.index')->with('message', 'Pembayaran Berhasil, Silakan Tunggu Konfirmasi Dari Admin');
     }

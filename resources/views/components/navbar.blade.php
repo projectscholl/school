@@ -35,14 +35,14 @@
                             </div>
                             <span type="button" class="">&#10005;</span type="button">
                         </div>
-                        <div class="dropdown-item d-flex">
+                        {{-- <div class="dropdown-item d-flex">
                             <div class="d-flex flex-column">
                                 <span>Pembayaran Tagihan</span>
                                 <a href="{{ route('admin.pembayaran.index') }}">Sandi telah melakukan pembayaran</a>
                                 <p class="text-little mt-1 text-secondary" style="font-size:13px;">3 Hari lalu</p>
                             </div>
                             <span type="button" class="">&#10005;</span type="button">
-                        </div>
+                        </div> --}}
                     </div>
                 @else
                 @endif()

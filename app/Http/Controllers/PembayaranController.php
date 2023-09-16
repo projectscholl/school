@@ -16,7 +16,7 @@ class PembayaranController extends Controller
     {
         $user = Auth::user();
         $instansi = Instansi::first();
-        $pembayarans = Pembayaran::with('murids')->get();
+        $pembayarans = Pembayaran::with(['murids', 'murids'])->get();
         return view('admin.pembayaran.index', compact('user', 'instansi', 'pembayarans'));
     }
     public function show(string $id)
@@ -29,20 +29,16 @@ class PembayaranController extends Controller
 
     public function confirm(Request $request, string $id)
     {
-        $pembayaran = Pembayaran::with('TagihanDetail')->find($id);
+        $pembayaran = Pembayaran::with('tagihanDetails')->find($id);
 
         if (!$pembayaran) {
             return response()->json(['message' => 'Pembayaran tidak ditemukan'], 404);
         }
 
-        $tagihan = Tagihan::where('id_biayas', $pembayaran->TagihanDetail->tagihan->biayas->id)->first();
-        $tagihanDetail = TagihanDetail::where('id_tagihan', $tagihan->id)->where('id_murids', $pembayaran->TagihanDetail->id_murids)->first();
-
-        if (!$tagihan) {
-            return response()->json(['message' => 'Tagihan tidak ditemukan'], 404);
+        foreach ($pembayaran->tagihanDetails as $tagihanDetail) {
+            $tagihanDetail->update(['status' => 'SUDAH']);
         }
 
-        $tagihanDetail->update(['status' => 'SUDAH']);
         $pembayaran->update(['payment_status' => 'Dikonfirmasi']);
 
         return redirect()->route('admin.pembayaran.index')->with('pesan', 'Pembayaran Berhasil Di Konfirmasi');

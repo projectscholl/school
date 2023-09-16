@@ -40,7 +40,7 @@
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
                                             <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-                                                <strong>{{ optional($pembayar->murids)->name ?? 'Tidak Ada Murid' }}</strong>
+                                                <strong>{{ $pembayar->name ?? 'Tidak Ada Murid' }}</strong>
                                             </td>
                                             </td>
                                             <td>
