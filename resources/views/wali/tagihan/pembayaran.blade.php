@@ -33,16 +33,21 @@
                                 @csrf
                                 <tbody>
                                     @foreach ($bulan as $bulans)
-                                        @if ($bulans->status === 'BELUM')
-                                            <tr>
-                                                <td>{{ $bulans->mounth ?? '-' }}</td>
-                                                <td>Rp {{ number_format($bulans->amount) }}</td>
-                                                <td>
-                                                    <input type="checkbox" data-select name="amount[{{ $bulans->id }}]"
-                                                        value="{{ $bulans->id }}" data-id="{{ $bulans->id }}">
-                                                </td>
-                                            </tr>
-                                        @endif
+                                        @php
+                                            $tagihanDetails = App\Models\TagihanDetail::where('id_tagihan', $bulans->id)->where('id_murids', $murid->id)->get();
+                                        @endphp
+                                        @foreach ($tagihanDetails as $tagihanDetail)
+                                            @if ($tagihanDetail->status === 'BELUM')
+                                                <tr>
+                                                    <td>{{ $bulans->mounth ?? '-' }}</td>
+                                                    <td>Rp {{ number_format($tagihanDetail->jumlah_biaya) }}</td>
+                                                    <td>
+                                                        <input type="checkbox" data-select name="amount[{{ $tagihanDetail->id }}]"
+                                                            value="{{ $tagihanDetail->id }}" data-id="{{ $tagihanDetail->id }}">
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
                                     @endforeach
                                 </tbody>
                             </form>                            

@@ -36,7 +36,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($user->murid as $index => $anak)
+                                @foreach ($murids as $index => $anak)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $anak->name }}</td> 

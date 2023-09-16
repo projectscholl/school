@@ -14,6 +14,8 @@ class NotifySeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('notifies')->truncate();
+        
         DB::table('notifies')->insert([
             'notif' => 'Assalamualaikum ini 1',
         ]);

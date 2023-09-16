@@ -43,12 +43,17 @@ class PembayaranWaliController extends Controller
         $imagePath = $request->file('bukti_transaksi')->store('public/image');
 
         $imageName = basename($imagePath);
-        $data['id_tagihans'] = $request->input('id_tagihans');
-        $data['id_users'] = Auth::id();
+        $idTagihanDetails = $request->input('id_tagihan_details');
 
-        // Simpan data ke dalam database
+        $data['id_users'] = Auth::id();
+        $pembayarans = Pembayaran::create($data);
+        foreach ($idTagihanDetails as $idTagihanDetail) {
+            $tagihanDetail = TagihanDetail::find($idTagihanDetail);
+            $tagihanDetail->update(['id_pembayarans' => $pembayarans->id]);
+        }
         // dd($data);
-        Pembayaran::create($data);
+
+        
 
         return redirect()->route('wali.tagihan.index')->with('message', 'Pembayaran Berhasil, Silakan Tunggu Konfirmasi Dari Admin');
     }
@@ -61,6 +66,7 @@ class PembayaranWaliController extends Controller
     {
         $id_tagihans = $request->amount;
         $biaya = Biaya::find($id);
+        $tagihs = Tagihan::where('id_biayas', $biaya->id)->get();
         $IdMurid = $request->idmurid;
         $murid = Murid::find($IdMurid);
 
@@ -68,23 +74,26 @@ class PembayaranWaliController extends Controller
             return redirect()->route('wali.tagihan.pembayaran', $biaya->id . '?idmurid=' . $murid->id)->with('error', 'Pilih setidaknya satu tagihan.');
         }
 
-        foreach ($request->amount as $key => $value) {
-            $tagihans[] = Tagihan::where('id', $key)->first()->amount;
-            // dd($request->all());
-            // $bill = Tagihan::where('id_biayas',$biaya->id)->get();
-            // foreach($bill as $bills){
-            //     $tagihan = $bills->id;
-            // }
-        }
+            foreach ($request->amount as $key => $value) {
+                $tagihans[] = TagihanDetail::where('id', $key)->first()->jumlah_biaya;
+                $tagihanDetails[] = TagihanDetail::where('id', $key)->first();
+                // dd($request->all());
+                // $bill = Tagihan::where('id_biayas',$biaya->id)->get();
+                // foreach($bill as $bills){
+                //     $tagihan = $bills->id;
+                // }
+            }
 
         session(['tagihans' => array_sum($tagihans)]);
         session(['id_tagihans' => $id_tagihans]);
 
         return view('wali.tagihan.pilih_pembayaran', [
-            // 'id' => $biaya->id,
+            'id' => $biaya->id,
             'murid' => $murid,
             'tagihans' => array_sum($tagihans),
-            'id_tagihans' => $id_tagihans
+            'tagihs' => $tagihs,
+            'id_tagihans' => $id_tagihans,
+            'tagihanDetails' => $tagihanDetails,
         ]);
     }
 
@@ -105,14 +114,15 @@ class PembayaranWaliController extends Controller
         $instansi = Instansi::first();
         $bank = Bank::all();
         $tagihan = Biaya::find($id);
-        $tagihan = Tagihan::find($id);
+        $tagihans = Tagihan::where('id_biayas', $id)->get();
         $murid = Murid::find($idmurid);
         $totalTagihan = session('tagihans');
         $id_tagihans = session('id_tagihans');
-        // dd($tagihan);
+        foreach ($request->tagihanDetails as $key => $value) {
+            $tagihanDetails[] = TagihanDetail::where('id', $value)->first();
+        }
 
-
-        return view('wali.tagihan.bayar', compact('instansi', 'bank', 'tagihan', 'totalTagihan', 'id_tagihans'));
+        return view('wali.tagihan.bayar', compact('instansi', 'bank', 'tagihan', 'totalTagihan', 'id_tagihans', 'murid', 'tagihans', 'tagihanDetails'));
     }
     public function bayarCash(Request $request, $id)
     {

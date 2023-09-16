@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Instansi;
 use App\Models\Murid;
+use App\Models\Pembayaran;
+use App\Models\TagihanDetail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +25,14 @@ class AdminController extends Controller
         $instansi = Instansi::first();
         $user = Auth::user();
         $jumlahMurid = Murid::count();
-        return view('admin.dashboard', compact('user', 'jumlahMurid', 'instansi'));
+        $tagihanDetail = TagihanDetail::all();
+
+        $jumlahLunas = $tagihanDetail->where('status', 'SUDAH')->count();
+        $jumlahBelumBayar = $tagihanDetail->where('status', 'BELUM')->count();
+        $pembayaran = Pembayaran::all();
+        $pembayaranDikonfirmasi = $pembayaran->where('payment_status', 'Dikonfirmasi')->count();
+        $pembayaranBelum_Dikonfirmasi = $pembayaran->where('payment_status', 'Belum Di Konfirmasi')->count();
+        return view('admin.dashboard', compact('user', 'jumlahMurid', 'instansi', 'tagihanDetail', 'jumlahBelumBayar', 'jumlahLunas', 'pembayaranDikonfirmasi', 'pembayaranBelum_Dikonfirmasi'));
     }
     public function edit()
     {
