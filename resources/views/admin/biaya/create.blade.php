@@ -384,7 +384,7 @@
                     optionals.removeAttribute('required');
                 });
                 for (i = 0; i < mounth.length; i++) {
-                    routine[i].setAttribute('name', 'mounth[]');
+                    mounth[i].setAttribute('name', 'mounth[]');
                 }
                 for (i = 0; i < routine.length; i++) {
                     routine[i].setAttribute('name', 'amount[]');
@@ -410,6 +410,7 @@
                     collection.removeAttribute('name');
                     collection.removeAttribute('required');
                 });
+
                 for (i = 0; i < notRoutine.length; i++) {
                     notRoutine[i].setAttribute('name', 'amount[]');
                     notRoutine[i].setAttribute('required', true);

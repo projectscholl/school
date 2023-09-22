@@ -4,7 +4,7 @@
         $active = 'menu-item active';
         $nonActive = 'menu-item';
     @endphp
-    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" data-bg-class="bg-menu-theme">
+    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme sidebar" data-bg-class="bg-menu-theme">
         <div class="app-brand demo mb-3" style="height: 100px;">
             <div class="d-flex flex-column">
                 <div class="d-flex align-items-center justify-content-center">
@@ -105,7 +105,7 @@
                     </a>
                 </li>
                 <!--Data Pembayaran-->
-                <li class="{{ Route::is('admin.pembayaran', 'admin.pembayaran.detail') ? $active : $nonActive }}">
+                <li class="{{ Route::is('admin.pembayaran.*', 'admin.pembayaran.detail') ? $active : $nonActive }}">
                     <a href="{{ route('admin.pembayaran.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-credit-card-front"></i>
                         <div data-i18n="Without menu">Data Pembayaran</div>
@@ -113,7 +113,7 @@
                 </li>
                 <!--Account setting-->
                 <li
-                    class="menu-item {{ Route::is('admin.profile.*', 'admin.instansi.*', 'admin.bank.*', 'admin.pesan-whatsaap.index') ? 'active open' : '' }}">
+                    class="menu-item {{ Route::is('admin.profile.*', 'admin.instansi.*', 'admin.bank.*', 'admin.pesan-whatsaap.index', 'admin.activity.*') ? 'active open' : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-dock-top"></i>
                         <div data-i18n="Account Settings">Account Setting</div>
@@ -136,6 +136,13 @@
                         <li class="{{ Route::is('admin.pesan-whatsaap.index') ? $active : $nonActive }}">
                             <a href="{{ route('admin.pesan-whatsaap.index') }}" class="menu-link">
                                 <div data-i18n="Without menu">Notifications</div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="menu-sub">
+                        <li class="{{ Route::is('admin.activity.*') ? $active : $nonActive }}">
+                            <a href="{{ route('admin.activity.index') }}" class="menu-link">
+                                <div data-i18n="Without menu">Activity user</div>
                             </a>
                         </li>
                     </ul>

@@ -9,6 +9,7 @@ use App\Models\Jurusan;
 use App\Models\Kelas;
 use App\Models\Murid;
 use App\Models\Tagihan;
+use App\Models\TagihanDetail;
 use App\Models\User;
 use App\Traits\Fonnte;
 use Illuminate\Http\Request;
@@ -53,23 +54,36 @@ class MuridController extends Controller
 
         $murid = Murid::create($data);
         $biaya = Biaya::with('tagihans')->where('id_jurusans', $murid->id_jurusans)->where('id_angkatans', $murid->id_angkatans)->where('id_kelas', $murid->id_kelas)->get();
-        
+        foreach ($biaya as $biayas) {
+            $tagihans = Tagihan::where('id_biayas', $biayas->id)->get();
+            foreach ($tagihans as $tagihan) {
+                $tagihanDetail = TagihanDetail::create([
+                    'id_tagihan' => $tagihan->id,
+                    'id_murids' => $murid->id,
+                    'start_date' => $tagihan->start_date,
+                    'end_date' => $tagihan->end_date,
+                    'nama_biaya' => $biayas->nama_biaya,
+                    'jumlah_biaya' => $tagihan->amount,
+                ]);
+            }
+        }
+
         $user = User::with('murids')->where('id', $murid->id_users)->get();
 
 
-        foreach ($biaya as $key => $biayas) {
-            foreach ($biayas->tagihans as $keys => $tagihans) {
-                foreach ($user as $waliUser) {
-                    if ($tagihans->mounth == null) {
-                        $tes1 = "Nama Tagihan : $biayas->nama_biaya : " . "Untuk Murid : " . $waliUser->name . " " . "Total : " . $tagihans->amount . " " . $tagihans->mounth;
-                        $this->send_message($murid->telepon, $tes1);
-                    } else {
-                        $tes2 = "Nama Tagihan : $biayas->nama_biaya : " . "Untuk Murid :  " . $waliUser->name . "  " . "Total : " . $tagihans->amount . " " . "Untuk Bulan : " . $tagihans->mounth;
-                        $this->send_message($murid->telepon, $tes2);
-                    }
-                }
-            }
-        }
+        // foreach ($biaya as $key => $biayas) {
+        //     foreach ($biayas->tagihans as $keys => $tagihans) {
+        //         foreach ($user as $waliUser) {
+        //             if ($tagihans->mounth == null) {
+        //                 $tes1 = "Nama Tagihan : $biayas->nama_biaya : " . "Untuk Murid : " . $waliUser->name . " " . "Total : " . $tagihans->amount . " " . $tagihans->mounth;
+        //                 $this->send_message($murid->telepon, $tes1);
+        //             } else {
+        //                 $tes2 = "Nama Tagihan : $biayas->nama_biaya : " . "Untuk Murid :  " . $waliUser->name . "  " . "Total : " . $tagihans->amount . " " . "Untuk Bulan : " . $tagihans->mounth;
+        //                 $this->send_message($murid->telepon, $tes2);
+        //             }
+        //         }
+        //     }
+        // }
 
         return redirect()->route('admin.murid.index')->with('message', "Murid Berhasil Ditambahkan!!");
     }
@@ -77,13 +91,21 @@ class MuridController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         $instansi = Instansi::first();
         $user = Auth::user();
         $murids = Murid::findOrFail($id);
-        return view('admin.murid.detail', compact('user', 'murids', 'instansi'));
+        $biaya = Biaya::with('tagihans')->where('id_angkatans', $murids->id_angkatans)->where('id_jurusans', $murids->id_jurusans)->where('id_kelas', $murids->id_kelas)->get();
+        foreach ($biaya as $key => $biayas) {
+            $tagihans = Tagihan::where('id_biayas', $biayas->id)->first();
+            foreach ($tagihans as $tagihanMurid) {
+            }
+        }
+        $tagihanDetail = TagihanDetail::with('tagihan')->where('id_murids', $murids->id)->get();
+        return view('admin.murid.detail', compact('user', 'murids', 'instansi', 'biaya', 'tagihanDetail'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

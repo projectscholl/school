@@ -24,7 +24,7 @@ class Pembayaran extends Model
 
     public function murids()
     {
-        return $this->belongsTo(Murid::class, 'id_users'); 
+        return $this->belongsTo(Murid::class, 'id_users');
     }
     public function tagihanDetails()
     {

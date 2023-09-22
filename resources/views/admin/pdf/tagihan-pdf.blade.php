@@ -435,35 +435,37 @@ in bold.
             </thead>
             <!-- The single invoice items are all within the TBODY of the table. -->
             <tbody>
-                <?php $i = 0; ?>
-                @foreach ($biaya as $data)
-                    @foreach ($data->tagihans as $biayas)
-                        @foreach ($datas as $murid)
-                            <?php $i++; ?>
-                            <tr>
-                                <td>{{ $i }}</td>
-                                <td>
-                                    <b>{{ $data->nama_biaya }}</b>
-                                </td>
-                                <td>
-                                    {{ $murid->name }}
-                                </td>
-                                <td>
-                                    {{ $murid->angkatans->tahun }}
-                                </td>
-                                <td>
-                                    {{ $biayas->mounth == null ? '-' : $biayas->mounth }}
-                                </td>
-                                <td class="text-danger">
-                                    {{ $biayas->status }}
-                                </td>
-                                <td>
-                                    Rp.{{ number_format($biayas->amount, 2, ',', '.') }}
-                                </td>
-                            </tr>
+                @if ($biaya)
+                    <?php $i = 0; ?>
+                    @foreach ($biaya as $data)
+                        @foreach ($data->tagihans as $biayas)
+                            @foreach ($datas as $murid)
+                                <?php $i++; ?>
+                                <tr>
+                                    <td>{{ $i }}</td>
+                                    <td>
+                                        <b>{{ $data->nama_biaya }}</b>
+                                    </td>
+                                    <td>
+                                        {{ $murid->name }}
+                                    </td>
+                                    <td>
+                                        {{ $murid->angkatans->tahun }}
+                                    </td>
+                                    <td>
+                                        {{ $biayas->mounth == null ? Carbon\Carbon::parse($biayas->start_date)->toFormattedDateString() : $biayas->mounth }}
+                                    </td>
+                                    <td class="text-danger">
+                                        {{ $biayas->status }}
+                                    </td>
+                                    <td>
+                                        Rp.{{ number_format($biayas->amount, 2, ',', '.') }}
+                                    </td>
+                                </tr>
+                            @endforeach
                         @endforeach
                     @endforeach
-                @endforeach
+                @endif
             </tbody>
         </table>
         <div class="d-flex justify-content-between">

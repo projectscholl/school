@@ -7,7 +7,7 @@
     <div class="layout-page">
         <!-- Navbar -->
         <x-navbar></x-navbar>
-        <div class="content-wrapper">
+        <div class="content-wrapper ">
 
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
@@ -46,7 +46,8 @@
                                         </td>
                                         <td>
                                             <strong>
-                                                <a href="{{ route('admin.spp.pdf', ['id_users' => $item->id]) }}"><i class="menu-icon tf-icons bx bx-copy ms-2"></i>Cetak</a>
+                                                <a href="{{ route('admin.spp.pdf', ['id_users' => $item->id]) }}"><i
+                                                        class="menu-icon tf-icons bx bx-copy ms-2"></i>Cetak</a>
                                             </strong>
                                         </td> --}}
                                     </tr>

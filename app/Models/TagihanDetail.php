@@ -15,6 +15,8 @@ class TagihanDetail extends Model
         'nama_biaya',
         'id_murids',
         'status',
+        'start_date',
+        'end_date',
         'jumlah_biaya',
     ];
     public function murids()

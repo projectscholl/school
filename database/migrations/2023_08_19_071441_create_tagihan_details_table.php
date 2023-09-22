@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('tagihan_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_pembayarans');
+            $table->foreignId('id_pembayarans')->nullable();
             $table->foreignId('id_tagihan');
             $table->foreignId('id_murids');
-            $table->string('status')->default('BELUM');
+            $table->string('status')->nullable();
+            $table->date('start_date');
+            $table->date('end_date');
             $table->string('nama_biaya');
             $table->integer('jumlah_biaya');
             $table->timestamps();

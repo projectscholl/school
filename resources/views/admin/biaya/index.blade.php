@@ -25,7 +25,8 @@
                                         <th>No</th>
                                         <th>Nama Biaya</th>
                                         <th>tahun</th>
-                                        <th>dibuat</th>
+                                        <th>jurusan</th>
+                                        <th>kelas</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -35,7 +36,8 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $value->nama_biaya }}</td>
                                             <td>{{ $value->angkatans->tahun }}</td>
-                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $value->jurusans->nama }}</td>
+                                            <td>{{ $value->kelas->kelas }}</td>
                                             <td class="d-flex">
 
                                                 <a href="{{ route('admin.biaya.edit', $value->id) }}"

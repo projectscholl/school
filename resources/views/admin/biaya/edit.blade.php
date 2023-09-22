@@ -65,7 +65,7 @@
                                                     <td><input type="number"
                                                             class="form-control @error('amount[]')
                                                     is-invalid
-                                                @enderror tess routine"
+                                                @enderror tess routine rupiah"
                                                             name="amount[]" value="{{ $tagihans->amount }}">
                                                     </td>
                                                     <td><input type="date" name="start_date[]"
@@ -76,6 +76,7 @@
                                                             class="form-control tess date2"
                                                             value="{{ $tagihans->end_date }}">
                                                     </td>
+                                                    <input type="hidden" name="id[]" value="{{ $tagihans->id }}">
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -91,7 +92,7 @@
                                             <input type="number"
                                                 class="form-control @error('amount[]')
                                         is-invalid
-                                    @enderror optional notroutine"
+                                    @enderror optional notroutine rupiah"
                                                 name="amount[]" placeholder="Masukkan Nama Biaya"
                                                 value="{{ $tagihans->amount }}">
                                             @foreach ($biaya->tagihans as $item)
@@ -119,6 +120,7 @@
                                         @foreach ($biaya->tagihans as $tagihan)
                                             <input type="date" class="form-control optional time2" name="end_date[]"
                                                 id="time" placeholder="" value="{{ $tagihan->end_date }}">
+                                            <input type="hidden" name="id[]" value="{{ $tagihan->id }}">
                                         @endforeach
                                     </div>
                                 </div>
@@ -218,6 +220,14 @@
     </div>
 @endsection
 @push('scripts')
+    <script src="{{ asset('sneat/js/jquery.mask.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.rupiah').mask("#.##0", {
+                reverse: true
+            });
+        })
+    </script>
     <script type="text/javascript">
         const status = document.getElementById('status');
         status.dispatchEvent(new Event('change'));

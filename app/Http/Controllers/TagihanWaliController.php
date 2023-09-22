@@ -75,7 +75,6 @@ class TagihanWaliController extends Controller
     // }
 
 
-
     public function detail(string $id, $IdMurid)
     {
         $instansi = Instansi::first();
