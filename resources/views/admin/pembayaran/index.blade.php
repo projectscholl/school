@@ -44,7 +44,7 @@
                                             </td>
                                             </td>
                                             <td>
-                                                @if ($pembayar->payment_links)
+                                                @if ($pembayar->payment_links == null)
                                                     iPaymu
                                                 @else
                                                     Bank

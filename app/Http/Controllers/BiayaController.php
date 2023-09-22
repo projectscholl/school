@@ -145,15 +145,16 @@ class BiayaController extends Controller
         $biaya = Biaya::with('tagihans')->find($id);
 
         $murid = Murid::with('biayas')->where('id_angkatans', $biaya->id_angkatans)->where('id_jurusans', $biaya->id_jurusans)->where('id_kelas', $biaya->id_kelas)->get();
-        $dateStart = $request->start_date;
-        $dateEnd = $request->end_date;
-        $mounth = $request->mounth;
-        $amount = $request->amount;
+        $dateStart = request()->input('start_date');
+        $dateEnd =  request()->input('end_date');
+        $mounth =  request()->input('mounth');
+        $amount = request()->input('amount');
         $valid = str_replace('.', '', $amount);
         // $tagihanDetail->delete();
         $ids = $request->id;
         foreach ($ids as $keys => $value) {
             $tagihans = Tagihan::where('id', $ids[$keys]);
+            // print_r($ids[$keys]);
             $tagihans->update([
                 'id_biayas' => $id,
                 'start_date' => $dateStart[$keys],
@@ -161,6 +162,7 @@ class BiayaController extends Controller
                 'amount' => $valid[$keys],
                 'mounth' => $mounth[$keys],
             ]);
+            activity()->causedBy(Auth::user())->event('Updated')->log('User operator ' . auth()->user()->name . ' melakukan Updated Tagihan');
             $tagihanGet = Tagihan::where('id', $ids[$keys])->get();
             foreach ($tagihanGet as $index => $tagihs) {
                 $tagihanDetails = TagihanDetail::where('id_tagihan', $tagihs->id);
@@ -173,8 +175,8 @@ class BiayaController extends Controller
             }
             $biaya->update($data);
             // dd($result);     
-            return redirect()->route('admin.biaya.index')->with('pesan', "Biaya Berhasil Diedit!!!");
         }
+        return redirect()->route('admin.biaya.index')->with('pesan', "Biaya Berhasil Diedit!!!");
     }
     /**
      * Remove the specified resource from storage.

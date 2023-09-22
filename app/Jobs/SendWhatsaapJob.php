@@ -6,6 +6,7 @@ use App\Models\Biaya;
 use App\Models\Murid;
 use App\Models\Notify;
 use App\Models\Tagihan;
+use App\Models\TagihanDetail;
 use App\Models\User;
 use App\Traits\Fonnte;
 use Illuminate\Bus\Queueable;
@@ -41,13 +42,23 @@ class SendWhatsaapjob implements ShouldQueue
 
         // $send = "Assalamualaikum Wr.Wb Bapak/Ibu $user->name Kami ingin Mengumumkan Tagihan Untuk Saudara " . $user->murids->name . "." . "<br>" . "Untuk Biaya $biaya->nama_biaya " . " " . "Dengan Total " . $tagihan->amount;
         foreach ($biaya as $biayas) {
-            $tagihans = Tagihan::where('id_biayas', $biayas->id)->where('end_date', date('Y-m-d'))->get();
+            $tagihans = Tagihan::with('biayas')->where('id_biayas', $biayas->id)->where('start_date', date('Y-m-d'))->get();
             foreach ($tagihans as $tagihan) {
-                $user = murid::with('User')->where('id_angkatans', $biayas->id_angkatans)->where('id_jurusans', $biayas->id_jurusans)->where('id_kelas', $biayas->id_kelas)->get();
-                $tagihan = Notify::where('id', 2)->get();
-                foreach ($user as $users) {
-                    $send =  $tagihan . $users->User->name . "Kami ingin Mengumumkan Tagihan Untuk Saudara " . $users->name . "." . "<br>" . "Untuk Biaya $biayas->nama_biaya " . " " . "Bulan $tagihan->mounth" . "Dengan Total " . $tagihan->amount;
-                    $this->send_message($send, $users->User->telepon);
+                $tagihanDetail = TagihanDetail::where('id_tagihan', $tagihan->id)->where('start_date', date('Y-m-d'))->where('status', 'BELUM')->get();
+                foreach ($tagihanDetail as $tagihansT) {
+                    $user = Murid::with('User')->where('id_angkatans', $biayas->id_angkatans)->where('id_jurusans', $biayas->id_jurusans)->where('id_kelas', $biayas->id_kelas)->get();
+                    foreach ($user as $users) {
+                        $wali = User::where('id', $users->id_users)->get();
+                        $notification = Notify::where('id', 1)->get();
+                        foreach ($wali as $keys => $walis) {
+                            // Log::info($tagihansT->id);
+                            if ($tagihansT->start_date == date('Y-m-d')) {
+                                $send = $notification[$keys]->notif . ' ' . $users->name . ' ' . number_format($tagihan->amount, 2, ',', '.') . ' ' . url('http://127.0.0.1:8000/login-wali');
+                                $this->send_message($walis->telepon, $send);
+                            } else {
+                            }
+                        }
+                    }
                 }
             }
         }

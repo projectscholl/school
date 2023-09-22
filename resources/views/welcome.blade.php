@@ -72,7 +72,10 @@
             <a href="" class="text-light text-decoration-none"
                 style="font-family: Public sans, serif;">admin@gmail.com</a>
             <hr style="width:3px;height:30px; background-color:rgb(4, 232, 205);" class="mx-2">
-            <a class="text-light" style="font-family: Public sans, serif;">Tlp : 0863712326</a>
+            <a class="text-light" style="font-family: Public sans, serif;"
+                href="https://wa.me/{{ $instansi->telepon }}?text=Hi%27,%20like%20to%20chat%20with%20you"
+                target="_blank">Tlp :
+                0863712326</a>
             @guest
                 <hr style="width:3px;height:30px; background-color:rgb(4, 232, 205);" class="mx-2">
 

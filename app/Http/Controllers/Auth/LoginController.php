@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Spatie\Activitylog\Models\Activity;
 
 class LoginController extends Controller
 {
@@ -50,6 +51,7 @@ class LoginController extends Controller
         ]);
 
         if (auth()->attempt($credentials) && auth()->user()->role == 'ADMIN') {
+            activity()->causedBy(Auth::user())->event('login')->log('User operator ' . auth()->user()->name . ' melakukan login');
             return redirect()->route('admin.dashboard');
         } else {
             Auth::logout();

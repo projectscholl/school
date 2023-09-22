@@ -9,14 +9,19 @@ use App\Models\Murid;
 use App\Models\Pembayaran;
 use App\Models\Tagihan;
 use App\Models\TagihanDetail;
+use App\Traits\Ipaymu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+
 
 class PembayaranWaliController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
+    use Ipaymu;
     public function index(string $id, $IdMurid)
     {
         $instansi = Instansi::first();
@@ -53,7 +58,7 @@ class PembayaranWaliController extends Controller
         }
         // dd($data);
 
-        
+
 
         return redirect()->route('wali.tagihan.index')->with('message', 'Pembayaran Berhasil, Silakan Tunggu Konfirmasi Dari Admin');
     }
@@ -74,15 +79,15 @@ class PembayaranWaliController extends Controller
             return redirect()->route('wali.tagihan.pembayaran', $biaya->id . '?idmurid=' . $murid->id)->with('error', 'Pilih setidaknya satu tagihan.');
         }
 
-            foreach ($request->amount as $key => $value) {
-                $tagihans[] = TagihanDetail::where('id', $key)->first()->jumlah_biaya;
-                $tagihanDetails[] = TagihanDetail::where('id', $key)->first();
-                // dd($request->all());
-                // $bill = Tagihan::where('id_biayas',$biaya->id)->get();
-                // foreach($bill as $bills){
-                //     $tagihan = $bills->id;
-                // }
-            }
+        foreach ($request->amount as $key => $value) {
+            $tagihans[] = TagihanDetail::where('id', $key)->first()->jumlah_biaya;
+            $tagihanDetails[] = TagihanDetail::where('id', $key)->first();
+            // dd($request->all());
+            // $bill = Tagihan::where('id_biayas',$biaya->id)->get();
+            // foreach($bill as $bills){
+            //     $tagihan = $bills->id;
+            // }
+        }
 
         session(['tagihans' => array_sum($tagihans)]);
         session(['id_tagihans' => $id_tagihans]);
@@ -150,22 +155,57 @@ class PembayaranWaliController extends Controller
         $auth = Auth::user();
         $murid = Murid::where('id', $id)->first();
 
+        $pembayarans =  Pembayaran::create([
+            'id_users' => $auth->id,
+            'total_bayar' => $total,
+            'payment_links' => 'Cash',
+            'payment_status' => 'Di konfirmasi',
+            'nama_pengirim' => $auth->name,
+        ]);
         foreach ($id as $keys => $id_details) {
-            Pembayaran::create([
-                'id_tagihans' => $id_details,
-                'id_users' => $auth->id,
-                'total_bayar' => $total,
-                'payment_status' => 'Di konfirmasi',
-                'nama_pengirim' => $auth->name,
-            ]);
+
             $tagihandetail = TagihanDetail::where('id', $id_details);
             $sudah = 'SUDAH';
             $tagihandetail->update([
+                'id_pembayarans' => $pembayarans->id,
                 'status' => $sudah,
             ]);
         }
         return redirect()->route('admin.murid.index');
     }
+
+    public function payIpaymu(Request $request, $id,  $idmurid)
+    {
+        $data = $request->validate([
+            'total' => 'required',
+            'tagihanDetails.*' => 'required',
+        ]);
+        $total = $request->total;
+        $id_tagihan = $request->input('tagihanDetails');
+        $id_tagihan = array_map('strip_tags', $id_tagihan);
+        $id_tagihan = array_map('htmlspecialchars', $id_tagihan);
+        // print_r($id_tagihan);
+        $biaya = Biaya::find($id);
+        $payment = json_decode(json_encode($this->redirect_payment($id,  $total, $id_tagihan)), true);
+        $pembayaran = Pembayaran::create([
+            'id_users' => Auth::user()->id,
+            'payment_status' => 'PENDING',
+            'payment_links' => $payment['Data']['Url'],
+            'total_bayar' => $total,
+            'bukti_transaksi' => $payment['Data']['SessionID'],
+        ]);
+        foreach ($id_tagihan as $tagihandetails) {
+            $idTagihan = TagihanDetail::where('id', $tagihandetails);
+
+            $idTagihan->update([
+                'id_pembayarans' => $pembayaran->id,
+            ]);
+        }
+
+        return Redirect::to($pembayaran->payment_links);
+    }
+
+
     /**
      * Display the specified resource.
      */

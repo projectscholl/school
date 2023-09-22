@@ -52,6 +52,8 @@ class LoginWaliController extends Controller
         ]);
 
         if (auth()->attempt($credentials) && auth()->user()->role == 'WALI') {
+            activity()->causedBy(Auth::user())->event('login')->log('Wali murid ' . auth()->user()->name . ' melakukan login');
+
             return redirect()->route('wali.dashboard');
         } else {
             return redirect()->route('login-wali')->withErrors([

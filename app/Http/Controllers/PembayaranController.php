@@ -28,6 +28,7 @@ class PembayaranController extends Controller
         return view('admin.pembayaran.detail', compact('user', 'instansi', 'pembayaran'));
     }
 
+
     public function confirm(Request $request, string $id)
     {
         $pembayaran = Pembayaran::with('tagihanDetails')->find($id);
