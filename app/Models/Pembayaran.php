@@ -26,7 +26,7 @@ class Pembayaran extends Model
     {
         return $this->belongsTo(Murid::class, 'id_users'); 
     }
-public function tagihanDetails()
+    public function tagihanDetails()
     {
         return $this->hasMany(TagihanDetail::class, 'id_pembayarans');
     }

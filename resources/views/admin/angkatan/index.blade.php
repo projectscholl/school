@@ -50,9 +50,9 @@
                                                 <strong>{{ $item->tahun ?? 'Tidak ada Angkatan' }}</strong>
                                             </td>
                                             <td class="d-flex">
-                                                <a href="{{ route('admin.angkatan.edit', $item->id) }}"
+                                                {{-- <a href="{{ route('admin.angkatan.edit', $item->id) }}"
                                                     class="btn btn-warning me-2"><i class="bx bx-edit-alt"></i>
-                                                </a>
+                                                </a> --}}
                                                 <form action="{{ route('admin.angkatan.destroy' ,$item->id) }}"method="POST">
                                                     @csrf
                                                     @method('DELETE')

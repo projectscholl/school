@@ -114,6 +114,15 @@
                                     });
                                 </script>
                             </div>
+                            <div class="form-group mb-3">
+                                <label for="address">Alamat</label>
+                                <input type="text" class="form-control @error('address') is-invalid @enderror"
+                                    name="address" id="address" placeholder="Masukkan Alamat" required
+                                    value="{{ old('address', $murid->address) }}">
+                                @error('address')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                             <button type="submit" class="btn btn-primary">Update</button>
                         </form>
                         <!--/ Bordered Table -->

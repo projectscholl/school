@@ -46,15 +46,51 @@
                         <a href="{{ route('admin.murid.create') }}" class="btn btn-primary col-2 ms-4">Tambah Murid</a>
                     </div>
                     <div class="card-body">
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-3">
-                                <div class="col-md-10">
-                                    <form action="">
-                                        
-                                    </form>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form action="{{ route('admin.murid.index') }}" method="GET">
+                                            <!-- Filter berdasarkan id_angkatans -->
+                                            <div class="mb-3">
+                                                <label for="id_angkatans" class="form-label">Angkatan</label>
+                                                <select name="id_angkatans" id="id_angkatans" class="form-select">
+                                                    <option value="">Semua Angkatan</option>
+                                                    @foreach ($angkatans as $angkatan)
+                                                        <option value="{{ $angkatan->id }}">{{ $angkatan->nama }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                        
+                                            <!-- Filter berdasarkan id_jurusans -->
+                                            <div class="mb-3">
+                                                <label for="id_jurusans" class="form-label">Jurusan</label>
+                                                <select name="id_jurusans" id="id_jurusans" class="form-select">
+                                                    <option value="">Semua Jurusan</option>
+                                                    @foreach ($jurusans as $jurusan)
+                                                        <option value="{{ $jurusan->id }}">{{ $jurusan->nama }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                        
+                                            <!-- Filter berdasarkan id_kelas -->
+                                            <div class="mb-3">
+                                                <label for="id_kelas" class="form-label">Kelas</label>
+                                                <select name="id_kelas" id="id_kelas" class="form-select">
+                                                    <option value="">Semua Kelas</option>
+                                                    @foreach ($kelas as $kelass)
+                                                        <option value="{{ $kelass->id }}">{{ $kelass->nama }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                        
+                                            <button type="submit" class="btn btn-primary">Filter</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
+                        
                         <div class="table-responsive text-nowrap">
                             <table class="table" id="myTable">
                                 <thead>

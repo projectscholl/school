@@ -44,6 +44,16 @@
                                     <td>Nomor Tagihan : <strong>#{{ $pembayaran->id }}</strong></td>
                                 </tr>
                                 <tr>
+                                    <td>Nama Tagihan : <strong>@if ($pembayaran->tagihanDetails->isNotEmpty())
+                                        {{ $pembayaran->tagihanDetails->first()->nama_biaya  }}
+                                    @endif</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Nama Murid  : <strong>@if ($pembayaran->tagihanDetails->isNotEmpty())
+                                        {{ $pembayaran->tagihanDetails->first()->murids->name }}</strong>
+                                    @endif
+                                </tr>
+                                <tr>
                                     <td class="d-flex align-items-center">Invoice Tagihan : <button type="submit"
                                             class="btn btn-link">
                                             <strong>
@@ -71,7 +81,7 @@
                                     @endif</td></strong></td>
                                 </tr>
                                 <tr>
-                                    <td>Tanggal Pembayaran : <strong class="">{{ $pembayaran->created_at }}</td>
+                                    <td>Tanggal Pembayaran : <strong class="">{{ $pembayaran->created_at->format('d/m/Y') }}</td>
                                 </tr>
                                 <tr>
                                     <td>Total Tagihan : <strong class="">Rp {{ number_format($pembayaran->total_bayar)}}</strong></td>
@@ -80,7 +90,15 @@
                                     <td>Jumlah Pembayaran : <strong class="">Rp {{ number_format($pembayaran->total_bayar)}}</strong></td>
                                 </tr>
                                 <tr>
-                                    <td>Bukti Pembayaran : <img src="{{ asset('storage/image/' . $pembayaran->bukti_transaksi) }}" alt="Bukti Transaksi" width="100"></td>
+                                    <td>
+                                        Bukti Pembayaran : 
+                                        <a href="{{ asset('storage/image/' . $pembayaran->bukti_transaksi) }}" target="_blank">
+                                            <br>
+                                            <br>
+
+                                            <img src="{{ asset('storage/image/' . $pembayaran->bukti_transaksi) }}" alt="Bukti Transaksi" width="150">
+                                        </a>
+                                    </td>
                                 </tr>                                
                             </tbody>
                         </table>

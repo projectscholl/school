@@ -40,9 +40,12 @@ class PembayaranWaliController extends Controller
         ]);        
 
         
-        $imagePath = $request->file('bukti_transaksi')->store('public/image');
+        if ($request->hasFile('bukti_transaksi')) {
+            $imagePath = $request->file('bukti_transaksi')->store('public/image');
+            $imageName = basename($imagePath);
+            $data['bukti_transaksi'] = $imageName;
+        }
         
-        $imageName = basename($imagePath);
         $idTagihanDetails = $request->input('id_tagihan_details');
 
         $data['id_users'] = Auth::id();

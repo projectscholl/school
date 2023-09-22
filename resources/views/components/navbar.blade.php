@@ -20,11 +20,11 @@
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             <!-- Place this tag where you want the button to render. -->
             <div class="dropdown" style="">
+                @if (Auth::user()->role == 'ADMIN')
                 <li class="nav-item me-3 " style="" type="button" data-bs-toggle="dropdown" aria-expanded="false"
                     id="dropdownMenuButton1">
                     <i class='bx bx-bell'></i>
                 </li>
-                @if (Auth::user()->role == 'ADMIN')
                     <div class="dropdown-menu dropdown-menu-end" style="width: ;" aria-labelledby="dropdownMenuButton1">
                         <span class="dropdown-item"><b>Notification</b></span>
                         <div class="dropdown-item d-flex">
@@ -35,14 +35,6 @@
                             </div>
                             <span type="button" class="">&#10005;</span type="button">
                         </div>
-                        {{-- <div class="dropdown-item d-flex">
-                            <div class="d-flex flex-column">
-                                <span>Pembayaran Tagihan</span>
-                                <a href="{{ route('admin.pembayaran.index') }}">Sandi telah melakukan pembayaran</a>
-                                <p class="text-little mt-1 text-secondary" style="font-size:13px;">3 Hari lalu</p>
-                            </div>
-                            <span type="button" class="">&#10005;</span type="button">
-                        </div> --}}
                     </div>
                 @else
                 @endif()

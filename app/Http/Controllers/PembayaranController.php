@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Instansi;
+use App\Models\Murid;
 use App\Models\Pembayaran;
-use App\Models\Tagihan;
-use App\Models\TagihanDetail;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,8 +14,12 @@ class PembayaranController extends Controller
     {
         $user = Auth::user();
         $instansi = Instansi::first();
-        $pembayarans = Pembayaran::with(['murids', 'murids'])->get();
-        return view('admin.pembayaran.index', compact('user', 'instansi', 'pembayarans'));
+        $pembayarans = Pembayaran::get();
+        $idsMurids = $pembayarans->pluck('id_murids')->unique();
+        foreach ($idsMurids as $idMurid) {
+            $murid = Murid::find($idMurid);
+        }
+        return view('admin.pembayaran.index', compact('user', 'instansi', 'pembayarans', 'idsMurids'));
     }
     public function show(string $id)
     {

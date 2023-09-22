@@ -23,7 +23,7 @@
                                     <th>ANGKATAN</th>
                                     <th>JURUSAN</th>
                                     <th>KELAS</th>
-                                    <th>Kartu SPP</th>
+                                    {{-- <th>DETAIL</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,11 +39,16 @@
                                         <td>{{ $item->angkatans->tahun }}</td>
                                         <td>{{ $item->jurusans->nama }}</td>
                                         <td>{{ $item->kelas->kelas }}</td>
+                                        {{-- <td>
+                                            <a href="{{ route('wali.siswa.detail', $item->id) }}"
+                                                class="btn btn-primary me-2"><i class="bx bx-detail"></i>
+                                            </a>
+                                        </td>
                                         <td>
                                             <strong>
                                                 <a href="{{ route('admin.spp.pdf', ['id_users' => $item->id]) }}"><i class="menu-icon tf-icons bx bx-copy ms-2"></i>Cetak</a>
                                             </strong>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>

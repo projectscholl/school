@@ -58,7 +58,7 @@
                                             </div>
                                         </div>
                                         <span class="fw-semibold d-block mb-1">Total Murid</span>
-                                        <h3 class="card-title mb-4">{{ $jumlahMurid }}</h3>
+                                        <h3 class="card-title mb-2">{{ $jumlahMurid }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -72,8 +72,8 @@
                                             </div>
                                         </div>
                                         <span class="fw-semibold d-block mb-1">Total Sudah Bayar</span>
-                                        <h3 class="card-title mb-1">0</h3>
-                                        <small class="text-success fw-semibold"><strong>Rp1.000.000</strong></small>
+                                        <h3 class="card-title mb-2">{{ $pembayaranDikonfirmasi }}</h3>
+                                        {{-- <small class="text-success fw-semibold"><strong>Rp1.000.000</strong></small> --}}
                                     </div>
                                 </div>
                             </div>

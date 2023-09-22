@@ -110,14 +110,14 @@ class MuridController extends Controller
             'name' => 'required|max:255|string',
             'nisn' => 'required|max:10',
             'id_users' => 'nullable',
-            'id_jurusans' => 'required',
             'id_angkatans' => 'required',
+            'id_jurusans' => 'required',
             'id_kelas' => 'required',
             'address' => 'required',
         ]);
-        dd($data);
-        // $murid = Murid::find($id);
-        // $result = $murid->update($data);
+        // dd($data);
+        $murid = Murid::find($id);
+        $result = $murid->update($data);
 
         return redirect()->route('admin.murid.index')->with('pesan', "Murid Berhasil Diedit!!");
     }

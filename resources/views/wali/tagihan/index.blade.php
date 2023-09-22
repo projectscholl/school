@@ -20,13 +20,15 @@
                         </div>                 
                     @endif
                     <div class="card">
-                        <h5 class="card-header">Data Tagihan</h5>
+                        <h5 class="card-header">Data Tagihan Murid</h5  >
                         <div class="card-body">
                             <div class="table-responsive text-nowrap">
                                 <table class="table" id="myTable">
                                     <thead>
                                         <tr>
                                             <th>No</th>
+                                            <th>Nama Tagihan</th>
+                                            <th>Jenis Tagihan</th>
                                             <th>Nama Murid</th>
                                             <th>Angkatan</th>
                                             <th>Jurusan</th>
@@ -35,10 +37,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($biayaItems as $index => $tagihans)
-                                            @foreach ($tagihans->murids as $index => $murid)
+                                        @php
+                                            $nomor = 1;
+                                        @endphp
+                                        @foreach ($biayaItems as $tagihans)
+                                            @foreach ($tagihans->murids as $murid)
                                                 <tr>
-                                                    <td>{{ $index + 1 }}</td>
+                                                    <td>{{ $nomor }}</td>
+                                                    <td>{{ $tagihans->nama_biaya }}</td>
+                                                    <td>
+                                                        @if ($tagihans->jenis_biaya === 'tidakRoutine')
+                                                            <strong>Tidak Rutin</strong>
+                                                        @elseif ($tagihans->jenis_biaya === 'routine')
+                                                            <strong>Rutin</strong>
+                                                        @else
+                                                            Jenis Tidak Diketahui
+                                                        @endif
+                                                    </td>                                                    
                                                     <td>
                                                         {{ $murid->name ?? 'Tidak Ada Data' }}<br>
                                                     </td>
@@ -49,6 +64,9 @@
                                                         <a href="{{ route('wali.tagihan.detail', ['id' => $tagihans->id, 'idmurid' => $murid->id]) }}" class="btn btn-primary me-2">Detail</a>
                                                     </td>
                                                 </tr>
+                                                @php
+                                                    $nomor++;
+                                                @endphp
                                             @endforeach
                                         @endforeach
                                     </tbody>
