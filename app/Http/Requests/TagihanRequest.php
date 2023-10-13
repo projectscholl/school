@@ -22,13 +22,12 @@ class TagihanRequest extends FormRequest
     public function rules(): array
     {
         return [
-
+            'id_biayas' => 'exists:biayas,id',
             'start_date.*' => 'nullable',
             'end_date.*' => 'nullable',
             'mounth.*' => 'nullable',
-            'amount.*' => 'required|numeric',
+            'amount.*' => 'required|numeric|min_digits:4',
             'status' => 'nullable',
-
         ];
     }
     protected function prepareForValidation()

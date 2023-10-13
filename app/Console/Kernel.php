@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Jobs\IpaymuJob;
 use App\Jobs\SendWhatsaapJob;
+use App\Jobs\TenggatJob;
 use App\Traits\Fonnte;
 use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
@@ -26,9 +27,10 @@ class Kernel extends ConsoleKernel
 
         $time = now()->format('H:i');
 
-        $schedule->command('notification:cron')->dailyAt('11.26');
-        $schedule->job(new SendWhatsaapJob())->everyMinute();
-        $schedule->job(new IpaymuJob())->everyFifteenSeconds();
+        // $schedule->command('notification:cron')->everyTenMinutes();
+        // $schedule->job(new SendWhatsaapJob())->everySecond();
+        $schedule->job(new TenggatJob())->dailyAt('13:00');
+        $schedule->job(new IpaymuJob())->everySecond();
     }
 
     /**

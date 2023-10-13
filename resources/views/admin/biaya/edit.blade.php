@@ -14,11 +14,25 @@
                 <div class="card">
                     <h5 class="card-header">Edit Biaya</h5>
                     <div class="card-body">
+                        @if ($biaya->jenis_biaya == 'routine')
+                            <div class="form-group mb-3" id="all">
+                                <label for="">Masukkan Seluruh Total Biaya</label>
+                                <form onsubmit="return false">
+                                    <div class="d-flex">
+                                        <input type="text" class="form-control rupiah" id="input_form"
+                                            placeholder="Optional : 200.000">
+                                        <button class="btn btn-success ms-2" id="tombol_form">Click</button>
+                                    </div>
+                                </form>
+                            </div>
+                        @endif
+
                         <form action="{{ route('admin.biaya.update', $biaya->id) }}" method="POST">
                             @csrf
                             @method('PUT')
+
                             <div class="form-group mb-3">
-                                <label for="nama">Nama selectedBiaya</label>
+                                <label for="nama">Nama Biaya</label>
                                 <input type="text"
                                     class="form-control @error('nama_biaya')
                                 is-invalid
@@ -45,12 +59,22 @@
                                             <th>NO</th>
                                             <th>TANGGAL</th>
                                             <th>Total biaya</th>
-                                            <th>tanggal mulai</th>
                                             <th>Tanggal tenggat</th>
                                         </tr>
                                     </thead>
 
                                     {{-- this input yang routine --}}
+                                    @php
+                                        $tanggal2 = ['28', '27', '26', '25', '24', '23', '22', '21', '20', '19', '18', '17', '16', '15', '14', '13', '12', '11', '10', '09', '08', '07', '06', '05', '04', '03', '02', '01'];
+                                        $tanggal = ['30', '29', '28', '27', '26', '25', '24', '23', '22', '21', '20', '19', '18', '17', '16', '15', '14', '13', '12', '11', '10', '09', '08', '07', '06', '05', '04', '03', '02', '01'];
+                                        $tanggal3 = ['07', '08', '09', '10', '11', '12', '01', '02', '03', '04', '05', '06'];
+                                        $tahun = date('Y');
+                                        $tanggal4 = ['31', '28', '31', '30', '31', '30', '31', '31', '30', '31', '30', '31'];
+
+                                        $tanggal5 = ['01', '01', '01', '01', '01', '01', '01', '01', '01', '01', '01', '01'];
+                                        $tanggal6 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+
+                                    @endphp
 
                                     @if ($biaya->jenis_biaya == 'routine')
                                         <tbody>
@@ -58,23 +82,28 @@
                                                 <tr>
                                                     <td>{{ $index + 1 }}</td>
                                                     <td>
-                                                        {{ $tagihans->mounth }}
+                                                        {{ \Carbon\Carbon::parse($tagihans->mounth)->format('F') }}
                                                         <input type="hidden" name="mounth[]" class="tess"
                                                             value="{{ $tagihans->mounth }}">
                                                     </td>
                                                     <td><input type="number"
                                                             class="form-control @error('amount[]')
                                                     is-invalid
-                                                @enderror tess routine rupiah"
+                                                @enderror tess routine rupiah hasil"
                                                             name="amount[]" value="{{ $tagihans->amount }}">
                                                     </td>
-                                                    <td><input type="date" name="start_date[]"
-                                                            class="form-control tess date1"
-                                                            value="{{ $tagihans->start_date }}">
-                                                    </td>
-                                                    <td><input type="date" name="end_date[]"
-                                                            class="form-control tess date2"
-                                                            value="{{ $tagihans->end_date }}">
+                                                    <input type="hidden" name="start_date[]"
+                                                        class="form-control tess date1" value="{{ $tagihans->start_date }}">
+                                                    <td><select name="end_date[]" id="" class="form-select">
+                                                            <option value="" disabled>Pilih Tanggal Pada Bulan
+                                                            </option>
+                                                            @foreach ($tanggal as $tanggals)
+                                                                <option value="{{ $tanggals . '-' . $tanggal3[$index] }}"
+                                                                    {{ $tagihans->end_date == $tanggals . '-' . $tanggal3[$index] ? 'selected' : '' }}>
+                                                                    {{ $tanggals . '-' . $tanggal3[$index] }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </td>
                                                     <input type="hidden" name="id[]" value="{{ $tagihans->id }}">
                                                 </tr>
@@ -82,6 +111,39 @@
                                         </tbody>
                                     @endif
                                 </table>
+                                <script>
+                                    const angkatanSelect = document.getElementById('id_angkatans');
+                                    const jurusanSelect = document.getElementById('id_jurusans');
+                                    const kelasSelect = document.getElementById('id_kelas');
+
+                                    const jurusanGrouped = @json($jurusanGrouped);
+                                    const kelasGrouped = @json($kelasGrouped);
+
+                                    angkatanSelect.dispatchEvent(new Event('change'));
+                                    const angkatanId = angkatanSelect.value;
+                                    const jurusanOptions = jurusanGrouped[angkatanId] || [];
+
+                                    jurusanSelect.innerHTML = '<option value="">Pilih Kelas</option>';
+                                    jurusanOptions.forEach(jurusan => {
+                                        const option = document.createElement('option');
+                                        option.value = jurusan.id;
+                                        option.textContent = jurusan.nama;
+                                        jurusanSelect.appendChild(option);
+                                    });
+
+
+                                    const jurusanId = jurusanSelect.value;
+                                    const kelasOptions = kelasGrouped[jurusanId] || [];
+
+                                    kelasSelect.innerHTML = '';
+
+                                    kelasOptions.forEach(kelas => {
+                                        const option = document.createElement('option');
+                                        option.value = kelas.id;
+                                        option.textContent = kelas.kelas;
+                                        kelasSelect.appendChild(option);
+                                    });
+                                </script>
                             </div>
                             <!--Input date pembayaran tidak routine-->
                             @if ($biaya->jenis_biaya == 'tidakRoutine')
@@ -107,7 +169,7 @@
                                         @endforeach
 
                                     </div>
-                                    <div class="form-group mb-3">
+                                    {{-- <div class="form-group mb-3">
                                         <label for="start_date">Tanggal mulai</label>
                                         @foreach ($biaya->tagihans as $tagihans)
                                             <input type="date" class="form-control optional time1" name="start_date[]"
@@ -123,93 +185,54 @@
                                             <input type="hidden" name="id[]" value="{{ $tagihan->id }}">
                                         @endforeach
                                     </div>
+                                    --}}
+                                    <div class="form-group mb-3">
+                                        <label for="start_date">Tanggal mulai</label>
+                                        <select name="start_date[]" id="time" class="form-select optional time1"
+                                            placeholder="Masukkan Nama Biaya">
+                                            <option value="" disabled>Pilih Tanggal dan Bulan di Awal</option>
+                                            @foreach ($tanggal6 as $index => $tree)
+                                                <option value="{{ $tanggal5[$index] }}-{{ $tree }}"
+                                                    {{ $tanggal5[$index] . '-' . $tree == $tagihans->start_date ? 'selected' : '' }}>
+                                                    {{ $tanggal5[$index] }}
+                                                    {{ Carbon\Carbon::parse('1990-' . $tree)->format('F') }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="end_date">Tanggal tenggat</label>
+                                        <select name="end_date[]" id="time" class="form-select optional time2">
+                                            <option value="" disabled>Pilih Tanggal dan Bulan di Akhir</option>
+                                            @foreach ($tanggal6 as $index => $tree)
+                                                <option value="{{ $tanggal4[$index] }}-{{ $tree }}"
+                                                    {{ $tanggal4[$index] . '-' . $tree == $tagihans->end_date ? 'selected' : '' }}>
+                                                    {{ $tanggal4[$index] }}
+
+                                                    <!--Ini format untuk menjadikan tanggal ke bulan-->
+                                                    {{ Carbon\Carbon::parse('1990-' . $tree)->format('F') }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <input type="hidden" name="id[]" value="{{ $tagihans->id }}">
+                                    </div>
                                 </div>
                             @endif
                             <div class="form-group
                                         mb-3">
-                                <label for="id_angkatans">Masukkan angkatan</label>
-                                <select name="id_angkatans" id="id_angkatans"
-                                    class="form-control @error('id_angkatans')
-                                    is-invalid
-                                @enderror"
-                                    readonly="readonly" required>
-                                    @foreach ($angkatan as $data)
-                                        <option
-                                            value="{{ $biaya->id_angkatans }}"{{ $data->id == $biaya->id_angkatans ? 'selected' : '' }}>
-                                            {{ $data->tahun }}</option>
-                                    @endforeach
-                                </select>
+                                <label for="id_angkatans">Angkatan</label>
+                                <input type="text" class="form-control" value="{{ $biaya->angkatans->tahun }}" readonly>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="id_jurusans">Masukkan Jurusan</label>
-                                <select name="id_jurusans" id="id_jurusans"
-                                    class="form-control @error('id_jurusans')
-                                    is-invalid
-                                @enderror"
-                                    readonly="readonly" required>
-                                    <option value="{{ $biaya->id_jurusans }}"{{ $biaya->id_jurusans ? 'selected' : '' }}
-                                        readonly="readonly">
-                                        {{ $biaya->jurusans->nama }}
-                                    </option>
-                                </select>
+                                <label for="id_jurusans">Jurusan</label>
+                                <input type="text" class="form-control" readonly value=" {{ $biaya->jurusans->nama }}">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="id_kelas">Masukkan kelas</label>
-                                <select name="id_kelas" id="id_kelas"
-                                    class="form-control @error('id_kelas')
-                                    is-invalid
-                                @enderror"
-                                    readonly="readonly" required>
-                                    <option value="{{ $biaya->id_kelas }}"{{ $biaya->id_jurusans ? 'selected' : '' }}
-                                        readonly="readonly">
-                                        {{ $biaya->kelas->kelas }}
-                                    </option>
-                                </select>
-                                <script>
-                                    const angkatanSelect = document.getElementById('id_angkatans');
-                                    const jurusanSelect = document.getElementById('id_jurusans');
-                                    const kelasSelect = document.getElementById('id_kelas');
-
-                                    const jurusanGrouped = @json($jurusanGrouped);
-                                    const kelasGrouped = @json($kelasGrouped);
-
-
-                                    angkatanSelect.addEventListener('change', () => {
-                                        const angkatanId = angkatanSelect.value;
-                                        const jurusanOptions = jurusanGrouped[angkatanId] || [];
-
-                                        jurusanSelect.innerHTML = '<option value="">Pilih Jurusan</option>';
-
-                                        jurusanOptions.forEach(jurusan => {
-                                            const option = document.createElement('option');
-                                            option.value = jurusan.id;
-                                            option.textContent = jurusan.nama;
-                                            jurusanSelect.appendChild(option);
-                                        });
-
-                                        updateKelasOptions();
-                                    });
-
-                                    jurusanSelect.addEventListener('change', () => {
-                                        updateKelasOptions();
-                                    });
-
-                                    function updateKelasOptions() {
-                                        const jurusanId = jurusanSelect.value;
-                                        const kelasOptions = kelasGrouped[jurusanId] || [];
-
-                                        kelasSelect.innerHTML = '<option value="">Pilih Kelas</option>';
-
-                                        kelasOptions.forEach(kelas => {
-                                            const option = document.createElement('option');
-                                            option.value = kelas.id;
-                                            option.textContent = kelas.kelas;
-                                            kelasSelect.appendChild(option);
-                                        });
-                                    }
-                                </script>
+                                <input type="text" class="form-control" readonly value="{{ $biaya->kelas->kelas }}">
                             </div>
-                            <button type="submit" class="btn btn-primary">Tambahkan</button>
+                            <button type="submit" class="btn btn-primary">Ubah</button>
                     </div>
                     </form>
                 </div>
@@ -222,11 +245,22 @@
 @push('scripts')
     <script src="{{ asset('sneat/js/jquery.mask.min.js') }}"></script>
     <script>
-        $(document).ready(function() {
-            $('.rupiah').mask("#.##0", {
-                reverse: true
-            });
-        })
+        $('.rupiah').mask("#.##0", {
+            reverse: true
+        });
+    </script>
+    <script type="text/javascript">
+        document.getElementById("tombol_form").addEventListener("click", tampilkan_nilai_form);
+
+        function tampilkan_nilai_form() {
+            event.preventDefault();
+            var nilai_form = document.getElementById("input_form").value;
+            const hasil = document.querySelectorAll('.hasil');
+            for (var i = 0; i < hasil.length; i++) {
+                hasil[i].setAttribute('value', nilai_form);
+                hasil[i].value = nilai_form;
+            }
+        }
     </script>
     <script type="text/javascript">
         const status = document.getElementById('status');

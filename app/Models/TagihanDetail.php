@@ -18,6 +18,7 @@ class TagihanDetail extends Model
         'start_date',
         'end_date',
         'jumlah_biaya',
+        'bulan'
     ];
     public function murids()
     {

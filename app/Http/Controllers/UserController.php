@@ -35,21 +35,25 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'telepon.regex' => 'Nomor telepon harus diawali 08'
+        ];
         $request->validate([
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users,email',
-            'telepon' => 'required',
+            'telepon' => 'required|min:12|max:12|regex:/^08\d+$/',
             'role' => 'required|in:ADMIN',
             'password' => 'required',
             'password_confirm' => 'required|same:password',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-
+        ], $messages);
+        $phone = ltrim($request->telepon, '0');
+        $phone = '62' . $phone;
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('storage/image'), $imageName);
         $user = User::create([
             'name' => $request->name,
-            'telepon' => $request->telepon,
+            'telepon' => $phone,
             'email' => $request->email,
             'role' => $request->role,
             'password' => Hash::make($request->password),
@@ -67,7 +71,17 @@ class UserController extends Controller
     public function show(string $id)
     {
     }
-
+    public function deleteSelect(Request $request)
+    {
+        $ids = $request->ids;
+        $user = User::whereIn('id', $ids);
+        $users = User::where('id', $ids)->first();
+        if ($users == Auth::user()) {
+            return redirect()->route('admin.user.index')->with('pesan', 'User Sedang dipakai');
+        }
+        $user->delete();
+        return redirect()->route('admin.user.index')->with('success', 'Berhasil menghapus data');
+    }
     /**
      * Show the form for editing the specified resource.
      */
@@ -83,11 +97,14 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $messages = [
+            'telepon.regex' => 'Nomor telepon harus diawali 08'
+        ];
         $data = $request->validate([
             'name' => 'required|min:3',
             'email' => 'required|unique:users,email,' . $user['id'],
-            'telepon' => 'required|min:8',
-        ]);
+            'telepon' => 'required|min:8|regex:/^08\d+$/',
+        ], $messages);
 
 
         if ($request->image) {
@@ -104,10 +121,14 @@ class UserController extends Controller
             $user->password;
         } else {
             $data = $request->validate([
+                'name' => 'required|min:3',
+                'email' => 'required|unique:users,email,' . $user['id'],
+                'telepon' => 'required|min:8|regex:/^08\d+$/',
                 'password' => 'min:5',
                 'password_confirmation' => 'required|same:password',
-            ]);
-
+            ], $messages);
+            $telepon = ltrim($data['telepon'], '0');
+            $data['telepon'] = '62' . $telepon;
             Hash::make($request->password);
         }
         $user->update($data);
@@ -122,7 +143,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if ($user == Auth::user()) {
-            return redirect()->route('admin.user.index')->with('error', 'User Sedang dipakai');
+            return redirect()->route('admin.user.index')->with('errors', 'User Sedang dipakai');
         }
         $user->delete();
 

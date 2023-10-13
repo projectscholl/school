@@ -19,14 +19,20 @@ class Pembayaran extends Model
         'rek_pengirim',
         'bukti_transaksi',
         'total_bayar',
-        'identitas_penerima'
+        'identitas_penerima',
+        'year'
     ];
 
     public function murids()
     {
         return $this->belongsTo(Murid::class, 'id_users');
     }
-public function tagihanDetails()
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'id_users');
+    }
+    public function tagihanDetails()
     {
         return $this->hasMany(TagihanDetail::class, 'id_pembayarans');
     }

@@ -26,12 +26,11 @@ class AdminController extends Controller
         $user = Auth::user();
         $jumlahMurid = Murid::count();
         $tagihanDetail = TagihanDetail::all();
-
         $jumlahLunas = $tagihanDetail->where('status', 'SUDAH')->count();
         $jumlahBelumBayar = $tagihanDetail->where('status', 'BELUM')->count();
         $pembayaran = Pembayaran::all();
-        $pembayaranDikonfirmasi = $pembayaran->where('payment_status', 'Dikonfirmasi')->count();
-        $pembayaranBelum_Dikonfirmasi = $pembayaran->where('payment_status', 'Belum Di Konfirmasi')->count();
+        $pembayaranDikonfirmasi = $pembayaran->where('payment_status', 'berhasil')->count();
+        $pembayaranBelum_Dikonfirmasi = $pembayaran->where('payment_status', 'pending')->count();
         return view('admin.dashboard', compact('user', 'jumlahMurid', 'instansi', 'tagihanDetail', 'jumlahBelumBayar', 'jumlahLunas', 'pembayaranDikonfirmasi', 'pembayaranBelum_Dikonfirmasi'));
     }
     public function edit()
@@ -47,8 +46,8 @@ class AdminController extends Controller
         $validate = $request->validate([
             'name' => 'required|max:50',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'telepon' => 'required'
-
+            'telepon' => 'required',
+            'image' => 'mimes:png,jpg,jpeg',
         ]);
 
         if ($request->image) {
@@ -64,6 +63,10 @@ class AdminController extends Controller
 
         if ($request->password && $request->old_password) {
             $validate = $request->validate([
+                'name' => 'required|max:50',
+                'email' => 'required|email|unique:users,email,' . $user->id,
+                'telepon' => 'required',
+                'image' => 'mimes:png,jpg,jpeg',
                 'old_password' => 'required',
                 'password' => 'required|confirmed',
             ]);

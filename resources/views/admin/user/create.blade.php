@@ -43,7 +43,7 @@
                                                 class="form-control @error('telepon')
                                             is-invalid
                                         @enderror"
-                                                type="text" name="telepon" id="telepon" value="{{ old('telepon') }}" />
+                                                type="number" name="telepon" id="telepon" value="{{ old('telepon') }}" />
                                             @error('telepon')
                                                 <div id="validationServer05Feedback" class="invalid-feedback">
                                                     {{ $message }}
@@ -120,7 +120,8 @@
                                             <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 2Mb
                                         </div>
                                         <div class="mt-2">
-                                            <button type="submit" class="btn btn-primary me-2" id="success">Submit</button>
+                                            <button type="submit" class="btn btn-primary me-2"
+                                                id="success">Submit</button>
                                             <a type="reset" class="btn btn-outline-secondary"
                                                 href="{{ route('admin.user.index') }}">Cancel</a>
                                         </div>

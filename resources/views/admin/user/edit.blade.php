@@ -49,7 +49,8 @@
                                                 class="form-control @error('telepon')
                                                 is-invalid
                                             @enderror"
-                                                type="number" name="telepon" value="{{ $user->telepon }}" />
+                                                type="number" name="telepon"
+                                                value="{{ str_replace('62', '0', $user->telepon) }}" />
                                             @error('telepon')
                                                 <div id="validationServer05Feedback" class="invalid-feedback">
                                                     {{ $message }}

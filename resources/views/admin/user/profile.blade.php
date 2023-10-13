@@ -33,8 +33,8 @@
                                 <img src="{{ asset('storage/image/' . $user->image) }}" alt="" width="100"
                                     height="100" class="d-block rounded mb-3">
                                 <div class="d-flex align-items-start gap-4">
-                                    <form action="{{ route('admin.profile.update', $user->id) }}" method="POST"
-                                        enctype="multipart/form-data">
+                                    <form action="{{ route('admin.profile.update', $user->id) }}" id="formId"
+                                        method="POST" enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
                                         <div class="row">
@@ -76,6 +76,9 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="" class="form-label">Image</label>
                                                 <input type="file" name="image" id="" class="form-control">
+                                                @error('image')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                                 <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of
                                                     800K
                                             </div>
@@ -96,3 +99,10 @@
     </div>
     <!-- / Menu -->
 @endsection
+
+@push('scripts')
+    <script type="text/javascript">
+        var someForm = document.getElementById('formId');
+        someForm.setAttribute("autocomplete", "off");
+    </script>
+@endpush

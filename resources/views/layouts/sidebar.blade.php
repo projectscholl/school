@@ -4,7 +4,7 @@
         $active = 'menu-item active';
         $nonActive = 'menu-item';
     @endphp
-    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme sidebar" data-bg-class="bg-menu-theme">
+    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme sidebar">
         <div class="app-brand demo mb-3" style="height: 100px;">
             <div class="d-flex flex-column">
                 <div class="d-flex align-items-center justify-content-center">
@@ -96,13 +96,31 @@
                 <li class="menu-header small text-uppercase">
                     <span class="menu-header-text">DATA TRANSAKSI</span>
                 </li>
-
-
-                <li class="{{ Route::is('admin.biaya.*') ? $active : $nonActive }}">
+                {{-- <li class="{{ Route::is('admin.biaya.*') ? $active : $nonActive }}">
                     <a href="{{ route('admin.biaya.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-wallet-alt"></i>
                         <div data-i18n="Without menu">Data biaya</div>
                     </a>
+                </li> --}}
+                <li class="menu-item {{ Route::is('admin.biaya.*', 'admin.masterBiaya.*') ? 'active open' : '' }}">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bx bx-wallet-alt"></i>
+                        <div data-i18n="Layouts">Data Biaya</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="{{ Route::is('admin.biaya.*') ? $active : $nonActive }}">
+                            <a href="{{ route('admin.biaya.index') }}" class="menu-link">
+                                <div data-i18n="Without menu">Manegement Biaya</div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="menu-sub">
+                        <li class="{{ Route::is('admin.masterBiaya.*') ? $active : $nonActive }}">
+                            <a href="{{ route('admin.masterBiaya.index') }}" class="menu-link">
+                                <div data-i18n="Without menu">Biaya Bawaan</div>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <!--Data Pembayaran-->
                 <li class="{{ Route::is('admin.pembayaran.*', 'admin.pembayaran.detail') ? $active : $nonActive }}">
@@ -116,7 +134,7 @@
                     class="menu-item {{ Route::is('admin.profile.*', 'admin.instansi.*', 'admin.bank.*', 'admin.pesan-whatsaap.index', 'admin.activity.*') ? 'active open' : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                        <div data-i18n="Account Settings">Account Setting</div>
+                        <div data-i18n="Layouts">Account Setting</div>
                     </a>
                     <ul class="menu-sub">
                         <li class="{{ Route::is('admin.instansi.*', 'admin.bank.*') ? $active : $nonActive }}">
@@ -183,6 +201,27 @@
                         <div data-i18n="Analytics">Data Wali Murid</div>
                     </a>
                 </li>
+                <!--Data Orang tua-->
+                <li class="menu-item {{ Route::is('admin.AyahMurid.*', 'admin.IbuMurid.*') ? 'active open' : '' }}">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bx bx-user"></i>
+                        <div data-i18n="Layouts">Data Orang Tua</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="{{ Route::is('admin.AyahMurid.*') ? $active : $nonActive }}">
+                            <a href="{{ route('admin.AyahMurid.index') }}" class="menu-link">
+                                <div data-i18n="Without menu">Data Ayah</div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="menu-sub">
+                        <li class="{{ Route::is('admin.IbuMurid.*') ? $active : $nonActive }}">
+                            <a href="{{ route('admin.IbuMurid.index') }}" class="menu-link">
+                                <div data-i18n="Without menu">Data Ibu</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <!--Data Siswa-->
                 <li class="{{ Route::is('admin.murid.*') ? $active : $nonActive }}">
                     <a href="{{ route('admin.murid.index') }}" class="menu-link">
@@ -223,5 +262,27 @@
                 </li>
             </ul>
         @endif
-
     </aside>
+    @push('scripts')
+        <!-- Core JS -->
+        <!-- build:js assets/vendor/js/core.js -->
+        <script src="/sneat/assets/vendor/libs/jquery/jquery.js"></script>
+        <script src="/sneat/assets/vendor/libs/popper/popper.js"></script>
+        <script src="/sneat/assets/vendor/js/bootstrap.js"></script>
+        <script src="/sneat/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+        <script src="/sneat/assets/vendor/js/menu.js"></script>
+        <!-- endbuild -->
+
+        <!-- Vendors JS -->
+        <script src="/sneat/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
+        <!-- Main JS -->
+        <script src="/sneat/assets/js/main.js"></script>
+
+        <!-- Page JS -->
+        <script src="/sneat/assets/js/dashboards-analytics.js"></script>
+
+        <!-- Place this tag in your head or just before your close body tag. -->
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+    @endpush

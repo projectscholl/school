@@ -34,15 +34,18 @@ class IpaymuJob implements ShouldQueue
         $pembayaran = Pembayaran::all();
 
         foreach ($pembayaran as $pembayarans) {
-            if ($pembayarans->payment_status == 'PENDING') {
+            if ($pembayarans->payment_status == 'pending') {
                 $times  = strtotime($pembayarans->created_at) + (86400 * 1);
                 if ($times < time()) {
                     $pembayarans->update([
-                        'payment_status' => 'EXPIRED',
+                        'payment_status' => 'expired',
                     ]);
                     $user = User::where('id', $pembayarans->id_users)->get();
-                    $send = 'Asslammualaikum warahmatullahi wabarakatu yang terhormat Bapak / ibu ' . $user->name . 'Kami informasikan ada pembayaram yang sudah expired jika ingin membayar silahkan membayar ulang';
-                    $this->send_message($user->telepon, $send);
+                    foreach ($user as $users) {
+                        $send = 'Asslammualaikum warahmatullahi wabarakatu yang terhormat Bapak / ibu ' . $users->name . ' Kami informasikan ada pembayaram yang sudah expired jika ingin membayar silahkan membayar ulang';
+                        $this->send_message($users->telepon, $send);
+                        // Log::info($users->telepon);
+                    }
                     // Log::info($user);
                 }
             }

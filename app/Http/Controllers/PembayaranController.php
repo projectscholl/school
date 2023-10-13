@@ -45,4 +45,12 @@ class PembayaranController extends Controller
 
         return redirect()->route('admin.pembayaran.index')->with('pesan', 'Pembayaran Berhasil Di Konfirmasi');
     }
+
+    public function deleteSelect(Request $request)
+    {
+        $ids = $request->ids;
+        $pemabayaran = Pembayaran::where('id', $ids);
+        $pemabayaran->delete();
+        return redirect()->route('admin.pembayaran.index')->with('pesan', 'Pembayaran Berhasil dihapus');
+    }
 }

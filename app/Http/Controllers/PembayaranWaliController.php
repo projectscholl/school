@@ -159,8 +159,9 @@ class PembayaranWaliController extends Controller
             'id_users' => $auth->id,
             'total_bayar' => $total,
             'payment_links' => 'Cash',
-            'payment_status' => 'Di konfirmasi',
+            'payment_status' => 'berhasil',
             'nama_pengirim' => $auth->name,
+            'year' => date('Y'),
         ]);
         foreach ($id as $keys => $id_details) {
 
@@ -187,12 +188,14 @@ class PembayaranWaliController extends Controller
         // print_r($id_tagihan);
         $biaya = Biaya::find($id);
         $payment = json_decode(json_encode($this->redirect_payment($id,  $total, $id_tagihan)), true);
+        // dd($payment);
         $pembayaran = Pembayaran::create([
             'id_users' => Auth::user()->id,
-            'payment_status' => 'PENDING',
+            'payment_status' => 'pending',
             'payment_links' => $payment['Data']['Url'],
             'total_bayar' => $total,
             'bukti_transaksi' => $payment['Data']['SessionID'],
+            'year' => date('Y'),
         ]);
         foreach ($id_tagihan as $tagihandetails) {
             $idTagihan = TagihanDetail::where('id', $tagihandetails);

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Angkatan;
+use App\Models\Biaya;
 use App\Models\Jurusan;
 use App\Models\Kelas;
+use App\Models\Murid;
 use Illuminate\Http\Request;
 
 class KelasController extends Controller
@@ -59,11 +61,43 @@ class KelasController extends Controller
 
         return redirect()->route('admin.kelas.index')->with('edit', "Kelas Berhasil Diupdate!!");;
     }
+    public function deleteSelect(Request $request)
+    {
+        $ids = $request->ids;
+        $kelas = Kelas::whereIn('id', $ids);
+        $biayat = Biaya::where('id_kelas', $ids)->first();
+        $murids = Murid::where('id_kelas', $ids)->first();
+
+
+        if ($biayat) {
+            foreach ($ids as $id) {
+                $biaya = Biaya::where('id_kelas', $id)->get();
+                foreach ($biaya as $biayas) {
+                    return redirect()->route('admin.kelas.index')->with('pesan', 'Gagal Menghapus data kelas ! Hapus data biaya dengan kelas ' . $biayas->kelas->kelas . ' terlebih dahulu');
+                }
+            }
+        } else if ($murids) {
+            return redirect()->route('admin.kelas.index')->with('pesan', 'Gagal Menghapus data kelas ! Hapus data murid dengan kelas ' . $murids->kelas->kelas . ' terlebih dahulu');
+        } else {
+            $kelas->delete();
+            return redirect()->route('admin.kelas.index')->with('success', 'Success Delete data ');
+        }
+    }
 
     public function destroy(string $id)
     {
+
         $kelas = Kelas::findOrFail($id);
-        $kelas->delete();
-        return redirect()->route('admin.kelas.index');
+        $biaya = Biaya::where('id_kelas', $kelas->id)->first();
+        $murids = Murid::where('id_jurusans', $kelas->id)->first();
+
+        if ($biaya) {
+            return redirect()->route('admin.kelas.index')->with('pesan', 'Gagal Menghapus data! Hapus data Biaya kelas ' . $biaya->kelas->kelas . ' terlebih dahulu');
+        } else if ($murids) {
+            return redirect()->route('admin.jurusan.index')->with('pesan', 'Gagal Menghapus data kelas! Hapus data Murid jurusan ' . $murids->jurusans->nama . ' terlebih dahulu');
+        } else {
+            $kelas->delete();
+            return redirect()->route('admin.kelas.index');
+        }
     }
 }
