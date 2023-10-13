@@ -13,7 +13,6 @@ use Spatie\Activitylog\LogOptions;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -25,8 +24,15 @@ class User extends Authenticatable
         'name',
         'email',
         'telepon',
+        'id_orangtua',
         'image',
         'role',
+        'status',
+        'sebagai',
+        'hubungan',
+        'agama',
+        'pekerjaan',
+        'pendidikan',
         'password',
     ];
 
@@ -49,12 +55,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()->logAll()->logOnlyDirty();
-    }
     public function murids()
     {
         return $this->hasMany(Murid::class, 'id_users');
+    }
+    public function orangtua()
+    {
+        return $this->belongsTo(Orangtua::class, 'id_orangtua');
     }
 }

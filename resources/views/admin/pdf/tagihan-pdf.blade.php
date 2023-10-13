@@ -415,59 +415,10 @@ in bold.
     </header>
     <hr>
     <!-- The footer contains the company's website and address. To align the address details we will use flexbox in the CSS style. -->
-
-
+    <a href="{{ route('admin.export.excel') }}" class="btn btn-primary">export</a>
     <!-- In the main section the table for the separate items is added. Also we add another table for the summary, so subtotal, tax and total amount. -->
     <main class="">
-        <table class="table table-bordered">
-            <!-- A THEAD element is used to ensure the header of the table is repeated if it consumes more than one page. -->
-            <thead>
-                <tr class="table-secondary">
-                    <th>No</th>
-                    <th>NAMA TAGIHAN</th>
-                    <th>NAMA</th>
-                    <th>ANGKATAN</th>
-                    <th>TANGGAL TAGIHAN</th>
-                    <th>STATUS</th>
-                    <th>TOTAL</th>
-
-                </tr>
-            </thead>
-            <!-- The single invoice items are all within the TBODY of the table. -->
-            <tbody>
-                @if ($biaya)
-                    <?php $i = 0; ?>
-                    @foreach ($biaya as $data)
-                        @foreach ($data->tagihans as $biayas)
-                            @foreach ($datas as $murid)
-                                <?php $i++; ?>
-                                <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>
-                                        <b>{{ $data->nama_biaya }}</b>
-                                    </td>
-                                    <td>
-                                        {{ $murid->name }}
-                                    </td>
-                                    <td>
-                                        {{ $murid->angkatans->tahun }}
-                                    </td>
-                                    <td>
-                                        {{ $biayas->mounth == null ? Carbon\Carbon::parse($biayas->start_date)->toFormattedDateString() : $biayas->mounth }}
-                                    </td>
-                                    <td class="text-danger">
-                                        {{ $biayas->status }}
-                                    </td>
-                                    <td>
-                                        Rp.{{ number_format($biayas->amount, 2, ',', '.') }}
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @endforeach
-                    @endforeach
-                @endif
-            </tbody>
-        </table>
+        @include('admin.tagihan.laporan')
         <div class="d-flex justify-content-between">
             <p>Demikian Yang Kami Sampaikan Terimakasih Atas Kerjasamanya</p>
 

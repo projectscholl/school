@@ -24,6 +24,11 @@
                         <hr>
                         <div>KELAS : {{ $murids->kelas->kelas ?? 'Tidak ada Kelas' }} </div>
                         <hr>
+                        <div>NAMA WALI : {{ $murids->User->name ?? 'Tidak Ada Wali' }}</div>
+                        <hr>
+                        <div>NAMA AYAH : {{ $murids->ayahs->name }}</div>
+                        <hr>
+                        <div>NAMA IBU : {{ $murids->ibus->name }}</div>
                     </div>
                 </div>
                 <!-- Transactions -->
@@ -56,7 +61,8 @@
                                             <th>Tanggal Penagihan</th>
                                             <th>Status</th>
                                             <th>Total Tagihan</th>
-                                            <th>Pilih</th>
+                                            <th class="d-flex align-items-center"><input type="checkbox" id="select_all_ids"
+                                                    class="me-2"> Pilih</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -65,12 +71,14 @@
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $tagihan->nama_biaya }}</td>
-                                                    <td>{{ Carbon\Carbon::parse($tagihan->end_date)->toFormattedDateString() }}
+                                                    <td>{{ Carbon\Carbon::parse($tagihan->end_date . '-' . date('Y'))->format('d F') }}
+                                                    </td>
                                                     </td>
                                                     <td>{{ $tagihan->status }}</td>
                                                     <td>Rp {{ number_format($tagihan->jumlah_biaya, 2, ',', '.') }}</td>
                                                     <td><input type="checkbox" name="id[]" value="{{ $tagihan->id }}"
-                                                            {{ $tagihan->status == 'SUDAH' ? 'disabled' : '' }}>
+                                                            {{ $tagihan->status == 'SUDAH' ? 'disabled' : '' }}
+                                                            class="checksAll">
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -91,3 +99,86 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+    crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}")
+        @elseif (Session::has('pesan'))
+            toastr.success('{{ Session::get('pesan') }}')
+        @endif
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.27/sweetalert2.min.js"
+        integrity="sha512-mJQ9oQHzLM2zXe1cwiHmnMddNrmjv1YlaKZe1rM4J7q8JTnNn9UgeJVBV9jyV/lVGdXymVx6odhgwNZjQD8AqA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.slim.js"
+        integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#select_all_ids').on('click', function() {
+                if (this.checked) {
+                    $('.checksAll').each(function() {
+                        this.checked = true
+                    })
+                } else {
+                    $('.checksAll').each(function() {
+                        this.checked = false
+                    })
+                }
+            });
+
+            $('.checksAll').on('click', function() {
+                if ($('.checksAll:checked').length == $('checksAll').length) {
+                    $('#select_all_ids').prop('checked', true)
+                } else {
+                    $('#select_all_ids').prop('checked', false)
+                }
+            });
+        });
+
+        function destroy(event) {
+            event.preventDefault()
+
+            if ($('.checksAll').is(':checked')) {
+                Swal.fire({
+                    title: 'Yakin?',
+                    text: "Kamu Akan Menghapus Biaya!!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Iya,  Hapus!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.form1.action = "{{ route('admin.biaya.delete') }}"
+                        document.form1.submit()
+
+                        Swal.fire(
+                            'Terhapus!',
+                            'Kamu telah menghapus Biaya!!.',
+                            'success'
+                        )
+                    }
+                });
+            }
+            if (!$('.checksAll').is(':checked')) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    footer: '<a href="">Why do I have this issue?</a>'
+                })
+            }
+        }
+    </script>
+@endpush

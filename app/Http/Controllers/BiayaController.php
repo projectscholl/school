@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Angkatan;
 use App\Models\Biaya;
+use App\Models\BiayaMaster;
 use App\Models\Instansi;
 use App\Models\Jurusan;
 use App\Models\Kelas;
@@ -62,11 +63,16 @@ class BiayaController extends Controller
     public function create()
     {
         $user = Auth::user();
+        $master = BiayaMaster::all();
         $murids = Murid::first();
         $angkatan = Angkatan::all();
+        $angkatans = Angkatan::first();
         $jurusanGrouped = Jurusan::with('angkatans')->get()->groupBy('id_angkatans');
         $kelasGrouped = Kelas::with('jurusans')->get()->groupBy('id_jurusans');
-        return view('admin.biaya.create', compact('user', 'angkatan', 'jurusanGrouped', 'kelasGrouped'));
+        $jurusans = Jurusan::with('angkatans')->first();
+        $kelas = Kelas::with('jurusans')->first();
+
+        return view('admin.biaya.create', compact('user', 'angkatan', 'jurusanGrouped', 'kelasGrouped', 'master', 'angkatans', 'jurusans', 'kelas'));
     }
 
     /**
@@ -74,45 +80,48 @@ class BiayaController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'id_angkatans' => 'required',
-            'id_kelas' => 'required',
-            'id_jurusans' => 'required',
-            'nama_biaya' => 'required|max:50',
-            'jenis_biaya' => 'required|in:routine,tidakRoutine',
-        ]);
-
+        // $minHarga = 10000;
         $data2 = $request->validate([
             'start_date.*' => 'nullable',
             'end_date.*' => 'nullable',
             'mounth.*' => 'nullable',
-            'amount.*' => 'required|numeric',
+            'amount.*' => 'required|string|min:5',
             'status' => 'nullable',
         ]);
+
+        $data = $request->validate([
+            'id_angkatans' => 'required',
+            'id_kelas' => 'required',
+            'id_jurusans' => 'required',
+            'nama_biaya' => 'required|min:2',
+            'jenis_biaya' => 'required|in:routine,tidakRoutine',
+        ]);
+
 
         $biaya = Biaya::create($data);
 
         $dateStart = request()->input('start_date');
-        $dateEnd =  request()->input('end_date');
-        $mounth =  request()->input('mounth');
+        $dateEnd = request()->input('end_date');
+        $mounth = request()->input('mounth');
         $amount = request()->input('amount');
-        $valid = str_replace('.', '', $amount);
         // dd($dateStart);
         $muridUser = Murid::with('User')->where('id_jurusans', $biaya->id_jurusans)->where('id_angkatans', $biaya->id_angkatans)->where('id_kelas', $biaya->id_kelas)->get();
-
+        $valid = str_replace('.', '', $amount);
 
         foreach ($valid as $index => $n) {
-
             $Tagihan = Tagihan::create([
                 'id_biayas' => $biaya->id,
-                'mounth' => $mounth ? $mounth[$index] : '',
+                'mounth' => $mounth[$index],
                 'amount' => $n,
                 'start_date' => $dateStart[$index],
                 'end_date' => $dateEnd[$index],
             ]);
             $murid = Murid::with('User')->where('id_angkatans', $biaya->id_angkatans)->where('id_jurusans', $biaya->id_jurusans)->where('id_kelas', $biaya->id_kelas)->get();
+            $tenggat = Notify::where('id', 4)->first();
             foreach ($murid as $key => $murids) {
-                // print_r($murids->id);
+                $end_date = strtotime($tenggat->notif, strtotime($dateEnd[$index] . '-' . date('Y'))); // foreach ($valid as $index => $n) {
+                $end_dates = date('d-m', $end_date);
+                // print_r($end_dates);
                 TagihanDetail::create([
                     'id_tagihan' => $Tagihan->id,
                     'id_murids' => $murids->id,
@@ -120,15 +129,12 @@ class BiayaController extends Controller
                     'end_date' => $dateEnd[$index],
                     'nama_biaya' => $biaya->nama_biaya,
                     'jumlah_biaya' => $n,
+                    'bulan' => $end_dates,
                 ]);
             }
         }
-
-
-
-        return redirect()->route('admin.biaya.index')->with('success', "Biaya Berhasil Dibuat!!!");
+        return redirect()->route('admin.biaya.index')->withErrors($data2)->with('success', "Biaya Berhasil Dibuat!!!");
     }
-
     /**
      * Display the specified resource.
      */
@@ -148,6 +154,7 @@ class BiayaController extends Controller
         $kelasGrouped = Kelas::with('jurusans')->get()->groupBy('id_jurusans');
 
         $biaya = Biaya::with('tagihans')->find($id);
+        $tagihans = Tagihan::where('id_biayas', $id)->first();
         $tagihan = Tagihan::where('id_biayas', $id)->get();
 
         return view('admin.biaya.edit', compact('user', 'angkatan', 'jurusanGrouped', 'kelasGrouped', 'biaya', 'tagihan'));
@@ -159,9 +166,6 @@ class BiayaController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->validate([
-            'id_angkatans' => 'required',
-            'id_kelas' => 'required',
-            'id_jurusans' => 'required',
             'nama_biaya' => 'required|max:50',
             'jenis_biaya' => 'required|in:routine,tidakRoutine',
         ]);
@@ -194,15 +198,19 @@ class BiayaController extends Controller
                 'amount' => $valid[$keys],
                 'mounth' => $mounth[$keys],
             ]);
-            activity()->causedBy(Auth::user())->event('Updated')->log('User operator ' . auth()->user()->name . ' melakukan Updated Tagihan');
+            activity()->causedBy(Auth::user())->event('Updated')->log('User operator ' . auth()->user()->name . ' melakukan Updated Tagihan untuk ' . $biaya->nama_biaya);
             $tagihanGet = Tagihan::where('id', $ids[$keys])->get();
+            $tenggat = Notify::where('id', 4)->first();
             foreach ($tagihanGet as $index => $tagihs) {
+                $end_date = strtotime($tenggat->notif, strtotime($dateEnd[$keys] . '-' . date('Y'))); // foreach ($valid as $index => $n) {
+                $end_dates = date('d-m', $end_date);
                 $tagihanDetails = TagihanDetail::where('id_tagihan', $tagihs->id);
                 $tagihanDetails->update([
                     'start_date' => $dateStart[$keys],
                     'end_date' => $dateEnd[$keys],
                     'nama_biaya' => $biaya->nama_biaya,
                     'jumlah_biaya' => $valid[$keys],
+                    'bulan' => $end_dates,
                 ]);
             }
             $biaya->update($data);
@@ -213,7 +221,23 @@ class BiayaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        $biaya = Biaya::whereIn('id', $ids);
+        $tagihans = Tagihan::whereIn('id_biayas', $ids)->get();
+        $tagihan = Tagihan::whereIn('id_biayas', $ids);
+
+        foreach ($tagihans as $tagihanDelete) {
+            $detail = TagihanDetail::where('id_tagihan', $tagihanDelete->id);
+            $detail->delete();
+        }
+        $tagihan->delete();
+        $biaya->delete();
+        // return redirect()->route('admin.biaya.index');
+    }
+    public function destroy($id)
     {
         $biaya = Biaya::findOrFail($id);
         $tagihan = Tagihan::where('id_biayas', $id);

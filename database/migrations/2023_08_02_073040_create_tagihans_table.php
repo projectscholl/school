@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('tagihans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_biayas');
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
+            $table->string('start_date')->nullable();
+            $table->string('end_date')->nullable();
             $table->string('mounth')->nullable();
-            $table->integer('amount');
+            $table->bigInteger('amount');
             $table->string('status')->default('BELUM');
             $table->timestamps();
         });

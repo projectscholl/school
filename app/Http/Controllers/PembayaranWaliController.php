@@ -174,6 +174,7 @@ class PembayaranWaliController extends Controller
             'payment_links' => 'Cash',
             'payment_status' => 'Berhasil',
             'nama_pengirim' => $auth->name,
+            'year' => date('Y'),
         ]);
         foreach ($id as $keys => $id_details) {
 
@@ -203,10 +204,11 @@ class PembayaranWaliController extends Controller
         // dd($payment);
         $pembayaran = Pembayaran::create([
             'id_users' => Auth::user()->id,
-            'payment_status' => 'PENDING',
+            'payment_status' => 'pending',
             'payment_links' => $payment['Data']['Url'],
             'total_bayar' => $total,
             'bukti_transaksi' => $payment['Data']['SessionID'],
+            'year' => date('Y'),
         ]);
         foreach ($id_tagihan as $tagihandetails) {
             $idTagihan = TagihanDetail::where('id', $tagihandetails);

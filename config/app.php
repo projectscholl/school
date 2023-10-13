@@ -171,6 +171,8 @@ return [
         Spatie\Activitylog\ActivitylogServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -185,8 +187,10 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'Example' => App\Facades\Example::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Example' => App\Facades\Example::class,
+        'PDF' => Barryvdh\DomPDF\Facades::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];

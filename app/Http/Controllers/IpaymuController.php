@@ -14,19 +14,22 @@ class IpaymuController extends Controller
         $idTagihan = $request->id_tagihan;
         $sid = $request->sid;
         $status = $request->status;
+        $trx = $request->trx_id;
 
-        $transaction = Pembayaran::where('bukti_transaksi', $sid)->first();
+
+        $transaction = Pembayaran::with('users')->where('bukti_transaksi', $sid)->first();
         if ($status == 'berhasil') {
-
-
             $transaction->update([
                 'payment_status' => $status,
+                'nama_pengirim' => $transaction->users->name,
+                'updated_at' => now(),
             ]);
             $pembayaranGet = TagihanDetail::where('id_pembayarans', $transaction->id)->get();
             foreach ($pembayaranGet as $pembayarans) {
                 $pembayaran = TagihanDetail::where('id', $pembayarans->id);
                 $pembayaran->update([
                     'status' => 'SUDAH',
+
                 ]);
             }
 

@@ -48,7 +48,8 @@ class AdminController extends Controller
         $validate = $request->validate([
             'name' => 'required|max:50',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'telepon' => 'required'
+            'telepon' => 'required',
+            'image' => 'mimes:png,jpg,jpeg',
         ]);
 
         if ($request->image) {
@@ -64,6 +65,10 @@ class AdminController extends Controller
 
         if ($request->password && $request->old_password) {
             $validate = $request->validate([
+                'name' => 'required|max:50',
+                'email' => 'required|email|unique:users,email,' . $user->id,
+                'telepon' => 'required',
+                'image' => 'mimes:png,jpg,jpeg',
                 'old_password' => 'required',
                 'password' => 'required|confirmed',
             ]);

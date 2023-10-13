@@ -19,7 +19,8 @@ class Pembayaran extends Model
         'rek_pengirim',
         'bukti_transaksi',
         'total_bayar',
-        'identitas_penerima'
+        'identitas_penerima',
+        'year'
     ];
     public function wali()
     {

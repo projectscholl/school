@@ -9,7 +9,7 @@ class LogActivityController extends Controller
 {
     public function index()
     {
-        $log = Activity::latest()->paginate(10);
+        $log = Activity::orderBy('id', 'desc')->get();
         return view('admin.settings.logActivity', compact('log'));
     }
 }
