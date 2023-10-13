@@ -41,56 +41,84 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
+                    @if (session('berhasil'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ session('berhasil') }}!</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <h5 class="card-header">Murid Tables</h5>
-                    <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
                         <a href="{{ route('admin.murid.create') }}" class="btn btn-primary col-2 ms-4">Tambah Murid</a>
-                    </div>
-                    <div class="card-body">
-                        {{-- <div class="row">
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <form action="{{ route('admin.murid.index') }}" method="GET">
-                                            <!-- Filter berdasarkan id_angkatans -->
-                                            <div class="mb-3">
-                                                <label for="id_angkatans" class="form-label">Angkatan</label>
-                                                <select name="id_angkatans" id="id_angkatans" class="form-select">
-                                                    <option value="">Semua Angkatan</option>
-                                                    @foreach ($angkatans as $angkatan)
-                                                        <option value="{{ $angkatan->id }}">{{ $angkatan->nama }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                        
-                                            <!-- Filter berdasarkan id_jurusans -->
-                                            <div class="mb-3">
-                                                <label for="id_jurusans" class="form-label">Jurusan</label>
-                                                <select name="id_jurusans" id="id_jurusans" class="form-select">
-                                                    <option value="">Semua Jurusan</option>
-                                                    @foreach ($jurusans as $jurusan)
-                                                        <option value="{{ $jurusan->id }}">{{ $jurusan->nama }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                        
-                                            <!-- Filter berdasarkan id_kelas -->
-                                            <div class="mb-3">
-                                                <label for="id_kelas" class="form-label">Kelas</label>
-                                                <select name="id_kelas" id="id_kelas" class="form-select">
-                                                    <option value="">Semua Kelas</option>
-                                                    @foreach ($kelas as $kelass)
-                                                        <option value="{{ $kelass->id }}">{{ $kelass->nama }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                        
-                                            <button type="submit" class="btn btn-primary">Filter</button>
-                                        </form>
-                                    </div>
+                        <div class="">
+                            <form action="{{ route('admin.murid.index') }}" method="GET">
+                                <div class="d-flex ms-5">
+                                        <label for="id_angkatans"  class="ms-3">Masukkan Angkatan</label>
+                                        <select name="id_angkatans" id="id_angkatans" class="form-control ms-3">
+                                            <option value="">---------</option>
+                                            @foreach ($angkatans as $data)
+                                                <option value="{{ $data->id }}">{{ $data->tahun }}</option>
+                                            @endforeach
+                                        </select>
+
+                                        <label for="id_jurusans" class="ms-3">Masukkan Jurusan</label>
+                                        <select name="id_jurusans" id="id_jurusans" class="form-control ms-3">
+                                            <option value="">---------</option>
+                                        </select>
+            
+                                        <label for="id_kelas" class="ms-3">Masukkan Kelas</label>
+                                        <select name="id_kelas" id="id_kelas" class="form-control ms-3">
+                                            <option value="">---------</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-primary ms-3">Cari</button>
+
                                 </div>
-                            </div>
-                        </div> --}}
-                        
+                                <script>
+                                    const angkatanSelect = document.getElementById('id_angkatans');
+                                    const jurusanSelect = document.getElementById('id_jurusans');
+                                    const kelasSelect = document.getElementById('id_kelas');
+
+                                    const jurusanGrouped = @json($jurusanGrouped);
+                                    const kelasGrouped = @json($kelasGrouped);
+
+                                    angkatanSelect.addEventListener('change', () => {
+                                        const angkatanId = angkatanSelect.value;
+                                        const jurusanOptions = jurusanGrouped[angkatanId] || [];
+
+                                        jurusanSelect.innerHTML = '<option value="">Pilih Jurusan</option>';
+
+                                        jurusanOptions.forEach(jurusan => {
+                                            const option = document.createElement('option');
+                                            option.value = jurusan.id;
+                                            option.textContent = jurusan.nama;
+                                            jurusanSelect.appendChild(option);
+                                        });
+
+                                        updateKelasOptions();
+                                    });
+
+                                    jurusanSelect.addEventListener('change', () => {
+                                        updateKelasOptions();
+                                    });
+
+                                    function updateKelasOptions() {
+                                        const jurusanId = jurusanSelect.value;
+                                        const kelasOptions = kelasGrouped[jurusanId] || [];
+
+                                        kelasSelect.innerHTML = '<option value="">Pilih Kelas</option>';
+
+                                        kelasOptions.forEach(kelas => {
+                                            const option = document.createElement('option');
+                                            option.value = kelas.id;
+                                            option.textContent = kelas.kelas;
+                                            kelasSelect.appendChild(option);
+                                        });
+                                    }
+                                </script>
+                        </form>
+                        </div>
+                    </div>               
+                    <div class="card-body">
                         <div class="table-responsive text-nowrap">
                             <table class="table" id="myTable">
                                 <thead>
@@ -105,13 +133,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($murids as $index => $item)
+                                    @php
+                                        $muridData = isset($murids) ? $murids : $muridAll;
+                                    @endphp
+                            
+                                    @foreach ($muridData as $index => $item)
                                         <tr>
                                             <td>
                                                 <i class="fab fa-angular fa-lg text-danger me-3"></i>
-                                                <strong>
-                                                    {{ $index + 1 }}
-                                                </strong>
+                                                <strong>{{ $index + 1 }}</strong>
                                             </td>
                                             <td>
                                                 <i class="fab fa-angular fa-lg text-danger me-3"></i>
@@ -122,19 +152,12 @@
                                             <td>{{ $item->jurusans->nama ?? 'Tidak ada Jurusan' }}</td>
                                             <td>{{ $item->kelas->kelas ?? 'Tidak ada Kelas' }}</td>
                                             <td class="d-flex">
-
-                                                <a href="{{ route('admin.murid.show', $item->id) }}"
-                                                    class="btn btn-primary me-2"><i class="bx bx-detail"></i>
-                                                </a>
-                                                <a href="{{ route('admin.murid.edit', $item->id) }}"
-                                                    class="btn btn-warning me-2"><i class="bx bx-edit-alt"></i>
-                                                </a>
-                                                <form action="{{ route('admin.murid.destroy', $item->id) }}"
-                                                    method="POST">
+                                                <a href="{{ route('admin.murid.show', $item->id) }}" class="btn btn-primary me-2"><i class="bx bx-detail"></i></a>
+                                                <a href="{{ route('admin.murid.edit', $item->id) }}" class="btn btn-warning me-2"><i class="bx bx-edit-alt"></i></a>
+                                                <form action="{{ route('admin.murid.destroy', $item->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="btn btn-danger show_confirm" type="submit"><i
-                                                            class="bx bx-trash"></i></button>
+                                                    <button class="btn btn-danger show_confirm" type="submit"><i class="bx bx-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>

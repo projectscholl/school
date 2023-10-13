@@ -71,7 +71,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="old_password" class="form-label">Password Confirmation</label>
                                                 <input class="form-control" type="password" id="email"
-                                                    name="password_confirmation" placeholder="****" />Settings
+                                                    name="password_confirmation" placeholder="****" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="" class="form-label">Image</label>

@@ -21,7 +21,10 @@ class Pembayaran extends Model
         'total_bayar',
         'identitas_penerima'
     ];
-
+    public function wali()
+    {
+        return $this->belongsTo(User::class, 'id_users');
+    }
     public function murids()
     {
         return $this->belongsTo(Murid::class, 'id_users');
@@ -29,5 +32,15 @@ class Pembayaran extends Model
     public function tagihanDetails()
     {
         return $this->hasMany(TagihanDetail::class, 'id_pembayarans');
+    }
+    public function getPaymentTypeAttribute()
+    {
+        if ($this->payment_links == 'Cash') {
+            return 'Cash';
+        } elseif ($this->payment_links == NULL) {
+            return 'Bank';
+        } else {
+            return 'Pembayaran Online';
+        }
     }
 }

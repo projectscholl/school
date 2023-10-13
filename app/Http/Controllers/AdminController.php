@@ -26,12 +26,13 @@ class AdminController extends Controller
         $user = Auth::user();
         $jumlahMurid = Murid::count();
         $tagihanDetail = TagihanDetail::all();
+        $pembayaranBelum_Dikonfirmasi = Pembayaran::where('payment_status', 'PENDING');
 
         $jumlahLunas = $tagihanDetail->where('status', 'SUDAH')->count();
         $jumlahBelumBayar = $tagihanDetail->where('status', 'BELUM')->count();
         $pembayaran = Pembayaran::all();
-        $pembayaranDikonfirmasi = $pembayaran->where('payment_status', 'Dikonfirmasi')->count();
-        $pembayaranBelum_Dikonfirmasi = $pembayaran->where('payment_status', 'Belum Di Konfirmasi')->count();
+        $pembayaranDikonfirmasi = $pembayaran->where('payment_status', 'Berhasil')->count();
+        $pembayaranBelum_Dikonfirmasi = $pembayaran->where('payment_status', 'PENDING')->count();
         return view('admin.dashboard', compact('user', 'jumlahMurid', 'instansi', 'tagihanDetail', 'jumlahBelumBayar', 'jumlahLunas', 'pembayaranDikonfirmasi', 'pembayaranBelum_Dikonfirmasi'));
     }
     public function edit()
@@ -48,7 +49,6 @@ class AdminController extends Controller
             'name' => 'required|max:50',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'telepon' => 'required'
-
         ]);
 
         if ($request->image) {

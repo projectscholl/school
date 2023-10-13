@@ -80,7 +80,7 @@
                                             <input
                                                 class="form-control @error('current_password')
                                                 is-invalid
-                                            @enderror"
+                                            @enderror"  value="{{ old('password') }}"
                                                 type="password" id="password" name="password" placeholder="" />
                                         </div>
                                         <div class="mb-3 col-md-6">

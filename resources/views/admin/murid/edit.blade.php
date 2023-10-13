@@ -64,14 +64,19 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="id_jurusans">Masukkan Jurusan</label>
-                                <select name="id_jurusans" id="id_jurusans"
-                                    class="form-control @error('id_jurusans') is-invalid @enderror">
+                                <select name="id_jurusans" id="id_jurusans" class="form-control @error('id_jurusans') is-invalid @enderror">
+                                    <option value="">---------</option>
+                                    @foreach ($jurusan as $data)
+                                        <option value="{{ $data->id }}" {{ old('id_jurusans', $murid->id_jurusans) == $data->id ? 'selected' : '' }}>
+                                            {{ $data->nama }}</option>
+                                    @endforeach
                                 </select>
                                 @error('id_jurusans')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="form-group mb-3">
+                            
+                            {{-- <div class="form-group mb-3">
                                 <label for="id_kelas">Masukkan kelas</label>
                                 <select name="id_kelas" id="id_kelas"
                                     class="form-control @error('id_kelas') is-invalid @enderror">
@@ -113,7 +118,83 @@
                                         });
                                     });
                                 </script>
+                            </div> --}}
+                            <div class="form-group mb-3">
+                                <label for="id_kelas">Masukkan kelas</label>
+                                <select name="id_kelas" id="id_kelas" class="form-control @error('id_kelas') is-invalid @enderror">
+                                    <option value="">---------</option>
+                                    @foreach ($kelas as $data)
+                                        <option value="{{ $data->id }}" {{ old('id_kelas', $murid->id_kelas) == $data->id ? 'selected' : '' }}>
+                                            {{ $data->kelas }}</option>
+                                    @endforeach
+                                </select>
+                                @error('id_kelas')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
+                            <script>
+                                const angkatanSelect = document.getElementById('id_angkatans');
+                                const jurusanSelect = document.getElementById('id_jurusans');
+                                const kelasSelect = document.getElementById('id_kelas');
+                                
+                                const jurusanGrouped = @json($jurusanGrouped);
+                                const kelasGrouped = @json($kelasGrouped);
+                                
+                                const oldAngkatan = {{ old('id_angkatans', $murid->id_angkatans) }};
+                                const oldJurusan = {{ old('id_jurusans', $murid->id_jurusans) }};
+                                const oldKelas = {{ old('id_kelas', $murid->id_kelas) }};
+                                
+                                // Function to populate the Jurusan select
+                                function populateJurusanOptions() {
+                                    const angkatanId = angkatanSelect.value;
+                                    const jurusanOptions = jurusanGrouped[angkatanId] || [];
+                                
+                                    jurusanSelect.innerHTML = '<option value="">-------</option>';
+                                
+                                    jurusanOptions.forEach(jurusan => {
+                                        const option = document.createElement('option');
+                                        option.value = jurusan.id;
+                                        option.textContent = jurusan.nama;
+                                        
+                                        if (jurusan.id === oldJurusan) {
+                                            option.selected = true;
+                                        }
+                                
+                                        jurusanSelect.appendChild(option);
+                                    });
+                                
+                                    // Trigger change event to populate kelas options
+                                    jurusanSelect.dispatchEvent(new Event('change'));
+                                }
+                                
+                                // Function to populate the Kelas select
+                                function populateKelasOptions() {
+                                    const jurusanId = jurusanSelect.value;
+                                    const kelasOptions = kelasGrouped[jurusanId] || [];
+                                
+                                    kelasSelect.innerHTML = '<option value="">-------</option>';
+                                
+                                    kelasOptions.forEach(kelas => {
+                                        const option = document.createElement('option');
+                                        option.value = kelas.id;
+                                        option.textContent = kelas.kelas;
+                                        
+                                        if (kelas.id === oldKelas) {
+                                            option.selected = true;
+                                        }
+                                
+                                        kelasSelect.appendChild(option);
+                                    });
+                                }
+                                
+                                // Event listeners
+                                angkatanSelect.addEventListener('change', populateJurusanOptions);
+                                jurusanSelect.addEventListener('change', populateKelasOptions);
+                                
+                                // Initialize the selects
+                                angkatanSelect.value = oldAngkatan;
+                                angkatanSelect.dispatchEvent(new Event('change'));
+                            </script>                                                      
                             <div class="form-group mb-3">
                                 <label for="address">Alamat</label>
                                 <input type="text" class="form-control @error('address') is-invalid @enderror"

@@ -5,656 +5,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <title>Laporan</title>
-    <style>
-        /*
-Import the desired font from Google fonts.
-*/
-        @import url("https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
-
-        /*
-Define all colors used in this template
-*/
-        :root {
-            --font-color: black;
-            --highlight-color: #000000;
-            --header-bg-color: #ffffff;
-            --footer-bg-color: #bfc0c3;
-            --table-row-separator-color: #bfc0c3;
-        }
-
-        @page {
-            /*
-  This CSS highlights how page sizes, margins, and margin boxes are set.
-  https://docraptor.com/documentation/article/1067959-size-dimensions-orientation
-
-  Within the page margin boxes content from running elements is used instead of a
-  standard content string. The name which is passed in the element() function can
-  be found in the CSS code below in a position property and is defined there by
-  the running() function.
-  */
-            size: A4;
-            margin: 8cm 0 3cm 0;
-
-            @top-left {
-                content: element(header);
-            }
-
-            @bottom-left {
-                content: element(footer);
-            }
-        }
-
-        /*
-The body itself has no margin but a padding top & bottom 1cm and left & right 2cm.
-Additionally the default font family, size and color for the document is defined
-here.
-*/
-        body {
-            margin: 0;
-            padding: 1cm 2cm;
-            color: var(--font-color);
-            font-family: 'Public Sans', sans-serif;
-            font-size: 10pt;
-        }
-
-        /*
-The links in the document should not be highlighted by an different color and underline
-instead we use the color value inherit to get the current texts color.
-*/
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /*
-For the dividers in the document we use an HR element with a margin top and bottom
-of 1cm, no height and only a border top of one millimeter.
-*/
-        hr {
-            margin: 1cm 0;
-            height: 0;
-            border: 0;
-            border-top: 1mm solid var(--highlight-color);
-        }
-
-        /*
-The page header in our document uses the HTML HEADER element, we define a height
-of 8cm matching the margin top of the page (see @page rule) and a padding left
-and right of 2cm. We did not give the page itself a margin of 2cm to ensure that
-the background color goes to the edges of the document.
-
-As mentioned above in the comment for the @page the position property with the
-value running(header) makes this HTML element float into the top left page margin
-box. This page margin box repeats on every page in case we would have a multi-page
-invoice.
-*/
-        header {
-            height: ;
-            padding: ;
-            position: running(header);
-            background-color: var(--header-bg-color);
-        }
-
-        /*
-For the different sections in the header we use some flexbox and keep space between
-with the justify-content property.
-*/
-        header .headerSection {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /*
-To move the first sections a little down and have more space between the top of
-the document and the logo/company name we give the section a padding top of 5mm.
-*/
-        header .headerSection:first-child {
-            padding-top: 0.5cm;
-        }
-
-        /*
-Similar we keep some space at the bottom of the header with the padding-bottom
-property.
-*/
-        header .headerSection:last-child {
-            padding-bottom: 0.5cm;
-        }
-
-        /*
-Within the header sections we have defined two DIV elements, and the last one in
-each headerSection element should only take 35% of the headers width.
-*/
-        header .headerSection div:last-child {
-            width: ;
-        }
-
-        /*
-For the logo, where we use an SVG image and the company text we also use flexbox
-to align them correctly.
-*/
-        header .logoAndName {
-            display: flex;
-            align-items: center;
-        }
-
-        /*
-The SVG gets set to a fixed size and get 5mm margin right to keep some distance
-to the company name.
-*/
-        header .logoAndName svg {
-            width: 1.5cm;
-            height: 1.5cm;
-            margin-right: 0.5cm;
-        }
-
-        /*
-To ensure the top right section "Invoice #100" starts on the same level as the Logo &
-Name we set a padding top of 1cm for this element.
-*/
-        header .headerSection .invoiceDetails {
-            padding-top: 0.5cm;
-        }
-
-        /*
-The H3 element "ISSUED TO" gets another 25mm margin to the right to keep some
-space between this header and the client's address.
-Additionally this header text gets the hightlight color as font color.
-*/
-        header .headerSection h3 {
-            margin: 0 0.75cm 0 0;
-            color: var(--highlight-color);
-        }
-
-        /*
-Put some margin between the "DUE DATE" and "AMOUNT" headings.
-*/
-        header .headerSection div:last-of-type h3:last-of-type {
-            margin-top: 0.5cm;
-        }
-
-        /*
-The paragraphs within the header sections DIV elements get a small 2px margin top
-to ensure its in line with the "ISSUED TO" header text.
-*/
-        header .headerSection div p {
-            margin-top: 2px;
-        }
-
-        /*
-All header elements and paragraphs within the HTML HEADER tag get a margin of 0.
-*/
-        header h1,
-        header h2,
-        header h3,
-        header p {
-            margin: 0;
-        }
-
-        /*
-The invoice details should not be uppercase and also be aligned to the right.
-*/
-        header .invoiceDetails,
-        header .invoiceDetails h6 {
-            text-align: left;
-            font-size: 1em;
-            text-transform: none;
-        }
-
-        /*
-Heading of level 2 and 3 ("DUE DATE", "AMOUNT" and "INVOICE TO") need to be written in
-uppercase, so we use the text-transform property for that.
-*/
-        header h2,
-        header h3 {
-            text-transform: uppercase;
-        }
-
-        /*
-The divider in the HEADER element gets a slightly different margin than the
-standard dividers.
-*/
-        header hr {
-            margin: 1cm 0 0.5cm 0;
-        }
-
-        /*
-Our main content is all within the HTML MAIN element. In this template this are
-two tables. The one which lists all items and the table which shows us the
-subtotal, tax and total amount.
-
-Both tables get the full width and collapse the border.
-*/
-        main table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        /*
-We put the first tables headers in a THEAD element, this way they repeat on the
-next page if our table overflows to multiple pages.
-
-The text color gets set to the highlight color.
-*/
-        main table thead th {
-            height: 1cm;
-            color: var(--highlight-color);
-        }
-
-        /*
-For the last three columns we set a fixed width of 2.5cm, so if we would change
-the documents size only the first column with the item name and description grows.
-*/
-        /*
-The items itself are all with the TBODY element, each cell gets a padding top
-and bottom of 2mm.
-*/
-        main table tbody td {
-            padding: 2mm 0;
-        }
-
-        /*
-The cells in the last column (in this template the column containing the total)
-get a text align right so the text is at the end of the table.
-*/
-        main table thead th:last-of-type,
-        main table tbody td:last-of-type {
-            text-align: right;
-        }
-
-        /*
-By default text within TH elements is aligned in the center, we do not want that
-so we overwrite it with an left alignment.
-*/
-        main table th {
-            text-align: left;
-        }
-
-        /*
-The summary table, so the table containing the subtotal, tax and total amount
-gets a width of 40% + 2cm. The plus 2cm is added because our body has a 2cm padding
-but we want our highlight color for the total row to go to the edge of the document.
-
-To move the table to the right side we simply set a margin-left of 60%.
-*/
-        main table.summary {
-            width: calc(40% + 2cm);
-            margin-left: 60%;
-            margin-top: 0.5cm;
-        }
-
-        /*
-The row containing the total amount gets its background color set to the highlight
-color and the font weight to bold.
-*/
-        main table.summary tr.total {
-            font-weight: bold;
-            background-color: ;
-        }
-
-        /*
-The TH elements of the summary table are not on top but the cells on the left side
-these get a padding left of 1cm to give the highlight color some space.
-*/
-        main table.summary th {
-            padding: 4mm 0 4mm 1cm;
-        }
-
-        /*
-As only the highlight background color should go to the edge of the document
-but the text should still have the 2cm distance, we set the padding right to
-2cm.
-*/
-        main table.summary td {
-            padding: 4mm 2cm 4mm 0;
-            border-bottom: 0;
-        }
-
-        /*
-The content below the tables is placed in a ASIDE element next to the MAIN element.
-To ensure this element is always at the bottom of the page, just above the page
-footer, we use the Prince custom property "-prince-float" with the value bottom.
-
-See Page Floats on https://www.princexml.com/howcome/2021/guides/float/.
-*/
-        aside {
-            -prince-float: bottom;
-            padding: 0 2cm 0.5cm 2cm;
-        }
-
-        /*
-The content itself is shown in 2 columns we use flexbox for this.
-*/
-        aside>div {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /*
-Each "column" has a width of 45% of the document.
-*/
-        aside>div>div {
-            width: 45%;
-        }
-
-        /*
-The list with the payment options has no bullet points and no margin.
-*/
-        aside>div>div ul {
-            list-style-type: none;
-            font-family: "ital", sans-serif;
-            margin: 0;
-        }
-
-        /*
-The page footer in our document uses the HTML FOOTER element, we define a height
-of 3cm matching the margin bottom of the page (see @page rule) and a padding left
-and right of 2cm. We did not give the page itself a margin of 2cm to ensure that
-the background color goes to the edges of the document.
-
-As mentioned above in the comment for the @page the position property with the
-value running(footer) makes this HTML element float into the bottom left page margin
-box. This page margin box repeats on every page in case we would have a multi-page
-invoice.
-
-The content inside the footer is aligned with the help of line-height 3cm and a
-flexbox for the child elements.
-*/
-        footer {
-            height: 3cm;
-            line-height: 3cm;
-            padding: 0 2cm;
-            position: running(footer);
-            background-color: var(--footer-bg-color);
-            font-size: 8pt;
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-        }
-
-        /*
-The first link in the footer, which points to the company website is highlighted
-in bold.
-*/
-        footer a:first-child {
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 </head>
 
+<style>
+    @font-face{
+        font-family: 'Public Sans', sans-serif;
+    }
+    body{
+        font-family: 'Public Sans', sans-serif;
+    }
+</style>
 <body>
     <!-- The header element will appear on the top of each page of this invoice document. -->
     <header>
+
         <div class="headerSection">
             <!-- As a logo we take an SVG element and add the name in an standard H1 element behind it. -->
-            <div class="logoAndName">
-                <img src="{{ asset('storage/image/' . $instansi->logo)}}" alt="" width="50">
-                <div class="w-100 d-flex flex-column ms-2">
-                    <h1 class="text-black">{{ $instansi->name }}</h1>
-                    <span>{{ $instansi->alamat }}</span>
-                </div>
+            <div class="container-fluid">
+                <div class="logoAndName">
+                    <div class="w-100 d-flex flex-column ms-2">
+                        <img src="{{ asset('storage/image/' . $instansi->logo) }}" alt='' class='mt-3' width='100'>
+                        <h1 style="font-weight: bold; font-size: 48px; margin: 0;">{{ $instansi->name }}</h1>
+                        <span>{{ $instansi->alamat }}</span>
+                        <div class='invoiceDetails'>
+                            <h2 style='font-size: 24px; padding-top: 50px;'><strong>Kartu SPP</strong></h2>
+                            <p>Nama Siswa : <strong>{{ $murid->name ?? 'Tidak Ada Nama' }}</strong>.</p>
+                            <p>Kelas : <strong>{{ $murid->kelas->kelas ?? 'Tidak Ada Data Kelas' }}</strong>.</p>
+                            <p>Jurusan : <strong>{{ $murid->jurusans->nama ?? 'Tidak Ada Data Jurusan' }}</strong>.</p>
+                            <p>NISN : <strong>({{ $murid->nisn }})</strong></p>
+                        </div>
+                        <main>
+                            <table style='width: 100%; border-collapse: collapse;'>
+                                <thead>
+                                    <tr style='background-color: #f2f2f2; text-align: left;'>
+                                        <th style='padding: 8px; border: 1px solid #ddd;'>No</th>
+                                        <th style='padding: 8px; border: 1px solid #ddd;'>Bulan</th>
+                                        <th style='padding: 8px; border: 1px solid #ddd;'>JUMLAH TAGIHAN</th>
+                                        <th style='padding: 8px; border: 1px solid #ddd;'>TANGGAL BAYAR</th>
+                                        <th style='padding: 8px; border: 1px solid #ddd;'>PARAF</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php $no = 1; @endphp
+                                    @foreach ($tagihanSPPs as $tagihanDetail)
+                                        <tr>
+                                            <td style='padding: 8px; border: 1px solid #ddd;'>{{ $loop->iteration }}</td>
+                                            <td style='padding: 8px; border: 1px solid #ddd;'>{{ $tagihanDetail->tagihan->mounth }}</td>
+                                            <td style='padding: 8px; border: 1px solid #ddd;'>Rp {{ number_format($tagihanDetail->tagihan->amount) }}</td>
+                                            <td style='padding: 8px; border: 1px solid #ddd;'>
+                                                @if ($tagihanDetail->pembayaran)
+                                                    {{ $tagihanDetail->pembayaran->created_at->format('d/m/Y') }}
+                                                @else
+                                                    Belum Bayar
+                                                @endif
+                                            </td>
+                                            <td style='padding: 8px; border: 1px solid #ddd;'>@if ($tagihanDetail->pembayaran)
+                                                <img src="{{ asset('storage/image/' . $instansi->tanda_tangan) }}" alt="" class="mb-4" width="100">
+                                            @else
+                                                -
+                                            @endif</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </main> 
+                    </div>
             </div>
+            </div>
+            
+            
             <!-- Details about the invoice are on the right top side of each page. -->
 
         </div>
 
-        <!-- The two header rows are divided by an blue line, we use the HR element for this. -->
+        <!-- The two header rows are divided by a blue line. -->
     </header>
     <hr>
-    <div class="invoiceDetails">
-        <h6 class="mb-3"><b>Kartu Spp Tahun 2022</b></h6>
-        <p>Nama Siswa : Jimmy Martin.
-            <br>
-            Kelas : 10.
-            <br>
-            Jurusan : Teknik Komputer.
-            <br>
-            NISN : (3456789012)
-        </p>
-    </div>
+    <form action="{{ route('admin.pdf.downloadPdf', ['id_murids' => $murid->id]) }}" method="GET">
+        <button type="submit" id="unduh-button" class="btn btn-primary mb-3 ms-3">
+            <strong>
+                Unduh
+            </strong>
+        </button>
+    </form>
 
-    <!-- The footer contains the company's website and address. To align the address details we will use flexbox in the CSS style. -->
-
-
-    <!-- In the main section the table for the separate items is added. Also we add another table for the summary, so subtotal, tax and total amount. -->
-    <main class="">
-        <table class="table table-bordered">
-            <!-- A THEAD element is used to ensure the header of the table is repeated if it consumes more than one page. -->
-            <thead>
-                <tr class="table-secondary">
-                    <th>No</th>
-                    <th>Bulan</th>
-                    <th>JUMLAH TAGIHAN</th>
-                    <th>TANGGAL BAYAR</th>
-                    <th>PARAF</th>
-                    <th>KETERANGAN</th>
-
-                </tr>
-            </thead>
-            <!-- The single invoice items are all within the TBODY of the table. -->
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>
-                        <b>July</b>
-                    </td>
-                    <td>
-                        Rp.220.000
-                    </td>
-                    <td>
-                        2 July 2022
-                    </td>
-                    <td>
-                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
-                    </td>
-                    <td class="">
-                        blasdl
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>
-                        <b>Agustus</b>
-                    </td>
-                    <td>
-                        Rp.220.000
-                    </td>
-                    <td>
-                        2 Agustus 2022
-                    </td>
-                    <td>
-                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
-                    </td>
-                    <td class="">
-                        blasdl
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>
-                        <b>September</b>
-                    </td>
-                    <td>
-                        Rp.220.000
-                    </td>
-                    <td>
-                        2 September 2022
-                    </td>
-                    <td>
-                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
-                    </td>
-                    <td class="">
-                        blasdl
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>
-                        <b>Oktober</b>
-                    </td>
-                    <td>
-                        Rp.220.000
-                    </td>
-                    <td>
-                        2 Oktober 2022
-                    </td>
-                    <td>
-                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
-                    </td>
-                    <td class="">
-                        blasdl
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>
-                        <b>November</b>
-                    </td>
-                    <td>
-                        Rp.220.000
-                    </td>
-                    <td>
-                        2 November 2022
-                    </td>
-                    <td>
-                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
-                    </td>
-                    <td class="">
-                        blasdl
-                    </td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>
-                        <b>Desember</b>
-                    </td>
-                    <td>
-                        Rp.220.000
-                    </td>
-                    <td>
-                        2 Desember 2022
-                    </td>
-                    <td>
-                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
-                    </td>
-                    <td class="">
-                        blasdl
-                    </td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>
-                        <b>January</b>
-                    </td>
-                    <td>
-                        Rp.220.000
-                    </td>
-                    <td>
-                        2 January 2022
-                    </td>
-                    <td>
-                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
-                    </td>
-                    <td class="">
-                        blasdl
-                    </td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>
-                        <b>February</b>
-                    </td>
-                    <td>
-                        Rp.220.000
-                    </td>
-                    <td>
-                        2 February 2022
-                    </td>
-                    <td>
-                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
-                    </td>
-                    <td class="">
-                        blasdl
-                    </td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>
-                        <b>Maret</b>
-                    </td>
-                    <td>
-                        Rp.220.000
-                    </td>
-                    <td>
-                        2 Maret 2022
-                    </td>
-                    <td>
-                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
-                    </td>
-                    <td class="">
-                        blasdl
-                    </td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>
-                        <b>April</b>
-                    </td>
-                    <td>
-                        Rp.220.000
-                    </td>
-                    <td>
-                        2 April 2022
-                    </td>
-                    <td>
-                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
-                    </td>
-                    <td class="">
-                        blasdl
-                    </td>
-                </tr>
-                <tr>
-                    <td>11</td>
-                    <td>
-                        <b>Mei</b>
-                    </td>
-                    <td>
-                        Rp.220.000
-                    </td>
-                    <td>
-                        2 Mei 2022
-                    </td>
-                    <td>
-                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
-                    </td>
-                    <td class="">
-                        blasdl
-                    </td>
-                </tr>
-                <tr>
-                    <td>12</td>
-                    <td>
-                        <b>June</b>
-                    </td>
-                    <td>
-                        Rp.220.000
-                    </td>
-                    <td>
-                        2 June 2022
-                    </td>
-                    <td>
-                        <img src="{{ asset('storage/image/' . $instansi->tanda_tangan)}}"  alt="" width="100" height="100">
-                    </td>
-                    <td class="">
-                        blasdl
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-    </main>
     <!-- Within the aside tag we will put the terms and conditions which shall be shown below the invoice table. -->
 
 </body>

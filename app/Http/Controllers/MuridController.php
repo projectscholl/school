@@ -18,13 +18,46 @@ use Illuminate\Support\Facades\Auth;
 class MuridController extends Controller
 {
     use Fonnte;
-    public function index()
+
+
+    public function index(Request $request)
     {
         $instansi = Instansi::first();
         $user = Auth::user();
-        $murids = Murid::all();
-        return view('admin.murid.index', compact('murids', 'user', 'instansi'));
+        
+        $muridAll = Murid::query(); 
+        
+        $filterAngkatan = $request->input('id_angkatans');
+        $filterJurusan = $request->input('id_jurusans');
+        $filterKelas = $request->input('id_kelas');
+    
+        // Terapkan filter ke Query Builder
+        if (!empty($filterAngkatan)) {
+            $muridAll->where('id_angkatans', $filterAngkatan);
+        }
+    
+        if (!empty($filterJurusan)) {
+            $muridAll->where('id_jurusans', $filterJurusan);
+        }
+    
+        if (!empty($filterKelas)) {
+            $muridAll->where('id_kelas', $filterKelas);
+        }
+    
+        // Dapatkan hasil query dengan get()
+        $muridAll->orderBy('created_at', 'desc');
+        $murids = $muridAll->get();
+    
+        $angkatans = Angkatan::all();
+        $jurusans = Jurusan::all();
+        $kelas = Kelas::all();
+        $jurusanGrouped = Jurusan::with('angkatans')->get()->groupBy('id_angkatans');
+        $kelasGrouped = Kelas::with('jurusans')->get()->groupBy('id_jurusans');
+    
+        return view('admin.murid.index', compact('muridAll', 'murids', 'user', 'instansi', 'angkatans', 'jurusanGrouped', 'kelasGrouped'));
     }
+    
+
 
     public function create()
     {
@@ -70,21 +103,6 @@ class MuridController extends Controller
 
         $user = User::with('murids')->where('id', $murid->id_users)->get();
 
-
-        // foreach ($biaya as $key => $biayas) {
-        //     foreach ($biayas->tagihans as $keys => $tagihans) {
-        //         foreach ($user as $waliUser) {
-        //             if ($tagihans->mounth == null) {
-        //                 $tes1 = "Nama Tagihan : $biayas->nama_biaya : " . "Untuk Murid : " . $waliUser->name . " " . "Total : " . $tagihans->amount . " " . $tagihans->mounth;
-        //                 $this->send_message($murid->telepon, $tes1);
-        //             } else {
-        //                 $tes2 = "Nama Tagihan : $biayas->nama_biaya : " . "Untuk Murid :  " . $waliUser->name . "  " . "Total : " . $tagihans->amount . " " . "Untuk Bulan : " . $tagihans->mounth;
-        //                 $this->send_message($murid->telepon, $tes2);
-        //             }
-        //         }
-        //     }
-        // }
-
         return redirect()->route('admin.murid.index')->with('message', "Murid Berhasil Ditambahkan!!");
     }
 
@@ -116,11 +134,13 @@ class MuridController extends Controller
         $murid = Murid::find($id);
         $users =  User::where('role', 'WALI')->get();
         $angkatan = Angkatan::all();
+        $jurusan = Jurusan::all(); 
+        $kelas = Kelas::all();
         $jurusanGrouped = Jurusan::with('angkatans')->get()->groupBy('id_angkatans');
         $kelasGrouped = Kelas::with('jurusans')->get()->groupBy('id_jurusans');
         $users =  User::where('role', 'WALI')->get();
 
-        return view('admin.murid.edit', compact('murid', 'users', 'angkatan', 'instansi', 'jurusanGrouped', 'kelasGrouped'));
+        return view('admin.murid.edit', compact('murid', 'users', 'angkatan', 'instansi', 'jurusanGrouped', 'kelasGrouped', 'jurusan', 'kelas'));
     }
 
     /**

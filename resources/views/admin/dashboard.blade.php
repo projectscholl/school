@@ -28,8 +28,7 @@
                                             {{ $user->name }}
                                             🎉</h5>
                                         <p class="mb-4">
-                                            Kamu mendapatkan <span class="fw-bold">10</span> notifikasi
-                                            konfirmasi belum dilihat
+                                            Kamu mendapatkan <span class="fw-bold">{{ auth()->user()->unreadNotifications->count() }}</span>Notifikasi
                                         </p>
                                     </div>
                                 </div>
@@ -206,7 +205,7 @@
         </script>
 
         <script>
-            var xValues = ["Dikonfirmasi", "Belum Dikonfirmasi"];
+            var xValues = ["Berhasil", "Pending"];
             var yValues = [{{ $pembayaranDikonfirmasi }}, {{ $pembayaranBelum_Dikonfirmasi }}];
             var barColors = [
                 "#EEFBE7",

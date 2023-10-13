@@ -28,9 +28,6 @@
                                         <p class="mb-4">
                                             Kamu mendapatkan <span class="fw-bold">{{ $notifikasiMurids }}</span> notifikasi
                                         </p>
-
-                                        <a href="javascript:;" class="btn btn-sm btn-outline-primary">Lihat
-                                            Notifikasi</a>
                                     </div>
                                 </div>
                                 <div class="col-sm-5 text-center text-sm-left">
@@ -69,47 +66,97 @@
                     <!--/ Total Revenue -->
                 </div>
                 <div class="row">
-                    <!-- Kartu SPP -->
+
                     <div class="col-md-8">
                         <div class="container-fluid">
                             <div class="row">
-                                {{-- @foreach ($tagihanMurids as $tagihanMurid)
-                                        @if ($tagihanMurid->tagihan->biayas->routine)  --}}
-                                        <div class="col-md-6 order-0 mb-4">
-                                            <div class="card h-100">
-                                                <div>
-                                                    <div class="card-header d-flex align-items-center justify-content-between pb-0">
-                                                        <div class="card-title mb-0">
-                                                            <h5 class="m-0 me-2">Kartu SPP <strong>Kazuki</strong></h5>
-                                                        </div>
+                                <!-- Kartu SPP -->
+                                @foreach ($kartuSPPs as $kartuSPP)
+                                    <div class="col-md-6 order-0 mb-4">
+                                        <div class="card h-100">
+                                            <div>
+                                                <div
+                                                    class="card-header d-flex align-items-center justify-content-between pb-0">
+                                                    <div class="card-title mb-0">
+                                                        <h5 class="m-0 me-2">Kartu SPP
+                                                            <strong>{{ $kartuSPP['nama_murid'] }}</strong></h5>
                                                     </div>
-                                                </div>
-                                                <div class="card-body">
-                                                    <table class="table table-bordered">
-                                                        <thead class="bg-dark">
-                                                            <tr>
-                                                                <th class="text-white">Bulan</th>
-                                                                <th class="text-white">Status</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <td>Januari</td>
-                                                            <td><span class="badge bg-label-success">Success</span></td>
-                                                        </tbody>
-                                                    </table>
+                                                    <div class="menu-icon">
+                                                        <a href="{{ route('admin.spp.pdf', ['id_murids' => $kartuSPP['id_murids']]) }}"
+                                                            class="btn btn-primary me-2"><i class="bx bx-detail"></i>
+                                                        </a>
+                                                    </div>
+                                                    {{-- <button type="button" class="btn btn-primary me-2"
+                                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                        <strong>
+                                                            <i class="menu-icon tf-icons bx bx-copy ms-2 "></i>
+                                                        </strong>
+                                                    </button>
+                                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                                        data-bs-keyboard="false" tabindex="-1"
+                                                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-xl">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    @include('admin.pdf.spp-pdf')
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Close</button>
+                                                                    <form
+                                                                        action="{{ route('admin.pdf.downloadPdf', ['id_murids' => $murid->id]) }}">
+                                                                        <button
+                                                                            type="submit"class="btn btn-link btn-primary">
+                                                                            <strong>
+                                                                                <i
+                                                                                    class="menu-icon tf-icons bx bx-download ms-2 "></i>Unduh
+                                                                            </strong>
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
+                                            <div class="card-body">
+                                                <table class="table table-bordered">
+                                                    <thead class="bg-dark">
+                                                        <tr>
+                                                            <th class="text-white">Bulan</th>
+                                                            <th class="text-white">Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($kartuSPP['bulan'] as $bulan)
+                                                            <tr>
+                                                                <td>{{ $bulan }}</td>
+                                                                <td>
+                                                                    <span
+                                                                        class="badge bg-label-{{ $kartuSPP['status'] == 'SUDAH' ? 'success' : 'danger' }}">
+                                                                        {{ $kartuSPP['status'] }}
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                        {{-- @endif
-                                @endforeach --}}
+                                    </div>
+                                @endforeach
                                 <!--/ Kartu SPP -->
                             </div>
                         </div>
                     </div>
                     <!--/ Kartu SPP -->
                     <!-- Notifikasi -->
-                    <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-                        <div class="card h-100">
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card">
                             <div>
                                 <div class="card-header d-flex align-items-center justify-content-between pb-0">
                                     <div class="card-title mb-0">
@@ -120,12 +167,16 @@
                             <div class="card-body">
                                 <div class="d-flex flex-column" style="max-height: 480px; overflow-y: auto;">
                                     @foreach ($tagihanMurids as $tagihanMurid)
-                                        <div class="alert alert-success alert-dismissible" role="alert">
-                                            {{ $tagihanMurid->nama_biaya }} <strong>{{ $tagihanMurid->murids->name }}</strong>
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>                                    
+                                        @if ($tagihanMurid->status == 'BELUM')
+                                            <div class="alert alert-success alert-dismissible" role="alert">
+                                                {{ $tagihanMurid->nama_biaya }}
+                                                <strong>{{ $tagihanMurid->murids->name }}</strong>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                        @endif
                                     @endforeach
-                                </div>                                
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -147,7 +198,8 @@
                             class="footer-link fw-bolder">ThemeSelection</a>
                     </div>
                     <div>
-                        <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
+                        <a href="https://themeselection.com/license/" class="footer-link me-4"
+                            target="_blank">License</a>
                         <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
                             Themes</a>
 
@@ -171,4 +223,17 @@
     <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        if (session('pembayaranBelum_Dikonfirmasi'))
+            Swal.fire({
+                icon: 'info',
+                title: 'Notifikasi Pembayaran',
+                text: "{{ session('pembayaranBelum_Dikonfirmasi') }}",
+                showConfirmButton: true,
+                timer: 3000,
+                timerProgressBar: true,
+            });
+        endif
+    </script>
 @endsection

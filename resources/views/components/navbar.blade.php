@@ -21,20 +21,24 @@
             <!-- Place this tag where you want the button to render. -->
             <div class="dropdown" style="">
                 @if (Auth::user()->role == 'ADMIN')
-                <li class="nav-item me-3 " style="" type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                    id="dropdownMenuButton1">
-                    <i class='bx bx-bell'></i>
-                </li>
-                    <div class="dropdown-menu dropdown-menu-end" style="width: ;" aria-labelledby="dropdownMenuButton1">
+                    <li class="nav-item me-3 " style="" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" id="dropdownMenuButton1">
+                        <i class='bx bx-bell'></i>
+                        <span class="badge bg-danger rounded-pill badge-notifications">{{ auth()->user()->unreadNotifications->count() }}</span>
+                    </li>
+                    <div class="dropdown-menu dropdown-menu-end" style="max-height: 380px; overflow-y: auto;" aria-labelledby="dropdownMenuButton1">
                         <span class="dropdown-item"><b>Notification</b></span>
-                        <div class="dropdown-item d-flex">
-                            <div class="d-flex flex-column">
-                                <span>Pembayaran Tagihan</span>
-                                <a href="{{ route('admin.pembayaran.index') }}">Sandi telah melakukan pembayaran</a>
-                                <p class="text-little mt-1 text-secondary" style="font-size:13px;">3 Hari lalu</p>
+                        @foreach (auth()->user()->unreadNotifications as $notification)
+                            <div class="dropdown-item d-flex" >
+                                <div class="d-flex flex-column">
+                                    <span>{{ $notification->data['title'] }}</span>
+                                    <a href="{{ route('admin.pembayaran.index') }}">{{ ucwords($notification->data['messages']) }}</a>
+                                    <p class="text-little mt-1 text-secondary" style="font-size:13px;">{{ $notification->created_at->diffForHumans()}}</p>
+                                </div>
+                                <span type="button" class="">&#10005;</span type="button">
                             </div>
-                            <span type="button" class="">&#10005;</span type="button">
-                        </div>
+                        @endforeach
+                            
                     </div>
                 @else
                 @endif()
@@ -70,12 +74,24 @@
                     <li>
                         <div class="dropdown-divider"></div>
                     </li>
-                    <li>
-                        <a class="dropdown-item" href="{{ route('admin.profile.edit', Auth::user()->id) }}">
-                            <i class="bx bx-user me-2"></i>
-                            <span class="align-middle">My Profile</span>
-                        </a>
-                    </li>
+                    @if (Auth::user()->role == 'ADMIN')
+                        <li>
+                            <a class="dropdown-item" href="{{ route('admin.profile.edit', Auth::user()->id) }}">
+                                <i class="bx bx-user me-2"></i>
+                                <span class="align-middle">My Profile</span>
+                            </a>
+                        </li>
+                    @else
+                    @endif()
+                    @if (Auth::user()->role == 'WALI')
+                        <li>
+                            <a class="dropdown-item" href="{{ route('profile.edit', Auth::user()->id) }}">
+                                <i class="bx bx-user me-2"></i>
+                                <span class="align-middle">My Profile</span>
+                            </a>
+                        </li>
+                    @else
+                    @endif()
                     <li>
                         <a class="dropdown-item" href="{{ route('admin.instansi.index') }}">
                             <i class="bx bx-cog me-2"></i>

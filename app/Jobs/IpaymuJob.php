@@ -41,7 +41,7 @@ class IpaymuJob implements ShouldQueue
                         'payment_status' => 'EXPIRED',
                     ]);
                     $user = User::where('id', $pembayarans->id_users)->get();
-                    $send = 'Asslammualaikum warahmatullahi wabarakatu yang terhormat Bapak / ibu ' . $user->name . 'Kami informasikan ada pembayaram yang sudah expired jika ingin membayar silahkan membayar ulang';
+                    $send = 'Assalamualaikum warahmatullahi wabarakatu yang terhormat Bapak / ibu ' . $user->name . 'Kami informasikan ada pembayaran yang sudah expired jika ingin membayar silahkan membayar ulang';
                     $this->send_message($user->telepon, $send);
                     // Log::info($user);
                 }

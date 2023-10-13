@@ -17,40 +17,64 @@
                     </div>
                 @endif
                 <div class="card">
-                    <h5 class="card-header">Pilih Bayar</h5>
+                    <h5 class="card-header mb-2">Tagihan <strong>{{ $murid->name }}</strong></h5>
                     <div class="card-body">
+                        <h5 class=" m-0 me-2 mb-3">{{ $tagihan->nama_biaya }}</h5>
                         <table class="table table-bordered">
                             <thead class="bg-dark">
                                 <tr>
                                     <th class="text-white">Bulan</th>
                                     <th class="text-white">Total</th>
+                                    <th class="text-white">STATUS</th>
+                                    <th class="text-white">TENGGAT</th>
                                     <th class="text-white d-flex">Pilih<input class="ms-2" type="checkbox" id="selectAll">
                                     </th>
                                 </tr>
                             </thead>
-                            <form id="pembayaran" action="{{ route('wali.tagihan.pembayaran.bank', ['id' => $tagihan->id, 'idmurid' => $murid->id]) }}"
+                            <form id="pembayaran"
+                                action="{{ route('wali.tagihan.pembayaran.bank', ['id' => $tagihan->id, 'idmurid' => $murid->id]) }}"
                                 method="POST">
                                 @csrf
                                 <tbody>
                                     @foreach ($bulan as $bulans)
                                         @php
-                                            $tagihanDetails = App\Models\TagihanDetail::where('id_tagihan', $bulans->id)->where('id_murids', $murid->id)->get();
+                                            $tagihanDetails = App\Models\TagihanDetail::where('id_tagihan', $bulans->id)
+                                                ->where('id_murids', $murid->id)
+                                                ->get();
                                         @endphp
                                         @foreach ($tagihanDetails as $tagihanDetail)
-                                            @if ($tagihanDetail->status === 'BELUM')
-                                                <tr>
-                                                    <td>{{ $bulans->mounth ?? '-' }}</td>
-                                                    <td>Rp {{ number_format($tagihanDetail->jumlah_biaya) }}</td>
-                                                    <td>
-                                                        <input type="checkbox" data-select name="amount[{{ $tagihanDetail->id }}]"
-                                                            value="{{ $tagihanDetail->id }}" data-id="{{ $tagihanDetail->id }}">
-                                                    </td>
-                                                </tr>
-                                            @endif
+                                            <tr>
+                                                <td>{{ $bulans->mounth ?? '-' }}</td>
+                                                <td>Rp {{ number_format($tagihanDetail->jumlah_biaya) }}</td>
+                                                <td
+                                                    class="ms-2 mt-2 badge bg-label-{{ $tagihanDetail->status == 'BELUM' && $tagihanDetail->end_date < now()
+                                                        ? 'warning'
+                                                        : ($tagihanDetail->status == 'SUDAH'
+                                                            ? 'success'
+                                                            : 'danger') }}">
+                                                    <strong>
+                                                        @if ($tagihanDetail->status == 'BELUM' && $tagihanDetail->end_date < now())
+                                                            NUNGGAK
+                                                        @elseif ($tagihanDetail->status == 'SUDAH')
+                                                            {{ $tagihanDetail->status }}
+                                                        @else
+                                                            {{ $tagihanDetail->status }}
+                                                        @endif
+                                                    </strong>
+                                                </td>
+                                                <td>{{ date('d/m/Y', strtotime($tagihanDetail->end_date)) }}</td>
+                                                <td>
+                                                    <input type="checkbox" data-select
+                                                        name="amount[{{ $tagihanDetail->id }}]"
+                                                        value="{{ $tagihanDetail->id }}"
+                                                        {{ $tagihanDetail->status == 'SUDAH' ? 'disabled' : '' }}
+                                                        data-id="{{ $tagihanDetail->id }}">
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     @endforeach
                                 </tbody>
-                            </form>                            
+                            </form>
                         </table>
                         <button form="pembayaran" type="submit" class="btn btn-success mt-3 w-25">Pilih Pembayaran</button>
                     </div>

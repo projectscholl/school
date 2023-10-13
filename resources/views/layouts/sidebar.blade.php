@@ -4,7 +4,7 @@
         $active = 'menu-item active';
         $nonActive = 'menu-item';
     @endphp
-    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme sidebar" data-bg-class="bg-menu-theme">
+    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme sidebar fixed-sidebar" data-bg-class="bg-menu-theme">
         <div class="app-brand demo mb-3" style="height: 100px;">
             <div class="d-flex flex-column">
                 <div class="d-flex align-items-center justify-content-center">
@@ -24,7 +24,6 @@
         </div>
 
         <div class="menu-inner-shadow"></div>
-
 
         @if (Auth::user()->role == 'WALI')
             <ul class="menu-inner py-1">
@@ -152,6 +151,13 @@
                     <span class="menu-header-text">DATA MASTER</span>
                 </li>
 
+                <!--Data Siswa-->
+                <li class="{{ Route::is('admin.murid.*') ? $active : $nonActive }}">
+                    <a href="{{ route('admin.murid.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-user"></i>
+                        <div data-i18n="Analytics">Data Siswa</div>
+                    </a>
+                </li>
 
                 <!--Data Angakatan-->
                 <li class="{{ Route::is('admin.angkatan.*') ? $active : $nonActive }}">
@@ -181,13 +187,6 @@
                     <a href="{{ route('admin.walimurid.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-user"></i>
                         <div data-i18n="Analytics">Data Wali Murid</div>
-                    </a>
-                </li>
-                <!--Data Siswa-->
-                <li class="{{ Route::is('admin.murid.*') ? $active : $nonActive }}">
-                    <a href="{{ route('admin.murid.index') }}" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-user"></i>
-                        <div data-i18n="Analytics">Data Siswa</div>
                     </a>
                 </li>
 

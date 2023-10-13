@@ -5,28 +5,49 @@ namespace App\Http\Controllers;
 use App\Models\Instansi;
 use App\Models\Murid;
 use App\Models\Pembayaran;
+use App\Models\User;
+use App\Traits\Fonnte;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PembayaranController extends Controller
 {
-    public function index()
+
+    use Fonnte;
+
+    public function index(Request $request)
     {
         $user = Auth::user();
         $instansi = Instansi::first();
-        $pembayarans = Pembayaran::get();
+
+        $paymentStatus = $request->input('payment_status'); 
+
+        $pembayarans = Pembayaran::when($paymentStatus, function ($query, $paymentStatus) {
+            if ($paymentStatus === 'Cash') {
+                return $query->where('payment_links', 'Cash');
+            } elseif ($paymentStatus === 'Bank') {
+                return $query->where('payment_links', null); 
+            } elseif ($paymentStatus === 'Pembayaran Online') {
+                return $query->where('nama_pengirim', null);
+            } else {
+                return $query;
+            }
+        })->get();
+
         $idsMurids = $pembayarans->pluck('id_murids')->unique();
-        foreach ($idsMurids as $idMurid) {
-            $murid = Murid::find($idMurid);
-        }
+
         return view('admin.pembayaran.index', compact('user', 'instansi', 'pembayarans', 'idsMurids'));
     }
+
+
+
     public function show(string $id)
     {
         $user = Auth::user();
         $instansi = Instansi::first();
         $pembayaran = Pembayaran::find($id);
-        return view('admin.pembayaran.detail', compact('user', 'instansi', 'pembayaran'));
+        $html = "<img src='" . public_path("storage/image/{$instansi->logo}") . "' alt='' class='mb-4' width='100'>";
+        return view('admin.pembayaran.detail', compact('user', 'instansi', 'pembayaran', 'html'));
     }
 
 
@@ -42,8 +63,21 @@ class PembayaranController extends Controller
             $tagihanDetail->update(['status' => 'SUDAH']);
         }
 
-        $pembayaran->update(['payment_status' => 'Dikonfirmasi']);
+        $pembayaran->update(['payment_status' => 'Berhasil']);
+
+        $user = User::where('id', $pembayaran->id_users)->first();
+        $send = 'Assalamualaikum warahmatullahi wabarakatu yang terhormat Bapak / Ibu, kami Informasikan Bahwa Pembayaran Bapak / Ibu sudah berhasil di Konfirmasi Oleh admin';
+
+        // dd($user->telepon);
+        $this->send_message($user->telepon, $send);
 
         return redirect()->route('admin.pembayaran.index')->with('pesan', 'Pembayaran Berhasil Di Konfirmasi');
+    }
+
+    public function destroy(string $id)
+    {
+        $pembayaran = Pembayaran::findOrFail($id);
+        $pembayaran->delete();
+        return redirect()->route('admin.pembayaran.index');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Biaya;
 use App\Models\Instansi;
 use App\Models\Murid;
 use App\Models\TagihanDetail;
@@ -72,11 +73,45 @@ class LoginWaliController extends Controller
         $tagihanMurids = TagihanDetail::whereHas('murids', function ($query) use ($wali_id) {
             $query->where('id_users', $wali_id);
         })->with('murids')
-        ->get();
+            ->get();
         $notifikasiMurids = $tagihanMurids->count();
         $jumlahMurid = Murid::where('id_users', $wali_id)->count();
-        return view('wali.dashboard', compact('jumlahMurid', 'instansi', 'tagihanMurids', 'notifikasiMurids'));
-    }
-    
+        $murids = Murid::where('id_users', $wali_id)->get();
+        $kartuSPPs = [];
+        foreach ($murids as $murid) {
+            // Mengambil biaya rutin untuk murid ini
+            $biayaRutin = $murid->biayas()->where('jenis_biaya', 'routine')->first();
 
+            if ($biayaRutin) {
+                $tagihanSPPs = $murid->tagihanDetail()
+                    ->whereHas('tagihan', function ($query) use ($biayaRutin) {
+                        $query->whereHas('biayas', function ($subquery) use ($biayaRutin) {
+                            $subquery->where('jenis_biaya', 'routine')
+                                ->where('id', $biayaRutin->id);
+                        });
+                    })
+                    ->get();
+
+                $bulanBulanan = [];
+
+                foreach ($tagihanSPPs as $tagihanSPP) {
+                    $bulan = $tagihanSPP->tagihan->mounth;
+                    $status = $tagihanSPP->status;
+
+                    if (!in_array($bulan, $bulanBulanan)) {
+                        $bulanBulanan[] = $bulan;
+                    }
+                }
+
+                // Tambahkan data kartu SPP ke dalam array
+                $kartuSPPs[] = [
+                    'id_murids' => $murid->id,
+                    'nama_murid' => $murid->name,
+                    'bulan' => $bulanBulanan,
+                    'status' => $status,
+                ];
+            }
+        }
+        return view('wali.dashboard', compact('jumlahMurid', 'instansi', 'tagihanMurids', 'notifikasiMurids', 'kartuSPPs', 'murids', 'murid', 'tagihanSPPs'));
+    }
 }

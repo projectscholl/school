@@ -45,9 +45,6 @@ class Biaya extends Model
             ->where('id_jurusans', $this->id_jurusans)
             ->where('id_kelas', $this->id_kelas);
     }
-
-
-
     public function tagihans()
     {
         return $this->hasMany(Tagihan::class, 'id_biayas');
