@@ -33,7 +33,8 @@ class AdminController extends Controller
         $pembayaran = Pembayaran::all();
         $pembayaranDikonfirmasi = $pembayaran->where('payment_status', 'Berhasil')->count();
         $pembayaranBelum_Dikonfirmasi = $pembayaran->where('payment_status', 'PENDING')->count();
-        return view('admin.dashboard', compact('user', 'jumlahMurid', 'instansi', 'tagihanDetail', 'jumlahBelumBayar', 'jumlahLunas', 'pembayaranDikonfirmasi', 'pembayaranBelum_Dikonfirmasi'));
+        $pembayaranTotal = $pembayaran->where('payment_status', 'Berhasil')->sum('total_bayar');
+        return view('admin.dashboard', compact('user', 'jumlahMurid', 'instansi', 'tagihanDetail', 'jumlahBelumBayar', 'jumlahLunas', 'pembayaranDikonfirmasi', 'pembayaranBelum_Dikonfirmasi', 'pembayaranTotal'));
     }
     public function edit()
     {

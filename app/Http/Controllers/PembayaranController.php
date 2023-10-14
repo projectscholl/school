@@ -26,15 +26,17 @@ class PembayaranController extends Controller
             if ($paymentStatus === 'Cash') {
                 return $query->where('payment_links', 'Cash');
             } elseif ($paymentStatus === 'Bank') {
-                return $query->where('payment_links', null); 
+                return $query->where('payment_links', null);
             } elseif ($paymentStatus === 'Pembayaran Online') {
-                return $query->where('nama_pengirim', null);
+                return $query->where('payment_links', '<>', 'Cash')->whereNotNull('payment_links');
             } else {
                 return $query;
             }
-        })->get();
+        })->orderBy('created_at', 'desc')->get();
+        
 
         $idsMurids = $pembayarans->pluck('id_murids')->unique();
+
 
         return view('admin.pembayaran.index', compact('user', 'instansi', 'pembayarans', 'idsMurids'));
     }

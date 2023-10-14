@@ -44,7 +44,13 @@
                                         @endphp
                                         @foreach ($tagihanDetails as $tagihanDetail)
                                             <tr>
-                                                <td>{{ $bulans->mounth ?? '-' }}</td>
+                                                <td>
+                                                    @if ($tagihanDetail->end_date)
+                                                        {{ \Carbon\Carbon::createFromFormat('d-m', $tagihanDetail->end_date)->format('F') }}
+                                                    @else
+                                                        -
+                                                    @endif
+                                                </td>                                                                                                
                                                 <td>Rp {{ number_format($tagihanDetail->jumlah_biaya) }}</td>
                                                 <td
                                                     class="ms-2 mt-2 badge bg-label-{{ $tagihanDetail->status == 'BELUM' && $tagihanDetail->end_date < now()
@@ -62,7 +68,13 @@
                                                         @endif
                                                     </strong>
                                                 </td>
-                                                <td>{{ date('d/m/Y', strtotime($tagihanDetail->end_date)) }}</td>
+                                                <td>
+                                                    @if ($tagihanDetail->end_date)
+                                                        {{ \Carbon\Carbon::createFromFormat('d-m', $tagihanDetail->end_date)->format('d/m') }}
+                                                    @else
+                                                        -
+                                                    @endif
+                                                </td>                                 
                                                 <td>
                                                     <input type="checkbox" data-select
                                                         name="amount[{{ $tagihanDetail->id }}]"

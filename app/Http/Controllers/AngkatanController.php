@@ -18,7 +18,7 @@ class AngkatanController extends Controller
     public function index()
     {
         $instansi = Instansi::first();
-        $angkatan = Angkatan::all();
+        $angkatan = Angkatan::orderBy('created_at', 'desc')->get();
         return view('admin.angkatan.index', compact('angkatan', 'instansi'));
     }
 

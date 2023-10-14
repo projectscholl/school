@@ -18,7 +18,7 @@ class IpaymuController extends Controller
 
 
         $transaction = Pembayaran::with('users')->where('bukti_transaksi', $sid)->first();
-        if ($status == 'berhasil') {
+        if ($status == 'Berhasil') {
             $transaction->update([
                 'payment_status' => $status,
                 'nama_pengirim' => $transaction->users->name,
@@ -29,10 +29,8 @@ class IpaymuController extends Controller
                 $pembayaran = TagihanDetail::where('id', $pembayarans->id);
                 $pembayaran->update([
                     'status' => 'SUDAH',
-
                 ]);
             }
-
             return view('callback.return');
         } else {
             return view('callback.cancel');

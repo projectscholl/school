@@ -152,7 +152,7 @@
                                             <tbody>
                                                 @foreach ($pembayaran->tagihanDetails as $pembayarans)
                                                     <tr>
-                                                        <td><strong>{{ $pembayarans->tagihan->mounth }}</strong></td>
+                                                        <td><strong>{{ $pembayarans->tagihan->mounth ? \Carbon\Carbon::createFromFormat('Y-m-d', $pembayarans->tagihan->mounth)->format('F') : '-' }}</strong></td> 
                                                         <td>Rp {{ number_format($pembayarans->tagihan->amount) }}</td>
                                                     </tr>
                                                 @endforeach

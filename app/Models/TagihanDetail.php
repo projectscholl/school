@@ -23,7 +23,7 @@ class TagihanDetail extends Model
     public function murids()
     {
         return $this->belongsTo(Murid::class, 'id_murids');
-    }
+}
     public function tagihan()
     {
         return $this->belongsTo(Tagihan::class, 'id_tagihan');

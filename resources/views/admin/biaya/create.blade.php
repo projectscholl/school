@@ -639,57 +639,6 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                                <script>
-                                    const angkatanSelect = document.getElementById('id_angkatans');
-                                    const jurusanSelect = document.getElementById('id_jurusans');
-                                    const kelasSelect = document.getElementById('id_kelas');
-
-                                    const jurusanGrouped = @json($jurusanGrouped);
-                                    const kelasGrouped = @json($kelasGrouped);
-                                    const jurusans = @json($jurusans);
-                                    const kelas = @json($kelas);
-
-                                    angkatanSelect.addEventListener('change', () => {
-                                        const angkatanId = angkatanSelect.value;
-                                        const jurusanOptions = jurusanGrouped[angkatanId] || [];
-                                        if (jurusanGrouped[angkatanId]) {
-                                            jurusanSelect.innerHTML = '<option value="">Pilih Jurusan</option>';
-                                        } else {
-                                            jurusanSelect.innerHTML =
-                                                '<option value="">Data Jurusan Kosong : Silahkan buat data jurusan terlebih dahulu !</option>';
-                                        }
-
-                                        jurusanOptions.forEach(jurusan => {
-                                            const option = document.createElement('option');
-                                            option.value = jurusan.id;
-                                            option.textContent = jurusan.nama;
-                                            jurusanSelect.appendChild(option);
-                                        });
-
-                                        updateKelasOptions();
-                                    });
-
-                                    jurusanSelect.addEventListener('change', () => {
-
-                                        const jurusanId = jurusanSelect.value;
-                                        const kelasOptions = kelasGrouped[jurusanId] || [];
-
-                                        if (kelasGrouped[jurusanId]) {
-                                            kelasSelect.innerHTML = '<option value="">Pilih Kelas</option>';
-                                        } else {
-                                            kelasSelect.innerHTML =
-                                                '<option value="">Data Kelas Kosong : Silahkan buat data kelas terlebih dahulu !</option>';
-                                        }
-
-                                        kelasOptions.forEach(kelas => {
-                                            const option = document.createElement('option');
-                                            option.value = kelas.id;
-                                            option.textContent = kelas.kelas;
-                                            kelasSelect.appendChild(option);
-                                        });
-                                        updateKelasOptions();
-                                    });
-                                </script>
                             </div>
                             <button type="submit" class="btn btn-primary">Tambah</button>
                     </div>
@@ -706,10 +655,61 @@
         $('.rupiah').mask("#.##0", {
             reverse: true
         });
+        </script>
+    <script>
+        const angkatanSelect = document.getElementById('id_angkatans');
+        const jurusanSelect = document.getElementById('id_jurusans');
+        const kelasSelect = document.getElementById('id_kelas');
+
+        const jurusanGrouped = @json($jurusanGrouped);
+        const kelasGrouped = @json($kelasGrouped);
+        const jurusans = @json($jurusans);
+        const kelas = @json($kelas);
+
+        angkatanSelect.addEventListener('change', () => {
+            const angkatanId = angkatanSelect.value;
+            const jurusanOptions = jurusanGrouped[angkatanId] || [];
+            if (jurusanGrouped[angkatanId]) {
+                jurusanSelect.innerHTML = '<option value="">Pilih Jurusan</option>';
+            } else {
+                jurusanSelect.innerHTML =
+                    '<option value="">Data Jurusan Kosong : Silahkan buat data jurusan terlebih dahulu !</option>';
+            }
+
+            jurusanOptions.forEach(jurusan => {
+                const option = document.createElement('option');
+                option.value = jurusan.id;
+                option.textContent = jurusan.nama;
+                jurusanSelect.appendChild(option);
+            });
+
+            updateKelasOptions();
+        });
+
+        jurusanSelect.addEventListener('change', () => {
+
+            const jurusanId = jurusanSelect.value;
+            const kelasOptions = kelasGrouped[jurusanId] || [];
+
+            if (kelasGrouped[jurusanId]) {
+                kelasSelect.innerHTML = '<option value="">Pilih Kelas</option>';
+            } else {
+                kelasSelect.innerHTML =
+                    '<option value="">Data Kelas Kosong : Silahkan buat data kelas terlebih dahulu !</option>';
+            }
+
+            kelasOptions.forEach(kelas => {
+                const option = document.createElement('option');
+                option.value = kelas.id;
+                option.textContent = kelas.kelas;
+                kelasSelect.appendChild(option);
+            });
+            updateKelasOptions();
+        });
     </script>
     <script type="text/javascript">
         document.getElementById("tombol_form").addEventListener("click", tampilkan_nilai_form);
-
+        
         function tampilkan_nilai_form() {
             event.preventDefault();
             var nilai_form = document.getElementById("input_form").value;

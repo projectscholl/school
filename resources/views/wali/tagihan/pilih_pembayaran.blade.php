@@ -69,7 +69,11 @@
                                                     @foreach ($tagihanDetails as $tagihanDetail)
                                                         <tr>
                                                             <td>@if ($tagihanDetail->tagihan->biayas->jenis_biaya === 'routine')
-                                                                <strong>{{ $tagihanDetail->tagihan->mounth }}</strong>
+                                                                <strong>@if ($tagihanDetail->end_date)
+                                                                    {{ \Carbon\Carbon::createFromFormat('d-m', $tagihanDetail->end_date)->format('F') }}
+                                                                @else
+                                                                    -
+                                                                @endif</strong>
                                                             @elseif ($tagihanDetail->tagihan->biayas->jenis_biaya === 'tidakRoutine')
                                                                 {{ $tagihanDetail->tagihan->nama_biaya }}
                                                             @else

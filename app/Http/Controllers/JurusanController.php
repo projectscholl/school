@@ -18,7 +18,7 @@ class JurusanController extends Controller
     public function index()
     {
         $instansi = Instansi::first();
-        $jurusans = Jurusan::with('angkatans')->get();
+        $jurusans = Jurusan::with('angkatans')->orderBy('created_at', 'desc')->get();
         return view('admin.jurusan.index', compact('instansi', 'jurusans'));
     }
 

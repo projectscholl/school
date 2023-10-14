@@ -22,7 +22,7 @@
                                             {{ $user->name }}
                                             🎉</h5>
                                         <p class="mb-4">
-                                            Kamu mendapatkan <span class="fw-bold">{{ auth()->user()->unreadNotifications->count() }}</span>Notifikasi
+                                            Kamu mendapatkan <span class="fw-bold">{{ auth()->user()->unreadNotifications->count() }}</span> Notifikasi
                                         </p>
                                     </div>
                                 </div>
@@ -65,8 +65,8 @@
                                             </div>
                                         </div>
                                         <span class="fw-semibold d-block mb-1">Total Sudah Bayar</span>
-                                        <h3 class="card-title mb-2">{{ $pembayaranDikonfirmasi }}</h3>
-                                        {{-- <small class="text-success fw-semibold"><strong>Rp1.000.000</strong></small> --}}
+                                        <h3 class="card-title mb-2">{{ $pembayaranDikonfirmasi }}</h3> 
+                                        <small class="text-success fw-semibold"><strong>Rp {{ number_format($pembayaranTotal) }}</strong></small>
                                     </div>
                                 </div>
                             </div>

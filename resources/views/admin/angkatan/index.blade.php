@@ -10,8 +10,8 @@
 
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Data Activity /</span>
-                    Activity
+                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Data Angkatan /</span>
+                    Angkatan
                 </h4>
                 <!-- Bordered Table -->
                 <div class="card">

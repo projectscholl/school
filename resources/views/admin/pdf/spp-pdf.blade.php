@@ -52,7 +52,14 @@
                                     @foreach ($tagihanSPPs as $tagihanDetail)
                                         <tr>
                                             <td style='padding: 8px; border: 1px solid #ddd;'>{{ $loop->iteration }}</td>
-                                            <td style='padding: 8px; border: 1px solid #ddd;'>{{ $tagihanDetail->tagihan->mounth }}</td>
+                                            <td style='padding: 8px; border: 1px solid #ddd;'>
+                                                @if (!empty($tagihanDetail->tagihan->mounth))
+                                                    {{ \Carbon\Carbon::createFromFormat('Y-m-d', $tagihanDetail->tagihan->mounth)->format('F') }}
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            
                                             <td style='padding: 8px; border: 1px solid #ddd;'>Rp {{ number_format($tagihanDetail->tagihan->amount) }}</td>
                                             <td style='padding: 8px; border: 1px solid #ddd;'>
                                                 @if ($tagihanDetail->pembayaran)

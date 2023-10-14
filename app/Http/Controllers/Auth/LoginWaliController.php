@@ -12,6 +12,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
+
 
 class LoginWaliController extends Controller
 {
@@ -72,14 +74,17 @@ class LoginWaliController extends Controller
         $wali_id = Auth::user()->id;
         $tagihanMurids = TagihanDetail::whereHas('murids', function ($query) use ($wali_id) {
             $query->where('id_users', $wali_id);
-        })->with('murids')
-            ->get();
+        })->with('murids')->get();
+
         $notifikasiMurids = $tagihanMurids->count();
         $jumlahMurid = Murid::where('id_users', $wali_id)->count();
         $murids = Murid::where('id_users', $wali_id)->get();
         $kartuSPPs = [];
+
+        $tagihanSPPs = []; // Initialize it before the loop
+
+
         foreach ($murids as $murid) {
-            // Mengambil biaya rutin untuk murid ini
             $biayaRutin = $murid->biayas()->where('jenis_biaya', 'routine')->first();
 
             if ($biayaRutin) {
@@ -93,13 +98,17 @@ class LoginWaliController extends Controller
                     ->get();
 
                 $bulanBulanan = [];
+                $status = 'BELUM';
 
                 foreach ($tagihanSPPs as $tagihanSPP) {
-                    $bulan = $tagihanSPP->tagihan->mounth;
-                    $status = $tagihanSPP->status;
+                    $bulan = $tagihanSPP->start_date;
 
                     if (!in_array($bulan, $bulanBulanan)) {
                         $bulanBulanan[] = $bulan;
+                    }
+
+                    if ($tagihanSPP->status === 'SUDAH') {
+                        $status = 'SUDAH';
                     }
                 }
 
@@ -112,6 +121,8 @@ class LoginWaliController extends Controller
                 ];
             }
         }
-        return view('wali.dashboard', compact('jumlahMurid', 'instansi', 'tagihanMurids', 'notifikasiMurids', 'kartuSPPs', 'murids', 'murid', 'tagihanSPPs'));
+
+
+        return view('wali.dashboard', compact('jumlahMurid', 'instansi', 'tagihanMurids', 'notifikasiMurids', 'kartuSPPs', 'murids', 'tagihanSPPs'));
     }
 }

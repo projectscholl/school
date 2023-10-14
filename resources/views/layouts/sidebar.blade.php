@@ -109,7 +109,7 @@
                     <ul class="menu-sub">
                         <li class="{{ Route::is('admin.biaya.*') ? $active : $nonActive }}">
                             <a href="{{ route('admin.biaya.index') }}" class="menu-link">
-                                <div data-i18n="Without menu">Manegement Biaya</div>
+                                <div data-i18n="Without menu">Management Biaya</div>
                             </a>
                         </li>
                     </ul>
@@ -227,13 +227,6 @@
                             </a>
                         </li>
                     </ul>
-                </li>
-                <!--Data Siswa-->
-                <li class="{{ Route::is('admin.murid.*') ? $active : $nonActive }}">
-                    <a href="{{ route('admin.murid.index') }}" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-user"></i>
-                        <div data-i18n="Analytics">Data Siswa</div>
-                    </a>
                 </li>
 
                 <!--Data User-->

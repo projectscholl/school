@@ -15,59 +15,17 @@
                     murid
                 </h4>
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-body">
                         <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center ms-4">
                             <a href="{{ route('admin.murid.create') }}" class="btn btn-primary">Tambah Murid</a>
                             <a href="#" id="deleteAll" class="btn btn-danger ms-2">Delete Selected</a>
                             <a href="{{ route('admin.murid.export') }}" class="btn btn-success ms-2">Export</a>
                         </div>
-                        <script>
-                            setTimeout(function() {
-                                document.getElementById('auto-dismiss-alert').remove();
-                            }, 2000);
-                        </script>
-                    @endif
-                    @if (session('delete'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>{{ session('delete') }}!</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        <script>
-                            setTimeout(function() {
-                                document.getElementById('auto-dismiss-alert').remove();
-                            }, 2000);
-                        </script>
-                    @endif
-                    @if (session('pesan'))
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <strong>{{ session('pesan') }}!</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-                    @if (session('berhasil'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>{{ session('berhasil') }}!</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="col-md-10">
-                                    <form action="">
-
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                    <h5 class="card-header">Murid Tables</h5>
-                    <div class="d-flex align-items-center">
-                        <a href="{{ route('admin.murid.create') }}" class="btn btn-primary col-2 ms-4">Tambah Murid</a>
-                        <div class="">
                             <form action="{{ route('admin.murid.index') }}" method="GET">
-                                <div class="d-flex ms-5">
+                                <div class="d-flex ms-5 col-ms-5 d-block">
                                         <label for="id_angkatans"  class="ms-3">Masukkan Angkatan</label>
-                                        <select name="id_angkatans" id="id_angkatans" class="form-control ms-3">
+                                        <select name="id_angkatans" id="id_angkatans" class="form-control ms-3 ">
                                             <option value="">---------</option>
                                             @foreach ($angkatans as $data)
                                                 <option value="{{ $data->id }}">{{ $data->tahun }}</option>
@@ -83,53 +41,9 @@
                                         <select name="id_kelas" id="id_kelas" class="form-control ms-3">
                                             <option value="">---------</option>
                                         </select>
-                                        <button type="submit" class="btn btn-primary ms-3">Cari</button>
-
+                                        <button type="submit" class="btn btn-primary ms-3">Cari</button>    
                                 </div>
-                                <script>
-                                    const angkatanSelect = document.getElementById('id_angkatans');
-                                    const jurusanSelect = document.getElementById('id_jurusans');
-                                    const kelasSelect = document.getElementById('id_kelas');
-
-                                    const jurusanGrouped = @json($jurusanGrouped);
-                                    const kelasGrouped = @json($kelasGrouped);
-
-                                    angkatanSelect.addEventListener('change', () => {
-                                        const angkatanId = angkatanSelect.value;
-                                        const jurusanOptions = jurusanGrouped[angkatanId] || [];
-
-                                        jurusanSelect.innerHTML = '<option value="">Pilih Jurusan</option>';
-
-                                        jurusanOptions.forEach(jurusan => {
-                                            const option = document.createElement('option');
-                                            option.value = jurusan.id;
-                                            option.textContent = jurusan.nama;
-                                            jurusanSelect.appendChild(option);
-                                        });
-
-                                        updateKelasOptions();
-                                    });
-
-                                    jurusanSelect.addEventListener('change', () => {
-                                        updateKelasOptions();
-                                    });
-
-                                    function updateKelasOptions() {
-                                        const jurusanId = jurusanSelect.value;
-                                        const kelasOptions = kelasGrouped[jurusanId] || [];
-
-                                        kelasSelect.innerHTML = '<option value="">Pilih Kelas</option>';
-
-                                        kelasOptions.forEach(kelas => {
-                                            const option = document.createElement('option');
-                                            option.value = kelas.id;
-                                            option.textContent = kelas.kelas;
-                                            kelasSelect.appendChild(option);
-                                        });
-                                    }
-                                </script>
                         </form>
-                        </div>
                     </div>               
                     <div class="card-body">
                         <div class="table-responsive text-nowrap">
@@ -190,6 +104,48 @@
     </div>
 @endsection
 @push('scripts')
+    <script>
+        const angkatanSelect = document.getElementById('id_angkatans');
+        const jurusanSelect = document.getElementById('id_jurusans');
+        const kelasSelect = document.getElementById('id_kelas');
+
+        const jurusanGrouped = @json($jurusanGrouped);
+        const kelasGrouped = @json($kelasGrouped);
+
+        angkatanSelect.addEventListener('change', () => {
+            const angkatanId = angkatanSelect.value;
+            const jurusanOptions = jurusanGrouped[angkatanId] || [];
+
+            jurusanSelect.innerHTML = '<option value="">Pilih Jurusan</option>';
+
+            jurusanOptions.forEach(jurusan => {
+                const option = document.createElement('option');
+                option.value = jurusan.id;
+                option.textContent = jurusan.nama;
+                jurusanSelect.appendChild(option);
+            });
+
+            updateKelasOptions();
+        });
+
+        jurusanSelect.addEventListener('change', () => {
+            updateKelasOptions();
+        });
+
+        function updateKelasOptions() {
+            const jurusanId = jurusanSelect.value;
+            const kelasOptions = kelasGrouped[jurusanId] || [];
+
+            kelasSelect.innerHTML = '<option value="">Pilih Kelas</option>';
+
+            kelasOptions.forEach(kelas => {
+                const option = document.createElement('option');
+                option.value = kelas.id;
+                option.textContent = kelas.kelas;
+                kelasSelect.appendChild(option);
+            });
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
         integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
         crossorigin="anonymous"
@@ -203,7 +159,7 @@
         @if (Session::has('success'))
             toastr.success("{{ Session::get('success') }}")
         @elseif (Session::has('pesan'))
-            toastr.success('{{ Session::get('pesan') }}')
+            toastr.error('{{ Session::get('pesan') }}')
         @endif
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

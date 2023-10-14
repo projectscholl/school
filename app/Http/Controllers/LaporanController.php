@@ -127,11 +127,12 @@ class LaporanController extends Controller
             
 
                 foreach ($pembayaran->tagihanDetails as $pembayarans) {
+                    $namaBulan = Carbon::parse($pembayarans->tagihan->mounth)->format('F');
+
                     $html .= "<tr class='item'>
-                <td style='padding: 10px;'><strong>" . $pembayarans->tagihan->mounth . "</strong></td>
-                <td>Rp " . number_format($pembayarans->tagihan->amount) . "</td>
-            </tr>
-            ";
+                        <td style='padding: 10px;'><strong>" . $namaBulan . "</strong></td>
+                        <td>Rp " . number_format($pembayarans->tagihan->amount) . "</td>
+                    </tr>";
                 }
 
                 $html .= " <tr class='total'>

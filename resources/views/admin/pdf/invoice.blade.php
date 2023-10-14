@@ -194,11 +194,15 @@
                 <tr>
                     <td><strong>
                         @if ($pembayarans)
-                            {{ $pembayarans->tagihan->mounth }}
+                            @if (!empty($pembayarans->tagihan->mounth))
+                                {{ \Carbon\Carbon::createFromFormat('Y-m-d', $pembayarans->tagihan->mounth)->format('F') }}
+                            @else
+                                -
+                            @endif
                         @else
                             -
                         @endif
-                    </strong></td>
+                    </strong></td>                    
                     <td>Rp {{ number_format($pembayarans->tagihan->amount) }}</td>
                 </tr>
             @endforeach

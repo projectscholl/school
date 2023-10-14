@@ -45,7 +45,7 @@ class PembayaranWaliController extends Controller
             'rek_pengirim' => 'required|max:16|min:16',
             'bukti_transaksi' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'identitas_penerima' => 'required',
-            'total_bayar' => 'required'
+            'total_bayar' => 'required',
         ]);
 
 
@@ -59,6 +59,7 @@ class PembayaranWaliController extends Controller
         $idTagihanDetails = $request->input('id_tagihan_details');
 
         $data['id_users'] = Auth::id();
+        $data['year'] = date('Y');
         $pembayarans = Pembayaran::create($data);
         $userAdmin = User::where('role', 'ADMIN')->get();
         Notification::send($userAdmin, new PembayaransNotifications($pembayarans));

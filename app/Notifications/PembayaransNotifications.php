@@ -53,7 +53,7 @@ class PembayaransNotifications extends Notification
             'id_users' => $this->pembayaran->id_users,
             'id_pembayarans' => $this->pembayaran->id,
             'title' => 'Pembayaran Tagihan',
-            'messages' => $this->pembayaran->wali->name . ' Melakukan Pembayaran Tagihan',
+        'messages' => $this->pembayaran->users->name . ' Melakukan Pembayaran Tagihan',
         ];
     }
 }

@@ -13,7 +13,7 @@ class KelasController extends Controller
 {
     public function index()
     {
-        $kelas = Kelas::with('angkatans', 'jurusans')->get();
+        $kelas = Kelas::with('angkatans', 'jurusans')->orderBy('created_at', 'desc')->get();
         return view('admin.kelas.index', compact('kelas'));
     }
 

@@ -79,48 +79,14 @@
                                                     class="card-header d-flex align-items-center justify-content-between pb-0">
                                                     <div class="card-title mb-0">
                                                         <h5 class="m-0 me-2">Kartu SPP
-                                                            <strong>{{ $kartuSPP['nama_murid'] }}</strong></h5>
+                                                            <strong>{{ $kartuSPP['nama_murid'] }}</strong>
+                                                        </h5>
                                                     </div>
                                                     <div class="menu-icon">
                                                         <a href="{{ route('admin.spp.pdf', ['id_murids' => $kartuSPP['id_murids']]) }}"
                                                             class="btn btn-primary me-2"><i class="bx bx-detail"></i>
                                                         </a>
                                                     </div>
-                                                    {{-- <button type="button" class="btn btn-primary me-2"
-                                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                                        <strong>
-                                                            <i class="menu-icon tf-icons bx bx-copy ms-2 "></i>
-                                                        </strong>
-                                                    </button>
-                                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-                                                        data-bs-keyboard="false" tabindex="-1"
-                                                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-xl">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    @include('admin.pdf.spp-pdf')
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">Close</button>
-                                                                    <form
-                                                                        action="{{ route('admin.pdf.downloadPdf', ['id_murids' => $murid->id]) }}">
-                                                                        <button
-                                                                            type="submit"class="btn btn-link btn-primary">
-                                                                            <strong>
-                                                                                <i
-                                                                                    class="menu-icon tf-icons bx bx-download ms-2 "></i>Unduh
-                                                                            </strong>
-                                                                        </button>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div> --}}
                                                 </div>
                                             </div>
                                             <div class="card-body">
@@ -134,15 +100,17 @@
                                                     <tbody>
                                                         @foreach ($kartuSPP['bulan'] as $bulan)
                                                             <tr>
-                                                                <td>{{ $bulan }}</td>
                                                                 <td>
-                                                                    <span
-                                                                        class="badge bg-label-{{ $kartuSPP['status'] == 'SUDAH' ? 'success' : 'danger' }}">
-                                                                        {{ $kartuSPP['status'] }}
-                                                                    </span>
+                                                                    {{ \Carbon\Carbon::createFromFormat('d-m', $bulan)->format('F') }}
+                                                                </td>
+                                                                <td>
+                                                                    <span class="badge bg-label-{{ $tagihanSPPs->where('start_date', $bulan)->first()->status == 'SUDAH' ? 'success' : 'danger' }}">
+                                                                        {{ $tagihanSPPs->where('start_date', $bulan)->first()->status ?? 'BELUM' }}
+                                                                    </span>                                                                    
                                                                 </td>
                                                             </tr>
                                                         @endforeach
+
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -198,8 +166,7 @@
                             class="footer-link fw-bolder">ThemeSelection</a>
                     </div>
                     <div>
-                        <a href="https://themeselection.com/license/" class="footer-link me-4"
-                            target="_blank">License</a>
+                        <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
                         <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
                             Themes</a>
 

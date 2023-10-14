@@ -25,22 +25,21 @@
                         </div>
                     @endif
                     <div class="d-flex align-items-center mt-3">
-                        <h5 class="card-header">Data Pembayaran</h5>
-                        <form action="{{ route('admin.pembayaran.index') }}" method="GET">
-                            <div class="d-flex ms-5">
-                                <label for="payment_status" class="ms-3">Pilih Tipe Pembayaran</label>
-                                <select name="payment_status" id="payment_status" class="form-control ms-3">
-                                    <option value="">----</option>
-                                    <option value="Cash">Cash</option>
-                                    <option value="Bank">Bank</option>
-                                    <option value="Pembayaran Online">Pembayaran Online</option>
-                                </select>
-                                <button type="submit" class="btn btn-primary ms-3">Cari</button>
-                            </div>
-                        </form>
-
-                    <div class="card-header">
-                        <a href="#" class="btn btn-danger" id="deleteAll"><i class='bx bx-trash'></i> Delete Selected</a>
+                        <a href="#" class="btn btn-danger ms-4" id="deleteAll"><i class='bx bx-trash'></i> Delete Selected</a>
+                        <div>
+                                <form action="{{ route('admin.pembayaran.index') }}" method="GET">
+                                    <div class="d-flex">
+                                        <label for="payment_status" class="ms-4">Pilih Metode Pembayaran</label>
+                                        <select name="payment_status" id="payment_status" class="form-control ms-4">
+                                            <option value="">----</option>
+                                            <option value="Cash">Cash</option>
+                                            <option value="Bank">Bank</option>
+                                            <option value="Pembayaran Online">Pembayaran Online</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-primary ms-3">Cari</button>
+                                    </div>
+                                </form>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive text-nowrap">
@@ -64,7 +63,7 @@
                                                     name="ids"></td>
                                             <td>{{ $index + 1 }}</td>
                                             <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-                                                <strong>{{ $pembayar->wali->name ?? 'Tidak Ada Pengirim/Bayar Online' }}</strong>
+                                                <strong>{{ $pembayar->users->name ?? 'Tidak Ada Pengirim/Bayar Online' }}</strong>
                                             </td>
                                             </td>
                                             <td>
@@ -158,72 +157,69 @@ crossorigin="anonymous"
                 });
             });
         </script>
-        
-@endpush
-
-    <script>
-        $(function(e) {
-            $("#select_all_ids").click(function() {
-                $('.checksAll').prop('checked', $(this).prop('checked'));
-            });
-
-            $("#deleteAll").click(function(e) {
-                e.preventDefault();
-                var all_ids = [];
-
-                $('input:checkbox[name="ids"]:checked').each(function() {
-                    all_ids.push($(this).val());
+        <script>
+            $(function(e) {
+                $("#select_all_ids").click(function() {
+                    $('.checksAll').prop('checked', $(this).prop('checked'));
                 });
-                if ($('.checksAll').is(':checked')) {
-                    Swal.fire({
-                        title: 'Yakin?',
-                        text: "Kamu Akan Menghapus Biaya Yang dipilih!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Iya,  Hapus!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                url: "{{ route('admin.pembayaran.delete') }}",
-                                type: "DELETE",
-                                data: {
-                                    ids: all_ids
-                                },
-                                headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                        'content')
-                                },
-                                success: function(response) {
-                                    // Handle response jika diperlukan
-                                    // Misalnya, menampilkan pesan sukses
-                                    // Lakukan reload halaman setelah permintaan AJAX selesai
-                                    location.reload();
-                                },
-                                error: function(xhr, status, error) {
-                                    // Handle error jika diperlukan
-                                    console.error(xhr.responseText);
-                                }
-
-                            });
-                            Swal.fire(
-                                'Terhapus!',
-                                'Kamu telah menghapus Biaya!!.',
-                                'success'
-                            )
-                        }
+    
+                $("#deleteAll").click(function(e) {
+                    e.preventDefault();
+                    var all_ids = [];
+    
+                    $('input:checkbox[name="ids"]:checked').each(function() {
+                        all_ids.push($(this).val());
                     });
-                }
-                if (!$('.checksAll').is(':checked')) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Pilih Minimal 1!',
-                    })
-                }
-
+                    if ($('.checksAll').is(':checked')) {
+                        Swal.fire({
+                            title: 'Yakin?',
+                            text: "Kamu Akan Menghapus Data Pembayaran Yang dipilih!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Iya,  Hapus!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $.ajax({
+                                    url: "{{ route('admin.pembayaran.delete') }}",
+                                    type: "DELETE",
+                                    data: {
+                                        ids: all_ids
+                                    },
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                            'content')
+                                    },
+                                    success: function(response) {
+                                        // Handle response jika diperlukan
+                                        // Misalnya, menampilkan pesan sukses
+                                        // Lakukan reload halaman setelah permintaan AJAX selesai
+                                        location.reload();
+                                    },
+                                    error: function(xhr, status, error) {
+                                        // Handle error jika diperlukan
+                                        console.error(xhr.responseText);
+                                    }
+    
+                                });
+                                Swal.fire(
+                                    'Terhapus!',
+                                    'Kamu telah menghapus Data Pembayaran!!.',
+                                    'success'
+                                )
+                            }
+                        });
+                    }
+                    if (!$('.checksAll').is(':checked')) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Pilih Minimal 1!',
+                        })
+                    }
+    
+                });
             });
-        });
-    </script>
+        </script>
 @endpush

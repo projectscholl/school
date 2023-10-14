@@ -11,10 +11,12 @@
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
                 <!-- Bordered Table -->
+                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Data Wali Murid /</span>
+                    Wali Murid
+                </h4>
                 <div class="card">
-                    <h5 class="card-header">Data Wali Murid</h5>
-                    <div class="d-flex">
-                        <a href="{{ route('admin.walimurid.create') }}" class="btn btn-primary col-2 ms-4">Tambah Data</a>
+                    <div class="card-header">
+                        <a href="{{ route('admin.walimurid.create') }}" class="btn btn-primary col-2">Tambah Data</a>
                         <a href="#" id="deleteAll" class="btn btn-danger ms-2">Delete Selected</a>
                     </div>
                     <div class="card-body">

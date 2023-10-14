@@ -34,7 +34,7 @@
                             
                                 <div class="form-group mb-3">
                                     <label for="rek_pengirim" class="mb-2">Rekening Pengirim</label>
-                                    <input type="number" class="form-control" placeholder="Masukkan Nomor Rekening Pengirim" name="rek_pengirim" required>
+                                    <input type="number" class="form-control" placeholder="Masukkan Nomor Rekening Pengirim, maksimal 16 digit" name="rek_pengirim" required>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="identitas_penerima" class="mb-2">Rekening Sekolah</label>

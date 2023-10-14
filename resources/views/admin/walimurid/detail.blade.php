@@ -21,6 +21,8 @@
                         <hr>
                         <div>Nomor Telepon :  {{ $user->telepon }}</div>
                         <hr>
+                        <div>Alamat :  {{ $user->telepon }}</div>
+                        <hr>
                         <div>Dibuat : {{ $user->created_at }} </div>
                         <hr>
                         <div>Di Update :  {{ $user->updated_at }}</div>

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Carbon\Carbon;
 use PDF;
 
 
@@ -97,31 +98,33 @@ class PdfController extends Controller
         
         $no = 1;
         foreach ($tagihanSPPs as $tagihanDetail) {
-            $html .= "<tr>
-                    <td style='padding: 8px; border: 1px solid #ddd;'>{$no}</td>
-                    <td style='padding: 8px; border: 1px solid #ddd;'>{$tagihanDetail->tagihan->mounth}</td>
-                    <td style='padding: 8px; border: 1px solid #ddd;'>Rp " . number_format($tagihanDetail->tagihan->amount) . "</td>
-                    <td style='padding: 8px; border: 1px solid #ddd;'>";
+            $namaBulan = Carbon::parse($tagihanDetail->tagihan->mounth)->format('F');
         
+            $html .= "<tr>
+                <td style='padding: 8px; border: 1px solid #ddd;'>{$no}</td>
+                <td style='padding: 8px; border: 1px solid #ddd;'>{$namaBulan}</td>
+                <td style='padding: 8px; border: 1px solid #ddd;'>Rp " . number_format($tagihanDetail->tagihan->amount) . "</td>
+                <td style='padding: 8px; border: 1px solid #ddd;'>";
+            
             if ($tagihanDetail->pembayaran) {
                 $html .= $tagihanDetail->pembayaran->created_at->format('d/m/Y');
             } else {
                 $html .= "Belum Bayar";
             }
-        
+            
             $html .= "</td>
-                    <td style='padding: 8px; border: 1px solid #ddd;'>";
-        
+                <td style='padding: 8px; border: 1px solid #ddd;'>";
+            
             if ($tagihanDetail->pembayaran) {
                 // Tambahkan gambar tanda tangan jika diperlukan
                 $html .= "<img src='" . public_path("storage/image/{$instansi->tanda_tangan}") . "' alt='' class='mb-4' width='100'>";
             } else {
                 $html .= "-";
             }
-        
+            
             $html .= "</td>
-                </tr>";
-        
+            </tr>";
+            
             $no++;
         }
         

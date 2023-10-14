@@ -22,7 +22,7 @@ class Pembayaran extends Model
         'identitas_penerima',
         'year'
     ];
-    public function wali()
+    public function users()
     {
         return $this->belongsTo(User::class, 'id_users');
     }
