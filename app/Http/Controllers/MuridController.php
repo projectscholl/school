@@ -9,6 +9,7 @@ use App\Models\Instansi;
 use App\Models\Jurusan;
 use App\Models\Kelas;
 use App\Models\Murid;
+use App\Models\Notify;
 use App\Models\Orangtua;
 use App\Models\Tagihan;
 use App\Models\TagihanDetail;
@@ -100,8 +101,9 @@ class MuridController extends Controller
         $biaya = Biaya::with('tagihans')->where('id_jurusans', $murid->id_jurusans)->where('id_angkatans', $murid->id_angkatans)->where('id_kelas', $murid->id_kelas)->get();
         foreach ($biaya as $biayas) {
             $tagihans = Tagihan::where('id_biayas', $biayas->id)->get();
+            $tenggat = Notify::where('id',4)->first();
             foreach ($tagihans as $tagihan) {
-                $end_date = strtotime('-10 days', strtotime($tagihan->end_date . '-' . date('Y'))); // foreach ($valid as $index => $n) {
+                $end_date = strtotime($tenggat->notif, strtotime($tagihan->end_date . '-' . date('Y'))); // foreach ($valid as $index => $n) {
                 $end_dates = date('d-m', $end_date);
                 $tagihanDetail = TagihanDetail::create([
                     'id_tagihan' => $tagihan->id,
@@ -170,7 +172,7 @@ class MuridController extends Controller
         $ayah = Orangtua::where('sebagai', 'Ayah')->get();
         $ibu = Orangtua::where('sebagai', 'Ibu')->get();
 
-        return view('admin.murid.edit', compact('ayah', 'ibu', 'murid', 'users', 'angkatan', 'instansi', 'jurusanGrouped', 'kelasGrouped'));
+        return view('admin.murid.edit', compact('ayah', 'ibu', 'murid', 'users', 'jurusan','angkatan', 'instansi', 'jurusanGrouped', 'kelasGrouped'));
     }
 
     /**
@@ -204,8 +206,10 @@ class MuridController extends Controller
         $biaya = Biaya::with('tagihans')->where('id_jurusans', $murid->id_jurusans)->where('id_angkatans', $murid->id_angkatans)->where('id_kelas', $murid->id_kelas)->get();
         foreach ($biaya as $biayas) {
             $tagihans = Tagihan::where('id_biayas', $biayas->id)->get();
+            $tenggat = Notify::where('id',4)->first();
+
             foreach ($tagihans as $tagihan) {
-                $end_date = strtotime('-10 days', strtotime($tagihan->end_date . '-' . date('Y'))); // foreach ($valid as $index => $n) {
+                $end_date = strtotime($tenggat->notif, strtotime($tagihan->end_date . '-' . date('Y'))); // foreach ($valid as $index => $n) {
                 $end_dates = date('d-m', $end_date);
                 $tagihanDetail = TagihanDetail::create([
                     'id_tagihan' => $tagihan->id,

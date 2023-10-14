@@ -28,8 +28,8 @@ class Kernel extends ConsoleKernel
         $time = now()->format('H:i');
 
         // $schedule->command('notification:cron')->everyTenMinutes();
-        // $schedule->job(new SendWhatsaapJob())->everySecond();
-        $schedule->job(new TenggatJob())->dailyAt('13:00');
+        $schedule->job(new SendWhatsaapJob())->dailyAt('17:01');
+        $schedule->job(new TenggatJob())->dailyAt('16:31');
         $schedule->job(new IpaymuJob())->everySecond();
     }
 

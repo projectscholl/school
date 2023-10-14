@@ -35,6 +35,13 @@
                             <p>Kelas : <strong>{{ $murid->kelas->kelas ?? 'Tidak Ada Data Kelas' }}</strong>.</p>
                             <p>Jurusan : <strong>{{ $murid->jurusans->nama ?? 'Tidak Ada Data Jurusan' }}</strong>.</p>
                             <p>NISN : <strong>({{ $murid->nisn }})</strong></p>
+                            <form action="{{ route('admin.pdf.downloadPdf', ['id_murids' => $murid->id]) }}" method="GET">
+                                <button type="submit" id="unduh-button" class="btn btn-primary mb-3 ms-3">
+                                    <strong>
+                                        Unduh
+                                    </strong>
+                                </button>
+                            </form>
                         </div>
                         <main>
                             <table style='width: 100%; border-collapse: collapse;'>
@@ -90,13 +97,6 @@
         <!-- The two header rows are divided by a blue line. -->
     </header>
     <hr>
-    <form action="{{ route('admin.pdf.downloadPdf', ['id_murids' => $murid->id]) }}" method="GET">
-        <button type="submit" id="unduh-button" class="btn btn-primary mb-3 ms-3">
-            <strong>
-                Unduh
-            </strong>
-        </button>
-    </form>
 
     <!-- Within the aside tag we will put the terms and conditions which shall be shown below the invoice table. -->
 

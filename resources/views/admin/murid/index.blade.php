@@ -27,7 +27,7 @@
                                     class='bx bxs-file-export me-1'></i>
                                 Export</a>
                         </div>
-                            <form action="{{ route('admin.murid.index') }}" method="GET">
+                            <form action="{{ route('admin.murid.index') }}" class="mt-4" method="GET">
                                 <div class="d-flex ms-5 col-ms-5 d-block">
                                         <label for="id_angkatans"  class="ms-3">Masukkan Angkatan</label>
                                         <select name="id_angkatans" id="id_angkatans" class="form-control ms-3 ">

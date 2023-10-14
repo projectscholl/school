@@ -44,7 +44,7 @@
                 <li class="{{ Route::is('wali.siswa.index*') ? $active : $nonActive }}">
                     <a href="{{ route('wali.siswa.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-user"></i>
-                        <div data-i18n="Analytics">Siswa</div>
+                        <div data-i18n="Analytics">Data Siswa</div>
                     </a>
                 </li>
 
@@ -52,7 +52,7 @@
                 <li class="{{ Route::is('wali.tagihan.*') ? $active : $nonActive }}">
                     <a href="{{ route('wali.tagihan.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-wallet-alt"></i>
-                        <div data-i18n="Without menu">Tagihan</div>
+                        <div data-i18n="Without menu">Data Tagihan</div>
                     </a>
                 </li>
                 <!--Profile-->
@@ -189,7 +189,7 @@
                 <li class="{{ Route::is('admin.jurusan.*') ? $active : $nonActive }}">
                     <a href="{{ route('admin.jurusan.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-book"></i>
-                        <div data-i18n="Analytics">Jurusan</div>
+                        <div data-i18n="Analytics">Data Jurusan</div>
                     </a>
                 </li>
 
@@ -197,14 +197,14 @@
                 <li class="{{ Route::is('admin.kelas.*') ? $active : $nonActive }}">
                     <a href="{{ route('admin.kelas.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-group"></i>
-                        <div data-i18n="Analytics">Kelas</div>
+                        <div data-i18n="Analytics">Data Kelas</div>
                     </a>
                 </li>
                 <!--Data User-->
                 <li class="menu-item {{ Route::is('admin.user.*', 'admin.walimurid.*') ? 'active open' : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-user"></i>
-                        <div data-i18n="Layouts">User</div>
+                        <div data-i18n="Layouts">Data User</div>
                     </a>
 
                     <!--Admin-->
@@ -229,7 +229,7 @@
                 <li class="menu-item {{ Route::is('admin.AyahMurid.*', 'admin.IbuMurid.*') ? 'active open' : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-user"></i>
-                        <div data-i18n="Layouts">Orang Tua</div>
+                        <div data-i18n="Layouts">Data Orang Tua</div>
                     </a>
                     <ul class="menu-sub">
                         <li class="{{ Route::is('admin.AyahMurid.*') ? $active : $nonActive }}">
