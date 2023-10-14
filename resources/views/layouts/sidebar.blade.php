@@ -40,22 +40,22 @@
                     <span class="menu-header-text">MASTER</span>
                 </li>
 
-                <!--Data Siswa-->
+                <!--Siswa-->
                 <li class="{{ Route::is('wali.siswa.index*') ? $active : $nonActive }}">
                     <a href="{{ route('wali.siswa.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-user"></i>
-                        <div data-i18n="Analytics">Data Siswa</div>
+                        <div data-i18n="Analytics">Siswa</div>
                     </a>
                 </li>
 
-                <!--Data Tagihan-->
+                <!--Tagihan-->
                 <li class="{{ Route::is('wali.tagihan.*') ? $active : $nonActive }}">
                     <a href="{{ route('wali.tagihan.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-wallet-alt"></i>
-                        <div data-i18n="Without menu">Data Tagihan</div>
+                        <div data-i18n="Without menu">Tagihan</div>
                     </a>
                 </li>
-                <!--Data Profile-->
+                <!--Profile-->
                 <li class="{{ Route::is('profile.*') ? $active : $nonActive }}">
                     <a href="{{ route('profile.edit', Auth::user()->id) }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-user"></i>
@@ -104,7 +104,7 @@
                 <li class="menu-item {{ Route::is('admin.biaya.*', 'admin.masterBiaya.*') ? 'active open' : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-wallet-alt"></i>
-                        <div data-i18n="Layouts">Data Biaya</div>
+                        <div data-i18n="Layouts">Biaya</div>
                     </a>
                     <ul class="menu-sub">
                         <li class="{{ Route::is('admin.biaya.*') ? $active : $nonActive }}">
@@ -125,7 +125,7 @@
                 <li class="{{ Route::is('admin.pembayaran.*', 'admin.pembayaran.detail') ? $active : $nonActive }}">
                     <a href="{{ route('admin.pembayaran.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-credit-card-front"></i>
-                        <div data-i18n="Without menu">Data Pembayaran</div>
+                        <div data-i18n="Without menu">Pembayaran</div>
                     </a>
                 </li>
                 <!--Account setting-->
@@ -181,7 +181,7 @@
                 <li class="{{ Route::is('admin.angkatan.*') ? $active : $nonActive }}">
                     <a href="{{ route('admin.angkatan.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-detail"></i>
-                        <div data-i18n="Analytics">Data Angkatan</div>
+                        <div data-i18n="Analytics">Angkatan / Periode</div>
                     </a>
                 </li>
 
@@ -189,7 +189,7 @@
                 <li class="{{ Route::is('admin.jurusan.*') ? $active : $nonActive }}">
                     <a href="{{ route('admin.jurusan.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-book"></i>
-                        <div data-i18n="Analytics">Data Jurusan</div>
+                        <div data-i18n="Analytics">Jurusan</div>
                     </a>
                 </li>
 
@@ -197,46 +197,55 @@
                 <li class="{{ Route::is('admin.kelas.*') ? $active : $nonActive }}">
                     <a href="{{ route('admin.kelas.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-group"></i>
-                        <div data-i18n="Analytics">Data Kelas</div>
+                        <div data-i18n="Analytics">Kelas</div>
                     </a>
                 </li>
-                <!--Data Wali Murid-->
-                <li class="{{ Route::is('admin.walimurid.*') ? $active : $nonActive }}">
-                    <a href="{{ route('admin.walimurid.index') }}" class="menu-link">
+                <!--Data User-->
+                <li class="menu-item {{ Route::is('admin.user.*', 'admin.walimurid.*') ? 'active open' : '' }}">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-user"></i>
-                        <div data-i18n="Analytics">Data Wali Murid</div>
+                        <div data-i18n="Layouts">User</div>
                     </a>
+
+                    <!--Admin-->
+                    <ul class="menu-sub">
+                        <li class="{{ Route::is('admin.user.*') ? $active : $nonActive }}">
+                            <a href="{{ route('admin.user.index') }}" class="menu-link">
+                                <div data-i18n="Without menu">Admin</div>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!--Walimurid-->
+                    <ul class="menu-sub">
+                        <li class="{{ Route::is('admin.walimurid.*') ? $active : $nonActive }}">
+                            <a href="{{ route('admin.walimurid.index') }}" class="menu-link">
+                                <div data-i18n="Without menu">Walimurid</div>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <!--Data Orang tua-->
+                <!--Orang tua-->
                 <li class="menu-item {{ Route::is('admin.AyahMurid.*', 'admin.IbuMurid.*') ? 'active open' : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-user"></i>
-                        <div data-i18n="Layouts">Data Orang Tua</div>
+                        <div data-i18n="Layouts">Orang Tua</div>
                     </a>
                     <ul class="menu-sub">
                         <li class="{{ Route::is('admin.AyahMurid.*') ? $active : $nonActive }}">
                             <a href="{{ route('admin.AyahMurid.index') }}" class="menu-link">
-                                <div data-i18n="Without menu">Data Ayah</div>
+                                <div data-i18n="Without menu">Ayah</div>
                             </a>
                         </li>
                     </ul>
                     <ul class="menu-sub">
                         <li class="{{ Route::is('admin.IbuMurid.*') ? $active : $nonActive }}">
                             <a href="{{ route('admin.IbuMurid.index') }}" class="menu-link">
-                                <div data-i18n="Without menu">Data Ibu</div>
+                                <div data-i18n="Without menu">Ibu</div>
                             </a>
                         </li>
                     </ul>
                 </li>
-
-                <!--Data User-->
-                <li class="{{ Route::is('admin.user.*') ? $active : $nonActive }}">
-                    <a href="{{ route('admin.user.index') }}" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-user"></i>
-                        <div data-i18n="Analytics">Data User</div>
-                    </a>
-                </li>
-
 
                 <!--Laporan-->
                 <li class="{{ Route::is('admin.laporan.index') ? $active : $nonActive }}">

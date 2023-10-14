@@ -21,7 +21,7 @@ class InstansiController extends Controller
         $instansi = Instansi::find($id);
         return view('admin.instansi.index', compact('instansi'));
     }
-    
+
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -31,7 +31,7 @@ class InstansiController extends Controller
 
         Bank::create($data);
 
-        return redirect()->route('admin.instansi.index')->with('message', "Data Bank berhasil Di tambah!!");
+        return redirect()->route('admin.instansi.index')->with('success', "Data Bank berhasil Di tambah!!");
     }
 
     public function update(Request $request, $id)
@@ -72,12 +72,12 @@ class InstansiController extends Controller
 
         $instansi->update($data);
 
-        return redirect()->route('admin.instansi.index')->with('pesan', "Data Instansi berhasil diperbarui!!");
+        return redirect()->route('admin.instansi.index')->with('success', "Data Instansi berhasil diperbarui!!");
     }
     public function destroy(string $Id)
     {
         $bank = Bank::findOrFail($Id);
         $bank->delete();
-        return redirect()->route('admin.instansi.index')->with('delete', "Data Bank berhasil Di Hapus!!");
+        return redirect()->route('admin.instansi.index')->with('success', "Data Bank berhasil Di Hapus!!");
     }
 }

@@ -35,11 +35,23 @@
                                 @csrf
                                 <div class="form-group mb-3">
                                     <label for="name">Nama harga</label>
-                                    <input type="text" name="name" id="name" class="form-control">
+                                    <input type="text" name="name" id="name" class="form-control"
+                                        value="{{ old('name') }}">
+                                    @error('name')
+                                        <div class="text-danger">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="name">Harga</label>
-                                    <input type="text" name="harga" id="harga" class="form-control">
+                                    <input type="text" name="harga" id="harga" class="form-control"
+                                        value="{{ old('harga') }}">
+                                    @error('harga')
+                                        <div class="text-danger">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                                 <a href="{{ route('admin.masterBiaya.index') }}" class="btn btn-warning">Back</a>

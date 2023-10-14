@@ -191,6 +191,6 @@ return [
         'PDF' => Barryvdh\DomPDF\Facades::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-    ])->toArray(),
+    ])->toArray(),  
 
 ];

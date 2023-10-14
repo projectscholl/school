@@ -165,9 +165,9 @@ class PembayaranWaliController extends Controller
             'total_bayar' => 'required',
         ]);
         $total = $request->total_bayar;
-        $id = $request->id;
+        $ids = $request->id;
         $auth = Auth::user();
-        $murid = Murid::where('id', $id)->first();
+        $murid = Murid::find($id);
 
         $pembayarans =  Pembayaran::create([
             'id_users' => $auth->id,
@@ -177,7 +177,8 @@ class PembayaranWaliController extends Controller
             'nama_pengirim' => $auth->name,
             'year' => date('Y'),
         ]);
-        foreach ($id as $keys => $id_details) {
+        $namaBiaya = TagihanDetail::where('id', $ids)->first()->nama_biaya;
+        foreach ($ids as $keys => $id_details) {
 
             $tagihandetail = TagihanDetail::where('id', $id_details);
             $sudah = 'SUDAH';

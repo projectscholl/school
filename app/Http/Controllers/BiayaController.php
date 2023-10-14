@@ -235,7 +235,7 @@ class BiayaController extends Controller
         }
         $tagihan->delete();
         $biaya->delete();
-        // return redirect()->route('admin.biaya.index');
+        return redirect()->back()->with('success', 'Berhasil menghapus biaya yang dipilih');
     }
     public function destroy($id)
     {

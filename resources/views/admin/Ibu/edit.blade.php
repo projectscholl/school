@@ -89,16 +89,25 @@
                                     <label for="name">Nama</label>
                                     <input type="text" name="name" id="name" class="form-control"
                                         value="{{ $ibu->name }}">
+                                    @error('name')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="name">email</label>
                                     <input type="email" name="email" id="email" class="form-control"
                                         value="{{ $ibu->email }}">
+                                    @error('email')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="name">Telepon</label>
                                     <input type="number" name="telepon" id="telepon" class="form-control"
                                         value="{{ $ibu->telepon }}">
+                                    @error('telepon')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="nama">Masukkan Agama</label>
@@ -183,3 +192,21 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}")
+        @elseif (Session::has('error'))
+            toastr.error('{{ Session::get('error') }}')
+        @endif
+    </script>
+@endpush

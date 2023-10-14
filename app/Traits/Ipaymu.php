@@ -85,6 +85,7 @@ trait Ipaymu
         $body['cancelUrl'] = route('callback.cancel');
         $body['paymentMethod'] = 'qris';
         $body['buyerName'] = Auth::user()->name;
+        $body['buyerPhone'] = Auth::user()->telepon;
 
 
         $signature = $this->signature($body, $method);

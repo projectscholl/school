@@ -61,7 +61,7 @@ class WaliMuridController extends Controller
         $user = User::create($data);
         activity()->causedBy(Auth::user())->event('created')->log('User operator ' . auth()->user()->name . ' melakukan tambah data' . $user->name);
 
-        return redirect()->route('admin.walimurid.index')->with('message', 'Wali murid berhasil ditambahkan!');
+        return redirect()->route('admin.walimurid.index')->with('success', 'Wali murid berhasil ditambahkan!');
     }
 
     /**
@@ -106,7 +106,7 @@ class WaliMuridController extends Controller
         $data['telepon'] = '62' . $telepon;
         // dd($user);
         $user->update($data);
-        return redirect()->route('admin.walimurid.index')->with('pesan', "Data Wali Murid berhasil diperbarui!!");
+        return redirect()->route('admin.walimurid.index')->with('success', "Data Wali Murid berhasil diperbarui!!");
     }
     public function deleteSelect(Request $request)
     {
@@ -118,6 +118,8 @@ class WaliMuridController extends Controller
             'id_users' => null,
         ]);
         $user->delete();
+
+        return redirect()->route('admin.walimurid.index')->with('success', 'Data W  alimurid berhasil dihapus');
     }
     /**
      * Remove the specified resource from storage.
@@ -126,6 +128,6 @@ class WaliMuridController extends Controller
     {
         $waliMurid =  User::findOrFail($id);
         $waliMurid->delete();
-        return redirect()->route('admin.walimurid.index')->with('delete', "Wali Murid Berhasil Dihapus!!");
+        return redirect()->route('admin.walimurid.index')->with('success', "Data Walimurid Berhasil Dihapus!!");
     }
 }

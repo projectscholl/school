@@ -109,32 +109,35 @@
                                             <button type="submit" class="btn btn-primary me-2">Submit</button>
                                         </div>
                                 </form>
-                                <table class="table mt-3">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>No rekening</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($banks as $bank)
+                                <div class="table-responsive text-nowrap">
+                                    <table class="table mt-3">
+                                        <thead>
                                             <tr>
-                                                <td>1</td>
-                                                <td>{{ $bank->nama }}</td>
-                                                <td>{{ $bank->no_rekening }}</td>
-                                                <td class="d-flex">
-                                                    <form action="{{ route('admin.instansi.destroy', $bank->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger show_confirm">Delete</button>
-                                                    </form>
-                                                </td>
+                                                <th>No</th>
+                                                <th>Nama</th>
+                                                <th>No rekening</th>
+                                                <th>Actions</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($banks as $bank)
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>{{ $bank->nama }}</td>
+                                                    <td>{{ $bank->no_rekening }}</td>
+                                                    <td class="d-flex">
+                                                        <form action="{{ route('admin.instansi.destroy', $bank->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-danger show_confirm">Delete</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -142,6 +145,22 @@
             </div>
         </div>
     </div>
-
 @endsection
-
+@push('scripts')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}")
+        @elseif (Session::has('pesan'))
+            toastr.success('{{ Session::get('pesan') }}')
+        @endif
+    </script>
+@endpush

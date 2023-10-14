@@ -6,27 +6,18 @@
         <x-navbar></x-navbar>
         <div class="content-wrapper">
             <div class="container-xxl flex-grow-1 container-p-y">
-                @if (session('edit'))
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>{{ session('edit') }}</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-                @if (session('message'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>{{ session('message') }}</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
                 <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Data Kelas /</span>
                     Kelas
                 </h4>
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('admin.kelas.create') }}" class="btn btn-primary"><i
-                                class='bx bx-add-to-queue'></i> Tambah kelas</a>
-                        <a href="#" id="deleteAll" class="btn btn-danger ms-2">Delete Selected</a>
-
+                        <div class="d-flex">
+                            <a href="{{ route('admin.kelas.create') }}" class="btn btn-primary"><i
+                                    class='bx bx-add-to-queue'></i>
+                                Tambah kelas</a>
+                            <a href="#" id="deleteAll" class="btn btn-danger ms-2 d-flex align-items-center"><i
+                                    class='bx bx-trash me-1'></i> Delete Selected</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <table class="table" id="myTable">

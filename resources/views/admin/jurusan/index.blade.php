@@ -1,8 +1,7 @@
 @extends('layouts.master')
 
+@section('title', 'Jurusan')
 @section('content')
-    <!-- Layout wrapper -->
-    <!-- Layout container -->
     <div class="layout-page">
         <!-- Navbar -->
         <x-navbar></x-navbar>
@@ -16,10 +15,12 @@
                 </h4>
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('admin.jurusan.create') }}" class="btn btn-primary"><i
-                                class='bx bx-add-to-queue'></i> Tambah Jurusan</a>
-                        <a href="#" id="deleteAll" class="btn btn-danger ms-2">Delete Selected</a>
-
+                        <div class="d-flex">
+                            <a href="{{ route('admin.jurusan.create') }}" class="btn btn-primary"><i
+                                    class='bx bx-add-to-queue'></i> Tambah Jurusan</a>
+                            <a href="#" id="deleteAll" class="btn btn-danger ms-2 d-flex align-items-center"><i
+                                    class='bx bx-trash me-1'></i> Delete Selected</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive text-nowrap">

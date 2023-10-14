@@ -1,5 +1,6 @@
 @extends('layouts.master')
 
+@section('title', 'Ibu')
 @section('content')
     <!-- Layout container -->
     <div class="layout-page">
@@ -15,10 +16,14 @@
                 <!-- Bordered Table -->
 
                 <div class="card">
-                    <h5 class="card-header">Data Ibu Murid</h5>
-                    <div class="d-flex">
-                        <a href="{{ route('admin.IbuMurid.create') }}" class="btn btn-primary col-2 ms-4">Tambah Data</a>
-                        <a href="#" id="deleteAll" class="btn btn-danger ms-2">Delete Selected</a>
+                    <div class="card-header">
+                        <div class="d-flex">
+                            <a href="{{ route('admin.IbuMurid.create') }}"
+                                class="btn btn-primary d-flex align-items-center"><i class='bx bx-add-to-queue me-1'></i>
+                                Tambah Data</a>
+                            <a href="#" id="deleteAll" class="btn btn-danger ms-2 d-flex align-items-center"><i
+                                    class='bx bx-trash me-1'></i> Delete Selected</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive text-nowrap">
@@ -30,6 +35,7 @@
                                         <th>No</th>
                                         <th>Nama</th>
                                         <th>Pekerjaan</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -41,9 +47,11 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $ibus->name }}</td>
                                             <td>{{ $ibus->pekerjaan }}</td>
-                                            <td class="d-flex">
-                                                <a href="{{ route('admin.AyahMurid.status', $ibus->id) }}"
+                                            <td><a href="{{ route('admin.AyahMurid.status', $ibus->id) }}"
                                                     class="btn btn-{{ $ibus->status ? 'success' : 'danger' }}">{{ $ibus->status ? 'Aktif' : 'Non Afktif' }}</a>
+                                            </td>
+                                            <td class="d-flex">
+
                                                 <a href="{{ route('admin.IbuMurid.show', $ibus->id) }}"
                                                     class="btn ms-2 btn-primary"><i class="bx bx-detail"></i></a>
                                                 <a href="{{ route('admin.IbuMurid.edit', $ibus->id) }}"
@@ -65,6 +73,22 @@
     </div>
 @endsection
 @push('scripts')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}")
+        @elseif (Session::has('pesan'))
+            toastr.success('{{ Session::get('pesan') }}')
+        @endif
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.27/sweetalert2.min.js"
         integrity="sha512-mJQ9oQHzLM2zXe1cwiHmnMddNrmjv1YlaKZe1rM4J7q8JTnNn9UgeJVBV9jyV/lVGdXymVx6odhgwNZjQD8AqA=="

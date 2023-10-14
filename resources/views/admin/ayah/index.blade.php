@@ -1,5 +1,6 @@
 @extends('layouts.master')
 
+@section('title', 'Ayah')
 @section('content')
     <!-- Layout container -->
     <div class="layout-page">
@@ -15,21 +16,30 @@
                 <!-- Bordered Table -->
 
                 <div class="card">
-                    <h5 class="card-header">Data Ayah Murid</h5>
-                    <div class="d-flex">
-                        <a href="{{ route('admin.AyahMurid.create') }}" class="btn btn-primary col-2 ms-4">Tambah Data</a>
-                        <a href="#" id="deleteAll" class="btn btn-danger ms-2">Delete Selected</a>
+                    <div class="card-header">
+                        <div class="d-flex">
+                            <a href="{{ route('admin.AyahMurid.create') }}"
+                                class="btn btn-primary d-flex align-items-center"><i class='bx bx-add-to-queue me-1'></i>
+                                Tambah
+                                Data</a>
+                            <a href="#" id="deleteAll" class="btn btn-danger ms-2 d-flex align-items-center"><i
+                                    class='bx bx-trash me-1'></i> Delete
+                                Selected</a>
+                        </div>
                     </div>
+
                     <div class="card-body">
-                        <div class="table-responsive text-nowrap">
+                        <div class="table-responsive text-wrap">
                             <table class="table" id="myTable">
                                 <thead>
                                     <tr>
-                                        <th class="d-flex"><input type="checkbox" id="select_all_ids" class="me-2"> Pilih
+                                        <th class="d-flex"><input type="checkbox" id="select_all_ids" class="me-2">
+                                            Pilih
                                         </th>
                                         <th>No</th>
                                         <th>Nama</th>
                                         <th>Pekerjaan</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -41,9 +51,11 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $ayahs->name }}</td>
                                             <td>{{ $ayahs->pekerjaan }}</td>
-                                            <td class="d-flex">
-                                                <a href="{{ route('admin.AyahMurid.status', $ayahs->id) }}"
+                                            <td><a href="{{ route('admin.AyahMurid.status', $ayahs->id) }}"
                                                     class="btn btn-{{ $ayahs->status ? 'success' : 'danger' }}">{{ $ayahs->status ? 'Aktif' : 'Non Afktif' }}</a>
+                                            </td>
+                                            <td class="d-flex">
+
                                                 <a href="{{ route('admin.AyahMurid.show', $ayahs->id) }}"
                                                     class="btn ms-2 btn-primary"><i class="bx bx-detail"></i></a>
                                                 <a href="{{ route('admin.AyahMurid.edit', $ayahs->id) }}"

@@ -176,32 +176,40 @@ class LaporanController extends Controller
         $angkatans = $request->id_angkatans;
         $jurusans = $request->id_jurusans;
         $kelas = $request->id_kelas;
-        $tahun = Angkatan::where('id', $angkatans)->get();
+        // $tahun = Angkatan::where('id', $angkatans)->get();
         // $datas = Murid::with('biayas')->where('id_angkatans', $angkatans)->where('id_jurusans', $jurusans)->where('id_kelas', $kelas)->get();
         $biaya = Biaya::with('tagihans')->where('id_angkatans', $angkatans)->where('id_jurusans', $jurusans)->where('id_kelas', $kelas)->get();
-        foreach ($biaya as $biayas) {
-            foreach ($biayas->tagihans as $tagihan) {
-                $tagihanDetail = TagihanDetail::where('id_tagihan', $tagihan->id)->get();
-                foreach ($tagihanDetail as $tagihanDetails) {
-                    $myDate = $tagihan->start_date . '-' . date('Y');
-                    $date = Carbon::parse($myDate);
-                    $datay = $date->format('F');
-                    $excel[] = [
-                        'NAMA TAGIHAN' => $biayas->nama_biaya,
-                        'NAMA MURID' => $tagihanDetails->murids->name,
-                        'ANGKATAN' => $tagihanDetails->murids->angkatans->tahun,
-                        'BULAN TAGIHAN' => $datay,
-                        'STATUS' => $tagihanDetails->status,
-                        'TOTAL' => number_format($tagihanDetails->amount, 2, ',', '.'),
+        $Notbiaya = Biaya::with('tagihans')->where('id_angkatans', $angkatans)->where('id_jurusans', $jurusans)->where('id_kelas', $kelas)->first();
+        // $biaya = Biaya::whereHas('tagihans', function ($query) {
+        //     $query->where()
+        // })->get();
+        if (!empty($Notbiaya)) {
+            foreach ($biaya as $biayas) {
+                foreach ($biayas->tagihans as $tagihan) {
+                    $tagihanDetail = TagihanDetail::where('id_tagihan', $tagihan->id)->get();
+                    foreach ($tagihanDetail as $tagihanDetails) {
+                        $myDate = $tagihan->start_date . '-' . date('Y');
+                        $date = Carbon::parse($myDate);
+                        $datay = $date->format('F');
+                        $excel[] = [
+                            'NAMA TAGIHAN' => $biayas->nama_biaya,
+                            'NAMA MURID' => $tagihanDetails->murids->name,
+                            'ANGKATAN' => $tagihanDetails->murids->angkatans->tahun,
+                            'BULAN TAGIHAN' => $datay,
+                            'STATUS' => $tagihanDetails->status,
+                            'TOTAL' => number_format($tagihanDetails->amount, 2, ',', '.'),
 
-                    ];
-                    // print_r($tagihanDetails->murids->angkatans->tahun,);
-                    // echo ''
+                        ];
+                        // print_r($tagihanDetails->murids->angkatans->tahun,);
+                        // echo ''
+                    }
                 }
             }
+            activity()->causedBy(Auth::user())->event('Export Excel Tagihan')->log('User operator ' . auth()->user()->name . ' melakukan Export Excel Tagihan');
+            return Excel::download(new TagihanExport($excel), 'tagihan.xlsx');
+        } else {
+            return redirect()->back()->with('error', 'Belum ada tagihan siswa');
         }
-        activity()->causedBy(Auth::user())->event('Export Excel Tagihan')->log('User operator ' . auth()->user()->name . ' melakukan Export Excel Tagihan');
-        return Excel::download(new TagihanExport($excel), 'tagihan.xlsx');
     }
 
     public function export2(Request $request)
@@ -239,7 +247,7 @@ class LaporanController extends Controller
             activity()->causedBy(Auth::user())->event('Export Excel Pembayaran')->log('User operator ' . auth()->user()->name . ' melakukan Export Excel Pembayaran SEMUA');
             return Excel::download(new PembayaranExport($data), 'tagihan.xlsx');
         } else {
-            return redirect()->back()->with('pesan', 'Gagal, Harus Pilih jenis laporan!');
+            return redirect()->back()->with('error', 'Gagal, Harus Pilih jenis laporan!');
         }
     }
 }

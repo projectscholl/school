@@ -1,5 +1,6 @@
 @extends('layouts.master')
 
+@section('title', 'Log activity')
 @section('content')
     <!-- Layout container -->
     <div class="layout-page">
