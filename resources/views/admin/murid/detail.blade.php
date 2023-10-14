@@ -29,6 +29,8 @@
                         <div>NAMA AYAH : {{ $murids->ayahs->name }}</div>
                         <hr>
                         <div>NAMA IBU : {{ $murids->ibus->name }}</div>
+                        <hr>
+                        <div>ALAMAT : {{ $murids->address }}</div>
                     </div>
                 </div>
                 <!-- Transactions -->

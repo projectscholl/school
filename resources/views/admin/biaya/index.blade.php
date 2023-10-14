@@ -1,5 +1,6 @@
 @extends('layouts.master')
 
+@section('title', 'Biaya')
 @section('content')
     <!-- Layout container -->
     <div class="layout-page">
@@ -14,12 +15,38 @@
                 </h4>
                 <!-- Bordered Table -->
                 <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex">
+                    <div class="card-header d-xl-block">
+                        <div class="d-xl-flex align-items-center mb-4 d-block">
                             <a href="{{ route('admin.biaya.create') }}" class="btn btn-primary"><i
                                     class='bx bx-add-to-queue'></i> Add Data</a>
-                            <a href="#" id="deleteAll" class="btn btn-danger ms-2">Delete Selected</a>
+                            <a href="#" id="deleteAll" class="btn btn-danger ms-2 d-flex align-items-center"><i
+                                    class='bx bx-trash me-1'></i> Delete Selected</a>
                         </div>
+                        <form action="{{ route('admin.biaya.index') }}" method="GET">
+                            <div class="d-xl-flex align-items-center d-sm-block col-xl-12 col-10">
+                                <label for="id_angkatans" class="ms-3">Pilih Angkatan</label>
+                                <select name="id_angkatans" id="id_angkatans" class="form-control ms-3">
+                                    <option value="">---------</option>
+                                    @foreach ($angkatans as $data)
+                                        <option value="{{ $data->id }}">{{ $data->tahun }}</option>
+                                    @endforeach
+                                </select>
+
+                                <label for="id_jurusans" class="ms-3">Pilih Jurusan</label>
+                                <select name="id_jurusans" id="id_jurusans" class="form-control ms-3">
+                                    <option value="">---------</option>
+                                </select>
+
+                                <label for="id_kelas" class="ms-3">Pilih Kelas</label>
+                                <select name="id_kelas" id="id_kelas" class="form-control ms-3">
+                                    <option value="">---------</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary mt-xl-0 mt-3 ms-3  ">Cari</button>
+                            </div>
+
+                        </form>
+
+
                     </div>
                     <div class="card-body">
                         <div class="table-responsive text-nowrap">
@@ -37,7 +64,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($biaya as $key => $value)
+                                    @foreach ($biayaAll as $key => $value)
                                         <tr id="value_ids" {{ $value->id }}>
                                             <td><input type="checkbox" name="ids" id=""
                                                     value="{{ $value->id }}" class="checksAll"></td>
@@ -138,15 +165,11 @@
                                 },
                                 error: function(xhr, status, error) {
                                     // Handle error jika diperlukan
-                                    console.error(xhr.responseText);
+                                    location.reload();
+
                                 }
 
                             });
-                            Swal.fire(
-                                'Terhapus!',
-                                'Kamu telah menghapus Biaya!!.',
-                                'success'
-                            )
                         }
                     });
                 }

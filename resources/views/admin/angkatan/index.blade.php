@@ -1,13 +1,11 @@
 @extends('layouts.master')
 
+@section('title', 'Angkatan')
 @section('content')
-    <!-- Layout wrapper -->
-    <!-- Layout container -->
     <div class="layout-page">
         <!-- Navbar -->
         <x-navbar></x-navbar>
         <div class="content-wrapper">
-
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
                 <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Data Activity /</span>
@@ -16,11 +14,13 @@
                 <!-- Bordered Table -->
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('admin.angkatan.create') }}" class="btn btn-primary"><i
-                                class='bx bx-add-to-queue'></i> Tambah
-                            Angkatan</a>
-                        <a href="#" id="deleteAll" class="btn btn-danger ms-2">Delete Selected</a>
-
+                        <div class="d-flex">
+                            <a href="{{ route('admin.angkatan.create') }}" class="btn btn-primary"><i
+                                    class='bx bx-add-to-queue'></i> Tambah
+                                Angkatan</a>
+                            <a href="#" id="deleteAll" class="btn btn-danger ms-2 d-flex align-items-center"><i
+                                    class='bx bx-trash me-1'></i> Delete Selected</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive text-nowrap">
@@ -76,7 +76,8 @@
 @push('scripts')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
         integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"

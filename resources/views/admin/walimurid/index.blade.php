@@ -1,22 +1,26 @@
 @extends('layouts.master')
 
+@section('title', 'Walimurid')
 @section('content')
-    <!-- Layout wrapper -->
-    <!-- Layout container -->
     <div class="layout-page">
         <!-- Navbar -->
         <x-navbar></x-navbar>
         <div class="content-wrapper">
-
-            <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-                <!-- Bordered Table -->
+                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Data Walimurid /</span>
+                    walimurid
+                </h4>
                 <div class="card">
-                    <h5 class="card-header">Data Wali Murid</h5>
-                    <div class="d-flex">
-                        <a href="{{ route('admin.walimurid.create') }}" class="btn btn-primary col-2 ms-4">Tambah Data</a>
-                        <a href="#" id="deleteAll" class="btn btn-danger ms-2">Delete Selected</a>
+                    <div class="card-header">
+                        <div class="d-flex">
+                            <a href="{{ route('admin.walimurid.create') }}"
+                                class="btn btn-primary  d-flex align-items-center"><i class='bx bx-add-to-queue me-1'></i>
+                                Tambah Data</a>
+                            <a href="#" id="deleteAll" class="btn btn-danger ms-2 d-flex align-items-center"><i
+                                    class='bx bx-trash me-1'></i>Delete Selected</a>
+                        </div>
                     </div>
+
                     <div class="card-body">
                         <div class="table-responsive text-nowrap">
                             <table class="table" id="myTable">
@@ -148,11 +152,6 @@
                                 }
 
                             });
-                            Swal.fire(
-                                'Terhapus!',
-                                'Kamu telah menghapus Biaya!!.',
-                                'success'
-                            )
                         }
                     });
                 }
@@ -183,11 +182,6 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     form.submit();
-                    Swal.fire(
-                        'Terhapus!',
-                        'Kamu telah menghapus Biaya!!.',
-                        'success'
-                    )
                 }
             });
         });

@@ -46,7 +46,7 @@ class AdminController extends Controller
         $validate = $request->validate([
             'name' => 'required|max:50',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'telepon' => 'required',
+            'telepon' => 'required|min:12|max:12|regex:/^08\d+$/',
             'image' => 'mimes:png,jpg,jpeg',
         ]);
 
@@ -65,7 +65,7 @@ class AdminController extends Controller
             $validate = $request->validate([
                 'name' => 'required|max:50',
                 'email' => 'required|email|unique:users,email,' . $user->id,
-                'telepon' => 'required',
+                'telepon' => 'required|min:12|max:12|regex:/^08\d+$/',
                 'image' => 'mimes:png,jpg,jpeg',
                 'old_password' => 'required',
                 'password' => 'required|confirmed',
@@ -78,8 +78,10 @@ class AdminController extends Controller
             $user->password;
         }
 
+        $telepon = ltrim($validate['telepon'], '0');
+        $validate['telepon'] = '62' . $telepon;
         $user->update($validate);
 
-        return redirect()->back()->with('message', 'Success Update User');
+        return redirect()->back()->with('success', 'Success Update User');
     }
 }

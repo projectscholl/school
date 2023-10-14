@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+
+@section('title', 'Biaya bawaan')
 @section('content')
     <!-- Layout container -->
     <div class="layout-page">
@@ -133,7 +135,7 @@
                                 },
                                 error: function(xhr, status, error) {
                                     // Handle error jika diperlukan
-                                    console.error(xhr.responseText);
+                                    location.reload();
                                 }
 
                             });
@@ -167,11 +169,6 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     form.submit();
-                    Swal.fire(
-                        'Terhapus!',
-                        'Kamu telah menghapus Biaya!!.',
-                        'success'
-                    )
                 }
             });
         });

@@ -20,14 +20,43 @@ use Illuminate\Support\Facades\Auth;
 class BiayaController extends Controller
 {
     use Fonnte;
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
         $instansi = Instansi::first();
-        $biaya = Biaya::with('angkatans')->get();
-        return view('admin.biaya.index', compact('user', 'biaya', 'instansi'));
-    }
 
+        // Mulai dengan seluruh data Biaya
+        $biayas = Biaya::query();
+
+        $filterAngkatan = $request->input('id_angkatans');
+        $filterJurusan = $request->input('id_jurusans');
+        $filterKelas = $request->input('id_kelas');
+
+        // Terapkan filter Angkatan jika ada
+        if (!empty($filterAngkatan)) {
+            $biayas->where('id_angkatans', $filterAngkatan);
+        }
+
+        // Terapkan filter Jurusan jika ada
+        if (!empty($filterJurusan)) {
+            $biayas->where('id_jurusans', $filterJurusan);
+        }
+
+        if (!empty($filterKelas)) {
+            $biayas->where('id_kelas', $filterKelas);
+        }
+
+        $biayas->orderBy('created_at', 'desc')->get();
+        $biayaAll = $biayas->get();
+
+        $angkatans = Angkatan::all();
+        $jurusans = Jurusan::all();
+        $kelas = Kelas::all();
+        $jurusanGrouped = Jurusan::with('angkatans')->get()->groupBy('id_angkatans');
+        $kelasGrouped = Kelas::with('jurusans')->get()->groupBy('id_jurusans');
+
+        return view('admin.biaya.index', compact('user', 'biayaAll', 'instansi', 'angkatans', 'jurusanGrouped', 'kelasGrouped'));
+    }
     public function create()
     {
         $user = Auth::user();
@@ -203,7 +232,7 @@ class BiayaController extends Controller
         }
         $tagihan->delete();
         $biaya->delete();
-        // return redirect()->route('admin.biaya.index');
+        return redirect()->back()->with('success', 'Berhasil menghapus biaya yang dipilih');
     }
     public function destroy($id)
     {

@@ -9,13 +9,17 @@
         <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Data User /</span>
-                    User
+                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Data Admin /</span>
+                    Admin
                 </h4>
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('admin.user.create') }}" class="btn btn-primary">Tambah User</a>
-                        <a href="#" id="deleteAll" class="btn btn-danger ms-2">Delete Selected</a>
+                        <div class="d-flex">
+                            <a href="{{ route('admin.user.create') }}" class="btn btn-primary"><i
+                                    class='bx bx-add-to-queue'></i> Tambah User</a>
+                            <a href="#" id="deleteAll" class="btn btn-danger ms-2 d-flex align-items-center"><i
+                                    class='bx bx-trash me-1'></i>Delete Selected</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <!-- Content -->

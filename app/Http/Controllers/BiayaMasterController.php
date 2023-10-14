@@ -80,7 +80,7 @@ class BiayaMasterController extends Controller
     {
         $ids = $request->ids;
         BiayaMaster::whereIn('id', $ids)->delete();
-        // return redirect()->route('admin.biayaMaster.index')->with('success', 'Berhasil Menghapus Data');
+        return redirect()->route('admin.masterBiaya.index')->with('success', 'Berhasil Menghapus data master biaya');
     }
     /**
      * Remove the specified resource from storage.

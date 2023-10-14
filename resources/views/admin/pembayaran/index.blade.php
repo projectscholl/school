@@ -30,7 +30,7 @@
                                         <th class="d-flex"><input type="checkbox" id="select_all_ids" class="me-2"> Pilih
                                         </th>
                                         <th>No</th>
-                                        <th>Nama Murid</th>
+                                        <th>Nama Walimurid</th>
                                         <th>Metode Pembayaran</th>
                                         <th>Status</th>
                                         <th>Tanggal Konfirmasi</th>
@@ -44,15 +44,12 @@
                                                     name="ids"></td>
                                             <td>{{ $index + 1 }}</td>
                                             <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-                                                <strong>{{ $pembayar->name ?? 'Tidak Ada Murid' }}</strong>
+                                                <strong>{{ $pembayar->users->name ?? 'Tidak Ada Murid' }}</strong>
                                             </td>
                                             </td>
                                             <td>
-                                                @if ($pembayar->payment_links == null)
-                                                    iPaymu
-                                                @else
-                                                    Bank
-                                                @endif
+                                                {{ $pembayar->payment_links }}
+
                                             </td>
                                             <td>{{ $pembayar->payment_status }}</td>
                                             <td>{{ $pembayar->updated_at ? $pembayar->updated_at->format('d/m/Y') : '-' }}

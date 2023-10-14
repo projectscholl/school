@@ -38,18 +38,18 @@
 
                 <div class="card mt-3">
                     <div class="card-header">
-                        <h4>Laporan Tagihan</h4>
+                        <h4>Laporan Tagihan Siswa</h4>
                         <div class="pe-5 me-5">
                             <form action="{{ route('admin.export.excel') }}" method="POST">
                                 @csrf
                                 @method('POST')
-                                <label for="" class="mb-2">Pilih Tahun Laporan</label>
+                                <label for="" class="mb-2">Pilih Laporan untuk :</label>
                                 <div class="d-flex justify-content-around">
                                     <select name="id_angkatans" id="id_angkatans"
                                         class="form-select me-2 @error('id_angkatans')
                                         is-invalid
                                     @enderror">
-                                        <option value="">--Pilih--</option>
+                                        <option value="">--Pilih angkatan--</option>
                                         @foreach ($angkatan as $angkatans)
                                             <option value="{{ $angkatans->id }}">{{ $angkatans->tahun }}</option>
                                         @endforeach
@@ -133,8 +133,8 @@
     <script>
         @if (Session::has('success'))
             toastr.success("{{ Session::get('success') }}")
-        @elseif (Session::has('pesan'))
-            toastr.error('{{ Session::get('pesan') }}')
+        @elseif (Session::has('error'))
+            toastr.error('{{ Session::get('error') }}')
         @endif
     </script>
 @endpush

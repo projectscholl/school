@@ -34,23 +34,29 @@ class AyahController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'telepon.regex' => 'Nomor telepon harus diawali 08'
+        ];
         $data = $request->validate([
             'name' => 'required',
             'email' => 'required|unique:orangtuas,email',
-            'telepon' => 'required',
+            'telepon' => 'required|min:12|max:12|regex:/^08\d+$/',
             'agama' => 'required',
             'pekerjaan' => 'required',
             'pendidikan' => 'required',
             'alamat' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
+        ], $messages);
+
+        $phone = ltrim($request->telepon, '0');
+        $phone = '62' . $phone;
         if ($request->image) {
             $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('storage/image'), $imageName);
             $create = Orangtua::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'telepon' => $request->telepon,
+                'telepon' => $phone,
                 'agama' => $request->agama,
                 'pekerjaan' => $request->pekerjaan,
                 'pendidikan' => $request->pendidikan,
@@ -62,7 +68,7 @@ class AyahController extends Controller
             $create = Orangtua::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'telepon' => $request->telepon,
+                'telepon' => $phone,
                 'agama' => $request->agama,
                 'pekerjaan' => $request->pekerjaan,
                 'pendidikan' => $request->pendidikan,
@@ -105,15 +111,19 @@ class AyahController extends Controller
     public function update(Request $request,  $id)
     {
         $ayah = Orangtua::find($id);
+        $messages = [
+            'telepon.regex' => 'Nomor telepon harus diawali 08'
+        ];
         $data = $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:orangtuas,email,' . $ayah['id'],
-            'telepon' => 'required',
+            'telepon' => 'required|min:12|max:12|regex:/^08\d+$/',
             'agama' => 'required',
             'pekerjaan' => 'required',
             'pendidikan' => 'required',
             'alamat' => 'required',
-        ]);
+        ], $messages);
+
         if ($request->image) {
             $content = $request->file('image');
             $imageName = time() . '.' . $content->extension();
@@ -123,6 +133,8 @@ class AyahController extends Controller
         } else {
             $ayah->image;
         }
+        $telepon = ltrim($data['telepon'], '0');
+        $data['telepon'] = '62' . $telepon;
 
         $ayah->update($data);
 
@@ -155,22 +167,26 @@ class AyahController extends Controller
             'name' => 'unique:users,name',
             'password' => 'required'
         ]);
+        if ($ayah->status == 1) {
+            $create = User::create([
+                'name' => $ayah->name,
+                'id_orangtua' => $ayah->id,
+                'password' => Hash::make($request->password),
+                'email' => $ayah->email,
+                'role' => 'WALI',
+                'status' => 1,
+                'telepon' => $ayah->telepon,
+                'hubungan' => $ayah->sebagai,
+                'agama' => $ayah->agama,
+                'pekerjaan' => $ayah->pekerjaan,
+                'pendidikan' => $ayah->pendidikan,
+                'alamat' => $ayah->alamat,
 
-        $create = User::create([
-            'name' => $ayah->name,
-            'id_orangtua' => $ayah->id,
-            'password' => Hash::make($request->password),
-            'email' => $ayah->email,
-            'role' => 'WALI',
-            'status' => 1,
-            'telepon' => $ayah->telepon,
-            'hubungan' => $ayah->sebagai,
-            'agama' => $ayah->agama,
-            'pekerjaan' => $ayah->pekerjaan,
-            'pendidikan' => $ayah->pendidikan,
-            'alamat' => $ayah->alamat,
-
-        ]);
+            ]);
+            return redirect()->back()->with('success', 'Berhasil menjadikan ' . $ayah->name . ' walimurid');
+        } else {
+            return redirect()->back()->with('error', 'Gagal menjadikan ' . $ayah->name . ' walimurid, Pastikan status Aktif');
+        }
     }
 
 

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Pembayaran')
+@section('title', 'Notify')
 @section('content')
 
     <!-- Layout container -->

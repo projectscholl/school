@@ -17,9 +17,15 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <a href="{{ route('admin.murid.create') }}" class="btn btn-primary">Tambah Murid</a>
-                            <a href="#" id="deleteAll" class="btn btn-danger ms-2">Delete Selected</a>
-                            <a href="{{ route('admin.murid.export') }}" class="btn btn-success ms-2">Export</a>
+                            <a href="{{ route('admin.murid.create') }}" class="btn btn-primary d-flex align-items-center"><i
+                                    class='bx bx-add-to-queue me-1'></i> Tambah Murid</a>
+                            <a href="#" id="deleteAll" class="btn btn-danger d-flex align-items-center ms-2"><i
+                                    class='bx bx-trash me-1'></i> Delete
+                                Selected</a>
+                            <a href="{{ route('admin.murid.export') }}"
+                                class="btn btn-success ms-2 d-flex align-items-center"><i
+                                    class='bx bxs-file-export me-1'></i>
+                                Export</a>
                         </div>
                     </div>
                     <div class="card-body">
