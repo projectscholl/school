@@ -129,24 +129,6 @@
     </div>
 @endsection
 @push('scripts')
-    {{-- <script>
-        document.getElementById("tombol_form").addEventListener("click", tampilkan_nilai_form);
-
-        function tampilkan_nilai_form() {
-            event.preventDefault();
-            var value_id_angkatans = document.getElementById("id_angkatans").value;
-            var value_id_jurusans = document.getElementById("id_jurusans").value;
-            var value_id_kelas = document.getElementById("id_kelas").value;
-
-            const input_angkatans = @json($muridFirst->id_angkatans);
-            const input_jurusans = @json($muridFirst->id_jurusans);
-            const input_kelas = @json($muridFirst->id_kelas);
-            input_angkatans.setAttribute('value', value_id_angkatans);
-            input_jurusans.setAttribute('value', value_id_jurusans);
-            input_kelas.setAttribute('value', value_id_kelas);
-
-        }
-    </script> --}}
     <script>
         const angkatanSelect = document.getElementById('id_angkatans');
         const jurusanSelect = document.getElementById('id_jurusans');
