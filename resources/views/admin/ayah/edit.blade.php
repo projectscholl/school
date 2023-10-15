@@ -101,7 +101,7 @@
                                 <div class="form-group mb-3">
                                     <label for="name">Telepon</label>
                                     <input type="number" name="telepon" id="telepon" class="form-control"
-                                        value="{{ $ayah->telepon }}">
+                                        value="{{ str_replace('62', '0', $ayah->telepon) }}">
                                     @error('telepon')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror

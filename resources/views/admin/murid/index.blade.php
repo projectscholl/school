@@ -15,17 +15,20 @@
                     Siswa
                 </h4>
                 <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
+                    <div class="card-header d-xl-block">
+                        <div class="d-xl-flex align-items-center mb-4 d-block">
                             <a href="{{ route('admin.murid.create') }}" class="btn btn-primary d-flex align-items-center"><i
                                     class='bx bx-add-to-queue me-1'></i> Tambah Murid</a>
                             <a href="#" id="deleteAll" class="btn btn-danger d-flex align-items-center ms-2"><i
                                     class='bx bx-trash me-1'></i> Delete
                                 Selected</a>
-                            <a href="{{ route('admin.murid.export') }}"
-                                class="btn btn-success ms-2 d-flex align-items-center"><i
-                                    class='bx bxs-file-export me-1'></i>
-                                Export</a>
+                            <form action="{{ route('admin.murid.export') }}" method="get">
+                                <input type="hidden" name="id_angkatans" id="angkatans" value="{{ $filterAngkatan }}">
+                                <input type="hidden" name="id_jurusans" id="jurusans" value="{{ $filterJurusan }}">
+                                <input type="hidden" name="id_kelas" id="kelas" value="{{ $filterKelas }}">
+                                <button class="btn btn-success ms-2 d-flex align-items-center"><i
+                                        class='bx bxs-file-export me-1'></i> Export</button>
+                            </form>
                         </div>
                         <form action="{{ route('admin.murid.index') }}" class="mt-4" method="GET">
                             <div class="d-flex ms-5 col-ms-5 d-block">
@@ -186,6 +189,48 @@
     searchButton.addEventListener('click', resetSelectValues);
 </script>
 
+    <script>
+        const angkatanSelect = document.getElementById('id_angkatans');
+        const jurusanSelect = document.getElementById('id_jurusans');
+        const kelasSelect = document.getElementById('id_kelas');
+
+        const jurusanGrouped = @json($jurusanGrouped);
+        const kelasGrouped = @json($kelasGrouped);
+
+        angkatanSelect.addEventListener('change', () => {
+            const angkatanId = angkatanSelect.value;
+            const jurusanOptions = jurusanGrouped[angkatanId] || [];
+
+            jurusanSelect.innerHTML = '<option value="">Pilih Jurusan</option>';
+
+            jurusanOptions.forEach(jurusan => {
+                const option = document.createElement('option');
+                option.value = jurusan.id;
+                option.textContent = jurusan.nama;
+                jurusanSelect.appendChild(option);
+            });
+
+            updateKelasOptions();
+        });
+
+        jurusanSelect.addEventListener('change', () => {
+            updateKelasOptions();
+        });
+
+        function updateKelasOptions() {
+            const jurusanId = jurusanSelect.value;
+            const kelasOptions = kelasGrouped[jurusanId] || [];
+
+            kelasSelect.innerHTML = '<option value="">Pilih Kelas</option>';
+
+            kelasOptions.forEach(kelas => {
+                const option = document.createElement('option');
+                option.value = kelas.id;
+                option.textContent = kelas.kelas;
+                kelasSelect.appendChild(option);
+            });
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
         integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
         crossorigin="anonymous"

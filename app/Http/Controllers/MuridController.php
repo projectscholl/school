@@ -212,16 +212,51 @@ class MuridController extends Controller
     public function deleteSelect(Request $request)
     {
         $ids = $request->ids;
-
         $murid = Murid::whereIn('id', $ids);
         $tagihanDetails = TagihanDetail::whereIn('id_murids', $ids);
         $tagihanDetails->delete();
         $murid->delete();
     }
 
-    public function export()
+    public function export(Request $request)
     {
-        return Excel::download(new MuridExport, 'murid.xlsx');
+        $muridAll = Murid::query();
+
+        $filterAngkatan = $request->input('id_angkatans');
+        $filterJurusan = $request->input('id_jurusans');
+        $filterKelas = $request->input('id_kelas');
+
+        // Terapkan filter ke Query Builder
+        if (!empty($filterAngkatan)) {
+            $muridAll->where('id_angkatans', $filterAngkatan);
+        }
+
+        if (!empty($filterJurusan)) {
+            $muridAll->where('id_jurusans', $filterJurusan);
+        }
+
+        if (!empty($filterKelas)) {
+            $muridAll->where('id_kelas', $filterKelas);
+        }
+
+        // Dapatkan hasil query dengan get()
+        $muridAll->orderBy('created_at', 'desc');
+        $murids = $muridAll->get();
+        $data = [];
+        foreach ($murids as $keys => $murid) {
+
+            $data[] = [
+                'NO' => $keys + 1,
+                'NAMA WALI' => $murid->User->name,
+                'NAMA' => $murid->name,
+                'NAMA AYAH' => $murid->ayahs->name,
+                'NAMA IBU' => $murid->ibus->name,
+                'ANGKATAN MURID' => $murid->angkatans->tahun,
+                'JURUSAN MURID' => $murid->jurusans->nama,
+                'KELAS' => $murid->kelas->kelas,
+            ];
+        }
+        return Excel::download(new MuridExport($data), 'Exportmurid' . date('Y') . '.csv');
     }
     /**
      * Remove the specified resource from storage.

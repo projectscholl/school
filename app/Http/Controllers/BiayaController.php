@@ -55,7 +55,7 @@ class BiayaController extends Controller
         $jurusanGrouped = Jurusan::with('angkatans')->get()->groupBy('id_angkatans');
         $kelasGrouped = Kelas::with('jurusans')->get()->groupBy('id_jurusans');
 
-        return view('admin.biaya.index', compact('user', 'biayaAll', 'instansi', 'angkatans', 'jurusanGrouped', 'kelasGrouped'));
+        return view('admin.biaya.index', compact('user', 'biayaAll', 'instansi', 'angkatans', 'jurusanGrouped', 'kelasGrouped', 'jurusans'));
     }
 
 
