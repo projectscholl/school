@@ -65,7 +65,7 @@ class PembayaranController extends Controller
             $tagihanDetail->update(['status' => 'SUDAH']);
         }
 
-        $pembayaran->update(['payment_status' => 'Berhasil']);
+        $pembayaran->update(['payment_status' => 'berhasil']);
 
         $user = User::where('id', $pembayaran->id_users)->first();
         $send = 'Assalamualaikum warahmatullahi wabarakatu yang terhormat Bapak / Ibu, kami Informasikan Bahwa Pembayaran Bapak / Ibu sudah berhasil di Konfirmasi Oleh admin';

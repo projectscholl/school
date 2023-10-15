@@ -43,7 +43,6 @@
                                 </select>
                                 <button type="submit" class="btn btn-primary mt-xl-0 mt-3 ms-3  ">Cari</button>
                             </div>
-
                         </form>
 
 
@@ -122,48 +121,48 @@
 
     <script src="https://code.jquery.com/jquery-3.7.0.slim.js"
         integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c=" crossorigin="anonymous"></script>
-        <script>
-            const angkatanSelect = document.getElementById('id_angkatans');
-            const jurusanSelect = document.getElementById('id_jurusans');
-            const kelasSelect = document.getElementById('id_kelas');
+    <script>
+        const angkatanSelect = document.getElementById('id_angkatans');
+        const jurusanSelect = document.getElementById('id_jurusans');
+        const kelasSelect = document.getElementById('id_kelas');
 
-            const jurusanGrouped = @json($jurusanGrouped);
-            const kelasGrouped = @json($kelasGrouped);
+        const jurusanGrouped = @json($jurusanGrouped);
+        const kelasGrouped = @json($kelasGrouped);
 
-            angkatanSelect.addEventListener('change', () => {
-                const angkatanId = angkatanSelect.value;
-                const jurusanOptions = jurusanGrouped[angkatanId] || [];
+        angkatanSelect.addEventListener('change', () => {
+            const angkatanId = angkatanSelect.value;
+            const jurusanOptions = jurusanGrouped[angkatanId] || [];
 
-                jurusanSelect.innerHTML = '<option value="">Pilih Jurusan</option>';
+            jurusanSelect.innerHTML = '<option value="">Pilih Jurusan</option>';
 
-                jurusanOptions.forEach(jurusan => {
-                    const option = document.createElement('option');
-                    option.value = jurusan.id;
-                    option.textContent = jurusan.nama;
-                    jurusanSelect.appendChild(option);
-                });
-
-                updateKelasOptions();
+            jurusanOptions.forEach(jurusan => {
+                const option = document.createElement('option');
+                option.value = jurusan.id;
+                option.textContent = jurusan.nama;
+                jurusanSelect.appendChild(option);
             });
 
-            jurusanSelect.addEventListener('change', () => {
-                updateKelasOptions();
+            updateKelasOptions();
+        });
+
+        jurusanSelect.addEventListener('change', () => {
+            updateKelasOptions();
+        });
+
+        function updateKelasOptions() {
+            const jurusanId = jurusanSelect.value;
+            const kelasOptions = kelasGrouped[jurusanId] || [];
+
+            kelasSelect.innerHTML = '<option value="">Pilih Kelas</option>';
+
+            kelasOptions.forEach(kelas => {
+                const option = document.createElement('option');
+                option.value = kelas.id;
+                option.textContent = kelas.kelas;
+                kelasSelect.appendChild(option);
             });
-
-            function updateKelasOptions() {
-                const jurusanId = jurusanSelect.value;
-                const kelasOptions = kelasGrouped[jurusanId] || [];
-
-                kelasSelect.innerHTML = '<option value="">Pilih Kelas</option>';
-
-                kelasOptions.forEach(kelas => {
-                    const option = document.createElement('option');
-                    option.value = kelas.id;
-                    option.textContent = kelas.kelas;
-                    kelasSelect.appendChild(option);
-                });
-            }
-        </script>
+        }
+    </script>
     <script>
         $(function(e) {
             $("#select_all_ids").click(function() {

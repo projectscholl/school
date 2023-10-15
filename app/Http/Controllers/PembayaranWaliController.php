@@ -173,7 +173,7 @@ class PembayaranWaliController extends Controller
             'id_users' => $auth->id,
             'total_bayar' => $total,
             'payment_links' => 'Cash',
-            'payment_status' => 'Berhasil',
+            'payment_status' => 'berhasil',
             'nama_pengirim' => $auth->name,
             'year' => date('Y'),
         ]);

@@ -172,7 +172,7 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="">Alamat</label>
-                                    <textarea name="alamat" id="" cols="30" rows="10" class="form-control">{{ $ayah->alamat }}</textarea>
+                                    <textarea name="alamat" id="alamat" cols="30" rows="10" class="form-control">{{ old('alamat', $ayah->alamat) }}</textarea>
                                     @error('alamat')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror

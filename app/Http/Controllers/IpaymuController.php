@@ -18,7 +18,7 @@ class IpaymuController extends Controller
 
 
         $transaction = Pembayaran::with('users')->where('bukti_transaksi', $sid)->first();
-        if ($status == 'Berhasil') {
+        if ($status == 'berhasil') {
             $transaction->update([
                 'payment_status' => $status,
                 'nama_pengirim' => $transaction->users->name,

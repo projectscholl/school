@@ -27,7 +27,7 @@ class LaporanController extends Controller
     public function index()
     {
         $instansi = Instansi::first();
-        $angkatan = Angkatan::all();
+        $angkatan = Angkatan::all();    
         $jurusanGrouped = Jurusan::with('angkatans')->get()->groupBy('id_angkatans');
         $kelasGrouped = Kelas::with('jurusans')->get()->groupBy('id_jurusans');
         return view('admin.laporan.index', compact('instansi', 'angkatan', 'jurusanGrouped', 'kelasGrouped'));

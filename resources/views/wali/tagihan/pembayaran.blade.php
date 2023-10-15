@@ -46,11 +46,11 @@
                                             <tr>
                                                 <td>
                                                     @if ($tagihanDetail->end_date)
-                                                        {{ \Carbon\Carbon::createFromFormat('d-m', $tagihanDetail->end_date)->format('F') }}
+                                                        {{ \Carbon\Carbon::createFromFormat('d-m', $tagihanDetail->end_date)->locale('id')->format('F') }}
                                                     @else
                                                         -
                                                     @endif
-                                                </td>                                                                                                
+                                                </td>                                                                                                                                               
                                                 <td>Rp {{ number_format($tagihanDetail->jumlah_biaya) }}</td>
                                                 <td
                                                     class="ms-2 mt-2 badge bg-label-{{ $tagihanDetail->status == 'BELUM' && $tagihanDetail->end_date < now()

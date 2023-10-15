@@ -172,7 +172,7 @@
         </script>
 
         <script>
-            var xValues = ["Berhasil", "Pending"];
+            var xValues = ["berhasil", "Pending"];
             var yValues = [{{ $pembayaranDikonfirmasi }}, {{ $pembayaranBelum_Dikonfirmasi }}];
             var barColors = [
                 "#EEFBE7",

@@ -50,6 +50,9 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-">
+                                    {{-- <tr>
+                                        <td>Nama Tagihan : <strong>{{ $tagihs->nama_biaya }}</strong></td>
+                                    </tr> --}}
                                     <tr>
                                         <td>Status Tagihan : <strong>Belum Dibayar</strong></td>
                                     </tr>

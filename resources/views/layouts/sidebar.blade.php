@@ -104,7 +104,7 @@
                 <li class="menu-item {{ Route::is('admin.biaya.*', 'admin.masterBiaya.*') ? 'active open' : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-wallet-alt"></i>
-                        <div data-i18n="Layouts">Biaya</div>
+                        <div data-i18n="Layouts">Data Biaya</div>
                     </a>
                     <ul class="menu-sub">
                         <li class="{{ Route::is('admin.biaya.*') ? $active : $nonActive }}">
@@ -125,7 +125,7 @@
                 <li class="{{ Route::is('admin.pembayaran.*', 'admin.pembayaran.detail') ? $active : $nonActive }}">
                     <a href="{{ route('admin.pembayaran.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-credit-card-front"></i>
-                        <div data-i18n="Without menu">Pembayaran</div>
+                        <div data-i18n="Without menu">Data Pembayaran</div>
                     </a>
                 </li>
                 <!--Account setting-->

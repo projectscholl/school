@@ -167,7 +167,7 @@ crossorigin="anonymous"
             event.preventDefault();
             Swal.fire({
                 title: 'Yakin?',
-                text: "Kamu Akan Menghapus Biaya!!",
+                text: "Kamu Akan Menghapus Data Ibu!!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -178,7 +178,7 @@ crossorigin="anonymous"
                     form.submit();
                     Swal.fire(
                         'Terhapus!',
-                        'Kamu telah menghapus Biaya!!.',
+                        'Kamu telah menghapus Data Ibu!!.',
                         'success'
                     )
                 }
