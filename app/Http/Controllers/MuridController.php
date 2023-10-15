@@ -39,26 +39,31 @@ class MuridController extends Controller
         if (!empty($filterAngkatan)) {
             $muridAll->where('id_angkatans', $filterAngkatan);
         }
-    
+
         if (!empty($filterJurusan)) {
             $muridAll->where('id_jurusans', $filterJurusan);
         }
-    
+
         if (!empty($filterKelas)) {
             $muridAll->where('id_kelas', $filterKelas);
         }
-    
+
         // Dapatkan hasil query dengan get()
         $muridAll->orderBy('created_at', 'desc');
         $murids = $muridAll->get();
-    
+        $muridFirst = $muridAll->first();
+
         $angkatans = Angkatan::all();
         $jurusans = Jurusan::all();
         $kelas = Kelas::all();
         $jurusanGrouped = Jurusan::with('angkatans')->get()->groupBy('id_angkatans');
         $kelasGrouped = Kelas::with('jurusans')->get()->groupBy('id_jurusans');
-    
-        return view('admin.murid.index', compact('muridAll', 'murids', 'user', 'instansi', 'angkatans', 'jurusanGrouped', 'kelasGrouped'));
+
+
+
+
+        return view('admin.murid.index', compact('filterAngkatan', 'filterJurusan', 'filterKelas', 'muridFirst', 'muridAll', 'murids', 'user', 'instansi', 'angkatans', 'jurusanGrouped', 'kelasGrouped'));
+        // return view('admin.murid.laporanMurid', compact('muridAll', 'murids', 'user', 'instansi', 'angkatans', 'jurusanGrouped', 'kelasGrouped'));
     }
     
 
