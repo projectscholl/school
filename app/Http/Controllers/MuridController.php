@@ -117,23 +117,6 @@ class MuridController extends Controller
             }
         }
 
-        // $user = User::with('murids')->where('id', $murid->id_users)->get();
-
-
-        // foreach ($biaya as $key => $biayas) {
-        //     foreach ($biayas->tagihans as $keys => $tagihans) {
-        //         foreach ($user as $waliUser) {
-        //             if ($tagihans->mounth == null) {
-        //                 $tes1 = "Nama Tagihan : $biayas->nama_biaya : " . "Untuk Murid : " . $waliUser->name . " " . "Total : " . $tagihans->amount . " " . $tagihans->mounth;
-        //                 $this->send_message($murid->telepon, $tes1);
-        //             } else {
-        //                 $tes2 = "Nama Tagihan : $biayas->nama_biaya : " . "Untuk Murid :  " . $waliUser->name . "  " . "Total : " . $tagihans->amount . " " . "Untuk Bulan : " . $tagihans->mounth;
-        //                 $this->send_message($murid->telepon, $tes2);
-        //             }
-        //         }
-        //     }
-        // }
-
         return redirect()->route('admin.murid.index')->with('success', "Murid Berhasil Ditambahkan!!");
     }
 
@@ -172,7 +155,7 @@ class MuridController extends Controller
         $ayah = Orangtua::where('sebagai', 'Ayah')->get();
         $ibu = Orangtua::where('sebagai', 'Ibu')->get();
 
-        return view('admin.murid.edit', compact('ayah', 'ibu', 'murid', 'users', 'jurusan','angkatan', 'instansi', 'jurusanGrouped', 'kelasGrouped'));
+        return view('admin.murid.edit', compact('ayah', 'ibu', 'murid', 'users', 'jurusan','angkatan', 'instansi', 'jurusanGrouped', 'kelasGrouped', 'kelas'));
     }
 
     /**

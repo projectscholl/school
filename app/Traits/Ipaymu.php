@@ -81,7 +81,7 @@ trait Ipaymu
         $body['description'][] = 'dasdasdadsasd';
         $body['referenceId'] = 'ID' . rand(1111, 9999);
         $body['returnUrl'] = route('callback.return');
-        $body['notifyUrl'] = 'https://1ce1-149-108-82-66.ngrok-free.app/callback/notify';
+        $body['notifyUrl'] = 'https://48b0-149-108-82-66.ngrok-free.app/callback/notify';
         $body['cancelUrl'] = route('callback.cancel');
         $body['paymentMethod'] = 'qris';
         $body['buyerName'] = Auth::user()->name;

@@ -26,7 +26,7 @@
                 <div class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
                     <a href="{{ route('welcome') }}"
                         class="pr-3 font-medium text-gray-900 dark:text-white underline">Home</a>
-                    <a class="pl-3 text-sm text-gray-500 dark:text-gray-400">Website E-Learning</a>
+                    <a class="pl-3 text-sm text-gray-500 dark:text-gray-400"></a>
                 </div>
             </figcaption>
         </figure>

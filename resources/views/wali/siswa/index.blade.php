@@ -19,7 +19,7 @@
                                 <div class="d-flex ms-5">
                                         <label for="id_angkatans"  class="ms-3">Masukkan Angkatan</label>
                                         <select name="id_angkatans" id="id_angkatans" class="form-control ms-3">
-                                            <option value="">---------</option>
+                                            <option value="">--Semua--</option>
                                             @foreach ($angkatans as $data)
                                                 <option value="{{ $data->id }}">{{ $data->tahun }}</option>
                                             @endforeach
@@ -27,12 +27,12 @@
 
                                         <label for="id_jurusans" class="ms-3">Masukkan Jurusan</label>
                                         <select name="id_jurusans" id="id_jurusans" class="form-control ms-3">
-                                            <option value="">---------</option>
+                                            <option value="">--Semua--</option>
                                         </select>
             
                                         <label for="id_kelas" class="ms-3">Masukkan Kelas</label>
                                         <select name="id_kelas" id="id_kelas" class="form-control ms-3">
-                                            <option value="">---------</option>
+                                            <option value="">--Semua--</option>
                                         </select>
                                         <button type="submit" class="btn btn-primary ms-3">Cari</button>
 
