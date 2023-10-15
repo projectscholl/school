@@ -88,7 +88,7 @@ class LaporanController extends Controller
                             'ANGKATAN' => $tagihanDetails->murids->angkatans->tahun,
                             'BULAN TAGIHAN' => $datay,
                             'STATUS' => $tagihanDetails->status,
-                            'TOTAL' => number_format($tagihanDetails->amount, 2, ',', '.'),
+                            'TOTAL' => number_format($tagihanDetails->jumlah_biaya, 2, ',', '.'),
 
                         ];
                         // print_r($tagihanDetails->murids->angkatans->tahun,);

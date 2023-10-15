@@ -10,7 +10,7 @@
 
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Data Biaya /</span>
+                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Data Biaya / </span>
                     Biaya
                 </h4>
                 <!-- Bordered Table -->
@@ -19,8 +19,9 @@
                         <div class="d-xl-flex align-items-center mb-4 d-block">
                             <a href="{{ route('admin.biaya.create') }}" class="btn btn-primary"><i
                                     class='bx bx-add-to-queue'></i> Add Data</a>
-                            <a href="#" id="deleteAll" class="btn btn-danger ms-2 d-flex align-items-center"><i
-                                    class='bx bx-trash me-1'></i> Delete Selected</a>
+                            <a href="#" id="deleteAll" class="btn btn-danger ms-2 text-center"><i
+                                    class='bx bx-trash me-1'></i>
+                                Delete Selected</a>
                         </div>
                         <form action="{{ route('admin.biaya.index') }}" method="GET">
                             <div class="d-xl-flex align-items-center d-sm-block col-xl-12 col-10">
@@ -41,11 +42,12 @@
                                 <select name="id_kelas" id="id_kelas" class="form-control ms-3">
                                     <option value="">---------</option>
                                 </select>
+
+
                                 <button type="submit" class="btn btn-primary mt-xl-0 mt-3 ms-3  ">Cari</button>
                             </div>
 
                         </form>
-
 
                     </div>
                     <div class="card-body">
@@ -53,7 +55,8 @@
                             <table class="table table-striped" id="myTable">
                                 <thead>
                                     <tr>
-                                        <th class="d-flex"><input type="checkbox" id="select_all_ids" class="me-2"> Pilih
+                                        <th class="d-flex"><input type="checkbox" id="select_all_ids" class="me-2">
+                                            Pilih
                                         </th>
                                         <th>No</th>
                                         <th>Nama Biaya</th>
@@ -90,6 +93,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            @yield('content')
                         </div>
                     </div>
                 </div>
@@ -99,6 +103,48 @@
     </div>
 @endsection
 @push('scripts')
+    <script>
+        const angkatanSelect = document.getElementById('id_angkatans');
+        const jurusanSelect = document.getElementById('id_jurusans');
+        const kelasSelect = document.getElementById('id_kelas');
+
+        const jurusanGrouped = @json($jurusanGrouped);
+        const kelasGrouped = @json($kelasGrouped);
+
+        angkatanSelect.addEventListener('change', () => {
+            const angkatanId = angkatanSelect.value;
+            const jurusanOptions = jurusanGrouped[angkatanId] || [];
+
+            jurusanSelect.innerHTML = '<option value="">Pilih Jurusan</option>';
+
+            jurusanOptions.forEach(jurusan => {
+                const option = document.createElement('option');
+                option.value = jurusan.id;
+                option.textContent = jurusan.nama;
+                jurusanSelect.appendChild(option);
+            });
+
+            updateKelasOptions();
+        });
+
+        jurusanSelect.addEventListener('change', () => {
+            updateKelasOptions();
+        });
+
+        function updateKelasOptions() {
+            const jurusanId = jurusanSelect.value;
+            const kelasOptions = kelasGrouped[jurusanId] || [];
+
+            kelasSelect.innerHTML = '<option value="">Pilih Kelas</option>';
+
+            kelasOptions.forEach(kelas => {
+                const option = document.createElement('option');
+                option.value = kelas.id;
+                option.textContent = kelas.kelas;
+                kelasSelect.appendChild(option);
+            });
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
         integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
         crossorigin="anonymous"
@@ -108,6 +154,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
         integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
         @if (Session::has('success'))
             toastr.success("{{ Session::get('success') }}")

@@ -100,7 +100,7 @@
                                                             @foreach ($tanggal as $tanggals)
                                                                 <option value="{{ $tanggals . '-' . $tanggal3[$index] }}"
                                                                     {{ $tagihans->end_date == $tanggals . '-' . $tanggal3[$index] ? 'selected' : '' }}>
-                                                                    {{ $tanggals . '-' . $tanggal3[$index] }}
+                                                                    {{ \Carbon\Carbon::parse($tanggals . '-' . $tanggal3[$index] . '-' . date('Y'))->format('d F') }}
                                                                 </option>
                                                             @endforeach
                                                         </select>

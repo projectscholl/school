@@ -60,13 +60,13 @@ class SendWhatsaapjob implements ShouldQueue
             $strtotime = strtotime($tagihanDetails->bulan . '-' . date('Y'));
             if (date('Y-m-d', $strtotime) == date('Y-m-d')) {
 
-                $user = User::where('id', $tagihanDetails->id_murids)->get();
+                $user = Murid::where('id', $tagihanDetails->id_murids)->get();
                 $tagihan = Tagihan::where('id', $tagihanDetails->id_tagihan)->get();
                 foreach ($tagihan as $tagihans) {
                     foreach ($user as $users) {
-                        $send = 'Asslammualaikum warahmatullahi wabarakatu yang terhormat Bapak / ibu ' . $users->name . 'Kami informasikan ada Tagihan yang ada ' . $tagihanDetails->id;
-                        Log::info($send);
-                        // $this->send_message($users->telepon, $send);
+                        $send = 'Asslammualaikum warahmatullahi wabarakatu yang terhormat Bapak / ibu ' . $users->User->name . ' Kami informasikan ada Tagihan ' . $tagihanDetails->id;
+                        // Log::info($send);
+                        $this->send_message($users->User->telepon, $send);
                     }
                 }
             }

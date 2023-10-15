@@ -10,34 +10,33 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\FromView;
 
-class MuridExport implements FromView
+class MuridExport implements FromCollection, WithHeadings
 {
     // /**
     //  * @return \Illuminate\Support\Collection
     //  */
-    // protected $excel;
-    // public function __construct($excel)
-    // {
-    //     $this->excel = $excel;
-    // }
-
-    public function view(): View
+    protected $data;
+    public function __construct($data)
     {
-
-        $murids = Murid::all();
-        return view('admin.murid.laporanMurid', compact('murids'));
+        $this->data = $data;
     }
-    // public function headings(): array
-    // {
-    //     return [
 
-    //         'NAMA TAGIHAN',
-    //         'NAMA MURID',
-    //         'ANGKATAN',
-    //         'BULAN TAGIHAN',
-    //         'STATUS',
-    //         'TOTAL',
-    //         // etc
-    //     ];
-    // }
+    public function collection()
+    {
+        return collect($this->data);
+    }
+    public function headings(): array
+    {
+        return [
+            'NO',
+            'NAMA WALI',
+            'NAMA',
+            'NAMA AYAH',
+            'NAMA IBU',
+            'ANGKATAN MURID',
+            'JURUSAN MURID',
+            'KELAS',
+            // etc
+        ];
+    }
 }

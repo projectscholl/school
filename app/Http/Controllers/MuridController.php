@@ -9,6 +9,7 @@ use App\Models\Instansi;
 use App\Models\Jurusan;
 use App\Models\Kelas;
 use App\Models\Murid;
+use App\Models\Notify;
 use App\Models\Orangtua;
 use App\Models\Tagihan;
 use App\Models\TagihanDetail;
@@ -21,12 +22,45 @@ use Maatwebsite\Excel\Facades\Excel;
 class MuridController extends Controller
 {
     use Fonnte;
-    public function index()
+    public function index(Request $request)
     {
         $instansi = Instansi::first();
         $user = Auth::user();
-        $murids = Murid::all();
-        return view('admin.murid.index', compact('murids', 'user', 'instansi'));
+        $muridAll = Murid::query();
+
+        $filterAngkatan = $request->input('id_angkatans');
+        $filterJurusan = $request->input('id_jurusans');
+        $filterKelas = $request->input('id_kelas');
+
+        // Terapkan filter ke Query Builder
+        if (!empty($filterAngkatan)) {
+            $muridAll->where('id_angkatans', $filterAngkatan);
+        }
+
+        if (!empty($filterJurusan)) {
+            $muridAll->where('id_jurusans', $filterJurusan);
+        }
+
+        if (!empty($filterKelas)) {
+            $muridAll->where('id_kelas', $filterKelas);
+        }
+
+        // Dapatkan hasil query dengan get()
+        $muridAll->orderBy('created_at', 'desc');
+        $murids = $muridAll->get();
+        $muridFirst = $muridAll->first();
+
+        $angkatans = Angkatan::all();
+        $jurusans = Jurusan::all();
+        $kelas = Kelas::all();
+        $jurusanGrouped = Jurusan::with('angkatans')->get()->groupBy('id_angkatans');
+        $kelasGrouped = Kelas::with('jurusans')->get()->groupBy('id_jurusans');
+
+
+
+
+        return view('admin.murid.index', compact('filterAngkatan', 'filterJurusan', 'filterKelas', 'muridFirst', 'muridAll', 'murids', 'user', 'instansi', 'angkatans', 'jurusanGrouped', 'kelasGrouped'));
+        // return view('admin.murid.laporanMurid', compact('muridAll', 'murids', 'user', 'instansi', 'angkatans', 'jurusanGrouped', 'kelasGrouped'));
     }
 
     public function create()
@@ -67,8 +101,9 @@ class MuridController extends Controller
         $biaya = Biaya::with('tagihans')->where('id_jurusans', $murid->id_jurusans)->where('id_angkatans', $murid->id_angkatans)->where('id_kelas', $murid->id_kelas)->get();
         foreach ($biaya as $biayas) {
             $tagihans = Tagihan::where('id_biayas', $biayas->id)->get();
+            $tenggat = Notify::where('id', 4)->first();
             foreach ($tagihans as $tagihan) {
-                $end_date = strtotime('-10 days', strtotime($tagihan->end_date . '-' . date('Y'))); // foreach ($valid as $index => $n) {
+                $end_date = strtotime($tenggat->notif, strtotime($tagihan->end_date . '-' . date('Y'))); // foreach ($valid as $index => $n) {
                 $end_dates = date('d-m', $end_date);
                 $tagihanDetail = TagihanDetail::create([
                     'id_tagihan' => $tagihan->id,
@@ -190,16 +225,51 @@ class MuridController extends Controller
     public function deleteSelect(Request $request)
     {
         $ids = $request->ids;
-
         $murid = Murid::whereIn('id', $ids);
         $tagihanDetails = TagihanDetail::whereIn('id_murids', $ids);
         $tagihanDetails->delete();
         $murid->delete();
     }
 
-    public function export()
+    public function export(Request $request)
     {
-        return Excel::download(new MuridExport, 'murid.xlsx');
+        $muridAll = Murid::query();
+
+        $filterAngkatan = $request->input('id_angkatans');
+        $filterJurusan = $request->input('id_jurusans');
+        $filterKelas = $request->input('id_kelas');
+
+        // Terapkan filter ke Query Builder
+        if (!empty($filterAngkatan)) {
+            $muridAll->where('id_angkatans', $filterAngkatan);
+        }
+
+        if (!empty($filterJurusan)) {
+            $muridAll->where('id_jurusans', $filterJurusan);
+        }
+
+        if (!empty($filterKelas)) {
+            $muridAll->where('id_kelas', $filterKelas);
+        }
+
+        // Dapatkan hasil query dengan get()
+        $muridAll->orderBy('created_at', 'desc');
+        $murids = $muridAll->get();
+        $data = [];
+        foreach ($murids as $keys => $murid) {
+
+            $data[] = [
+                'NO' => $keys + 1,
+                'NAMA WALI' => $murid->User->name,
+                'NAMA' => $murid->name,
+                'NAMA AYAH' => $murid->ayahs->name,
+                'NAMA IBU' => $murid->ibus->name,
+                'ANGKATAN MURID' => $murid->angkatans->tahun,
+                'JURUSAN MURID' => $murid->jurusans->nama,
+                'KELAS' => $murid->kelas->kelas,
+            ];
+        }
+        return Excel::download(new MuridExport($data), 'Exportmurid' . date('Y') . '.csv');
     }
     /**
      * Remove the specified resource from storage.
