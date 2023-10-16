@@ -20,7 +20,7 @@ class PembayaranController extends Controller
         $user = Auth::user();
         $instansi = Instansi::first();
 
-        $paymentStatus = $request->input('payment_status'); 
+        $paymentStatus = $request->input('payment_status');
 
         $pembayarans = Pembayaran::when($paymentStatus, function ($query, $paymentStatus) {
             if ($paymentStatus === 'Cash') {
@@ -33,7 +33,7 @@ class PembayaranController extends Controller
                 return $query;
             }
         })->orderBy('created_at', 'desc')->get();
-        
+
 
         $idsMurids = $pembayarans->pluck('id_murids')->unique();
 
@@ -82,11 +82,11 @@ class PembayaranController extends Controller
         $pembayaran->delete();
         return redirect()->route('admin.pembayaran.index');
     }
-        
+
     public function deleteSelect(Request $request)
     {
         $ids = $request->ids;
-        $pemabayaran = Pembayaran::where('id', $ids);
+        $pemabayaran = Pembayaran::whereIn('id', $ids);
         $pemabayaran->delete();
         return redirect()->route('admin.pembayaran.index')->with('pesan', 'Pembayaran Berhasil dihapus');
     }

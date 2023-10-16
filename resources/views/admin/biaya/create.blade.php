@@ -108,7 +108,8 @@
                                                     <option value="" disabled>Pilih Tanggal Pada Bulan Juli
                                                     </option>
                                                     @foreach ($tanggal as $tanggals)
-                                                        <option value="{{ $tanggals }}-07">{{ $tanggals }} Juli
+                                                        <option value="{{ $tanggals }}-07">
+                                                            {{ $tanggals }} Juli
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -148,7 +149,8 @@
                                                     <option value="" disabled>Pilih Tanggal Pada Bulan Agustus
                                                     </option>
                                                     @foreach ($tanggal as $tanggals)
-                                                        <option value="{{ $tanggals }}-08">{{ $tanggals }} Agustus
+                                                        <option value="{{ $tanggals }}-08">
+                                                            {{ $tanggals }} Agustus
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -706,7 +708,7 @@
         $('.rupiah').mask("#.##0", {
             reverse: true
         });
-        </script>
+    </script>
     <script>
         const angkatanSelect = document.getElementById('id_angkatans');
         const jurusanSelect = document.getElementById('id_jurusans');
@@ -760,7 +762,7 @@
     </script>
     <script type="text/javascript">
         document.getElementById("tombol_form").addEventListener("click", tampilkan_nilai_form);
-        
+
         function tampilkan_nilai_form() {
             event.preventDefault();
             var nilai_form = document.getElementById("input_form").value;

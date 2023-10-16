@@ -28,13 +28,13 @@ class MuridController extends Controller
     {
         $instansi = Instansi::first();
         $user = Auth::user();
-        
-        $muridAll = Murid::query(); 
-        
+
+        $muridAll = Murid::query();
+
         $filterAngkatan = $request->input('id_angkatans');
         $filterJurusan = $request->input('id_jurusans');
         $filterKelas = $request->input('id_kelas');
-    
+
         // Terapkan filter ke Query Builder
         if (!empty($filterAngkatan)) {
             $muridAll->where('id_angkatans', $filterAngkatan);
@@ -65,7 +65,7 @@ class MuridController extends Controller
         return view('admin.murid.index', compact('filterAngkatan', 'filterJurusan', 'filterKelas', 'muridFirst', 'muridAll', 'murids', 'user', 'instansi', 'angkatans', 'jurusanGrouped', 'kelasGrouped'));
         // return view('admin.murid.laporanMurid', compact('muridAll', 'murids', 'user', 'instansi', 'angkatans', 'jurusanGrouped', 'kelasGrouped'));
     }
-    
+
 
 
     public function create()
@@ -106,7 +106,7 @@ class MuridController extends Controller
         $biaya = Biaya::with('tagihans')->where('id_jurusans', $murid->id_jurusans)->where('id_angkatans', $murid->id_angkatans)->where('id_kelas', $murid->id_kelas)->get();
         foreach ($biaya as $biayas) {
             $tagihans = Tagihan::where('id_biayas', $biayas->id)->get();
-            $tenggat = Notify::where('id',4)->first();
+            $tenggat = Notify::where('id', 4)->first();
             foreach ($tagihans as $tagihan) {
                 $end_date = strtotime($tenggat->notif, strtotime($tagihan->end_date . '-' . date('Y'))); // foreach ($valid as $index => $n) {
                 $end_dates = date('d-m', $end_date);
@@ -152,7 +152,7 @@ class MuridController extends Controller
         $instansi = Instansi::first();
         $murid = Murid::find($id);
         $angkatan = Angkatan::all();
-        $jurusan = Jurusan::all(); 
+        $jurusan = Jurusan::all();
         $kelas = Kelas::all();
         $jurusanGrouped = Jurusan::with('angkatans')->get()->groupBy('id_angkatans');
         $kelasGrouped = Kelas::with('jurusans')->get()->groupBy('id_jurusans');
@@ -160,7 +160,7 @@ class MuridController extends Controller
         $ayah = Orangtua::where('sebagai', 'Ayah')->get();
         $ibu = Orangtua::where('sebagai', 'Ibu')->get();
 
-        return view('admin.murid.edit', compact('ayah', 'ibu', 'murid', 'users', 'jurusan','angkatan', 'instansi', 'jurusanGrouped', 'kelasGrouped', 'kelas'));
+        return view('admin.murid.edit', compact('ayah', 'ibu', 'murid', 'users', 'jurusan', 'angkatan', 'instansi', 'jurusanGrouped', 'kelasGrouped', 'kelas'));
     }
 
     /**
@@ -194,7 +194,7 @@ class MuridController extends Controller
         $biaya = Biaya::with('tagihans')->where('id_jurusans', $murid->id_jurusans)->where('id_angkatans', $murid->id_angkatans)->where('id_kelas', $murid->id_kelas)->get();
         foreach ($biaya as $biayas) {
             $tagihans = Tagihan::where('id_biayas', $biayas->id)->get();
-            $tenggat = Notify::where('id',4)->first();
+            $tenggat = Notify::where('id', 4)->first();
 
             foreach ($tagihans as $tagihan) {
                 $end_date = strtotime($tenggat->notif, strtotime($tagihan->end_date . '-' . date('Y'))); // foreach ($valid as $index => $n) {
@@ -221,6 +221,7 @@ class MuridController extends Controller
         $tagihanDetails = TagihanDetail::whereIn('id_murids', $ids);
         $tagihanDetails->delete();
         $murid->delete();
+        return redirect()->back()->with('success', 'Berhasil menghapus murid yang dipilih');
     }
 
     public function export(Request $request)

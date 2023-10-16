@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
 
     protected $commands = [
         Commands\NotificationCron::class,
+        Commands\Nunggak::class,
     ];
     protected function schedule(Schedule $schedule): void
     {
@@ -28,8 +29,10 @@ class Kernel extends ConsoleKernel
         $time = now()->format('H:i');
 
         // $schedule->command('notification:cron')->everyTenMinutes();
-        $schedule->job(new SendWhatsaapJob())->dailyAt('17:01');
-        $schedule->job(new TenggatJob())->dailyAt('16:31');
+        $schedule->command('app:nunggak')->everySecond();
+
+        $schedule->job(new SendWhatsaapJob())->dailyAt('23:00');
+        $schedule->job(new TenggatJob())->dailyAt('23:00');
         $schedule->job(new IpaymuJob())->everySecond();
     }
 

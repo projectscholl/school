@@ -14,7 +14,6 @@
                     Activity
                 </h4>
                 <!-- Bordered Table -->
-
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">

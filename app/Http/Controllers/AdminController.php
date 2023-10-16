@@ -26,14 +26,14 @@ class AdminController extends Controller
         $user = Auth::user();
         $jumlahMurid = Murid::count();
         $tagihanDetail = TagihanDetail::all();
-        $pembayaranBelum_Dikonfirmasi = Pembayaran::where('payment_status', 'PENDING');
+        $pembayaranBelum_Dikonfirmasi = Pembayaran::where('payment_status', 'pending');
 
         $jumlahLunas = $tagihanDetail->where('status', 'SUDAH')->count();
         $jumlahBelumBayar = $tagihanDetail->where('status', 'BELUM')->count();
         $pembayaran = Pembayaran::all();
-        $pembayaranDikonfirmasi = $pembayaran->where('payment_status', 'Berhasil')->count();
-        $pembayaranBelum_Dikonfirmasi = $pembayaran->where('payment_status', 'PENDING')->count();
-        $pembayaranTotal = $pembayaran->where('payment_status', 'Berhasil')->sum('total_bayar');
+        $pembayaranDikonfirmasi = $pembayaran->where('payment_status', 'berhasil')->count();
+        $pembayaranBelum_Dikonfirmasi = $pembayaran->where('payment_status', 'pending')->count();
+        $pembayaranTotal = $pembayaran->where('payment_status', 'berhasil')->sum('total_bayar');
         return view('admin.dashboard', compact('user', 'jumlahMurid', 'instansi', 'tagihanDetail', 'jumlahBelumBayar', 'jumlahLunas', 'pembayaranDikonfirmasi', 'pembayaranBelum_Dikonfirmasi', 'pembayaranTotal'));
     }
     public function edit()

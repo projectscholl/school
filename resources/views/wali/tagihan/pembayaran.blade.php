@@ -50,7 +50,7 @@
                                                     @else
                                                         -
                                                     @endif
-                                                </td>                                                                                                                                               
+                                                </td>
                                                 <td>Rp {{ number_format($tagihanDetail->jumlah_biaya) }}</td>
                                                 <td
                                                     class="ms-2 mt-2 badge bg-label-{{ $tagihanDetail->status == 'BELUM' && $tagihanDetail->end_date < now()
@@ -59,13 +59,7 @@
                                                             ? 'success'
                                                             : 'danger') }}">
                                                     <strong>
-                                                        @if ($tagihanDetail->status == 'BELUM' && $tagihanDetail->end_date < now())
-                                                            NUNGGAK
-                                                        @elseif ($tagihanDetail->status == 'SUDAH')
-                                                            {{ $tagihanDetail->status }}
-                                                        @else
-                                                            {{ $tagihanDetail->status }}
-                                                        @endif
+                                                        {{ $tagihanDetail->status }}
                                                     </strong>
                                                 </td>
                                                 <td>
@@ -74,7 +68,7 @@
                                                     @else
                                                         -
                                                     @endif
-                                                </td>                                 
+                                                </td>
                                                 <td>
                                                     <input type="checkbox" data-select
                                                         name="amount[{{ $tagihanDetail->id }}]"

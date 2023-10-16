@@ -55,7 +55,7 @@ class NotificationCron extends Command
                             $tanggal = date("j F", strtotime($tagihansT->end_date . '-' . date('Y')));
                             $dates = strtotime($tagihansT->end_date . '-' . date('Y')) + (86400 * 15);
                             if ($dates < time()) {
-                                $send = $notification[$keys]->notif . ' ' . $users->name . ' ' . number_format($tagihan->amount, 2, ',', '.') . ' ' . url('http://127.0.0.1:8000/login-wali');
+                                $send = $notification[$keys]->notif . ' ' . $users->name . ' ' . number_format($tagihansT->total_biaya, 2, ',', '.') . ' ' . url('http://127.0.0.1:8000/login-wali');
                                 $this->send_message($walis->telepon, $send);
                             }
                         }

@@ -94,15 +94,41 @@
                                                     </td>
                                                     <input type="hidden" name="start_date[]"
                                                         class="form-control tess date1" value="{{ $tagihans->start_date }}">
+                                                    @php
+                                                        $date1 = date('Y');
+                                                        $date2 = date('Y') + 1;
+
+                                                        // $startDate = Carbon\Carbon::parse('2023-01-01');
+                                                        // $endDate = Carbon\Carbon::parse('2023-06-01');
+                                                        // $date = $startDate;
+                                                        // $date->lte($endDate);
+                                                        // $date->addDay();
+
+                                                    @endphp
+                                                    {{-- @for ($date = $startDate; $date->lte($endDate); $date->addDay())
+                                                        {{ $date->format('m-d') }} <br>
+                                                    @endfor --}}
+                                                    {{ date('m', strtotime($tagihans->end_date . '-' . date('Y'))) }}
                                                     <td><select name="end_date[]" id="" class="form-select">
                                                             <option value="" disabled>Pilih Tanggal Pada Bulan
                                                             </option>
-                                                            @foreach ($tanggal as $tanggals)
-                                                                <option value="{{ $tanggals . '-' . $tanggal3[$index] }}"
-                                                                    {{ $tagihans->end_date == $tanggals . '-' . $tanggal3[$index] ? 'selected' : '' }}>
-                                                                    {{ \Carbon\Carbon::parse($tanggals . '-' . $tanggal3[$index] . '-' . date('Y'))->format('d F') }}
-                                                                </option>
-                                                            @endforeach
+                                                            @if (date('m', strtotime($tagihans->end_date . '-' . date('Y'))) === '02')
+                                                                @foreach ($tanggal2 as $tanggals)
+                                                                    <option
+                                                                        value="{{ $tanggals . '-' . $tanggal3[$index] }}"
+                                                                        {{ $tagihans->end_date == $tanggals . '-' . $tanggal3[$index] ? 'selected' : '' }}>
+                                                                        {{ \Carbon\Carbon::parse($tanggals . '-' . $tanggal3[$index] . '-' . date('Y'))->format('d F') }}
+                                                                    </option>
+                                                                @endforeach
+                                                            @else
+                                                                @foreach ($tanggal as $tanggals)
+                                                                    <option
+                                                                        value="{{ $tanggals . '-' . $tanggal3[$index] }}"
+                                                                        {{ $tagihans->end_date == $tanggals . '-' . $tanggal3[$index] ? 'selected' : '' }}>
+                                                                        {{ \Carbon\Carbon::parse($tanggals . '-' . $tanggal3[$index] . '-' . date('Y'))->format('d F') }}
+                                                                    </option>
+                                                                @endforeach
+                                                            @endif
                                                         </select>
                                                     </td>
                                                     <input type="hidden" name="id[]" value="{{ $tagihans->id }}">
