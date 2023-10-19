@@ -73,7 +73,8 @@
 
                                         $tanggal5 = ['01', '01', '01', '01', '01', '01', '01', '01', '01', '01', '01', '01'];
                                         $tanggal6 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-
+                                        $date1 = date('Y');
+                                        $date2 = date('Y') + 1;
                                     @endphp
 
                                     @if ($biaya->jenis_biaya == 'routine')
@@ -94,37 +95,27 @@
                                                     </td>
                                                     <input type="hidden" name="start_date[]"
                                                         class="form-control tess date1" value="{{ $tagihans->start_date }}">
-                                                    @php
-                                                        $date1 = date('Y');
-                                                        $date2 = date('Y') + 1;
 
-                                                        // $startDate = Carbon\Carbon::parse('2023-01-01');
-                                                        // $endDate = Carbon\Carbon::parse('2023-06-01');
-                                                        // $date = $startDate;
-                                                        // $date->lte($endDate);
-                                                        // $date->addDay();
-
-                                                    @endphp
                                                     {{-- @for ($date = $startDate; $date->lte($endDate); $date->addDay())
                                                         {{ $date->format('m-d') }} <br>
                                                     @endfor --}}
-                                                    {{ date('m', strtotime($tagihans->end_date . '-' . date('Y'))) }}
+                                                    {{ Carbon\Carbon::parse($tagihans->end_date)->format('m') }}
                                                     <td><select name="end_date[]" id="" class="form-select">
                                                             <option value="" disabled>Pilih Tanggal Pada Bulan
                                                             </option>
-                                                            @if (date('m', strtotime($tagihans->end_date . '-' . date('Y'))) === '02')
+                                                            @if (Carbon\Carbon::parse($tagihans->end_date)->format('m') === '02')
                                                                 @foreach ($tanggal2 as $tanggals)
                                                                     <option
-                                                                        value="{{ $tanggals . '-' . $tanggal3[$index] }}"
-                                                                        {{ $tagihans->end_date == $tanggals . '-' . $tanggal3[$index] ? 'selected' : '' }}>
+                                                                        value="{{ $tanggals . '-' . $tanggal3[$index] . '-' }}{{ Carbon\Carbon::parse($tagihans->end_date)->format('m') === '07' || Carbon\Carbon::parse($tagihans->end_date)->format('m') === '08' || Carbon\Carbon::parse($tagihans->end_date)->format('m') === '09' || Carbon\Carbon::parse($tagihans->end_date)->format('m') === '10' || Carbon\Carbon::parse($tagihans->end_date)->format('m') === '11' || Carbon\Carbon::parse($tagihans->end_date)->format('m') === '12' ? $date1 : $date2 }}"
+                                                                        {{ Carbon\Carbon::parse($tagihans->end_date)->format('d-m') == $tanggals . '-' . $tanggal3[$index] ? 'selected' : '' }}>
                                                                         {{ \Carbon\Carbon::parse($tanggals . '-' . $tanggal3[$index] . '-' . date('Y'))->format('d F') }}
                                                                     </option>
                                                                 @endforeach
                                                             @else
                                                                 @foreach ($tanggal as $tanggals)
                                                                     <option
-                                                                        value="{{ $tanggals . '-' . $tanggal3[$index] }}"
-                                                                        {{ $tagihans->end_date == $tanggals . '-' . $tanggal3[$index] ? 'selected' : '' }}>
+                                                                        value="{{ $tanggals . '-' . $tanggal3[$index] . '-' }}{{ Carbon\Carbon::parse($tagihans->end_date)->format('m') === '07' || Carbon\Carbon::parse($tagihans->end_date)->format('m') === '08' || Carbon\Carbon::parse($tagihans->end_date)->format('m') === '09' || Carbon\Carbon::parse($tagihans->end_date)->format('m') === '10' || Carbon\Carbon::parse($tagihans->end_date)->format('m') === '11' || Carbon\Carbon::parse($tagihans->end_date)->format('m') === '12' ? $date1 : $date2 }}"
+                                                                        {{ Carbon\Carbon::parse($tagihans->end_date)->format('d-m') == $tanggals . '-' . $tanggal3[$index] ? 'selected' : '' }}>
                                                                         {{ \Carbon\Carbon::parse($tanggals . '-' . $tanggal3[$index] . '-' . date('Y'))->format('d F') }}
                                                                     </option>
                                                                 @endforeach

@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->truncate();
-        
+
         DB::table('users')->insert([
             'name' => 'admin',
             'email' => 'admin@example.com',
@@ -49,8 +49,10 @@ class UserSeeder extends Seeder
             'name' => 'Ahmad Subardjo',
             'email' => 'subarjo@example.com',
             'role' => 'WALI',
-            'telepon' => '+624104028706',
+            'telepon' => '6282134698068',
+            'alamat' => 'Jl.kaliurang, km.10, sleman,Yogyakarta',
             'password' => Hash::make('sandi'),
+            'created_at' => now(),
         ]);
     }
 }

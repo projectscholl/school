@@ -101,12 +101,13 @@
                                                         @foreach ($kartuSPP['bulan'] as $bulan)
                                                             <tr>
                                                                 <td>
-                                                                    {{ \Carbon\Carbon::createFromFormat('d-m', $bulan)->format('F') }}
+                                                                    {{ \Carbon\Carbon::parse($bulan)->format('F') }}
                                                                 </td>
                                                                 <td>
-                                                                    <span class="badge bg-label-{{ $tagihanSPPs->where('start_date', $bulan)->first()->status == 'SUDAH' ? 'success' : 'danger' }}">
+                                                                    <span
+                                                                        class="badge bg-label-{{ $tagihanSPPs->where('start_date', $bulan)->first()->status == 'SUDAH' ? 'success' : 'danger' }}">
                                                                         {{ $tagihanSPPs->where('start_date', $bulan)->first()->status ?? 'BELUM' }}
-                                                                    </span>                                                                    
+                                                                    </span>
                                                                 </td>
                                                             </tr>
                                                         @endforeach

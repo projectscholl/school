@@ -31,6 +31,7 @@ class User extends Authenticatable
         'sebagai',
         'hubungan',
         'agama',
+        'alamat',
         'pekerjaan',
         'pendidikan',
         'password',

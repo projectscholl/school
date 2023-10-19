@@ -9,6 +9,7 @@ use App\Models\Tagihan;
 use App\Models\TagihanDetail;
 use App\Models\User;
 use App\Traits\Fonnte;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -62,18 +63,18 @@ class TenggatJob implements ShouldQueue
         $biaya = Biaya::with('tagihans')->get();
 
         foreach ($biaya as $biayas) {
-            $tagihans = Tagihan::with('biayas')->where('id_biayas', $biayas->id)->where('end_date', date('d-m'))->get();
+            $tagihans = Tagihan::with('biayas')->where('id_biayas', $biayas->id)->get();
             foreach ($tagihans as $tagihan) {
-                $tagihanDetail = TagihanDetail::where('id_tagihan', $tagihan->id)->where('end_date', $tagihan->end_date)->where('status', 'BELUM')->get();
+                $tagihanDetail = TagihanDetail::where('id_tagihan', $tagihan->id)->get();
                 foreach ($tagihanDetail as $tagihansT) {
-                    $user = Murid::with('User')->where('id', $tagihansT->id_murids)->get();
-                    foreach ($user as $users) {
-                        $wali = User::where('id', $users->id_users)->get();
-                        $notification = Notify::where('id', 2)->get();
-                        foreach ($wali as $keys => $walis) {
-                            $send = $notification[$keys]->notif . ' ' . $walis->name . ' ' . number_format($tagihan->amount, 2, ',', '.') . ' ' . url('http://127.0.0.1:8000/login-wali');
-                            $this->send_message($walis->telepon, $send);
-                            // Log::info($walis->telepon);
+                    if (Carbon::parse($tagihansT->end_date)->format('d-m') == date('d-m')) {
+                        $user = Murid::with('User')->where('id', $tagihansT->id_murids)->get();
+                        foreach ($user as $users) {
+                            $wali = User::where('id', $users->id_users)->get();
+                            $notification = Notify::where('id', 2)->first();
+                            $send = $notification->notif . ' ' . $users->User->name . ' ' . number_format($tagihan->total_biaya, 2, ',', '.') . ' ' . url('http://127.0.0.1:8000/login-wali');
+                            Log::info($tagihansT->User->telepon);
+                            // $this->send_message($walis->telepon, $send);
                         }
                     }
                 }

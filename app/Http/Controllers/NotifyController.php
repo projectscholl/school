@@ -37,7 +37,7 @@ class NotifyController extends Controller
             $tagihanGet = Tagihan::all();
             $notify->update($data);
             foreach ($tagihanGet as $index => $tagihs) {
-                $end_date = strtotime($notify->notif, strtotime($tagihs->end_date . '-' . date('Y'))); // foreach ($valid as $index => $n) {
+                $end_date = strtotime($notify->notif, strtotime($tagihs->end_date)); // foreach ($valid as $index => $n) {
                 $end_dates = date('d-m', $end_date);
                 $tagihanDetails = TagihanDetail::where('id_tagihan', $tagihs->id);
                 $tagihanDetails->update([

@@ -83,8 +83,8 @@ class AngkatanController extends Controller
     {
         $ids = $request->ids;
         $angkatan = Angkatan::whereIn('id', $ids);
-        $biayat = Biaya::where('id_angkatans', $ids)->first();
-        $murids = Murid::where('id_angkatans', $ids)->first();
+        $biayat = Biaya::whereIn('id_angkatans', $ids)->first();
+        $murids = Murid::whereIn('id_angkatans', $ids)->first();
 
 
         if ($biayat) {

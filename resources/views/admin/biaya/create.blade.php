@@ -102,13 +102,14 @@
                                                     @endforeach
                                                 </datalist>
                                             </td>
-                                            <input type="hidden" name="start_date[]" class="tess date1" value="01-07">
+                                            <input type="hidden" name="start_date[]" class="tess date1"
+                                                value="01-07-{{ $tahun }}">
 
                                             <td><select name="end_date[]" id="" class="form-select tess date2">
                                                     <option value="" disabled>Pilih Tanggal Pada Bulan Juli
                                                     </option>
                                                     @foreach ($tanggal as $tanggals)
-                                                        <option value="{{ $tanggals }}-07">
+                                                        <option value="{{ $tanggals }}-07-{{ $tahun }}">
                                                             {{ $tanggals }} Juli
                                                         </option>
                                                     @endforeach
@@ -143,13 +144,14 @@
                                                     @endforeach
                                                 </datalist>
                                             </td>
-                                            <input type="hidden" name="start_date[]" class="tess date1" value="01-08">
+                                            <input type="hidden" name="start_date[]" class="tess date1"
+                                                value="01-08-{{ $tahun }}">
 
                                             <td><select name="end_date[]" id="" class="form-select tess date2">
                                                     <option value="" disabled>Pilih Tanggal Pada Bulan Agustus
                                                     </option>
                                                     @foreach ($tanggal as $tanggals)
-                                                        <option value="{{ $tanggals }}-08">
+                                                        <option value="{{ $tanggals }}-08-{{ $tahun }}">
                                                             {{ $tanggals }} Agustus
                                                         </option>
                                                     @endforeach
@@ -182,12 +184,14 @@
                                                     @endforeach
                                                 </datalist>
                                             </td>
-                                            <input type="hidden" name="start_date[]" class="tess date1" value="01-09">
+                                            <input type="hidden" name="start_date[]" class="tess date1"
+                                                value="01-09-{{ $tahun }}">
                                             <td><select name="end_date[]" id="" class="form-select tess date2">
                                                     <option value="" disabled>Pilih Tanggal Pada Bulan September
                                                     </option>
                                                     @foreach ($tanggal as $tanggals)
-                                                        <option value="{{ $tanggals }}-09">{{ $tanggals }}
+                                                        <option value="{{ $tanggals }}-09-{{ $tahun }}">
+                                                            {{ $tanggals }}
                                                             September
                                                         </option>
                                                     @endforeach
@@ -221,12 +225,14 @@
                                                     @endforeach
                                                 </datalist>
                                             </td>
-                                            <input type="hidden" name="start_date[]" class="tess date1" value="01-10">
+                                            <input type="hidden" name="start_date[]" class="tess date1"
+                                                value="01-10-{{ $tahun }}">
                                             <td><select name="end_date[]" id="" class="form-select tess date2">
                                                     <option value="" disabled>Pilih Tanggal Pada Bulan Oktober
                                                     </option>
                                                     @foreach ($tanggal as $tanggals)
-                                                        <option value="{{ $tanggals }}-10">{{ $tanggals }}
+                                                        <option value="{{ $tanggals }}-10-{{ $tahun }}">
+                                                            {{ $tanggals }}
                                                             Oktober
                                                         </option>
                                                     @endforeach
@@ -260,13 +266,15 @@
                                                     @endforeach
                                                 </datalist>
                                             </td>
-                                            <input type="hidden" name="start_date[]" class="tess date1" value="01-11">
+                                            <input type="hidden" name="start_date[]" class="tess date1"
+                                                value="01-11-{{ $tahun }}">
                                             <td>
                                                 <select name="end_date[]" id="" class="form-select tess date2">
                                                     <option value="" disabled>Pilih Tanggal Pada Bulan November
                                                     </option>
                                                     @foreach ($tanggal as $tanggals)
-                                                        <option value="{{ $tanggals }}-11">{{ $tanggals }}
+                                                        <option value="{{ $tanggals }}-11-{{ $tahun }}">
+                                                            {{ $tanggals }}
                                                             November
                                                         </option>
                                                     @endforeach
@@ -299,13 +307,16 @@
                                                     @endforeach
                                                 </datalist>
                                             </td>
-                                            <input type="hidden" name="start_date[]" class="tess date1" value="01-12">
+                                            <input type="hidden" name="start_date[]" class="tess date1"
+                                                value="01-12-{{ $tahun }}">
 
                                             <td><select name="end_date[]" id="" class="form-select tess date2">
                                                     <option value="" disabled>Pilih Tanggal Pada Bulan Desember
                                                     </option>
                                                     @foreach ($tanggal as $tanggals)
-                                                        <option value="{{ $tanggals }}-12">{{ $tanggals }} Maret
+                                                        <option value="{{ $tanggals }}-12-{{ $tahun }}">
+                                                            {{ $tanggals }}
+                                                            Desember
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -318,7 +329,7 @@
                                         </tr>
                                         <tr>
                                             <td>7</td>
-                                            <td>Januari<input type="hidden" value="{{ $tahun }}-01-01"
+                                            <td>Januari<input type="hidden" value="{{ $tahun + 1 }}-01-01"
                                                     name="mounth[]" class="mounth tess"></td>
                                             <td> <input list="harga" name="amount[]"
                                                     class="form-control @error('amount.6')
@@ -337,13 +348,15 @@
                                                     @endforeach
                                                 </datalist>
                                             </td>
-                                            <input type="hidden" name="start_date[]" class="tess date1" value="01-01">
+                                            <input type="hidden" name="start_date[]" class="tess date1"
+                                                value="01-01-{{ $tahun + 1 }}">
 
                                             <td><select name="end_date[]" id="" class="form-select tess date2">
                                                     <option value="" disabled>Pilih Tanggal Pada Bulan Januari
                                                     </option>
                                                     @foreach ($tanggal as $tanggals)
-                                                        <option value="{{ $tanggals }}-01">{{ $tanggals }}
+                                                        <option value="{{ $tanggals }}-01-{{ $tahun + 1 }}">
+                                                            {{ $tanggals }}
                                                             Januari
                                                         </option>
                                                     @endforeach
@@ -357,7 +370,7 @@
                                         </tr>
                                         <tr>
                                             <td>8</td>
-                                            <td>Februari<input type="hidden" value="{{ $tahun }}-02-01"
+                                            <td>Februari<input type="hidden" value="{{ $tahun + 1 }}-02-01"
                                                     name="mounth[]" class="mounth tess"></td>
                                             <td> <input list="harga" name="amount[]"
                                                     class="form-control @error('amount.7')
@@ -376,12 +389,14 @@
                                                     @endforeach
                                                 </datalist>
                                             </td>
-                                            <input type="hidden" name="start_date[]" class="tess date1" value="01-02">
+                                            <input type="hidden" name="start_date[]" class="tess date1"
+                                                value="01-02-{{ $tahun + 1 }}">
                                             <td><select name="end_date[]" id="" class="form-select tess date2">
                                                     <option value="" disabled>Pilih Tanggal Pada Bulan February
                                                     </option>
                                                     @foreach ($tanggal2 as $tanggals2)
-                                                        <option value="{{ $tanggals2 }}-02">{{ $tanggals2 }}
+                                                        <option value="{{ $tanggals2 }}-02-{{ $tahun + 1 }}">
+                                                            {{ $tanggals2 }}
                                                             February
                                                         </option>
                                                     @endforeach
@@ -395,7 +410,7 @@
                                         </tr>
                                         <tr>
                                             <td>9</td>
-                                            <td>Maret<input type="hidden" value="{{ $tahun }}-03-01"
+                                            <td>Maret<input type="hidden" value="{{ $tahun + 1 }}-03-01"
                                                     name="mounth[]" class="mounth tess"></td>
                                             <td> <input list="harga" name="amount[]"
                                                     class="form-control @error('amount.8')
@@ -414,11 +429,13 @@
                                                     @endforeach
                                                 </datalist>
                                             </td>
-                                            <input type="hidden" name="start_date[]" class="tess date1" value="01-03">
+                                            <input type="hidden" name="start_date[]" class="tess date1"
+                                                value="01-03-{{ $tahun + 1 }}">
                                             <td><select name="end_date[]" id="" class="form-select tess date2">
                                                     <option value="" disabled>Pilih Tanggal Pada Bulan Maret</option>
                                                     @foreach ($tanggal as $tanggals)
-                                                        <option value="{{ $tanggals }}-03">{{ $tanggals }} Maret
+                                                        <option value="{{ $tanggals }}-03-{{ $tahun + 1 }}">
+                                                            {{ $tanggals }} Maret
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -431,7 +448,7 @@
                                         </tr>
                                         <tr>
                                             <td>10</td>
-                                            <td>April<input type="hidden" value="{{ $tahun }}-04-01"
+                                            <td>April<input type="hidden" value="{{ $tahun + 1 }}-04-01"
                                                     name="mounth[]" class="mounth tess"></td>
                                             <td> <input list="harga" name="amount[]"
                                                     class="form-control @error('amount.9')
@@ -450,11 +467,13 @@
                                                     @endforeach
                                                 </datalist>
                                             </td>
-                                            <input type="hidden" name="start_date[]" class="tess date1" value="01-04">
+                                            <input type="hidden" name="start_date[]" class="tess date1"
+                                                value="01-04-{{ $tahun }}">
                                             <td><select name="end_date[]" id="" class="form-select tess date2">
                                                     <option value="" disabled>Pilih Tanggal Pada Bulan April</option>
                                                     @foreach ($tanggal as $tanggals)
-                                                        <option value="{{ $tanggals }}-04">{{ $tanggals }} April
+                                                        <option value="{{ $tanggals }}-04-{{ $tahun + 1 }}">
+                                                            {{ $tanggals }} April
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -468,7 +487,7 @@
 
                                         <tr>
                                             <td>11</td>
-                                            <td>Mei <input type="hidden" value="{{ $tahun }}-05-01"
+                                            <td>Mei <input type="hidden" value="{{ $tahun + 1 }}-05-01"
                                                     name="mounth[]" class="mounth tess">
                                             </td>
                                             <td> <input list="harga" name="amount[]"
@@ -488,11 +507,13 @@
                                                     @endforeach
                                                 </datalist>
                                             </td>
-                                            <input type="hidden" name="start_date[]" class="tess date1" value="01-05">
+                                            <input type="hidden" name="start_date[]" class="tess date1"
+                                                value="01-05-{{ $tahun + 1 }}">
                                             <td><select name="end_date[]" id="" class="form-select tess date2">
                                                     <option value="" disabled>Pilih Tanggal Pada Bulan Mei</option>
                                                     @foreach ($tanggal as $tanggals)
-                                                        <option value="{{ $tanggals }}-05">{{ $tanggals }} Mei
+                                                        <option value="{{ $tanggals }}-05-{{ $tahun + 1 }}">
+                                                            {{ $tanggals }} Mei
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -504,7 +525,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>12 <input type="hidden" value="{{ $tahun }}-06-01"
+                                            <td>12 <input type="hidden" value="{{ $tahun + 1 }}-06-01"
                                                     name="mounth[]" class="mounth tess">
                                             </td>
                                             <td>Juni</td>
@@ -525,12 +546,14 @@
                                                     @endforeach
                                                 </datalist>
                                             </td>
-                                            <input type="hidden" name="start_date[]" class="tess date1" value="01-06">
+                                            <input type="hidden" name="start_date[]" class="tess date1"
+                                                value="01-06-{{ $tahun + 1 }}">
                                             <td>
                                                 <select name="end_date[]" id="" class="form-select tess date2">
                                                     <option value="" disabled>Pilih Tanggal Pada Bulan Juni</option>
                                                     @foreach ($tanggal as $tanggals)
-                                                        <option value="{{ $tanggals }}-06">{{ $tanggals }} Juni
+                                                        <option value="{{ $tanggals }}-06-{{ $tahun + 1 }}">
+                                                            {{ $tanggals }} Juni
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -571,7 +594,8 @@
                                         placeholder="Masukkan Nama Biaya">
                                         <option value="" disabled>Pilih Tanggal dan Bulan di Awal</option>
                                         @foreach ($tanggal3 as $index => $tree)
-                                            <option value="{{ $tanggal5[$index] }}-{{ $tree }}">
+                                            <option
+                                                value="{{ $tanggal5[$index] }}-{{ $tree }}-{{ $tahun }}">
                                                 {{ $tanggal5[$index] }}
                                                 {{ Carbon\Carbon::parse('1990-' . $tree)->format('F') }}
                                             </option>
@@ -588,7 +612,8 @@
                                     <select name="end_date[]" id="" class="form-select optional time2">
                                         <option value="" disabled>Pilih Tanggal dan Bulan di Akhir</option>
                                         @foreach ($tanggal3 as $index => $tree)
-                                            <option value="{{ $tanggal4[$index] }}-{{ $tree }}">
+                                            <option
+                                                value="{{ $tanggal4[$index] }}-{{ $tree }}-{{ $tahun }}">
                                                 {{ $tanggal4[$index] }}
                                                 {{ Carbon\Carbon::parse('1990-' . $tree)->format('F') }}
                                             </option>

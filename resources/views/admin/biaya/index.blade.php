@@ -287,11 +287,6 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     form.submit();
-                    Swal.fire(
-                        'Terhapus!',
-                        'Kamu telah menghapus Biaya!!.',
-                        'success'
-                    )
                 }
             });
         });

@@ -42,6 +42,7 @@ class WaliMuridController extends Controller
         $data = $request->validate([
             'name' => 'required|max:255|string',
             'email' => 'required|email|unique:users',
+            'alamat' => 'required|string',
             'telepon' => 'required|min:12|max:12|regex:/^08\d+$/',
             'hubungan' => 'required|string',
             'image' => 'nullable|mimes:jpeg,png,gif',
@@ -96,6 +97,7 @@ class WaliMuridController extends Controller
         $data = $request->validate([
             'name' => 'max:255|string',
             'email' => 'email|unique:users,email,' . $id,
+            'alamat' => 'required',
             'telepon' => 'required|min:12|max:12|regex:/^08\d+$/',
             'hubungan' => 'required',
             // 'password' => 'required',
@@ -104,6 +106,7 @@ class WaliMuridController extends Controller
 
         $telepon = ltrim($data['telepon'], '0');
         $data['telepon'] = '62' . $telepon;
+        $data['alamat'] = $request->alamat;
         // dd($user);
         $user->update($data);
         return redirect()->route('admin.walimurid.index')->with('success', "Data Wali Murid berhasil diperbarui!!");

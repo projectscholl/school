@@ -43,7 +43,7 @@ class NotificationCron extends Command
         $biaya = Biaya::with('tagihans')->get();
 
         foreach ($biaya as $biayas) {
-            $tagihans = Tagihan::with('biayas')->where('id_biayas', $biayas->id)->where('end_date', date('d-m'))->get();
+            $tagihans = Tagihan::with('biayas')->where('id_biayas', $biayas->id)->where('end_date', date('Y-m-d'))->get();
             foreach ($tagihans as $tagihan) {
                 $tagihanDetail = TagihanDetail::where('id_tagihan', $tagihan->id)->where('end_date', $tagihan->end_date)->where('status', 'BELUM')->get();
                 foreach ($tagihanDetail as $tagihansT) {
@@ -52,8 +52,8 @@ class NotificationCron extends Command
                         $wali = User::where('id', $users->id_users)->get();
                         $notification = Notify::where('id', 2)->get();
                         foreach ($wali as $keys => $walis) {
-                            $tanggal = date("j F", strtotime($tagihansT->end_date . '-' . date('Y')));
-                            $dates = strtotime($tagihansT->end_date . '-' . date('Y')) + (86400 * 15);
+                            $tanggal = date("j F", strtotime($tagihansT->end_date));
+                            $dates = strtotime($tagihansT->end_date) + (86400 * 15);
                             if ($dates < time()) {
                                 $send = $notification[$keys]->notif . ' ' . $users->name . ' ' . number_format($tagihansT->total_biaya, 2, ',', '.') . ' ' . url('http://127.0.0.1:8000/login-wali');
                                 $this->send_message($walis->telepon, $send);

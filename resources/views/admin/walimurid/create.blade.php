@@ -42,6 +42,14 @@
                                 @enderror
                             </div>
                             <div class="form-group mb-3">
+                                <label for="sebagai" class="mb-3">Alamat</label>
+                                <input type="text" class="form-control" name="alamat" id="alamat"
+                                    placeholder="Jl.betutu">
+                                @error('alamat')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-3">
                                 <label for="content" class="mb-3">Password</label>
                                 <input type="password" class="form-control" name="password" id="password"
                                     placeholder="Masukkan Password" required>

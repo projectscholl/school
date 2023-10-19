@@ -41,11 +41,11 @@ class BiayaController extends Controller
         if (!empty($filterJurusan)) {
             $biayas->where('id_jurusans', $filterJurusan);
         }
-    
+
         if (!empty($filterKelas)) {
             $biayas->where('id_kelas', $filterKelas);
         }
-        
+
         $biayas->orderBy('created_at', 'desc')->get();
         $biayaAll = $biayas->get();
 
@@ -119,7 +119,7 @@ class BiayaController extends Controller
             $murid = Murid::with('User')->where('id_angkatans', $biaya->id_angkatans)->where('id_jurusans', $biaya->id_jurusans)->where('id_kelas', $biaya->id_kelas)->get();
             $tenggat = Notify::where('id', 4)->first();
             foreach ($murid as $key => $murids) {
-                $end_date = strtotime($tenggat->notif, strtotime($dateEnd[$index] . '-' . date('Y'))); // foreach ($valid as $index => $n) {
+                $end_date = strtotime($tenggat->notif, strtotime($dateEnd[$index])); // foreach ($valid as $index => $n) {
                 $end_dates = date('d-m', $end_date);
                 // print_r($end_dates);
                 TagihanDetail::create([
@@ -202,8 +202,9 @@ class BiayaController extends Controller
             $tagihanGet = Tagihan::where('id', $ids[$keys])->get();
             $tenggat = Notify::where('id', 4)->first();
             foreach ($tagihanGet as $index => $tagihs) {
-                $end_date = strtotime($tenggat->notif, strtotime($dateEnd[$keys] . '-' . date('Y'))); // foreach ($valid as $index => $n) {
+                $end_date = strtotime($tenggat->notif, strtotime($dateEnd[$keys])); // foreach ($valid as $index => $n) {
                 $end_dates = date('d-m', $end_date);
+                // dd($end_dates);
                 $tagihanDetails = TagihanDetail::where('id_tagihan', $tagihs->id);
                 $tagihanDetails->update([
                     'start_date' => $dateStart[$keys],
@@ -250,6 +251,6 @@ class BiayaController extends Controller
         $tagihan->delete();
         $biaya->delete();
 
-        return redirect()->route('admin.biaya.index');
+        return redirect()->route('admin.biaya.index')->with('success', 'Berhasil menghapus biaya ' . $biaya->nama_biaya);
     }
 }
