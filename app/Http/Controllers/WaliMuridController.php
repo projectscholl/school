@@ -16,8 +16,8 @@ class WaliMuridController extends Controller
     {
         $instansi = Instansi::first();
         $user = Auth::user();
-        $walimurids = User::where('role', 'WALI')->get();
-        return view('admin.walimurid.index', compact('walimurids', 'user','instansi'));
+        $walimurids = User::where('role', 'WALI')->orderBy('id', 'desc')->get();
+        return view('admin.walimurid.index', compact('walimurids', 'user', 'instansi'));
     }
 
     /**
@@ -36,26 +36,33 @@ class WaliMuridController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'telepon.regex' => 'Nomor telepon harus diawali 08'
+        ];
         $data = $request->validate([
             'name' => 'required|max:255|string',
             'email' => 'required|email|unique:users',
-            'telepon' => 'required|string',
+            'alamat' => 'required|string',
+            'telepon' => 'required|min:12|max:12|regex:/^08\d+$/',
+            'hubungan' => 'required|string',
             'image' => 'nullable|mimes:jpeg,png,gif',
             'password' => 'required',
-        ]);
+        ], $messages);
 
         $data['password'] = Hash::make($request->password);
         $data['role'] = 'WALI';
-
+        $telepon = ltrim($data['telepon'], '0');
+        $data['telepon'] = '62' . $telepon;
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
-            $request->image->storeAs('public/image', $imageName); 
-            $data['image'] = '' . $imageName; 
+            $request->image->storeAs('public/image', $imageName);
+            $data['image'] = '' . $imageName;
         }
 
         $user = User::create($data);
+        activity()->causedBy(Auth::user())->event('created')->log('User operator ' . auth()->user()->name . ' melakukan tambah data' . $user->name);
 
-        return redirect()->route('admin.walimurid.index')->with('message', 'Wali murid berhasil ditambahkan!');
+        return redirect()->route('admin.walimurid.index')->with('success', 'Wali murid berhasil ditambahkan!');
     }
 
     /**
@@ -84,18 +91,39 @@ class WaliMuridController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'telepon.regex' => 'Nomor telepon harus diawali 08'
+        ];
         $data = $request->validate([
             'name' => 'max:255|string',
             'email' => 'email|unique:users,email,' . $id,
-            'telepon' => 'required|string',
+            'alamat' => 'required',
+            'telepon' => 'required|min:12|max:12|regex:/^08\d+$/',
+            'hubungan' => 'required',
             // 'password' => 'required',
-        ]);
+        ], $messages);
         $user = User::find($id);
+
+        $telepon = ltrim($data['telepon'], '0');
+        $data['telepon'] = '62' . $telepon;
+        $data['alamat'] = $request->alamat;
         // dd($user);
         $user->update($data);
-        return redirect()->route('admin.walimurid.index')->with('pesan', "Data Wali Murid berhasil diperbarui!!");
+        return redirect()->route('admin.walimurid.index')->with('success', "Data Wali Murid berhasil diperbarui!!");
     }
+    public function deleteSelect(Request $request)
+    {
+        $ids = $request->ids;
 
+        $user = User::whereIn('id', $ids);
+        $murid = Murid::whereIn('id_users', $ids);
+        $murid->update([
+            'id_users' => null,
+        ]);
+        $user->delete();
+
+        return redirect()->route('admin.walimurid.index')->with('success', 'Data W  alimurid berhasil dihapus');
+    }
     /**
      * Remove the specified resource from storage.
      */
@@ -103,6 +131,6 @@ class WaliMuridController extends Controller
     {
         $waliMurid =  User::findOrFail($id);
         $waliMurid->delete();
-        return redirect()->route('admin.walimurid.index')->with('delete', "Wali Murid Berhasil Dihapus!!");
+        return redirect()->route('admin.walimurid.index')->with('success', "Data Walimurid Berhasil Dihapus!!");
     }
 }

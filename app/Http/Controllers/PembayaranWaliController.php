@@ -9,14 +9,23 @@ use App\Models\Murid;
 use App\Models\Pembayaran;
 use App\Models\Tagihan;
 use App\Models\TagihanDetail;
+use App\Models\User;
+use App\Notifications\PembayaransNotifications;
+use App\Traits\Ipaymu;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Redirect;
+
 
 class PembayaranWaliController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
+    use Ipaymu;
     public function index(string $id, $IdMurid)
     {
         $instansi = Instansi::first();
@@ -36,22 +45,42 @@ class PembayaranWaliController extends Controller
             'rek_pengirim' => 'required|max:16|min:16',
             'bukti_transaksi' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'identitas_penerima' => 'required',
-            'total_bayar' => 'required'
-        ]);        
+            'total_bayar' => 'required',
+        ]);
+
 
         
-        $imagePath = $request->file('bukti_transaksi')->store('public/image');
+        if ($request->hasFile('bukti_transaksi')) {
+            $imagePath = $request->file('bukti_transaksi')->store('public/image');
+            $imageName = basename($imagePath);
+            $data['bukti_transaksi'] = $imageName;
+        }
         
-        $imageName = basename($imagePath);
-        $data['id_tagihan_details'] = $request->input('id_tagihan_details');
+        $idTagihanDetails = $request->input('id_tagihan_details');
+
         $data['id_users'] = Auth::id();
-
-        // Simpan data ke dalam database
+        $data['year'] = date('Y');
+        $pembayarans = Pembayaran::create($data);
+        $userAdmin = User::where('role', 'ADMIN')->get();
+        Notification::send($userAdmin, new PembayaransNotifications($pembayarans));
+        foreach ($idTagihanDetails as $idTagihanDetail) {
+            $tagihanDetail = TagihanDetail::find($idTagihanDetail);
+            $tagihanDetail->update(['id_pembayarans' => $pembayarans->id]);
+        }
         // dd($data);
-        Pembayaran::create($data);
 
         return redirect()->route('wali.tagihan.index')->with('message', 'Pembayaran Berhasil, Silakan Tunggu Konfirmasi Dari Admin');
+        // return redirect()->route('wali.tagihan.index');
     }
+
+    public function result()
+    {
+    $user = Auth::user(); 
+    $pembayaran = Pembayaran::where('id_users', $user->id)->get();
+
+    return view('wali.tagihan.result', compact('pembayaran'));
+    }
+
 
 
     /**
@@ -66,18 +95,14 @@ class PembayaranWaliController extends Controller
         $murid = Murid::find($IdMurid);
 
         if (!$request->amount) {
-            return redirect()->route('wali.tagihan.pembayaran', $biaya->id . '?idmurid=' . $murid->id)->with('error', 'Pilih setidaknya satu tagihan.');
+            return redirect()->route('wali.tagihan.pembayaran', ['id' => $biaya->id, 'idmurid' => $murid->id])->with('error', 'Pilih setidaknya satu tagihan.');
+
         }
 
-            foreach ($request->amount as $key => $value) {
-                $tagihans[] = TagihanDetail::where('id', $key)->first()->jumlah_biaya;
-                $tagihanDetails[] = TagihanDetail::where('id', $key)->first();
-                // dd($request->all());
-                // $bill = Tagihan::where('id_biayas',$biaya->id)->get();
-                // foreach($bill as $bills){
-                //     $tagihan = $bills->id;
-                // }
-            }
+        foreach ($request->amount as $key => $value) {
+            $tagihans[] = TagihanDetail::where('id', $key)->first()->jumlah_biaya;
+            $tagihanDetails[] = TagihanDetail::where('id', $key)->first();
+        }
 
         session(['tagihans' => array_sum($tagihans)]);
         session(['id_tagihans' => $id_tagihans]);
@@ -118,6 +143,84 @@ class PembayaranWaliController extends Controller
         }
 
         return view('wali.tagihan.bayar', compact('instansi', 'bank', 'tagihan', 'totalTagihan', 'id_tagihans', 'murid', 'tagihans', 'tagihanDetails'));
+    }
+    public function bayarCash(Request $request, $id)
+    {
+        $tagihan = $request->id;
+        foreach ($tagihan as $idTagihan) {
+            $tagihans = TagihanDetail::where('id', $idTagihan)->get();
+            foreach ($tagihans as $t) {
+                $jumlahBiaya[] = $t->jumlah_biaya;
+            }
+        }
+        $total = array_sum($jumlahBiaya);
+        $murid = Murid::where('id', $id)->first();
+        return view('admin.murid.bayar', compact('tagihan', 'total', 'murid'));
+    }
+
+    public function bayarCashProses(Request $request, $id)
+    {
+
+        $data = $request->validate([
+            'total_bayar' => 'required',
+        ]);
+        $total = $request->total_bayar;
+        $ids = $request->id;
+        $auth = Auth::user();
+        $murid = Murid::find($id);
+
+        $pembayarans =  Pembayaran::create([
+            'id_users' => $auth->id,
+            'total_bayar' => $total,
+            'payment_links' => 'Cash',
+            'payment_status' => 'berhasil',
+            'nama_pengirim' => $auth->name,
+            'year' => date('Y'),
+        ]);
+        $namaBiaya = TagihanDetail::where('id', $ids)->first()->nama_biaya;
+        foreach ($ids as $keys => $id_details) {
+
+            $tagihandetail = TagihanDetail::where('id', $id_details);
+            $sudah = 'SUDAH';
+            $tagihandetail->update([
+                'id_pembayarans' => $pembayarans->id,
+                'status' => $sudah,
+            ]);
+        }
+        return redirect()->route('admin.murid.index')->with('berhasil', "Berhasil Membayar!!");
+    }
+
+    public function payIpaymu(Request $request, $id,  $idmurid)
+    {
+        $data = $request->validate([
+            'total' => 'required',
+            'tagihanDetails.*' => 'required',
+        ]);
+        $total = $request->total;
+        $id_tagihan = $request->input('tagihanDetails');
+        $id_tagihan = array_map('strip_tags', $id_tagihan);
+        $id_tagihan = array_map('htmlspecialchars', $id_tagihan);
+        // print_r($id_tagihan);
+        $biaya = Biaya::find($id);
+        $payment = json_decode(json_encode($this->redirect_payment($id,  $total, $id_tagihan)), true);
+        // dd($payment);
+        $pembayaran = Pembayaran::create([
+            'id_users' => Auth::user()->id,
+            'payment_status' => 'pending',
+            'payment_links' => $payment['Data']['Url'],
+            'total_bayar' => $total,
+            'bukti_transaksi' => $payment['Data']['SessionID'],
+            'year' => date('Y'),
+        ]);
+        foreach ($id_tagihan as $tagihandetails) {
+            $idTagihan = TagihanDetail::where('id', $tagihandetails);
+
+            $idTagihan->update([
+                'id_pembayarans' => $pembayaran->id,
+            ]);
+        }
+
+        return Redirect::to($pembayaran->payment_links);
     }
 
 

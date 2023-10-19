@@ -14,11 +14,18 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->foreignId('id_orangtua')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['ADMIN', 'WALI']);
+            $table->integer('status')->default(1)->nullable();
             $table->string('telepon');
+            $table->string('hubungan')->nullable();
+            $table->string('agama')->nullable();
+            $table->string('pekerjaan')->nullable();
+            $table->string('pendidikan')->nullable();
+            $table->text('alamat')->nullable();
             $table->string('image')->nullable();
             $table->rememberToken();
             $table->timestamps();

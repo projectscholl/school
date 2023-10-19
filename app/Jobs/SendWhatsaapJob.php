@@ -6,8 +6,10 @@ use App\Models\Biaya;
 use App\Models\Murid;
 use App\Models\Notify;
 use App\Models\Tagihan;
+use App\Models\TagihanDetail;
 use App\Models\User;
 use App\Traits\Fonnte;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -35,19 +37,34 @@ class SendWhatsaapjob implements ShouldQueue
     public function handle()
     {
         //
+        //Whatsaap 
         $biaya = Biaya::with('tagihans')->get();
-        // $tagihan = $biaya->tagihans;
-        // $user = User::with('murids')->get();
+        // $time = strtotime('-10 days', strtotime($tagihanDetails->end_date . '-' . date('Y')));
+        // $times = strtotime($tagihanDetails->end_date . '-' . date('Y')) - (86400 * 10);
+        // foreach ($tagihanDetail as $tagihanDetails) {
+        //     if ($tagihanDetails->status == 'BELUM') {
+        //         $time = strtotime($tagihanDetails->end_date . '-' . date('Y')) - (86400 * 10);
+        //         Log::info(time());
+        //     }
+        // }
+        // $date = Carbon::parse(date('Y-m-d'))->format('F');
+        // $dates = Carbon::parse('1990-09-09')->format('F');
+        // $to = 'adsdad';
+        // if ($date == $dates) {
+        //     Log::info($dates);
+        // }
 
-        // $send = "Assalamualaikum Wr.Wb Bapak/Ibu $user->name Kami ingin Mengumumkan Tagihan Untuk Saudara " . $user->murids->name . "." . "<br>" . "Untuk Biaya $biaya->nama_biaya " . " " . "Dengan Total " . $tagihan->amount;
-        foreach ($biaya as $biayas) {
-            $tagihans = Tagihan::where('id_biayas', $biayas->id)->where('end_date', date('Y-m-d'))->get();
-            foreach ($tagihans as $tagihan) {
-                $user = murid::with('User')->where('id_angkatans', $biayas->id_angkatans)->where('id_jurusans', $biayas->id_jurusans)->where('id_kelas', $biayas->id_kelas)->get();
-                $tagihan = Notify::where('id', 2)->get();
+        //Tagihan mencapai 10 before tenggat
+        $tagihanDetail = TagihanDetail::with('tagihan')->where('bulan', date('d-m'))->get();
+        foreach ($tagihanDetail as $tagihanDetails) {
+            $strtotime = strtotime($tagihanDetails->bulan . '-' . date('Y'));
+            if (date('Y-m-d', $strtotime) == date('Y-m-d')) {
+                $user = Murid::where('id', $tagihanDetails->id_murids)->get();
+                $tagihan = Tagihan::where('id', $tagihanDetails->id_tagihan)->get();
                 foreach ($user as $users) {
-                    $send =  $tagihan . $users->User->name . "Kami ingin Mengumumkan Tagihan Untuk Saudara " . $users->name . "." . "<br>" . "Untuk Biaya $biayas->nama_biaya " . " " . "Bulan $tagihan->mounth" . "Dengan Total " . $tagihan->amount;
-                    $this->send_message($send, $users->User->telepon);
+                    $send = 'Assalammualaikum warahmatullahi wabarakatu yang terhormat Bapak / ibu ' . $users->User->name . 'Kami informasikan ada Tagihan yang ada ' . $tagihanDetails->nama_biaya;
+                    $this->send_message($users->User->telepon, $send);
+                    // Log::info($users->User->telepon);
                 }
             }
         }

@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_tagihans');
             $table->foreignId('id_users');
-            $table->string('payment_status')->default('Belum Di Konfirmasi');
+            $table->string('payment_status')->default('PENDING');
             $table->string('payment_links')->nullable();
             $table->string('total_bayar');
             $table->string('nama_pengirim')->nullable();

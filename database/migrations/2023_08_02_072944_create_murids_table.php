@@ -14,8 +14,13 @@ return new class extends Migration
         Schema::create('murids', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_users')->nullable();
+            $table->foreignId('id_ayah')->nullable();
+            $table->foreignId('id_ibu')->nullable();
             $table->string('name');
             $table->string('nisn');
+            $table->date('tanggal_lahir');
+            $table->string('agama');
+            $table->string('jenis_kelamin');
             $table->foreignId('id_angkatans')->nullable();
             $table->foreignId('id_jurusans')->nullable();
             $table->foreignId('id_kelas')->nullable();

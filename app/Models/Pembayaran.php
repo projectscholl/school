@@ -10,7 +10,6 @@ class Pembayaran extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_tagihan_details',
         'amount',
         'mounth',
         'id_users',
@@ -20,15 +19,29 @@ class Pembayaran extends Model
         'rek_pengirim',
         'bukti_transaksi',
         'total_bayar',
-        'identitas_penerima'
+        'identitas_penerima',
+        'year'
     ];
-
-    public function TagihanDetail()
+    public function users()
     {
-        return $this->belongsTo(TagihanDetail::class, 'id_tagihan_details');
+        return $this->belongsTo(User::class, 'id_users');
     }
     public function murids()
     {
-        return $this->belongsTo(Murid::class, 'id_users'); 
+        return $this->belongsTo(Murid::class, 'id_users');
+    }
+    public function tagihanDetails()
+    {
+        return $this->hasMany(TagihanDetail::class, 'id_pembayarans');
+    }
+    public function getPaymentTypeAttribute()
+    {
+        if ($this->payment_links == 'Cash') {
+            return 'Cash';
+        } elseif ($this->payment_links == NULL) {
+            return 'Bank';
+        } else {
+            return 'Pembayaran Online';
+        }
     }
 }

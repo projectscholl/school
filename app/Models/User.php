@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class User extends Authenticatable
 {
@@ -17,12 +19,21 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
     protected $fillable = [
         'name',
         'email',
         'telepon',
+        'id_orangtua',
         'image',
         'role',
+        'status',
+        'sebagai',
+        'hubungan',
+        'agama',
+        'alamat',
+        'pekerjaan',
+        'pendidikan',
         'password',
     ];
 
@@ -45,9 +56,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
     public function murids()
     {
         return $this->hasMany(Murid::class, 'id_users');
+    }
+    public function orangtua()
+    {
+        return $this->belongsTo(Orangtua::class, 'id_orangtua');
     }
 }

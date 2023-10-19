@@ -49,7 +49,8 @@
                                                 class="form-control @error('telepon')
                                                 is-invalid
                                             @enderror"
-                                                type="number" name="telepon" value="{{ $user->telepon }}" />
+                                                type="number" name="telepon"
+                                                value="{{ str_replace('62', '0', $user->telepon) }}" />
                                             @error('telepon')
                                                 <div id="validationServer05Feedback" class="invalid-feedback">
                                                     {{ $message }}
@@ -80,7 +81,7 @@
                                             <input
                                                 class="form-control @error('current_password')
                                                 is-invalid
-                                            @enderror"
+                                            @enderror"  value="{{ old('password') }}"
                                                 type="password" id="password" name="password" placeholder="" />
                                         </div>
                                         <div class="mb-3 col-md-6">

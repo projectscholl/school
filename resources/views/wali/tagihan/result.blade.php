@@ -27,19 +27,19 @@
                                 </thead>
                                 <tbody class="table-border-bottom-0">
                                     <tr>
-                                        <td>Nama Murid : <strong> }}</strong></td>
+                                        <td>Nama Murid : <strong></strong></td>
                                     </tr>
                                     <tr>
-                                        <td>Nama Wali Murid : <strong>->name }}</strong></td>
+                                        <td>Nama Wali Murid : <strong>-></strong></td>
                                     </tr>
                                     <tr>
-                                        <td>Angkatan : <strong>->tahun }}</strong></td>
+                                        <td>Angkatan : <strong></strong></td>
                                     </tr>
                                     <tr>
-                                        <td>Jurusan : <strong> {jurusans->nama }}</strong></td>
+                                        <td>Jurusan : <strong></strong></td>
                                     </tr>
                                     <tr>
-                                        <td>Kelas : <strong>->kelas }}</strong></td>
+                                        <td>Kelas : <strong></strong></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -69,14 +69,19 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
+                                    @foreach ($pembayaran as $pembayar)
                                     <tr>
-                                        <td>Metode Pembayaran : <strong>Online</strong></td>
+                                        <td>Metode Pembayaran : <strong>@if ($pembayar->payment_links)
+                                            iPaymu
+                                        @else
+                                            Bank
+                                        @endif</td></strong></td>
                                     </tr>
                                     <tr>
-                                        <td>Tanggal Pembayaran : <strong class="">25/05/2050</strong></td>
+                                        <td>Tanggal Pembayaran : <strong class="">{{ $pembayar->created_at->format('d/m/Y') }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Total Tagihan : <strong class="">Rp {{ number_format($tagihans) }}</strong></td>
+                                        <td>Total Tagihan : <strong class="">Rp {{ number_format($pembayar->total_bayar)}}</strong></td>
                                     </tr>
                                     <tr>
                                         <td>Jumlah Pembayaran : <strong class="">1000.000</strong></td>
@@ -87,7 +92,7 @@
                                     <tr>
                                         <td>Status Konfirmasi : <strong class="">Pending</strong></td>
                                     </tr>
-                                    <tr></tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

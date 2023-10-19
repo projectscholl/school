@@ -4,16 +4,31 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Murid extends Model
 {
     use HasFactory;
+    use LogsActivity;
 
 
 
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()->logAll()->logOnlyDirty();
+    }
     public function User()
     {
         return $this->belongsTo(User::class, 'id_users')->where('role', 'WALI');
+    }
+    public function ayahs()
+    {
+        return $this->belongsTo(Orangtua::class, 'id_ayah')->where('sebagai', 'Ayah');
+    }
+    public function ibus()
+    {
+        return $this->belongsTo(Orangtua::class, 'id_ibu')->where('sebagai', 'Ibu');
     }
 
     public function angkatans()
@@ -50,8 +65,13 @@ class Murid extends Model
 
     protected $fillable = [
         'id_users',
+        'id_ayah',
+        'id_ibu',
         'name',
         'nisn',
+        'tanggal_lahir',
+        'agama',
+        'jenis_kelamin',
         'id_jurusans',
         'id_kelas',
         'id_angkatans',

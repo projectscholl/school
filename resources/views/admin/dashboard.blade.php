@@ -2,17 +2,11 @@
 
 @section('title', 'Admin')
 @section('content')
-    <!-- Layout wrapper -->
-    <!-- Menu -->
-    <!-- sidebar -->
-    <!-- Layout container -->
     <div class="layout-page">
 
         <!-- Navbar -->
         <x-navbar></x-navbar>
-
         <!-- / Navbar -->
-
         <!-- Content wrapper -->
         <div class="content-wrapper">
             <!-- Content -->
@@ -28,8 +22,7 @@
                                             {{ $user->name }}
                                             🎉</h5>
                                         <p class="mb-4">
-                                            Kamu mendapatkan <span class="fw-bold">10</span> notifikasi
-                                            konfirmasi belum dilihat
+                                            Kamu mendapatkan <span class="fw-bold">{{ auth()->user()->unreadNotifications->count() }}</span> Notifikasi
                                         </p>
                                     </div>
                                 </div>
@@ -58,7 +51,7 @@
                                             </div>
                                         </div>
                                         <span class="fw-semibold d-block mb-1">Total Murid</span>
-                                        <h3 class="card-title mb-4">{{ $jumlahMurid }}</h3>
+                                        <h3 class="card-title mb-2">{{ $jumlahMurid }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -72,8 +65,8 @@
                                             </div>
                                         </div>
                                         <span class="fw-semibold d-block mb-1">Total Sudah Bayar</span>
-                                        <h3 class="card-title mb-1">0</h3>
-                                        <small class="text-success fw-semibold"><strong>Rp1.000.000</strong></small>
+                                        <h3 class="card-title mb-2">{{ $pembayaranDikonfirmasi }}</h3> 
+                                        <small class="text-success fw-semibold"><strong>Rp {{ number_format($pembayaranTotal) }}</strong></small>
                                     </div>
                                 </div>
                             </div>
@@ -148,40 +141,13 @@
                 </div> --}}
             </div>
         </div>
-        <!-- / Content -->
-
-        <!-- Footer -->
-        <footer class="content-footer footer bg-footer-theme">
-            <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                    ©
-                    <script>
-                        document.write(new Date().getFullYear());
-                    </script>
-                    , made with ❤️ by
-                    <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                </div>
-                <div>
-                    <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                    <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
-                        Themes</a>
-
-                    <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                        target="_blank" class="footer-link me-4">Documentation</a>
-
-                    <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank"
-                        class="footer-link me-4">Support</a>
-                </div>
-            </div>
-        </footer>
-        <!-- / Footer -->
 
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <script>
             var xValues = ["Lunas", "Belum Bayar"];
-            var yValues = [55, 49];
+            var yValues = [{{ $jumlahLunas }}, {{ $jumlahBelumBayar }}];
             var barColors = [
                 "#EEFBE7",
                 "#e0f7fc",
@@ -206,8 +172,8 @@
         </script>
 
         <script>
-            var xValues = ["Dikonfirmasi", "Belum Dikonfirmasi"];
-            var yValues = [55, 49];
+            var xValues = ["berhasil", "Pending"];
+            var yValues = [{{ $pembayaranDikonfirmasi }}, {{ $pembayaranBelum_Dikonfirmasi }}];
             var barColors = [
                 "#EEFBE7",
                 "#e0f7fc",

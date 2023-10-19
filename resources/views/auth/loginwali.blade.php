@@ -1,4 +1,7 @@
 <!-- Content -->
+@php
+    $instansi = \App\Models\Instansi::first();
+@endphp
 <!DOCTYPE html>
 
 <html lang="en" class="light-style customizer-hide" dir="ltr" data-theme="theme-default"
@@ -64,7 +67,8 @@
                         <!-- Logo -->
                         <div class="app-brand justify-content-center">
                             <a href="index.html" class="app-brand-link gap-2">
-                                <img src="{{ asset('storage/image/tutwuri1.png') }}" alt="" width="50">
+                                <img src="{{ asset('storage/image/' . $instansi->logo) }}" alt=""
+                                    width="50">
                                 <span class="app-brand-text demo text-body fw-bolder text-capitalize">TADIKA</span>
                             </a>
                         </div>

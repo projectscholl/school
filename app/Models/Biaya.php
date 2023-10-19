@@ -5,10 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Biaya extends Model
 {
     use HasFactory;
+    use LogsActivity;
+
 
     protected $fillable = [
         'id_angkatans',
@@ -18,6 +22,10 @@ class Biaya extends Model
         'jenis_biaya',
     ];
 
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()->logAll()->logOnlyDirty();
+    }
     public function angkatans()
     {
         return $this->belongsTo(Angkatan::class, 'id_angkatans');
@@ -37,11 +45,12 @@ class Biaya extends Model
             ->where('id_jurusans', $this->id_jurusans)
             ->where('id_kelas', $this->id_kelas);
     }
-
-
-
     public function tagihans()
     {
         return $this->hasMany(Tagihan::class, 'id_biayas');
+    }
+    public function pembayaran()
+    {
+        return $this->hasOne(Pembayaran::class);
     }
 }

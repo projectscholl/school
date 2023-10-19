@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('pembayarans', function (Blueprint $table) {
-            $table->renameColumn('id_tagihans','id_tagihan_details');
+        Schema::create('biaya_masters', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->bigInteger('harga');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('pembayarans', function (Blueprint $table) {
-            $table->renameColumn('id_tagihan_details','id_tagihans');
-        });
+        Schema::dropIfExists('biaya_masters');
     }
 };
