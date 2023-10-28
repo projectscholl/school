@@ -25,7 +25,6 @@
                         </div>
                         <form action="{{ route('admin.biaya.store') }}" method="POST" id="form">
                             @csrf
-
                             <div class="form-group mb-3">
                                 <label for="nama">Nama Biaya</label>
                                 <input type="text"
@@ -785,6 +784,8 @@
             updateKelasOptions();
         });
     </script>
+
+    <!--Input All-->
     <script type="text/javascript">
         document.getElementById("tombol_form").addEventListener("click", tampilkan_nilai_form);
 
@@ -798,6 +799,8 @@
             }
         }
     </script>
+
+    <!--Fitur Menghilangkan Input-->
     <script type="text/javascript">
         const status = document.getElementById('status');
         status.dispatchEvent(new Event('change'));

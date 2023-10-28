@@ -30,7 +30,7 @@
                                     <form action="{{ route('admin.pesan-whatsaap.update', $notif->id) }}" method="POST">
                                         @csrf
                                         @method('PUT')
-                                        <label for="" class="mb-2">Notification Tagihan</label>
+                                        <label for="" class="mb-2">Notification Jatuh tempo</label>
                                         <input type="text" name="notif" value="{{ $notif->notif }}"
                                             class="form-control mb-3">
                                         <button class="btn btn-primary">Submit</button>
@@ -43,7 +43,7 @@
                                     <form action="{{ route('admin.pesan-whatsaap.update', $notif2->id) }} "method="POST">
                                         @csrf
                                         @method('PUT')
-                                        <label for="" class="mb-2">Notification Tenggat</label>
+                                        <label for="" class="mb-2">Notification Sebelum Jatuh tempo</label>
                                         <input type="text" name="notif" value="{{ $notif2->notif }}"
                                             class="form-control mb-3">
                                         <button class="btn btn-primary">Submit</button>
@@ -55,7 +55,7 @@
                                     <form action="{{ route('admin.pesan-whatsaap.update', $notif3->id) }}" method="POST">
                                         @csrf
                                         @method('PUT')
-                                        <label for="" class="mb-2">Notification Confirmation</label>
+                                        <label for="" class="mb-2">Notification Penagihan Tunggakan</label>
                                         <input type="text" name="notif" value="{{ $notif3->notif }}"
                                             class="form-control mb-3">
                                         <button class="btn btn-primary">Submit</button>
@@ -100,8 +100,7 @@
 @push('scripts')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
         integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"

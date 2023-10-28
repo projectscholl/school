@@ -72,6 +72,7 @@ class AdminController extends Controller
                 'image' => 'mimes:png,jpg,jpeg',
                 'old_password' => 'required',
                 'password' => 'required|confirmed',
+                'password_confirmation' => 'same:password'
             ]);
             if (!Hash::check($request->old_password, $user->password)) {
                 return redirect()->back();

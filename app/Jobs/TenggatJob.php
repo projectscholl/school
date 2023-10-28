@@ -71,10 +71,10 @@ class TenggatJob implements ShouldQueue
                         $user = Murid::with('User')->where('id', $tagihansT->id_murids)->get();
                         foreach ($user as $users) {
                             $wali = User::where('id', $users->id_users)->get();
-                            $notification = Notify::where('id', 2)->first();
-                            $send = $notification->notif . ' ' . $users->User->name . ' ' . number_format($tagihan->total_biaya, 2, ',', '.') . ' ' . url('http://127.0.0.1:8000/login-wali');
+                            $notification = Notify::where('id', 1)->first();
+                            $send = $notification->notif . ' Nama : ' . $users->name . ' ,Nama tagihan: ' . $tagihansT->nama_biaya . ' total: Rp ' . number_format($tagihansT->jumlah_biaya, 2, ',', '.') . ' ' . url('http://127.0.0.1:8000/login-wali');
                             Log::info($tagihansT->User->telepon);
-                            // $this->send_message($walis->telepon, $send);
+                            $this->send_message($tagihansT->User->telepon, $send);
                         }
                     }
                 }

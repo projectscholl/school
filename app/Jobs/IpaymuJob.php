@@ -42,7 +42,7 @@ class IpaymuJob implements ShouldQueue
                     ]);
                     $user = User::where('id', $pembayarans->id_users)->first();
                     $send = 'Assalamualaikum warahmatullahi wabarakatu yang terhormat Bapak / ibu ' . $pembayarans->users->name . ' Kami informasikan ada pembayaran yang sudah expired jika ingin membayar silahkan membayar ulang';
-
+                    
                     $this->send_message($pembayarans->users->telepon, $send);
                     // Log::info($pembayarans->users->telepon);
                 }
