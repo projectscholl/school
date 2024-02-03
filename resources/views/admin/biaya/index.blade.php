@@ -43,7 +43,6 @@
                                     <option value="">---------</option>
                                 </select>
 
-
                                 <button type="submit" class="btn btn-primary mt-xl-0 mt-3 ms-3  ">Cari</button>
                             </div>
                         </form>
@@ -54,7 +53,8 @@
                             <table class="table table-striped" id="myTable">
                                 <thead>
                                     <tr>
-                                        <th class="d-flex"><input type="checkbox" id="select_all_ids" class="me-2">
+                                        <th class="d-flex align-items-center"><input type="checkbox" id="select_all_ids"
+                                                class="">
                                             Pilih
                                         </th>
                                         <th>No</th>
@@ -146,8 +146,7 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
         integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"

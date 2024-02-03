@@ -155,6 +155,7 @@ class PembayaranWaliController extends Controller
         }
         $total = array_sum($jumlahBiaya);
         $murid = Murid::where('id', $id)->first();
+        
         return view('admin.murid.bayar', compact('tagihan', 'total', 'murid'));
     }
 
@@ -220,7 +221,7 @@ class PembayaranWaliController extends Controller
             ]);
         }
 
-        return Redirect::to($pembayaran->payment_links);
+      	  return Redirect::to($pembayaran->payment_links);
     }
 
 

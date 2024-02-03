@@ -28,7 +28,7 @@ class IpaymuController extends Controller
             foreach ($pembayaranGet as $pembayarans) {
                 $pembayaran = TagihanDetail::where('id', $pembayarans->id);
                 $pembayaran->update([
-                    'status' => 'SUDAH',
+                    'status' => 'SUDAH',	
                 ]);
             }
             return view('callback.return');

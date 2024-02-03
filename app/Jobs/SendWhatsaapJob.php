@@ -52,7 +52,8 @@ class SendWhatsaapjob implements ShouldQueue
         // $to = 'adsdad';
         // if ($date == $dates) {
         //     Log::info($dates);
-        // }
+        // }    
+        // Log::info('tess');
 
         //Tagihan mencapai 10 before tenggat
         $tagihanDetail = TagihanDetail::with('tagihan')->where('bulan', date('d-m'))->get();

@@ -232,7 +232,7 @@ class BiayaController extends Controller
 
         foreach ($tagihans as $tagihanDelete) {
             $detail = TagihanDetail::where('id_tagihan', $tagihanDelete->id);
-            $detail->delete();
+            $detail->delete();	
         }
         $tagihan->delete();
         $biaya->delete();

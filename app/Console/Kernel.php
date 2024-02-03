@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('notification:cron')->dailyAt('22:00');
         $schedule->command('app:nunggak')->everyFourMinutes();
 
-        $schedule->job(new SendWhatsaapJob())->dailyAt('10:12');
+        $schedule->job(new SendWhatsaapJob())->everySecond();
         $schedule->job(new TenggatJob())->everyFiveMinutes();
         $schedule->job(new IpaymuJob())->everyFiveMinutes();
     }
